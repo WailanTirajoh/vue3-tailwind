@@ -1,9 +1,16 @@
 {
-  "name": "vue3-libs",
-  "version": "0.0.0",
-  "private": true,
+  "name": "vue3-tailwind",
+  "version": "0.1.0",
+  "private": false,
   "main": "./dist/tw-libs.umd.js",
   "module": "./dist/tw-libs.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/tw-libs.es.js",
+      "require": "./dist/tw-libs.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
