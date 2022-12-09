@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "tw-libs",
+      name: "vue3-tailwind",
       fileName: (format) => `${format}.js`,
     },
     rollupOptions: {

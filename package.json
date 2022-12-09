@@ -1,13 +1,12 @@
 {
   "name": "vue3-tailwind",
   "version": "0.1.1",
-  "private": false,
-  "main": "./dist/tw-libs.umd.js",
-  "module": "./dist/tw-libs.es.js",
+  "main": "./dist/umd.js",
+  "module": "./dist/es.js",
   "exports": {
     ".": {
-      "import": "./dist/tw-libs.es.js",
-      "require": "./dist/tw-libs.umd.js"
+      "import": "./dist/es.js",
+      "require": "./dist/umd.js"
     },
     "./dist/style.css": "./dist/style.css"
   },
