@@ -6,11 +6,4 @@ import TwTextarea from "./form/TwTextarea.vue";
 import TwToggle from "./form/TwToggle.vue";
 import TwInput from "./form/TwInput.vue";
 
-export default {
-  TwFile,
-  TwInput,
-  TwMultiSelect,
-  TwSelect,
-  TwTextarea,
-  TwToggle,
-};
+export { TwFile, TwInput, TwMultiSelect, TwSelect, TwTextarea, TwToggle };

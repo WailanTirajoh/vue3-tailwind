@@ -1,13 +1,21 @@
 import type { App } from "vue";
-import * as components from "./components";
-
-const componentList = components?.default;
+import {
+  TwFile,
+  TwInput,
+  TwMultiSelect,
+  TwSelect,
+  TwTextarea,
+  TwToggle,
+} from "./components";
 
 const TwComponents = {
   install(app: App) {
-    Object.keys(componentList).forEach((name) => {
-      app.component(name, componentList[name]);
-    });
+    app.component("TwFile", TwFile);
+    app.component("TwInput", TwInput);
+    app.component("TwMultiSelect", TwMultiSelect);
+    app.component("TwSelect", TwSelect);
+    app.component("TwTextarea", TwTextarea);
+    app.component("TwToggle", TwToggle);
   },
 };
 
