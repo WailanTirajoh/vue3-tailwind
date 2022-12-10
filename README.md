@@ -1,46 +1,65 @@
-# vue3-libs
+# Vue 3 Tailwind
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+## Instalation
+via npm
+```
+npm i --save vue3-tailwind
 ```
 
-### Compile and Hot-Reload for Development
+via pnpm
+```
+pnpm i vue3-tailwind --shamefully-hoist
+```
+## Setup
+### Vue 3
+on your entry (main.js)
+```
+// src/main.js
+import Vue3Tailwind from "vue3-tailwind"; // import components
 
-```sh
-npm run dev
+createApp(App).use(Vue3Tailwind).mount("#app");
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
+import css to main.css
+```
+// src/assets/css/main.css
+@import "vue3-tailwind/dist/style.css";
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Nuxt 3
+create plugins/vue3-tailwind.ts
 
-```sh
-npm run lint
 ```
+// plugins/vue3-tailwind.ts
+import Vue3Tailwind from "vue3-tailwind"
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(Vue3Tailwind)
+})
+```
+
+import css to main.css
+```
+// assets/css/main.css
+@import "vue3-tailwind/dist/style.css";
+```
+
+use the css at nuxt.config.css
+```
+// nuxt.config.css
+export default defineNuxtConfig({
+    css: ["~/assets/css/main.css"],
+});
+```
+
+## Usage
+### Forms
+~ Ongoing Documentation
+### Buttons
+~ Ongoing Documentation
+### Modal
+~ Ongoing Documentation
+### Offcanvas
+~ Ongoing Documentation
+### Tabs
+~ Ongoing Documentation
