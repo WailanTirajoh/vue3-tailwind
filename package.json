@@ -1,6 +1,6 @@
 {
   "name": "vue3-tailwind",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./dist/umd.js",
   "module": "./dist/es.js",
   "exports": {
