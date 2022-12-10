@@ -10,6 +10,7 @@ import TwFeather from "./icon/TwFeather.vue";
 import TwTab from "./tab/TwTab.vue";
 import TwOffcanvas from "./offcanvas/TwOffcanvas.vue";
 import TwModal from "./modal/TwModal.vue";
+import TwDatatableClient from "./datatable/TwDatatableClient.vue";
 
 export {
   TwFile,
@@ -23,4 +24,5 @@ export {
   TwTab,
   TwOffcanvas,
   TwModal,
+  TwDatatableClient,
 };
