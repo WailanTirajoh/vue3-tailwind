@@ -23,7 +23,7 @@ createApp(App).use(Vue3Tailwind).mount("#app");
 import css to main.css
 ```
 // src/assets/css/main.css
-@import "vue3-tailwind/dist/style.css";
+@import "/node_modules/vue3-tailwind/dist/style.css";
 ```
 
 ### Nuxt 3
