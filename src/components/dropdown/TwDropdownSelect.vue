@@ -34,19 +34,20 @@ defineExpose({ toggleDropdown, closeDropdown });
       }"
     >
       <div
-        class="flex items-center justify-between text-gray-700 w-full text-sm border-r-0 rounded-l h-10"
+        class="flex items-center justify-between text-gray-700 w-full text-sm border-r-0 rounded-l h-10 cursor-pointer"
         :class="{
           'bg-white border dark:bg-gray-800 dark:border-gray-700': !isShown,
           'rounded-l-md': !rounded,
           'bg-gray-100': disabled,
         }"
+        @click="toggleDropdown"
       >
         <slot name="body" />
         <button
           v-show="showClearData"
           class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all duration-300 ease-in-out p-2"
           :disabled="disabled"
-          @click="$emit('clear-data')"
+          @click.stop="$emit('clear-data')"
         >
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
             <path

@@ -72,7 +72,7 @@ const closeDropdown = () => {
               </div>
               <div
                 class="cursor-pointer bg-gray-200 p-1 w-5 h-full"
-                @click="removeSelectedValue(v)"
+                @click.stop="removeSelectedValue(v)"
               >
                 &#10005;
               </div>

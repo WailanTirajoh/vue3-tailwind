@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
+      entry: path.resolve(__dirname, "src/build.ts"),
       name: "vue3-tailwind",
       fileName: (format) => `${format === "es" ? "index" : "index.comon"}.js`,
     },

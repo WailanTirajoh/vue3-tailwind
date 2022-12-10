@@ -1,8 +1,13 @@
-import { createApp } from "vue";
+import { createApp, type Directive } from "vue";
 import App from "./App.vue";
 
 import "./assets/main.css";
+import Ripple from "./services/ripple";
 
 const app = createApp(App);
+
+Ripple.color = "rgba(255, 255, 255, 0.35)";
+Ripple.zIndex = "55";
+app.directive("ripple", Ripple as Directive<any, any>);
 
 app.mount("#app");
