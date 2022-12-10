@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
+import { TwFeather } from "@/components";
 
 type Position = "top" | "left" | "right" | "bottom";
 interface Props {
@@ -88,7 +89,7 @@ watch(
             class="duration-200 p-1 ml-auto bg-transparent border-0 text-black opacity-30 hover:opacity-80 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
             @click="closeOffCanvas()"
           >
-            <KIconFeather type="x" />
+            <TwFeather type="x" />
           </button>
         </div>
         <div class="p-4 overflow-y-auto">
