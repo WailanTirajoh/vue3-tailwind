@@ -8,11 +8,11 @@ import {
   TwTextarea,
   TwToggle,
   TwButton,
-  TwFeather,
   TwTab,
   TwOffcanvas,
   TwModal,
   TwDatatableClient,
+  TwFeather,
 } from "./components";
 
 Ripple.color = "rgba(255, 255, 255, 0.35)";
@@ -26,13 +26,28 @@ const TwComponents = {
     app.component("TwTextarea", TwTextarea);
     app.component("TwToggle", TwToggle);
     app.component("TwButton", TwButton);
-    app.component("TwFeather", TwFeather);
     app.component("TwTab", TwTab);
     app.component("TwOffcanvas", TwOffcanvas);
     app.component("TwModal", TwModal);
     app.component("TwDatatableClient", TwDatatableClient);
     app.directive("ripple", Ripple as Directive<any, any>);
+    app.component("TwFeather", TwFeather);
   },
 };
 
 export default TwComponents;
+
+export {
+  TwFile,
+  TwInput,
+  TwMultiSelect,
+  TwSelect,
+  TwTextarea,
+  TwToggle,
+  TwButton,
+  TwTab,
+  TwOffcanvas,
+  TwModal,
+  TwDatatableClient,
+  TwFeather,
+};

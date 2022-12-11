@@ -1,9 +1,4 @@
 <script setup lang="ts">
-/**
- * TODO:
- * - filter on each column
- * - column type (string / number / date / money / etc...)
- */
 import { ref, computed, watch } from "vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
 import TwDatatablePagination from "./TwDatatablePagination.vue";
@@ -11,12 +6,9 @@ import TwDatatableTd from "./TwDatatableTd.vue";
 import type { Data, Column, Setting } from "./type";
 
 interface Props {
-  // Required props
   data: Array<Data>;
   column: Array<Column>;
   limit: number;
-
-  // Optional props
   currentPage?: number;
   totalData?: number;
   isLoading?: boolean;
@@ -28,7 +20,6 @@ interface Props {
   sortType?: string;
   summary?: string;
 }
-
 const props = defineProps<Props>();
 const emit = defineEmits([
   "on-change-sort",

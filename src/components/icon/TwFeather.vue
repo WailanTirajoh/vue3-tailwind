@@ -105,41 +105,34 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style>
 @keyframes tw-feather--spin {
   from {
     transform: rotate(0);
   }
-
   to {
     transform: rotate(360deg);
   }
 }
-
 .tw-feather {
   display: inline-block;
   overflow: hidden;
-
-  &--spin {
-    animation: tw-feather--spin 2s linear infinite;
-  }
-
-  &--pulse {
-    animation: tw-feather--spin 2s infinite steps(8);
-  }
-
-  &--slow {
-    animation-duration: 3s;
-  }
-
-  &--fast {
-    animation-duration: 1s;
-  }
-
-  &__content {
-    display: block;
-    height: inherit;
-    width: inherit;
-  }
+}
+.tw-feather--spin {
+  animation: tw-feather--spin 2s linear infinite;
+}
+.tw-feather--pulse {
+  animation: tw-feather--spin 2s infinite steps(8);
+}
+.tw-feather--slow {
+  animation-duration: 3s;
+}
+.tw-feather--fast {
+  animation-duration: 1s;
+}
+.tw-feather__content {
+  display: block;
+  height: inherit;
+  width: inherit;
 }
 </style>
