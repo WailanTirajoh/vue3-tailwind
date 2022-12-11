@@ -1,1 +1,12 @@
 src
+.eslintrc.cjs
+.prettierrc.json
+env.d.ts
+index.html
+pnpm-lock.yaml
+postcss.config.js 
+README.md
+tailwind.config.js 
+tsconfig.config.json 
+tsconfig.json
+vite.config.js
