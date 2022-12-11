@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted } from "vue";
 
-type Position = "bottom" | "top" | "left" | "right";
-type Type = "horizontal" | "vertical";
-interface Props {
+export type Position = "bottom" | "top" | "left" | "right";
+export type Type = "horizontal" | "vertical";
+export interface Props {
   type?: Type;
   currentTab?: string;
   tabs: Array<{

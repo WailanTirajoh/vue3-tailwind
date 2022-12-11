@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-interface Props {
+export interface Props {
   label: string;
   placeholder?: string;
   modelValue?: boolean;

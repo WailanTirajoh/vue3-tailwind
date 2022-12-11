@@ -3,7 +3,7 @@
  * Ref: https://github.com/PygmySlowLoris/vue-ripple-directive (JS)
  */
 
-interface Props {
+export interface Props {
   event: string;
   transition: number;
 }

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import UploadSvg from "../svg/TwUpload.vue";
 import IconX from "../svg/TwX.vue";
 
-interface Props {
+export interface Props {
   label?: string;
   imgUrls?: string[] | never[];
   multiple?: boolean;

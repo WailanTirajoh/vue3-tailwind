@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-interface Props {
+export interface Props {
   copyText: string | number | boolean;
 }
 const props = defineProps<Props>();

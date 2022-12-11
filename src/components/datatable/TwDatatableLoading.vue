@@ -1,5 +1,5 @@
 <script setup lang="ts">
-interface Props {
+export interface Props {
   show?: boolean;
 }
 withDefaults(defineProps<Props>(), {

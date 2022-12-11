@@ -15,6 +15,8 @@ import {
   TwFeather,
 } from "./components";
 
+import "./assets/build.css";
+
 Ripple.color = "rgba(255, 255, 255, 0.35)";
 Ripple.zIndex = "55";
 const TwComponents = {

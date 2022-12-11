@@ -3,7 +3,7 @@ import { ref } from "vue";
 import type { Item } from "../dropdown/types-selection";
 import SelectionList from "../dropdown/TwSelectionList.vue";
 
-interface Props {
+export interface Props {
   modelValue?: string | number;
   label?: string;
   placeholder?: string;

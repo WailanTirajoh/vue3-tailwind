@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-interface Props {
+export interface Props {
   currentPage: number;
   totalData: number;
   totalPage: number;

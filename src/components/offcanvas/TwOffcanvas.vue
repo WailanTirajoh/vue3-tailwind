@@ -2,8 +2,8 @@
 import { computed, ref, watch } from "vue";
 import { TwFeather } from "@/components";
 
-type Position = "top" | "left" | "right" | "bottom";
-interface Props {
+export type Position = "top" | "left" | "right" | "bottom";
+export interface Props {
   position?: Position;
   width?: string;
   height?: string;

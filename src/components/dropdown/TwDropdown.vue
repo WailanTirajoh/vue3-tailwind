@@ -2,7 +2,7 @@
 import { computed, ref, onMounted, onUnmounted } from "vue";
 import { Align } from "./types";
 
-interface Props {
+export interface Props {
   align: Align;
   width: string;
   contentClasses: Array<string>;

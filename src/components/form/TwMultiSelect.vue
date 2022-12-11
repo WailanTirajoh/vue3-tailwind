@@ -4,7 +4,7 @@ import MultiSelectionList from "../dropdown/TwMultiSelectionList.vue";
 
 import type { Item, ItemValue } from "../dropdown/types-selection";
 
-interface Props {
+export interface Props {
   modelValue: Array<ItemValue>;
   items: Array<Item>;
   label?: string;

@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { IconPosition, TextPosition, Variant } from "./types.d";
 import TwFeather from "../icon/TwFeather.vue";
 
-interface Props {
+export interface Props {
   classes?: Array<string>;
   variant?: Variant;
   icon?: string;

@@ -10,7 +10,7 @@
 import { computed } from "vue";
 import type { Data, Column, Setting } from "./type";
 
-interface Props {
+export interface Props {
   // Required props
   data: Array<Data>;
   column: Array<Column>;

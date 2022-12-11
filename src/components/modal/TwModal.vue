@@ -2,7 +2,7 @@
 import { computed, ref, watch } from "vue";
 import { TwFeather } from "..";
 
-interface Props {
+export interface Props {
   fullHeight?: boolean;
   width?: string;
 }

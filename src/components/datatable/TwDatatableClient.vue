@@ -5,7 +5,7 @@ import TwDatatablePagination from "./TwDatatablePagination.vue";
 import TwDatatableTd from "./TwDatatableTd.vue";
 import type { Data, Column, Setting } from "./type";
 
-interface Props {
+export interface Props {
   data: Array<Data>;
   column: Array<Column>;
   limit: number;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-interface Props {
+export interface Props {
   rounded?: boolean;
   showClearData?: boolean;
   dropdownBg?: string;
