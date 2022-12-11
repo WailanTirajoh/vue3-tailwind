@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  Variant,
-  IconPosition,
-  TextPosition,
-} from "@/components/button/types.d";
+import { Variant, IconPosition, TextPosition } from "@/components/button/type";
 import { TwButton } from "@/components";
 </script>
 

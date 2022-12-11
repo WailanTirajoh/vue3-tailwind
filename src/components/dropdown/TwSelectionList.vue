@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Item } from "./types-selection";
+import type { Item } from "./type-selection";
 import { computed, ref } from "vue";
 import TwDropdownSelect from "./TwDropdownSelect.vue";
 

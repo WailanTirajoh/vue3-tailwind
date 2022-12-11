@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Item } from "../dropdown/types-selection";
+import type { Item } from "../dropdown/type-selection";
 import SelectionList from "../dropdown/TwSelectionList.vue";
 
 export interface Props {

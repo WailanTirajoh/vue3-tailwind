@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { IconPosition, TextPosition, Variant } from "./types.d";
+import { IconPosition, TextPosition, Variant } from "./type";
 import TwFeather from "../icon/TwFeather.vue";
 
 export interface Props {
