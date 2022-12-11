@@ -1,4 +1,15 @@
 import type { App, Directive } from "vue";
+import type {
+  ButtonVariant,
+  ButtonIconPosition,
+  ButtonTextPosition,
+  DatatableColumn,
+  DatatableData,
+  DatatableSetting,
+  DropdownAlign,
+  DropdownItemValue,
+  DropdownItem,
+} from "./components/type";
 import Ripple from "./services/ripple";
 import {
   TwFile,
@@ -14,11 +25,8 @@ import {
   TwDatatableClient,
   TwFeather,
 } from "./components";
-
 import "./assets/build.css";
 
-Ripple.color = "rgba(255, 255, 255, 0.35)";
-Ripple.zIndex = "55";
 const TwComponents = {
   install(app: App) {
     app.component("TwFile", TwFile);
@@ -32,8 +40,11 @@ const TwComponents = {
     app.component("TwOffcanvas", TwOffcanvas);
     app.component("TwModal", TwModal);
     app.component("TwDatatableClient", TwDatatableClient);
-    app.directive("ripple", Ripple as Directive<any, any>);
     app.component("TwFeather", TwFeather);
+
+    Ripple.color = "rgba(255, 255, 255, 0.35)";
+    Ripple.zIndex = "55";
+    app.directive("ripple", Ripple as Directive<any, any>);
   },
 };
 
@@ -52,4 +63,16 @@ export {
   TwModal,
   TwDatatableClient,
   TwFeather,
+};
+
+export {
+  ButtonVariant,
+  ButtonIconPosition,
+  ButtonTextPosition,
+  DatatableColumn,
+  DatatableData,
+  DatatableSetting,
+  DropdownAlign,
+  DropdownItemValue,
+  DropdownItem,
 };

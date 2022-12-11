@@ -8,12 +8,12 @@
  * - filter on each column
  */
 import { computed } from "vue";
-import type { Data, Column, Setting } from "./type";
+import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
 
 export interface Props {
   // Required props
-  data: Array<Data>;
-  column: Array<Column>;
+  data: Array<DatatableData>;
+  column: Array<DatatableColumn>;
   currentPage: number;
   limit: number;
   totalData: number;
@@ -23,7 +23,7 @@ export interface Props {
   sortType?: string;
   summary?: string;
   search?: string;
-  setting?: Setting;
+  setting?: DatatableSetting;
   selected?: Array<string | never>;
 }
 
@@ -71,7 +71,7 @@ const selected = computed({
   },
 });
 
-const setting: Setting = props.setting ?? {
+const setting: DatatableSetting = props.setting ?? {
   checkbox: false,
   limitOption: [
     {
@@ -100,14 +100,14 @@ const setting: Setting = props.setting ?? {
 const clickSort = (key: string) =>
   emit("on-sort-change", key, props.sortType === "asc" ? "desc" : "asc");
 const enterSearch = () => emit("on-enter-search");
-const thClick = (h: Column) => {
+const thClick = (h: DatatableColumn) => {
   clickSort(h.field);
   if (h.onColumnClick) {
     h.onColumnClick();
   }
 };
 
-const cellClick = (c: Column) => {
+const cellClick = (c: DatatableColumn) => {
   if (c.onCellClick) c.onCellClick();
 };
 </script>

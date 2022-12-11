@@ -1,19 +1,20 @@
 <script setup lang="ts">
+import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
+
 import { ref, computed, watch } from "vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
 import TwDatatablePagination from "./TwDatatablePagination.vue";
 import TwDatatableTd from "./TwDatatableTd.vue";
-import type { Data, Column, Setting } from "./type";
 
 export interface Props {
-  data: Array<Data>;
-  column: Array<Column>;
+  data: Array<DatatableData>;
+  column: Array<DatatableColumn>;
   limit: number;
   currentPage?: number;
   totalData?: number;
   isLoading?: boolean;
   search?: string;
-  setting?: Setting;
+  setting?: DatatableSetting;
   selected?: Array<string | never>;
   serverSide?: boolean;
   sortBy?: string;
@@ -32,7 +33,7 @@ const emit = defineEmits([
   "datatable:column-hook",
 ]);
 
-const setting: Setting = props.setting ?? {
+const setting: DatatableSetting = props.setting ?? {
   checkbox: false,
   limitOption: [
     {
@@ -148,14 +149,14 @@ watch(selected, (value) => {
 const clickSort = (key: string) =>
   emit("on-change-sort", key, props.sortType === "asc" ? "desc" : "asc");
 const enterSearch = () => emit("on-enter-search");
-const columnClick = (column: Column) => {
+const columnClick = (column: DatatableColumn) => {
   if (column.onColumnClick) column.onColumnClick();
   if (column.sortable) {
     clickSort(column.field);
     updateSort(column);
   }
 };
-const cellClick = (cellClick: Column) => {
+const cellClick = (cellClick: DatatableColumn) => {
   if (cellClick.onCellClick) cellClick.onCellClick();
 };
 const columnHook = (arg: any) => {
@@ -163,7 +164,7 @@ const columnHook = (arg: any) => {
 };
 
 // Method's
-const updateSort = (h: Column) => {
+const updateSort = (h: DatatableColumn) => {
   sortBy.value = h.field;
   sortType.value = sortType.value === "asc" ? "desc" : "asc";
 };

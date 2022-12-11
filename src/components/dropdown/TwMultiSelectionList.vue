@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Item, ItemValue } from "./type-selection";
+import type { DropdownItem, DropdownItemValue } from "../type";
 import { computed, ref } from "vue";
 import TwDropdownSelect from "./TwDropdownSelect.vue";
 
 export interface Props {
   placeholder?: string;
-  items: Array<Item>;
-  modelValue: readonly ItemValue[];
+  items: Array<DropdownItem>;
+  modelValue: readonly DropdownItemValue[];
   closeOnSelect?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -26,16 +26,16 @@ const filterredItems = computed(() => {
   });
 });
 
-const updateValue = (value: ItemValue) => {
-  const tempValue: ItemValue[] = [];
-  props.modelValue.forEach((v: ItemValue) => tempValue.push(v));
+const updateValue = (value: DropdownItemValue) => {
+  const tempValue: DropdownItemValue[] = [];
+  props.modelValue.forEach((v: DropdownItemValue) => tempValue.push(v));
   if (tempValue.includes(value)) tempValue.splice(tempValue.indexOf(value), 1);
   else tempValue.push(value);
   emit("update:modelValue", tempValue);
   closeDropdown();
 };
 
-const removeSelectedValue = (value: ItemValue) => {
+const removeSelectedValue = (value: DropdownItemValue) => {
   updateValue(value);
 };
 

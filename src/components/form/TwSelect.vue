@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Item } from "../dropdown/type-selection";
+import type { DropdownItem } from "../type";
 import SelectionList from "../dropdown/TwSelectionList.vue";
 
 export interface Props {
   modelValue?: string | number;
   label?: string;
   placeholder?: string;
-  items: Array<Item>;
+  items: Array<DropdownItem>;
   disabled?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {

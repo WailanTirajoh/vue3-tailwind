@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from "vue";
-import { Align } from "./type";
+import { DropdownAlign } from "../type";
 
 export interface Props {
-  align: Align;
+  align: DropdownAlign;
   width: string;
   contentClasses: Array<string>;
 }
 const props = defineProps<Props>();
 
-const ALIGN_CLASSES: Record<Align, string> = {
-  [Align.LEFT]: "origin-top-left left-0",
-  [Align.RIGHT]: "origin-top-right right-0",
+const ALIGN_CLASSES: Record<DropdownAlign, string> = {
+  [DropdownAlign.LEFT]: "origin-top-left left-0",
+  [DropdownAlign.RIGHT]: "origin-top-right right-0",
 };
 const alignmentClasses = computed(() => {
-  return ALIGN_CLASSES[props.align ?? Align.LEFT];
+  return ALIGN_CLASSES[props.align ?? DropdownAlign.LEFT];
 });
 const widthClass = computed(() => {
   return {

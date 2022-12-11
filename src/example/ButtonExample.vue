@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { Variant, IconPosition, TextPosition } from "@/components/button/type";
+import {
+  ButtonVariant,
+  ButtonIconPosition,
+  ButtonTextPosition,
+} from "@/components/type";
 import { TwButton } from "@/components";
 </script>
 
@@ -12,38 +16,44 @@ import { TwButton } from "@/components";
         <div
           class="grid gap-2 grid-cols-[repeat(auto-fill,_minmax(14rem,_1fr))] mb-2"
         >
-          <TwButton :variant="Variant.PRIMARY" :ripple="true">
+          <TwButton :variant="ButtonVariant.PRIMARY" :ripple="true">
             Primary Button with ripple
           </TwButton>
-          <TwButton :variant="Variant.SECONDARY" :ripple="true">
+          <TwButton :variant="ButtonVariant.SECONDARY" :ripple="true">
             Secondary Button with ripple
           </TwButton>
-          <TwButton :variant="Variant.DANGER" :ripple="true">
+          <TwButton :variant="ButtonVariant.DANGER" :ripple="true">
             Danger Button with ripple
           </TwButton>
-          <TwButton :variant="Variant.PRIMARY"> Primary Button </TwButton>
-          <TwButton :variant="Variant.SECONDARY"> Secondary Button </TwButton>
-          <TwButton :variant="Variant.DANGER"> Danger Button </TwButton>
+          <TwButton :variant="ButtonVariant.PRIMARY"> Primary Button </TwButton>
+          <TwButton :variant="ButtonVariant.SECONDARY">
+            Secondary Button
+          </TwButton>
+          <TwButton :variant="ButtonVariant.DANGER"> Danger Button </TwButton>
           <TwButton
             icon="smile"
-            :variant="Variant.PRIMARY"
-            :icon-position="IconPosition.LEFT"
+            :variant="ButtonVariant.PRIMARY"
+            :icon-position="ButtonIconPosition.LEFT"
           >
             Button with Icon
           </TwButton>
           <TwButton
             icon="smile"
-            :variant="Variant.PRIMARY"
-            :icon-position="IconPosition.RIGHT"
+            :variant="ButtonVariant.PRIMARY"
+            :icon-position="ButtonIconPosition.RIGHT"
           >
             Button with Icon Right
           </TwButton>
-          <TwButton icon="smile" :variant="Variant.PRIMARY" :disabled="true">
+          <TwButton
+            icon="smile"
+            :variant="ButtonVariant.PRIMARY"
+            :disabled="true"
+          >
             Disabled Button
           </TwButton>
           <TwButton
             icon="smile"
-            :variant="Variant.PRIMARY"
+            :variant="ButtonVariant.PRIMARY"
             :disabled="true"
             :loading="true"
           >
@@ -51,8 +61,8 @@ import { TwButton } from "@/components";
           </TwButton>
           <TwButton
             icon="smile"
-            :variant="Variant.PRIMARY"
-            :text-position="TextPosition.LEFT"
+            :variant="ButtonVariant.PRIMARY"
+            :text-position="ButtonTextPosition.LEFT"
             :disabled="true"
             :loading="true"
           >

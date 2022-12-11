@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Item } from "./type-selection";
+import type { DropdownItem } from "../type";
 import { computed, ref } from "vue";
 import TwDropdownSelect from "./TwDropdownSelect.vue";
 
 export interface Props {
   placeholder?: string;
-  items: Array<Item>;
+  items: Array<DropdownItem>;
   modelValue?: string | number | null;
   closeOnSelect?: boolean;
   disabled?: boolean;

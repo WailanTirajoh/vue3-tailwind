@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TwDatatableClient } from "@/components";
-import type { Column, Data } from "@/components/datatable/type";
+import type { DatatableColumn, DatatableData } from "@/components/type";
 import { ref } from "vue";
 const data = ref({
   column: [
@@ -16,7 +16,7 @@ const data = ref({
       width: "400px",
       sortable: true,
       // Template string example
-      template: (data: Data): string => `
+      template: (data: DatatableData): string => `
         <div class="flex justify-center">
           <span class="${
             data.status.toLowerCase() === "active"
@@ -28,7 +28,7 @@ const data = ref({
         </div>
       `,
     },
-  ] as Array<Column>,
+  ] as Array<DatatableColumn>,
   data: [
     {
       id: 1,
@@ -150,7 +150,7 @@ const data = ref({
       status: "Active",
       test: "test",
     },
-  ] as Array<Data>,
+  ] as Array<DatatableData>,
   limit: 5,
   search: "",
   selected: [],

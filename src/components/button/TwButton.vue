@@ -1,52 +1,52 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { IconPosition, TextPosition, Variant } from "./type";
+import { ButtonIconPosition, ButtonTextPosition, ButtonVariant } from "../type";
 import TwFeather from "../icon/TwFeather.vue";
 
 export interface Props {
   classes?: Array<string>;
-  variant?: Variant;
+  variant?: ButtonVariant;
   icon?: string;
   disabled?: boolean;
   ripple?: boolean;
-  iconPosition?: IconPosition;
+  iconPosition?: ButtonIconPosition;
   loading?: boolean;
-  textPosition?: TextPosition;
+  ButtontextPosition?: ButtonTextPosition;
 }
 const props = defineProps<Props>();
 
-const COLORS: Record<Variant, string> = {
-  [Variant.PRIMARY]: "bg-gray-800 text-white",
-  [Variant.SECONDARY]: "bg-gray-200 text-gray-800",
-  [Variant.DANGER]: "bg-red-800 text-white",
-  [Variant.SUCCESS]: "bg-green-800 text-white",
-  [Variant.LIGHT]: "bg-white text-gray-800",
-  [Variant.WARNING]: "bg-yellow-800 text-white",
-  [Variant.INFO]: "bg-gray-800 text-white",
-  [Variant.NONE]: "",
+const COLORS: Record<ButtonVariant, string> = {
+  [ButtonVariant.PRIMARY]: "bg-gray-800 text-white",
+  [ButtonVariant.SECONDARY]: "bg-gray-200 text-gray-800",
+  [ButtonVariant.DANGER]: "bg-red-800 text-white",
+  [ButtonVariant.SUCCESS]: "bg-green-800 text-white",
+  [ButtonVariant.LIGHT]: "bg-white text-gray-800",
+  [ButtonVariant.WARNING]: "bg-yellow-800 text-white",
+  [ButtonVariant.INFO]: "bg-gray-800 text-white",
+  [ButtonVariant.NONE]: "",
 };
 
-const ICON_POSITIONS: Record<IconPosition, string> = {
-  [IconPosition.LEFT]: "float-left mr-2",
-  [IconPosition.RIGHT]: "float-right ml-2",
+const ICON_POSITIONS: Record<ButtonIconPosition, string> = {
+  [ButtonIconPosition.LEFT]: "float-left mr-2",
+  [ButtonIconPosition.RIGHT]: "float-right ml-2",
 };
 
-const TEXT_POSITIONS: Record<TextPosition, string> = {
-  [TextPosition.LEFT]: "text-left",
-  [TextPosition.RIGHT]: "text-right",
-  [TextPosition.CENTER]: "text-center",
+const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
+  [ButtonTextPosition.LEFT]: "text-left",
+  [ButtonTextPosition.RIGHT]: "text-right",
+  [ButtonTextPosition.CENTER]: "text-center",
 };
 
 const btnColor = computed(() => {
-  let color = COLORS[props.variant ?? Variant.PRIMARY];
+  let color = COLORS[props.variant ?? ButtonVariant.PRIMARY];
   if (!btnDisabled.value) {
     color += " active:bg-opacity-90 hover:bg-opacity-90";
   }
   return color;
 });
 
-const btnTextPosition = computed(() => {
-  return TEXT_POSITIONS[props.textPosition ?? TextPosition.LEFT];
+const btnButtonTextPosition = computed(() => {
+  return TEXT_POSITIONS[props.ButtontextPosition ?? ButtonTextPosition.LEFT];
 });
 
 const btnLoading = computed(() => {
@@ -57,7 +57,7 @@ const btnIcon = computed(() => {
   return btnLoading.value ? "loader" : props.icon;
 });
 const btnIconPosition = computed(() => {
-  return ICON_POSITIONS[props.iconPosition ?? IconPosition.LEFT];
+  return ICON_POSITIONS[props.iconPosition ?? ButtonIconPosition.LEFT];
 });
 const btnClasses = computed(() => {
   if (!props.classes) return [];
@@ -77,7 +77,7 @@ const btnRipple = computed(() => {
     v-bind="$attrs"
     :disabled="btnDisabled"
     class="p-2 rounded-md relative duration-200"
-    :class="[btnColor, ...btnClasses, btnTextPosition]"
+    :class="[btnColor, ...btnClasses, btnButtonTextPosition]"
   >
     <transition
       enter-active-class="ease-out duration-300"
