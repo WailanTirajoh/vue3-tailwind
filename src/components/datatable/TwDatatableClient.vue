@@ -66,15 +66,14 @@ const sortType = ref(props.sortType ?? "asc");
 const checkAll = ref(false);
 
 const filteredData = computed(() => {
-  return props.data
-    .map((data) => data)
-    .filter(function (obj) {
-      return Object.keys(obj).some(function (key) {
-        if (typeof obj[key] === "string") {
-          return obj[key].toLowerCase().includes(search.value.toLowerCase());
-        }
-      });
+  return props.data.filter((obj) => {
+    return Object.keys(obj).some((key) => {
+      return (
+        typeof obj[key] === "string" &&
+        obj[key].toLowerCase().includes(search.value.toLowerCase())
+      );
     });
+  });
 });
 const totalData = computed(() => filteredData.value.length);
 const totalPage = computed(() => Math.ceil(totalData.value / props.limit));
@@ -89,36 +88,44 @@ const showTo = computed(() =>
 
 const data = computed(() => {
   let d = filteredData.value;
-  d = d
-    .map((data) => data)
-    .filter(function (obj) {
-      return Object.keys(obj).some(function (key) {
-        if (typeof obj[key] === "string") {
-          return obj[key].toLowerCase().includes(search.value.toLowerCase());
-        }
-      });
-    })
-    .sort((a, b) => {
-      let computedA, computedB;
-      switch (typeof a[sortBy.value]) {
-        case "string":
-          computedA = a[sortBy.value].toLowerCase();
-          computedB = b[sortBy.value].toLowerCase();
-          break;
-        default:
-          computedA = a[sortBy.value];
-          computedB = b[sortBy.value];
-      }
-      if (computedA < computedB) return -1;
-      if (computedA > computedB) return 1;
-      return 0;
-    });
 
+  // Filter
+  d = d.filter((obj) => {
+    return Object.keys(obj).some((key) => {
+      return (
+        typeof obj[key] === "string" &&
+        obj[key].toLowerCase().includes(search.value.toLowerCase())
+      );
+    });
+  });
+
+  // Sort Column
+  d = d.sort((a, b) => {
+    let computedA, computedB;
+    switch (typeof a[sortBy.value]) {
+      case "string":
+        computedA = a[sortBy.value].toLowerCase();
+        computedB = b[sortBy.value].toLowerCase();
+        break;
+      default:
+        computedA = a[sortBy.value];
+        computedB = b[sortBy.value];
+    }
+
+    if (computedA < computedB) return -1;
+    if (computedA > computedB) return 1;
+    return 0;
+  });
+
+  // Sort Type
   if (sortType.value === "desc") d = d.reverse();
 
-  d = d.splice(showFrom.value - 1, showTo.value);
+  // Limit
+  d = d.slice(showFrom.value - 1, showTo.value);
+
   return d;
 });
+
 const limit = computed({
   get() {
     return props.limit;

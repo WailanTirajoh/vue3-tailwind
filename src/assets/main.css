@@ -1,1 +1,8 @@
-@import "./tailwind.css"
+@import "./tailwind.css";
+@import "./font.css";
+
+
+body {
+    font-family: Nunito, sans-serif;
+    overflow: overlay;
+}
