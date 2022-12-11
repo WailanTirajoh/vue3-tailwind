@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 export interface Props {
+  id: string;
   label: string;
   placeholder?: string;
   modelValue?: boolean;
@@ -23,10 +24,10 @@ const inputData = ref(props.modelValue);
     </label>
     <div>
       <div class="flex gap-2 items-center w-full">
-        <label for="toggle" class="flex items-center cursor-pointer">
+        <label :for="id" class="flex items-center cursor-pointer bor">
           <div class="relative">
             <input
-              id="toggle"
+              :id="id"
               v-model="inputData"
               type="checkbox"
               class="sr-only"
@@ -34,7 +35,7 @@ const inputData = ref(props.modelValue);
               :disabled="disabled"
             />
             <div
-              class="block w-14 h-8 rounded-full"
+              class="block w-14 h-8 rounded-full border shadow-inner"
               :class="{
                 'bg-gray-100': inputData,
                 'bg-gray-600': !inputData,

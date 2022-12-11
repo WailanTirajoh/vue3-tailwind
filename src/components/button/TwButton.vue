@@ -11,7 +11,7 @@ export interface Props {
   ripple?: boolean;
   iconPosition?: ButtonIconPosition;
   loading?: boolean;
-  ButtontextPosition?: ButtonTextPosition;
+  buttonTextPosition?: ButtonTextPosition;
 }
 const props = defineProps<Props>();
 
@@ -22,7 +22,19 @@ const COLORS: Record<ButtonVariant, string> = {
   [ButtonVariant.SUCCESS]: "bg-green-800 text-white",
   [ButtonVariant.LIGHT]: "bg-white text-gray-800",
   [ButtonVariant.WARNING]: "bg-yellow-800 text-white",
-  [ButtonVariant.INFO]: "bg-gray-800 text-white",
+  [ButtonVariant.INFO]: "bg-sky-800 text-white",
+  [ButtonVariant.OUTLINE_PRIMARY]:
+    "border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100",
+  [ButtonVariant.OUTLINE_SECONDARY]: "border-2 border-gray-200 text-gray-800",
+  [ButtonVariant.OUTLINE_DANGER]:
+    "border-2 border-red-800 text-gray-800 hover:bg-red-800 hover:text-gray-100",
+  [ButtonVariant.OUTLINE_SUCCESS]:
+    "border-2 border-green-800 text-gray-800 hover:bg-green-800 hover:text-gray-100",
+  [ButtonVariant.OUTLINE_LIGHT]: "border-2 border-white text-gray-800",
+  [ButtonVariant.OUTLINE_WARNING]:
+    "border-2 border-yellow-800 text-gray-800 hover:bg-yellow-800 hover:text-gray-100",
+  [ButtonVariant.OUTLINE_INFO]:
+    "border-2 border-sky-800 text-gray-800 hover:bg-sky-800 hover:text-gray-100",
   [ButtonVariant.NONE]: "",
 };
 
@@ -46,7 +58,7 @@ const btnColor = computed(() => {
 });
 
 const btnButtonTextPosition = computed(() => {
-  return TEXT_POSITIONS[props.ButtontextPosition ?? ButtonTextPosition.LEFT];
+  return TEXT_POSITIONS[props.buttonTextPosition ?? ButtonTextPosition.LEFT];
 });
 
 const btnLoading = computed(() => {
@@ -89,11 +101,11 @@ const btnRipple = computed(() => {
     >
       <div
         class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded bg-opacity-10"
-        v-if="btnDisabled"
+        v-if="btnDisabled || loading"
       ></div>
     </transition>
     <TwFeather
-      v-if="icon"
+      v-if="icon || loading"
       class="mr-2"
       :class="[btnIconPosition]"
       :type="btnIcon"

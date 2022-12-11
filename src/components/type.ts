@@ -8,6 +8,13 @@ export enum ButtonVariant {
   LIGHT = "light",
   WARNING = "warning",
   INFO = "info",
+  OUTLINE_PRIMARY = "outline-primary",
+  OUTLINE_SECONDARY = "outline-secondary",
+  OUTLINE_DANGER = "outline-danger",
+  OUTLINE_SUCCESS = "outline-success",
+  OUTLINE_LIGHT = "outline-light",
+  OUTLINE_WARNING = "outline-warning",
+  OUTLINE_INFO = "outline-info",
   NONE = "none",
 }
 

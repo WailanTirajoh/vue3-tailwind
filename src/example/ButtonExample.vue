@@ -1,10 +1,41 @@
 <script setup lang="ts">
 import {
-  ButtonVariant,
   ButtonIconPosition,
   ButtonTextPosition,
+  ButtonVariant,
 } from "@/components/type";
+import { TwToggle, TwRadio, TwInput } from "@/components";
 import { TwButton } from "@/components";
+import { computed, ref } from "vue";
+
+const buttonVariants = computed(() =>
+  Object.entries(ButtonVariant).map(([key, value]) => ({
+    label: key,
+    value: value,
+  }))
+);
+const buttonTextPositions = computed(() =>
+  Object.entries(ButtonTextPosition).map(([key, value]) => ({
+    label: key,
+    value: value,
+  }))
+);
+const buttonIconPositions = computed(() =>
+  Object.entries(ButtonIconPosition).map(([key, value]) => ({
+    label: key,
+    value: value,
+  }))
+);
+const options = ref({
+  variant: ButtonVariant.PRIMARY,
+  ripple: true,
+  icon: "user",
+  disabled: false,
+  iconPosition: ButtonIconPosition.LEFT,
+  loading: false,
+  buttonTextPosition: ButtonTextPosition.LEFT,
+  text: "Hi there!",
+});
 </script>
 
 <template>
@@ -13,61 +44,81 @@ import { TwButton } from "@/components";
     <hr class="my-2 border" />
     <div class="grid grid-cols-12">
       <div class="col-span-12">
-        <div
-          class="grid gap-2 grid-cols-[repeat(auto-fill,_minmax(14rem,_1fr))] mb-2"
+        <tw-button
+          class="w-full md:w-[400px]"
+          :variant="options.variant"
+          :icon="options.icon"
+          :disabled="options.disabled"
+          :ripple="options.ripple"
+          :icon-position="options.iconPosition"
+          :loading="options.loading"
+          :button-text-position="options.buttonTextPosition"
         >
-          <TwButton :variant="ButtonVariant.PRIMARY" :ripple="true">
-            Primary Button with ripple
-          </TwButton>
-          <TwButton :variant="ButtonVariant.SECONDARY" :ripple="true">
-            Secondary Button with ripple
-          </TwButton>
-          <TwButton :variant="ButtonVariant.DANGER" :ripple="true">
-            Danger Button with ripple
-          </TwButton>
-          <TwButton :variant="ButtonVariant.PRIMARY"> Primary Button </TwButton>
-          <TwButton :variant="ButtonVariant.SECONDARY">
-            Secondary Button
-          </TwButton>
-          <TwButton :variant="ButtonVariant.DANGER"> Danger Button </TwButton>
-          <TwButton
-            icon="smile"
-            :variant="ButtonVariant.PRIMARY"
-            :icon-position="ButtonIconPosition.LEFT"
-          >
-            Button with Icon
-          </TwButton>
-          <TwButton
-            icon="smile"
-            :variant="ButtonVariant.PRIMARY"
-            :icon-position="ButtonIconPosition.RIGHT"
-          >
-            Button with Icon Right
-          </TwButton>
-          <TwButton
-            icon="smile"
-            :variant="ButtonVariant.PRIMARY"
-            :disabled="true"
-          >
-            Disabled Button
-          </TwButton>
-          <TwButton
-            icon="smile"
-            :variant="ButtonVariant.PRIMARY"
-            :disabled="true"
-            :loading="true"
-          >
-            Loading Button
-          </TwButton>
-          <TwButton
-            icon="smile"
-            :variant="ButtonVariant.PRIMARY"
-            :text-position="ButtonTextPosition.LEFT"
-            :disabled="true"
-            :loading="true"
-          >
-            Text Left
-          </TwButton>
+          {{ options.text }}
+        </tw-button>
+      </div>
+      <div class="col-span-12">
+        <hr class="my-2" />
+        <h3 class="text-xl font-semibold">Props</h3>
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-toggle
+              id="toggle-button-loading"
+              v-model="options.loading"
+              label="Loading"
+            ></tw-toggle>
+            <tw-toggle
+              id="toggle-button-ripple"
+              v-model="options.ripple"
+              label="Ripple"
+            ></tw-toggle>
+            <tw-toggle
+              id="toggle-button-disabled"
+              v-model="options.disabled"
+              label="Disabled"
+            ></tw-toggle>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-radio
+              label="Variant"
+              id="radio-button-variant"
+              v-model="options.variant"
+              :options="buttonVariants"
+            ></tw-radio>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-radio
+              label="Text Position"
+              id="radio-button-textPosition"
+              v-model="options.buttonTextPosition"
+              :options="buttonTextPositions"
+            ></tw-radio>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-radio
+              label="Icon Position"
+              id="radio-button-iconPosition"
+              v-model="options.iconPosition"
+              :options="buttonIconPositions"
+            ></tw-radio>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-input
+              label="Text"
+              type="text"
+              placeholder="Button Text"
+              v-model="options.text"
+            ></tw-input>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+            <tw-input
+              label="Icon"
+              type="text"
+              placeholder="Button Icon"
+              v-model="options.icon"
+              :disabled="true"
+            ></tw-input>
+          </div>
         </div>
       </div>
     </div>

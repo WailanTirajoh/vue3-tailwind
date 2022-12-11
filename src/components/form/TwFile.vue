@@ -80,7 +80,7 @@ const onDragOver = (e: DragEvent) => {
       >
         <div class="grid grid-cols-12 justify-left gap-4 p-4">
           <div
-            class="relative col-span-3"
+            class="relative col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2"
             v-for="(url, index) in dataImgUrls"
             :key="`form-image-${index}`"
           >

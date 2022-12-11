@@ -5,6 +5,7 @@ import TwSelect from "./form/TwSelect.vue";
 import TwTextarea from "./form/TwTextarea.vue";
 import TwToggle from "./form/TwToggle.vue";
 import TwInput from "./form/TwInput.vue";
+import TwRadio from "./form/TwRadio.vue";
 import TwButton from "./button/TwButton.vue";
 import TwFeather from "./icon/TwFeather.vue";
 import TwTab from "./tab/TwTab.vue";
@@ -15,6 +16,7 @@ import TwDatatableClient from "./datatable/TwDatatableClient.vue";
 export {
   TwFile,
   TwInput,
+  TwRadio,
   TwMultiSelect,
   TwSelect,
   TwTextarea,
