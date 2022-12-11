@@ -12,6 +12,7 @@ import {
   TwTab,
   TwOffcanvas,
   TwModal,
+  TwDatatableClient,
 } from "./components";
 
 Ripple.color = "rgba(255, 255, 255, 0.35)";
@@ -29,6 +30,7 @@ const TwComponents = {
     app.component("TwTab", TwTab);
     app.component("TwOffcanvas", TwOffcanvas);
     app.component("TwModal", TwModal);
+    app.component("TwDatatableClient", TwDatatableClient);
     app.directive("ripple", Ripple as Directive<any, any>);
   },
 };
