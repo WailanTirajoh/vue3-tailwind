@@ -70,3 +70,10 @@ export type DropdownItem = {
   label: string;
   value: DropdownItemValue;
 };
+
+// Form Radio
+
+export type RadioOption = {
+  label: string;
+  value: any;
+};

@@ -39,8 +39,8 @@ const COLORS: Record<ButtonVariant, string> = {
 };
 
 const ICON_POSITIONS: Record<ButtonIconPosition, string> = {
-  [ButtonIconPosition.LEFT]: "float-left mr-2",
-  [ButtonIconPosition.RIGHT]: "float-right ml-2",
+  [ButtonIconPosition.LEFT]: "float-left",
+  [ButtonIconPosition.RIGHT]: "float-right",
 };
 
 const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
@@ -48,14 +48,6 @@ const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
   [ButtonTextPosition.RIGHT]: "text-right",
   [ButtonTextPosition.CENTER]: "text-center",
 };
-
-const btnColor = computed(() => {
-  let color = COLORS[props.variant ?? ButtonVariant.PRIMARY];
-  if (!btnDisabled.value) {
-    color += " active:bg-opacity-90 hover:bg-opacity-90";
-  }
-  return color;
-});
 
 const btnButtonTextPosition = computed(() => {
   return TEXT_POSITIONS[props.buttonTextPosition ?? ButtonTextPosition.LEFT];
@@ -81,6 +73,13 @@ const btnDisabled = computed(() => {
 const btnRipple = computed(() => {
   return props.ripple;
 });
+const btnColor = computed(() => {
+  let color = COLORS[props.variant ?? ButtonVariant.PRIMARY];
+  if (!btnDisabled.value) {
+    color += " active:bg-opacity-90 hover:bg-opacity-90";
+  }
+  return color;
+});
 </script>
 
 <template>
@@ -100,17 +99,18 @@ const btnRipple = computed(() => {
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded bg-opacity-10"
+        class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded bg-opacity-20"
         v-if="btnDisabled || loading"
       ></div>
     </transition>
-    <TwFeather
+    <tw-feather
       v-if="icon || loading"
-      class="mr-2"
       :class="[btnIconPosition]"
       :type="btnIcon"
       :animation="btnLoading ? 'spin' : ''"
     />
-    <slot />
+    <div v-if="$slots.hasOwnProperty('default')" class="mx-2 inline-block">
+      <slot />
+    </div>
   </button>
 </template>

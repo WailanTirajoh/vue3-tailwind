@@ -1,15 +1,13 @@
 <script setup lang="ts">
-export type Option = {
-  label: string;
-  value: any;
-};
+import type { RadioOption } from "../type";
+
 export interface Props {
   label: string;
   id: string;
   modelValue?: string | number;
   type?: string;
   disabled?: boolean;
-  options: Option[];
+  options: RadioOption[];
 }
 withDefaults(defineProps<Props>(), {
   type: "text",

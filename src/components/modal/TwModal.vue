@@ -6,7 +6,6 @@ export interface Props {
   fullHeight?: boolean;
   width?: string;
 }
-
 const props = withDefaults(defineProps<Props>(), {
   fullHeight: true,
   width: "100%",
@@ -74,7 +73,7 @@ watch(
                 class="duration-200 p-1 ml-auto transition-opacity bg-transparent border-0 text-black opacity-30 hover:opacity-60 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 @click="toggleModal()"
               >
-                <TwFeather type="x" />
+                <tw-feather type="x" />
               </button>
             </div>
             <div

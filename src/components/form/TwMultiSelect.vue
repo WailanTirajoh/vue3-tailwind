@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { DropdownItem, DropdownItemValue } from "../type";
+
 import { ref } from "vue";
 import MultiSelectionList from "../dropdown/TwMultiSelectionList.vue";
-
-import type { DropdownItem, DropdownItemValue } from "../type";
 
 export interface Props {
   modelValue: Array<DropdownItemValue>;

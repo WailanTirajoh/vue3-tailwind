@@ -40,13 +40,6 @@ const classPosition = computed(() => {
   }
 });
 
-const openOffCanvas = () => {
-  isOpen.value = true;
-};
-const closeOffCanvas = () => {
-  isOpen.value = false;
-};
-
 watch(
   isOpen,
   (newValue) => {
@@ -60,6 +53,16 @@ watch(
     immediate: true,
   }
 );
+
+const openOffCanvas = () => {
+  isOpen.value = true;
+};
+const closeOffCanvas = () => {
+  isOpen.value = false;
+};
+
+// Expose open / close so we can programaticaly close / open canvas base of ref
+defineExpose({ openOffCanvas, closeOffCanvas });
 </script>
 
 <template>

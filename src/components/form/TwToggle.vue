@@ -7,11 +7,15 @@ export interface Props {
   placeholder?: string;
   modelValue?: boolean;
   disabled?: boolean;
+  activeText?: string;
+  inactiveText?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   disabled: false,
   placeholder: "",
+  activeText: "Active",
+  inactiveText: "Inactive",
 });
 const emit = defineEmits(["update:modelValue"]);
 const inputData = ref(props.modelValue);
@@ -47,7 +51,7 @@ const inputData = ref(props.modelValue);
           </div>
         </label>
         <div class="">
-          {{ inputData ? "Active" : "Inactive" }}
+          {{ inputData ? activeText : inactiveText }}
         </div>
       </div>
     </div>
@@ -57,6 +61,6 @@ const inputData = ref(props.modelValue);
 <style scoped>
 input:checked ~ .dot {
   transform: translateX(100%);
-  background-color: #bb6348;
+  background-color: rgb(75, 85, 99);
 }
 </style>

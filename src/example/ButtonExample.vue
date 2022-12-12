@@ -45,7 +45,6 @@ const options = ref({
     <div class="grid grid-cols-12">
       <div class="col-span-12">
         <tw-button
-          class="w-full md:w-[400px]"
           :variant="options.variant"
           :icon="options.icon"
           :disabled="options.disabled"
@@ -60,7 +59,7 @@ const options = ref({
       <div class="col-span-12">
         <hr class="my-2" />
         <h3 class="text-xl font-semibold">Props</h3>
-        <div class="grid grid-cols-12">
+        <div class="grid grid-cols-12 gap-x-4">
           <div class="col-span-12 md:col-span-6 lg:col-span-3">
             <tw-toggle
               id="toggle-button-loading"

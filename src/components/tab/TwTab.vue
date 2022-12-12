@@ -3,13 +3,14 @@ import { computed, ref, watch, onMounted } from "vue";
 
 export type Position = "bottom" | "top" | "left" | "right";
 export type Type = "horizontal" | "vertical";
+export type Tab = {
+  name: string;
+  ref: string;
+};
 export interface Props {
   type?: Type;
   currentTab?: string;
-  tabs: Array<{
-    name: string;
-    ref: string;
-  }>;
+  tabs: Array<Tab>;
   position?: Position;
   navClass?: string;
   tabClass?: string;
@@ -35,21 +36,9 @@ const emit = defineEmits(["after-move"]);
 const positionLineClass = computed(() => {
   let position = "";
   if (type.value === "horizontal") {
-    switch (props.position) {
-      case "top":
-        position = "top-0";
-        break;
-      default:
-        position = "bottom-0";
-    }
+    position = props.position === "top" ? "top-0" : "bottom-0";
   } else {
-    switch (props.position) {
-      case "right":
-        position = "right-0";
-        break;
-      default:
-        position = "left-0";
-    }
+    position = props.position === "right" ? "right-0" : "left-0";
   }
   return position;
 });
@@ -63,24 +52,31 @@ watch(currentTab, (newValue) => {
   move(newValue);
 });
 
-const changeTab = (ref: string) => {
-  currentTab.value = ref;
-};
-
 const move = (newActiveTab: string) => {
   if (!currentTab.value) return;
 
   const element = tabRefs.value[newActiveTab];
-
   if (type.value === "horizontal") {
-    hlineWidth.value = element.clientWidth;
-    hlineOffset.value = element.offsetLeft;
+    setHorizontalLineProperties(element);
   } else {
-    vlineHeight.value = element.clientHeight;
-    vlineOffset.value = element.offsetTop;
+    setVerticalLineProperties(element);
   }
 
   emit("after-move", currentTab.value);
+};
+
+const setHorizontalLineProperties = (element: HTMLElement) => {
+  hlineWidth.value = element.clientWidth;
+  hlineOffset.value = element.offsetLeft;
+};
+
+const setVerticalLineProperties = (element: HTMLElement) => {
+  vlineHeight.value = element.clientHeight;
+  vlineOffset.value = element.offsetTop;
+};
+
+const changeTab = (ref: string) => {
+  currentTab.value = ref;
 };
 
 onMounted(async () => {
