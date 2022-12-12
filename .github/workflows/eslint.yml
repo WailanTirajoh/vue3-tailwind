@@ -34,10 +34,9 @@ jobs: # list of things to do
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install ESLint
+      - name: Install Dependency
         run: |
-          npm install eslint@8.10.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
+          npm install
 
       - name: Code Linting
         run: npm run lint
