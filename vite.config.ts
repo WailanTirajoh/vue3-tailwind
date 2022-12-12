@@ -10,8 +10,8 @@ export default defineConfig({
     lib: {
       entry: "./src/build.ts",
       formats: ["es", "cjs"],
-      name: "vue3-tailwind",
-      fileName: (format) => `${format === "es" ? "index" : "index.comon"}.js`,
+      name: "Vue3Tailwind",
+      fileName: "vue3-tailwind",
     },
     rollupOptions: {
       external: ["vue"],

@@ -71,7 +71,7 @@ const selectionList = [
         <pre>{{ multiSelectExample }}</pre>
       </div>
       <div class="col-span-12">
-        <TwToggle v-model="toggleExample" label="Toggle" />
+        <TwToggle id="toggle" v-model="toggleExample" label="Toggle" />
         <div>Result:</div>
         <pre>{{ toggleExample }}</pre>
       </div>

@@ -1,13 +1,13 @@
 {
   "name": "vue3-tailwind",
   "version": "0.1.15",
-  "main": "./dist/index.common.js",
-  "module": "./dist/index.js",
+  "main": "./dist/vue3-tailwind.mjs",
+  "module": "./dist/vue3-tailwind.js",
   "types": "./dist/build.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.common.js"
+      "import": "./dist/vue3-tailwind.js",
+      "require": "./dist/vue3-tailwind.mjs"
     },
     "./dist/style.css": "./dist/style.css"
   },
