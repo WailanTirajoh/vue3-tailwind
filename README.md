@@ -63,3 +63,5 @@ export default defineNuxtConfig({
 ~ Ongoing Documentation
 ### Tabs
 ~ Ongoing Documentation
+### Datatable
+~ Ongoing Documentation
