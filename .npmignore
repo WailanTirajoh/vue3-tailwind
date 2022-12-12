@@ -1,4 +1,6 @@
 src
+.github
+.vscode
 .eslintrc.cjs
 .prettierrc.json
 env.d.ts

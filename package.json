@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only && npm run generate:types --mode dev",
+    "build": "run-p type-check build-only && npm run generate:types",
     "generate:types": "vue-tsc --declaration --emitDeclarationOnly --outdir ./dist",
     "preview": "vite preview",
     "build-only": "vite build",
