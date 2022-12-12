@@ -39,14 +39,17 @@ const inputData = ref(props.modelValue);
               :disabled="disabled"
             />
             <div
-              class="block w-14 h-8 rounded-full border shadow-inner"
+              class="block w-10 h-6 rounded-full border shadow-inner"
               :class="{
                 'bg-gray-100': inputData,
                 'bg-gray-600': !inputData,
               }"
             ></div>
             <div
-              class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+              class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"
+              :class="{
+                'translate-x-full bg-gray-600': inputData,
+              }"
             ></div>
           </div>
         </label>
@@ -57,10 +60,3 @@ const inputData = ref(props.modelValue);
     </div>
   </div>
 </template>
-
-<style scoped>
-input:checked ~ .dot {
-  transform: translateX(100%);
-  background-color: rgb(75, 85, 99);
-}
-</style>

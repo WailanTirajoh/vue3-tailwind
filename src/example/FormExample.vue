@@ -37,8 +37,6 @@ const selectionList = [
     <div class="grid grid-cols-12 gap-2">
       <div class="col-span-12">
         <TwFile v-model="fileModel" />
-        <div>Result:</div>
-        <pre>{{ fileModel }}</pre>
       </div>
       <div class="col-span-12">
         <TwInput
@@ -47,8 +45,6 @@ const selectionList = [
           placeholder="Input Field"
           type="text"
         />
-        <div>Result:</div>
-        <pre>{{ inputExample }}</pre>
       </div>
       <div class="col-span-12">
         <TwSelect
@@ -57,8 +53,6 @@ const selectionList = [
           label="Single Select"
           placeholder="Choose select"
         />
-        <div>Result:</div>
-        <pre>{{ selectExample }}</pre>
       </div>
       <div class="col-span-12">
         <TwMultiSelect
@@ -67,13 +61,9 @@ const selectionList = [
           label="Multi Select"
           placeholder="Choose select"
         />
-        <div>Result:</div>
-        <pre>{{ multiSelectExample }}</pre>
       </div>
       <div class="col-span-12">
         <TwToggle id="toggle" v-model="toggleExample" label="Toggle" />
-        <div>Result:</div>
-        <pre>{{ toggleExample }}</pre>
       </div>
     </div>
   </div>

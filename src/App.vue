@@ -9,7 +9,7 @@ import DatatableClientExample from "./example/DatatableClientExample.vue";
 
 <template>
   <div class="flex justify-center py-4 bg-gray-300 min-h-screen">
-    <div class="container grid gap-2">
+    <div class="grid gap-2">
       <div class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100">
         <FormExample />
       </div>
