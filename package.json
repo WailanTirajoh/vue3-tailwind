@@ -1,7 +1,7 @@
 {
   "name": "vue3-tailwind",
   "version": "0.1.15",
-  "main": "./dist/vue3-tailwind.mjs",
+  "main": "./dist/vue3-tailwind.js",
   "module": "./dist/vue3-tailwind.js",
   "types": "./dist/build.d.ts",
   "exports": {
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only && npm run generate:types",
+    "build": "run-p type-check build-only && npm run generate:types --mode dev",
     "generate:types": "vue-tsc --declaration --emitDeclarationOnly --outdir ./dist",
     "preview": "vite preview",
     "build-only": "vite build",
