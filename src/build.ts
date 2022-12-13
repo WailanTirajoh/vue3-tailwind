@@ -24,6 +24,7 @@ import {
   TwModal,
   TwDatatableClient,
   TwFeather,
+  TwToast,
 } from "./components";
 import Toast from "@/composables/toast";
 import "./assets/build.css";
@@ -64,6 +65,7 @@ export {
   TwModal,
   TwDatatableClient,
   TwFeather,
+  TwToast,
   Toast,
 };
 
