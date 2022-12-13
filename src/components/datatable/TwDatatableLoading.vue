@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import TwDatatableCircleSpinner from "./TwDatatableCircleSpinner.vue";
+
 export interface Props {
   show?: boolean;
 }

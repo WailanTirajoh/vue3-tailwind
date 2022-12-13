@@ -44,7 +44,7 @@ watch(
 <template>
   <div>
     <span @click="toggleModal()">
-      <slot name="button"></slot>
+      <slot name="trigger"></slot>
     </span>
     <teleport to="body">
       <transition
@@ -100,7 +100,6 @@ watch(
                   <slot name="footer"></slot>
                 </div>
               </div>
-              <!-- </div> -->
             </div>
           </transition>
         </div>

@@ -5,6 +5,7 @@ import TabExample from "@/example/TabExample.vue";
 import ModalExample from "./example/ModalExample.vue";
 import OffcanvasExample from "./example/OffcanvasExample.vue";
 import DatatableClientExample from "./example/DatatableClientExample.vue";
+import ToastExample from "./example/ToastExample.vue";
 </script>
 
 <template>
@@ -24,6 +25,9 @@ import DatatableClientExample from "./example/DatatableClientExample.vue";
       </div>
       <div class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100">
         <OffcanvasExample />
+      </div>
+      <div class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100">
+        <ToastExample />
       </div>
       <div class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100">
         <DatatableClientExample />

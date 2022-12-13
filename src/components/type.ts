@@ -72,8 +72,19 @@ export type DropdownItem = {
 };
 
 // Form Radio
-
 export type RadioOption = {
   label: string;
   value: any;
 };
+
+// Toast
+export type ToastType = "success" | "info" | "error" | "warning";
+export interface Toast {
+  id: string;
+  message?: string;
+  html?: string;
+  lifetime?: number;
+  type: ToastType;
+  jsonMessage?: object | null;
+  title?: string | null;
+}

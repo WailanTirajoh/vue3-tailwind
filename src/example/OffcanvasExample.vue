@@ -53,7 +53,7 @@ officiis debitis fuga repellendus? Quam!
       <div class="col-span-12">
         <div class="grid md:flex gap-2">
           <TwOffcanvas position="left">
-            <template #button>
+            <template #trigger>
               <TwButton> Left Offcanvas </TwButton>
             </template>
             <template #header> Left Offcanvas </template>
@@ -62,7 +62,7 @@ officiis debitis fuga repellendus? Quam!
             </div>
           </TwOffcanvas>
           <TwOffcanvas position="right">
-            <template #button>
+            <template #trigger>
               <TwButton> Right Offcanvas </TwButton>
             </template>
             <template #header> Right Offcanvas </template>
@@ -71,7 +71,7 @@ officiis debitis fuga repellendus? Quam!
             </div>
           </TwOffcanvas>
           <TwOffcanvas position="right" width="800px">
-            <template #button>
+            <template #trigger>
               <TwButton> Right Offcanvas with width 800px </TwButton>
             </template>
             <template #header> Right Offcanvas </template>
@@ -80,7 +80,7 @@ officiis debitis fuga repellendus? Quam!
             </div>
           </TwOffcanvas>
           <TwOffcanvas position="left" width="600px">
-            <template #button>
+            <template #trigger>
               <TwButton> Left Offcanvas with width 600px </TwButton>
             </template>
             <template #header> Right Offcanvas </template>
@@ -89,7 +89,7 @@ officiis debitis fuga repellendus? Quam!
             </div>
           </TwOffcanvas>
           <TwOffcanvas position="top">
-            <template #button>
+            <template #trigger>
               <TwButton> Top Offcanvas </TwButton>
             </template>
             <template #header> Top Offcanvas </template>
@@ -98,7 +98,7 @@ officiis debitis fuga repellendus? Quam!
             </div>
           </TwOffcanvas>
           <TwOffcanvas position="bottom">
-            <template #button>
+            <template #trigger>
               <TwButton> Bottom Offcanvas </TwButton>
             </template>
             <template #header> Bottom Offcanvas </template>

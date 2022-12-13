@@ -66,15 +66,15 @@ defineExpose({ openOffCanvas, closeOffCanvas });
 </script>
 
 <template>
-  <div :class="position">
-    <span @click="openOffCanvas()">
-      <slot name="button"></slot>
-    </span>
+  <span @click="openOffCanvas()">
+    <slot name="trigger"></slot>
+  </span>
+  <Teleport to="body">
     <transition name="slide-fade">
       <div
         v-if="isOpen"
         class="fixed z-40 flex flex-col max-w-full bg-white bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
-        :class="classPosition"
+        :class="[classPosition, position]"
         :style="{
           width: width,
           height: height,
@@ -108,82 +108,82 @@ defineExpose({ openOffCanvas, closeOffCanvas });
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div v-show="isOpen" class="fixed inset-0 transform transition-all z-10">
+      <div v-if="isOpen" class="fixed inset-0 transform transition-all z-10">
         <div
           class="absolute inset-0 bg-gray-900 opacity-50"
           @click="closeOffCanvas"
         ></div>
       </div>
     </transition>
-  </div>
+  </Teleport>
 </template>
 
 <style scoped>
-.left .slide-fade-enter-from {
+.left.slide-fade-enter-from {
   transform: translateX(-100%);
 }
 
-.left .slide-fade-enter-active {
+.left.slide-fade-enter-active {
   transition: all 0.5s ease-in-out;
 }
 
-.left .slide-fade-leave-active-to {
+.left.slide-fade-leave-active-to {
   transition: all 0.5s ease-in-out;
 }
 
-.left .slide-fade-enter,
-.left .slide-fade-leave-to {
+.left.slide-fade-enter,
+.left.slide-fade-leave-to {
   transform: translateX(-100%);
 }
 
-.right .slide-fade-enter-from {
+.right.slide-fade-enter-from {
   transform: translateX(100%);
 }
 
-.right .slide-fade-enter-active {
+.right.slide-fade-enter-active {
   transition: all 0.5s ease-in-out;
 }
 
-.right .slide-fade-leave-active-to {
+.right.slide-fade-leave-active-to {
   transition: all 0.5s ease-in-out;
 }
 
-.right .slide-fade-enter,
-.right .slide-fade-leave-to {
+.right.slide-fade-enter,
+.right.slide-fade-leave-to {
   transform: translateX(100%);
 }
 
-.top .slide-fade-enter-from {
+.top.slide-fade-enter-from {
   transform: translateY(-100%);
 }
 
-.top .slide-fade-enter-active {
+.top.slide-fade-enter-active {
   transition: all 0.5s ease-in-out;
 }
 
-.top .slide-fade-leave-active-to {
+.top.slide-fade-leave-active-to {
   transition: all 0.5s ease-in-out;
 }
 
-.top .slide-fade-enter,
-.top .slide-fade-leave-to {
+.top.slide-fade-enter,
+.top.slide-fade-leave-to {
   transform: translateY(-100%);
 }
 
-.bottom .slide-fade-enter-from {
+.bottom.slide-fade-enter-from {
   transform: translateY(100%);
 }
 
-.bottom .slide-fade-enter-active {
+.bottom.slide-fade-enter-active {
   transition: all 0.5s ease-in-out;
 }
 
-.bottom .slide-fade-leave-active-to {
+.bottom.slide-fade-leave-active-to {
   transition: all 0.5s ease-in-out;
 }
 
-.bottom .slide-fade-enter,
-.bottom .slide-fade-leave-to {
+.bottom.slide-fade-enter,
+.bottom.slide-fade-leave-to {
   transform: translateY(100%);
 }
 </style>

@@ -5,7 +5,7 @@ import { TwButton, TwModal } from "@/components";
   <h2 class="text-2xl font-bold">Modal</h2>
   <hr class="my-2 border" />
   <TwModal :full-height="false">
-    <template #button>
+    <template #trigger>
       <TwButton> Modal </TwButton>
     </template>
     <template #header>
