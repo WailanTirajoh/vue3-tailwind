@@ -98,3 +98,9 @@ export interface ToastSuccess extends ToastDeafult {}
 export interface ToastError extends ToastDeafult {}
 export interface ToastWarning extends ToastDeafult {}
 export interface ToastInfo extends ToastDeafult {}
+
+// Modal
+export type ModalBackdrop = "" | "static";
+
+// Offcanvas
+export type OffcanvasPosition = "top" | "left" | "right" | "bottom";

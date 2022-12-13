@@ -4,7 +4,7 @@ import { TwButton, TwModal } from "@/components";
 <template>
   <h2 class="text-2xl font-bold">Modal</h2>
   <hr class="my-2 border dark:border-gray-700" />
-  <TwModal :full-height="false">
+  <TwModal backdrop="static" :full-height="false">
     <template #trigger>
       <TwButton> Modal </TwButton>
     </template>

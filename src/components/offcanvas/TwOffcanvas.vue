@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import type { OffcanvasPosition } from "../type";
+
 import { computed, ref, watch } from "vue";
 import { TwFeather } from "@/components";
 
-export type Position = "top" | "left" | "right" | "bottom";
 export interface Props {
-  position?: Position;
+  position?: OffcanvasPosition;
   width?: string;
   height?: string;
 }
