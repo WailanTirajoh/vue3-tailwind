@@ -50,7 +50,7 @@ const handleAfterMove = (newTab: string) => {
           tab-class="p-2 text-gray-900 dark:text-gray-300 rounded"
           line-class="!bg-gray-700 rounded-t"
           tab-active-class="!font-bold"
-          body-class="bg-white dark:bg-gray-800 shadow border rounded-b dark:border-gray-700"
+          body-class="bg-white dark:bg-gray-800 shadow border rounded dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -70,9 +70,9 @@ const handleAfterMove = (newTab: string) => {
           :current-tab="currentTab"
           nav-class="px-2 rounded-t gap-2 py-2"
           tab-class="p-2 text-gray-900 dark:text-gray-300 rounded"
-          line-class="!bg-gray-700 rounded-b"
+          line-class="!bg-gray-700 rounded-lg"
           tab-active-class="!font-bold"
-          body-class="bg-white dark:bg-gray-800 shadow border rounded-b dark:border-gray-700"
+          body-class="bg-white dark:bg-gray-800 shadow border rounded dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -92,9 +92,9 @@ const handleAfterMove = (newTab: string) => {
           :current-tab="currentTab"
           nav-class="px-2 rounded-l gap-2 py-2"
           tab-class="p-2 text-gray-900 dark:text-gray-300 rounded text-left"
-          line-class="!bg-gray-700 rounded-r"
+          line-class="!bg-gray-700 rounded"
           tab-active-class="!font-bold"
-          body-class="bg-white dark:bg-gray-800 shadow rounded-r border dark:border-gray-700"
+          body-class="bg-white dark:bg-gray-800 shadow rounded border dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -116,7 +116,7 @@ const handleAfterMove = (newTab: string) => {
           tab-class="p-2 text-gray-900 dark:text-gray-300 rounded text-center bg-gray-200 dark:bg-gray-900 shadow-inset"
           line-class="!bg-gray-700 rounded-l"
           tab-active-class="!font-bold"
-          body-class="bg-white dark:bg-gray-800 shadow rounded-r border dark:border-gray-700"
+          body-class="bg-white dark:bg-gray-800 shadow rounded border dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>

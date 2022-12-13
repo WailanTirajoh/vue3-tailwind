@@ -62,16 +62,16 @@ const closeDropdown = () => {
           <div
             v-for="v in modelValue"
             :key="v"
-            class="inline-block border rounded"
+            class="inline-block border dark:border-gray-700 dark:bg-gray-800 rounded overflow-hidden dark:text-gray-200"
           >
             <div class="flex items-center gap-2">
               <div
-                class="text-xs rounded text-gray-800 p-1 bg-white h-full w-full"
+                class="text-xs rounded text-gray-800 dark:text-gray-200 p-1 bg-white dark:bg-gray-800 h-full w-full"
               >
                 {{ v }}
               </div>
               <div
-                class="cursor-pointer bg-gray-200 p-1 w-5 h-full"
+                class="cursor-pointer bg-gray-200 dark:bg-gray-900 p-1 w-5 h-full"
                 @click.stop="removeSelectedValue(v)"
               >
                 &#10005;
