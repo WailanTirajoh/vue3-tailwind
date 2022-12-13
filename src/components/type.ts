@@ -1,6 +1,6 @@
 import type { Component } from "vue";
 // Buttons
-export declare enum ButtonVariant {
+export const enum ButtonVariant {
   PRIMARY = "primary",
   SECONDARY = "secondary",
   DANGER = "danger",
@@ -18,12 +18,12 @@ export declare enum ButtonVariant {
   NONE = "none",
 }
 
-export declare enum ButtonIconPosition {
+export const enum ButtonIconPosition {
   LEFT = "left",
   RIGHT = "right",
 }
 
-export declare enum ButtonTextPosition {
+export const enum ButtonTextPosition {
   LEFT = "left",
   RIGHT = "right",
   CENTER = "center",
