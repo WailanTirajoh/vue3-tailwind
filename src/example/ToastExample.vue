@@ -2,7 +2,6 @@
 import useToast from "@/composables/toast";
 import TwToast from "@/components/toast/TwToast.vue";
 import { TwButton } from "@/components";
-import { ButtonVariant } from "@/components/type";
 
 const { toasts, success, error, warning, info } = useToast();
 </script>
@@ -13,7 +12,7 @@ const { toasts, success, error, warning, info } = useToast();
     <h2 class="text-2xl font-bold">Toasts</h2>
     <hr class="my-2 border dark:border-gray-700" />
     <tw-button
-      :variant="ButtonVariant.SUCCESS"
+      variant="success"
       @click="
         success({
           message: 'test',
@@ -24,7 +23,7 @@ const { toasts, success, error, warning, info } = useToast();
       Success Toast
     </tw-button>
     <tw-button
-      :variant="ButtonVariant.DANGER"
+      variant="danger"
       @click="
         error({
           message: 'test',
@@ -35,7 +34,7 @@ const { toasts, success, error, warning, info } = useToast();
       Error Toast
     </tw-button>
     <tw-button
-      :variant="ButtonVariant.WARNING"
+      variant="warning"
       @click="
         warning({
           message: 'test',
@@ -46,7 +45,7 @@ const { toasts, success, error, warning, info } = useToast();
       Warning Toast
     </tw-button>
     <tw-button
-      :variant="ButtonVariant.INFO"
+      variant="info"
       @click="
         info({
           message: 'test',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import type { DropdownAlign } from "../type";
 import { computed, ref, onMounted, onUnmounted } from "vue";
-import { DropdownAlign } from "../type";
 
 export interface Props {
   align: DropdownAlign;
@@ -9,11 +9,11 @@ export interface Props {
 const props = defineProps<Props>();
 
 const ALIGN_CLASSES: Record<DropdownAlign, string> = {
-  [DropdownAlign.LEFT]: "origin-top-left left-0",
-  [DropdownAlign.RIGHT]: "origin-top-right right-0",
+  ["left"]: "origin-top-left left-0",
+  ["right"]: "origin-top-right right-0",
 };
 const alignmentClasses = computed(() => {
-  return ALIGN_CLASSES[props.align ?? DropdownAlign.LEFT];
+  return ALIGN_CLASSES[props.align ?? "left"];
 });
 const isOpen = ref(false);
 

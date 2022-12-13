@@ -1,34 +1,25 @@
 import type { Component } from "vue";
 // Buttons
-export const enum ButtonVariant {
-  PRIMARY = "primary",
-  SECONDARY = "secondary",
-  DANGER = "danger",
-  SUCCESS = "success",
-  LIGHT = "light",
-  WARNING = "warning",
-  INFO = "info",
-  OUTLINE_PRIMARY = "outline-primary",
-  OUTLINE_SECONDARY = "outline-secondary",
-  OUTLINE_DANGER = "outline-danger",
-  OUTLINE_SUCCESS = "outline-success",
-  OUTLINE_LIGHT = "outline-light",
-  OUTLINE_WARNING = "outline-warning",
-  OUTLINE_INFO = "outline-info",
-  NONE = "none",
-}
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "danger"
+  | "success"
+  | "light"
+  | "warning"
+  | "info"
+  | "outline-primary"
+  | "outline-secondary"
+  | "outline-danger"
+  | "outline-success"
+  | "outline-light"
+  | "outline-warning"
+  | "outline-info"
+  | "none";
 
-export const enum ButtonIconPosition {
-  LEFT = "left",
-  RIGHT = "right",
-}
+export type ButtonIconPosition = "left" | "right";
 
-export const enum ButtonTextPosition {
-  LEFT = "left",
-  RIGHT = "right",
-  CENTER = "center",
-}
-
+export type ButtonTextPosition = "left" | "right" | "center";
 // Datatable
 export interface DatatableColumn {
   label: string;
@@ -61,10 +52,7 @@ export type DatatableSetting = {
 };
 
 // Dropdown
-export enum DropdownAlign {
-  LEFT = "left",
-  RIGHT = "right",
-}
+export type DropdownAlign = "left" | "right";
 export type DropdownItemValue = any;
 export type DropdownItem = {
   label: string;

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { TwButton } from "@/components";
 import TwDropdown from "@/components/dropdown/TwDropdown.vue";
-import { ButtonVariant, DropdownAlign } from "@/components/type";
 </script>
 
 <template>
@@ -10,11 +9,9 @@ import { ButtonVariant, DropdownAlign } from "@/components/type";
     <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12">
       <div class="col-span-12 flex gap-2">
-        <tw-dropdown :align="DropdownAlign.LEFT" width="48">
+        <tw-dropdown align="left" width="48">
           <template #trigger>
-            <tw-button :variant="ButtonVariant.LIGHT">
-              Dropdown left align
-            </tw-button>
+            <tw-button variant="light"> Dropdown left align </tw-button>
           </template>
 
           <template #content>
@@ -34,11 +31,9 @@ import { ButtonVariant, DropdownAlign } from "@/components/type";
             </div>
           </template>
         </tw-dropdown>
-        <tw-dropdown :align="DropdownAlign.RIGHT" width="48">
+        <tw-dropdown align="right" width="48">
           <template #trigger>
-            <tw-button :variant="ButtonVariant.LIGHT">
-              Dropdown right align
-            </tw-button>
+            <tw-button variant="light"> Dropdown right align </tw-button>
           </template>
 
           <template #content>

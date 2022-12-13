@@ -13,13 +13,6 @@ import TwOffcanvas from "./offcanvas/TwOffcanvas.vue";
 import TwModal from "./modal/TwModal.vue";
 import TwDatatableClient from "./datatable/TwDatatableClient.vue";
 import TwToast from "./toast/TwToast.vue";
-// import Toast from "@/composables/toast";
-
-import {
-  ButtonIconPosition,
-  ButtonTextPosition,
-  ButtonVariant,
-} from "@/components/type";
 
 export {
   TwFile,
@@ -36,8 +29,4 @@ export {
   TwModal,
   TwDatatableClient,
   TwToast,
-  ButtonIconPosition,
-  ButtonTextPosition,
-  ButtonVariant,
-  // Toast,
 };

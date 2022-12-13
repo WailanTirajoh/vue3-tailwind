@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {
+import type {
   ButtonIconPosition,
   ButtonTextPosition,
   ButtonVariant,
@@ -9,31 +9,57 @@ import { TwButton } from "@/components";
 import { computed, ref } from "vue";
 
 const buttonVariants = computed(() =>
-  Object.entries(ButtonVariant).map(([key, value]) => ({
-    label: key,
+  [
+    "primary",
+    "secondary",
+    "danger",
+    "success",
+    "light",
+    "warning",
+    "info",
+    "outline-primary",
+    "outline-secondary",
+    "outline-danger",
+    "outline-success",
+    "outline-light",
+    "outline-warning",
+    "outline-info",
+    "none",
+  ].map((value) => ({
+    label: value,
     value: value,
   }))
 );
 const buttonTextPositions = computed(() =>
-  Object.entries(ButtonTextPosition).map(([key, value]) => ({
-    label: key,
+  ["left", "right", "center"].map((value) => ({
+    label: value,
     value: value,
   }))
 );
 const buttonIconPositions = computed(() =>
-  Object.entries(ButtonIconPosition).map(([key, value]) => ({
-    label: key,
+  ["left", "right"].map((value) => ({
+    label: value,
     value: value,
   }))
 );
-const options = ref({
-  variant: ButtonVariant.PRIMARY,
+interface Options {
+  variant: ButtonVariant;
+  ripple: boolean;
+  icon: string;
+  disabled: boolean;
+  iconPosition: ButtonIconPosition;
+  loading: boolean;
+  buttonTextPosition: ButtonTextPosition;
+  text: string;
+}
+const options = ref<Options>({
+  variant: "primary",
   ripple: true,
   icon: "user",
   disabled: false,
-  iconPosition: ButtonIconPosition.LEFT,
+  iconPosition: "left",
   loading: false,
-  buttonTextPosition: ButtonTextPosition.LEFT,
+  buttonTextPosition: "left",
   text: "Hi there!",
 });
 </script>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import type {
+  ButtonIconPosition,
+  ButtonTextPosition,
+  ButtonVariant,
+} from "../type";
+
 import { computed } from "vue";
-import { ButtonIconPosition, ButtonTextPosition, ButtonVariant } from "../type";
 import TwFeather from "../icon/TwFeather.vue";
 
 export interface Props {
@@ -16,42 +21,41 @@ export interface Props {
 const props = defineProps<Props>();
 
 const COLORS: Record<ButtonVariant, string> = {
-  [ButtonVariant.PRIMARY]: "bg-gray-800 text-white",
-  [ButtonVariant.SECONDARY]: "bg-gray-200 text-gray-800",
-  [ButtonVariant.DANGER]: "bg-red-800 text-white",
-  [ButtonVariant.SUCCESS]: "bg-green-800 text-white",
-  [ButtonVariant.LIGHT]:
-    "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
-  [ButtonVariant.WARNING]: "bg-yellow-800 text-white",
-  [ButtonVariant.INFO]: "bg-sky-800 text-white",
-  [ButtonVariant.OUTLINE_PRIMARY]:
+  ["primary"]: "bg-gray-800 text-white",
+  ["secondary"]: "bg-gray-200 text-gray-800",
+  ["danger"]: "bg-red-800 text-white",
+  ["success"]: "bg-green-800 text-white",
+  ["light"]: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
+  ["warning"]: "bg-yellow-800 text-white",
+  ["info"]: "bg-sky-800 text-white",
+  ["outline-primary"]:
     "border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-gray-100",
-  [ButtonVariant.OUTLINE_SECONDARY]: "border-2 border-gray-200 text-gray-800",
-  [ButtonVariant.OUTLINE_DANGER]:
+  ["outline-secondary"]: "border-2 border-gray-200 text-gray-800",
+  ["outline-danger"]:
     "border-2 border-red-800 text-gray-800 hover:bg-red-800 hover:text-gray-100",
-  [ButtonVariant.OUTLINE_SUCCESS]:
+  ["outline-success"]:
     "border-2 border-green-800 text-gray-800 hover:bg-green-800 hover:text-gray-100",
-  [ButtonVariant.OUTLINE_LIGHT]: "border-2 border-white text-gray-800",
-  [ButtonVariant.OUTLINE_WARNING]:
+  ["outline-light"]: "border-2 border-white text-gray-800",
+  ["outline-warning"]:
     "border-2 border-yellow-800 text-gray-800 hover:bg-yellow-800 hover:text-gray-100",
-  [ButtonVariant.OUTLINE_INFO]:
+  ["outline-info"]:
     "border-2 border-sky-800 text-gray-800 hover:bg-sky-800 hover:text-gray-100",
-  [ButtonVariant.NONE]: "",
+  ["none"]: "",
 };
 
 const ICON_POSITIONS: Record<ButtonIconPosition, string> = {
-  [ButtonIconPosition.LEFT]: "float-left",
-  [ButtonIconPosition.RIGHT]: "float-right",
+  ["left"]: "float-left",
+  ["right"]: "float-right",
 };
 
 const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
-  [ButtonTextPosition.LEFT]: "text-left",
-  [ButtonTextPosition.RIGHT]: "text-right",
-  [ButtonTextPosition.CENTER]: "text-center",
+  ["left"]: "text-left",
+  ["right"]: "text-right",
+  ["center"]: "text-center",
 };
 
 const btnButtonTextPosition = computed(() => {
-  return TEXT_POSITIONS[props.buttonTextPosition ?? ButtonTextPosition.LEFT];
+  return TEXT_POSITIONS[props.buttonTextPosition ?? "left"];
 });
 
 const btnLoading = computed(() => {
@@ -62,7 +66,7 @@ const btnIcon = computed(() => {
   return btnLoading.value ? "loader" : props.icon;
 });
 const btnIconPosition = computed(() => {
-  return ICON_POSITIONS[props.iconPosition ?? ButtonIconPosition.LEFT];
+  return ICON_POSITIONS[props.iconPosition ?? "left"];
 });
 const btnClasses = computed(() => {
   if (!props.classes) return [];
@@ -75,7 +79,7 @@ const btnRipple = computed(() => {
   return props.ripple;
 });
 const btnColor = computed(() => {
-  let color = COLORS[props.variant ?? ButtonVariant.PRIMARY];
+  let color = COLORS[props.variant ?? "primary"];
   if (!btnDisabled.value) {
     color += " active:bg-opacity-90 hover:bg-opacity-90";
   }
