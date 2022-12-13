@@ -25,6 +25,7 @@ import {
   TwDatatableClient,
   TwFeather,
 } from "./components";
+import Toast from "@/composables/toast";
 import "./assets/build.css";
 
 const TwComponents = {
@@ -63,6 +64,7 @@ export {
   TwModal,
   TwDatatableClient,
   TwFeather,
+  Toast,
 };
 
 export {
