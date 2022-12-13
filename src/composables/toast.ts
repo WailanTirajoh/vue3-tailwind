@@ -9,7 +9,7 @@ import { generateId } from "@/utils/generateId";
 import { ref } from "vue";
 
 const toasts = ref<Array<Toast>>([]);
-export const useToast = () => {
+const useToast = () => {
   const addToast = (params: Toast) => {
     params.id = generateId();
     toasts.value.push(params);
@@ -70,3 +70,4 @@ export const useToast = () => {
     info,
   };
 };
+export default useToast;

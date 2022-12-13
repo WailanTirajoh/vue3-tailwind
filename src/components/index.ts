@@ -12,6 +12,8 @@ import TwTab from "./tab/TwTab.vue";
 import TwOffcanvas from "./offcanvas/TwOffcanvas.vue";
 import TwModal from "./modal/TwModal.vue";
 import TwDatatableClient from "./datatable/TwDatatableClient.vue";
+import TwToast from "./toast/TwToast.vue";
+import Toast from "@/composables/toast";
 
 export {
   TwFile,
@@ -27,4 +29,6 @@ export {
   TwOffcanvas,
   TwModal,
   TwDatatableClient,
+  TwToast,
+  Toast,
 };

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import { useToast } from "@/composables/toast";
+import useToast from "@/composables/toast";
 import type { ToastType } from "../type";
 import { TwFeather } from "..";
 
