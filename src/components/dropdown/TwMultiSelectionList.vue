@@ -92,12 +92,12 @@ const closeDropdown = () => {
             placeholder="Type something"
           />
         </div>
-        <ul class="max-h-52 overflow-y-auto">
+        <div class="max-h-52 overflow-y-auto">
           <template v-if="filterredItems.length > 0">
-            <li
+            <button
               v-for="item in filterredItems"
               :key="'dropdown-' + item.value"
-              class="p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out"
+              class="p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left"
               :class="{
                 'bg-gray-800 text-white': modelValue.includes(item.value),
                 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300':
@@ -106,16 +106,16 @@ const closeDropdown = () => {
               @click="updateValue(item.value)"
             >
               {{ item.label }}
-            </li>
+            </button>
           </template>
           <template v-else>
-            <li
+            <div
               class="p-3 w-full text-sm text-center overflow-hidden break-words"
             >
               No matching data for key "{{ search }}"
-            </li>
+            </div>
           </template>
-        </ul>
+        </div>
       </template>
     </TwDropdownSelect>
   </div>

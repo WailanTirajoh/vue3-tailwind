@@ -44,6 +44,7 @@ const inputData = ref(props.modelValue);
               class="sr-only"
               @input="emit('update:modelValue', !inputData)"
               :disabled="disabled"
+              :aria-label="`${id}-checkbox`"
             />
             <div
               class="block w-10 h-6 rounded-full border dark:border-gray-700 shadow-inner"

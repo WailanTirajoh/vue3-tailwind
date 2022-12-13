@@ -69,19 +69,19 @@ const updateValue = (value: any) => {
             placeholder="Type something"
           />
         </div>
-        <ul class="max-h-52 overflow-y-auto">
+        <div class="max-h-52 overflow-y-auto">
           <template v-if="items.length === 0">
-            <li
+            <button
               class="p-3 w-full text-sm text-center overflow-hidden break-words"
             >
               No Data
-            </li>
+            </button>
           </template>
           <template v-else-if="filterredItems.length > 0">
-            <li
+            <button
               v-for="item in filterredItems"
               :key="'dropdown-' + item.value"
-              class="p-3 cursor-pointer w-full text-sm"
+              class="p-3 cursor-pointer w-full text-sm text-left"
               :class="{
                 'bg-gray-800 dark:bg-gray-700 text-white':
                   modelValue === item.value,
@@ -91,16 +91,16 @@ const updateValue = (value: any) => {
               @click="updateValue(item.value)"
             >
               {{ item.label }}
-            </li>
+            </button>
           </template>
           <template v-else>
-            <li
+            <button
               class="p-3 w-full text-sm text-center overflow-hidden break-words"
             >
               No matching data for key "{{ search }}"
-            </li>
+            </button>
           </template>
-        </ul>
+        </div>
       </template>
     </TwDropdownSelect>
   </div>
