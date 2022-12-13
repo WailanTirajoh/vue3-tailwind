@@ -60,7 +60,7 @@ const options = ref({
         <hr class="my-2" />
         <h3 class="text-xl font-semibold">Props</h3>
         <div
-          class="grid grid-cols-12 gap-x-4 border-2 p-2 rounded-lg shadow-inner bg-gray-50"
+          class="grid grid-cols-12 gap-x-4 border-2 p-2 rounded-lg shadow-inner bg-gray-200"
         >
           <div class="col-span-12 md:col-span-6 lg:col-span-3">
             <tw-toggle
