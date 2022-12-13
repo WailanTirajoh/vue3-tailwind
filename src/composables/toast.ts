@@ -1,19 +1,15 @@
-import type { Toast } from "@/components/type";
+import type {
+  Toast,
+  ToastSuccess,
+  ToastWarning,
+  ToastInfo,
+  ToastError,
+} from "@/components/type";
 import { generateId } from "@/utils/generateId";
 import { ref } from "vue";
 
 const toasts = ref<Array<Toast>>([]);
 export const useToast = () => {
-  interface ToastDeafult {
-    message: string;
-    lifetime?: number;
-    title?: string;
-  }
-  interface Success extends ToastDeafult {}
-  interface Error extends ToastDeafult {}
-  interface Warning extends ToastDeafult {}
-  interface Info extends ToastDeafult {}
-
   const addToast = (params: Toast) => {
     params.id = generateId();
     toasts.value.push(params);
@@ -24,7 +20,7 @@ export const useToast = () => {
     toasts.value.splice(index, 1);
   };
 
-  const success = (params: Success) => {
+  const success = (params: ToastSuccess) => {
     addToast({
       id: "",
       message: params.message,
@@ -34,7 +30,7 @@ export const useToast = () => {
     });
   };
 
-  const error = (params: Error) => {
+  const error = (params: ToastError) => {
     addToast({
       id: "",
       message: params.message,
@@ -44,7 +40,7 @@ export const useToast = () => {
     });
   };
 
-  const warning = (params: Warning) => {
+  const warning = (params: ToastWarning) => {
     addToast({
       id: "",
       message: params.message,
@@ -54,7 +50,7 @@ export const useToast = () => {
     });
   };
 
-  const info = (params: Info) => {
+  const info = (params: ToastInfo) => {
     addToast({
       id: "",
       message: params.message,
