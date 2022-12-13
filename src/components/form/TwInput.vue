@@ -25,9 +25,9 @@ const inputData = ref(props.modelValue);
       <input
         v-model="inputData"
         :type="type"
-        class="transition duration-300 ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
+        class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
         :class="{
-          '!bg-gray-100 cursor-not-allowed': disabled,
+          '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
         }"
         :placeholder="placeholder"
         :disabled="disabled"

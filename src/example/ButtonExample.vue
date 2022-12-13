@@ -41,7 +41,7 @@ const options = ref({
 <template>
   <div>
     <h2 class="text-2xl font-bold">Button</h2>
-    <hr class="my-2 border" />
+    <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12">
       <div class="col-span-12">
         <tw-button
@@ -57,10 +57,10 @@ const options = ref({
         </tw-button>
       </div>
       <div class="col-span-12">
-        <hr class="my-2" />
+        <hr class="my-2 dark:border-gray-700" />
         <h3 class="text-xl font-semibold">Props</h3>
         <div
-          class="grid grid-cols-12 gap-x-4 border-2 p-2 rounded-lg shadow-inner bg-gray-200"
+          class="grid grid-cols-12 gap-x-4 border-2 p-2 rounded-lg shadow-inner bg-gray-200 dark:bg-gray-800 dark:border-gray-700"
         >
           <div class="col-span-12 md:col-span-6 lg:col-span-3">
             <tw-toggle

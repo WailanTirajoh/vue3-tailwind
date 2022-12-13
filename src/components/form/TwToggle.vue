@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { TwFeather } from "..";
 
 export interface Props {
   id: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   modelValue?: boolean;
   disabled?: boolean;
   activeText?: string;
   inactiveText?: string;
+  activeIcon?: string;
+  inactiveIcon?: string;
+  noIcon?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
@@ -16,6 +20,9 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: "",
   activeText: "Active",
   inactiveText: "Inactive",
+  activeIcon: "check",
+  inactiveIcon: "x",
+  noIcon: true,
 });
 const emit = defineEmits(["update:modelValue"]);
 const inputData = ref(props.modelValue);
@@ -28,7 +35,7 @@ const inputData = ref(props.modelValue);
     </label>
     <div>
       <div class="flex gap-2 items-center w-full">
-        <label :for="id" class="flex items-center cursor-pointer bor">
+        <label :for="id" class="flex items-center cursor-pointer">
           <div class="relative">
             <input
               :id="id"
@@ -39,18 +46,25 @@ const inputData = ref(props.modelValue);
               :disabled="disabled"
             />
             <div
-              class="block w-10 h-6 rounded-full border shadow-inner"
+              class="block w-10 h-6 rounded-full border dark:border-gray-700 shadow-inner"
               :class="{
-                'bg-gray-100': inputData,
-                'bg-gray-600': !inputData,
+                'bg-gray-100 dark:bg-gray-600': inputData,
+                'bg-gray-600 dark:bg-gray-600': !inputData,
               }"
             ></div>
             <div
-              class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"
+              class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition flex items-center justify-center"
               :class="{
-                'translate-x-full bg-gray-600': inputData,
+                'translate-x-full bg-gray-600 dark:bg-green-600': inputData,
               }"
-            ></div>
+            >
+              <TwFeather
+                v-if="!noIcon"
+                size="10"
+                class="flex items-center justify-center"
+                :type="inputData ? activeIcon : inactiveIcon"
+              ></TwFeather>
+            </div>
           </div>
         </label>
         <div class="">

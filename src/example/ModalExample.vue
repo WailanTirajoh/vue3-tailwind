@@ -3,7 +3,7 @@ import { TwButton, TwModal } from "@/components";
 </script>
 <template>
   <h2 class="text-2xl font-bold">Modal</h2>
-  <hr class="my-2 border" />
+  <hr class="my-2 border dark:border-gray-700" />
   <TwModal :full-height="false">
     <template #trigger>
       <TwButton> Modal </TwButton>

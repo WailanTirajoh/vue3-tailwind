@@ -74,7 +74,7 @@ watch(
               @click.self="toggleModal"
             >
               <div
-                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-800 outline-none focus:outline-none max-h-[80vh]"
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-800 dark:text-gray-300 outline-none focus:outline-none max-h-[80vh]"
                 :style="{ width: props.width }"
               >
                 <div

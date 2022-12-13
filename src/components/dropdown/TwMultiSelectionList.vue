@@ -87,7 +87,7 @@ const closeDropdown = () => {
         <div class="w-full p-2">
           <input
             v-model="search"
-            class="block w-full rounded text-gray-600 text-xs focus:border-transparent focus:ring-0 focus:outline-none p-3 bg-gray-50"
+            class="block w-full rounded text-gray-600 text-xs focus:border-transparent focus:ring-0 focus:outline-none p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
             type="text"
             placeholder="Type something"
           />
@@ -100,9 +100,8 @@ const closeDropdown = () => {
               class="p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out"
               :class="{
                 'bg-gray-800 text-white': modelValue.includes(item.value),
-                'hover:bg-gray-100 text-gray-700': !modelValue.includes(
-                  item.value
-                ),
+                'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300':
+                  !modelValue.includes(item.value),
               }"
               @click="updateValue(item.value)"
             >

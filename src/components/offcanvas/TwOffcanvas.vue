@@ -73,7 +73,7 @@ defineExpose({ openOffCanvas, closeOffCanvas });
     <transition name="slide-fade">
       <div
         v-if="isOpen"
-        class="fixed z-40 flex flex-col max-w-full bg-white bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
+        class="fixed z-40 flex flex-col max-w-full bg-white dark:bg-gray-800 dark:text-gray-300 bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
         :class="[classPosition, position]"
         :style="{
           width: width,
@@ -83,7 +83,7 @@ defineExpose({ openOffCanvas, closeOffCanvas });
         }"
       >
         <div
-          class="flex justify-between p-4 border-b-2 border-b-gray-200 items-center"
+          class="flex justify-between p-4 border-b-2 dark:border-gray-700 border-b-gray-200 items-center"
         >
           <h3 class="font-medium text-2xl" @click="closeOffCanvas()">
             <slot name="header"></slot>

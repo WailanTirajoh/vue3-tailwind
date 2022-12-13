@@ -39,29 +39,29 @@ const classPosition = computed(() => {
 </script>
 
 <template>
-  <Teleport to="body">
-    <transition-group
-      tag="ul"
-      name="list"
-      class="w-80 fixed inset-x-0 z-50 grid gap-2 break-words pt-3"
-      :class="[classPosition, position, wrapperClass]"
-      style="overflow-wrap: anywhere"
-      appear
-    >
-      <TwToastItem
-        v-for="toast in props.toasts"
-        :id="toast?.id"
-        :key="`toast-${toast.id}`"
-        class="w-full"
-        :message="toast.message"
-        :type="toast.type"
-        :lifetime="toast.lifetime"
-        :json-message="toast.jsonMessage"
-        :html="toast.html"
-        :title="toast.title"
-      />
-    </transition-group>
-  </Teleport>
+  <!-- <Teleport to="body"> -->
+  <transition-group
+    tag="ul"
+    name="list"
+    class="w-80 fixed inset-x-0 z-50 grid gap-2 break-words pt-3"
+    :class="[classPosition, position, wrapperClass]"
+    style="overflow-wrap: anywhere"
+    appear
+  >
+    <tw-toast-item
+      v-for="toast in props.toasts"
+      :id="toast?.id"
+      :key="`toast-${toast.id}`"
+      class="w-full"
+      :message="toast.message"
+      :type="toast.type"
+      :lifetime="toast.lifetime"
+      :json-message="toast.jsonMessage"
+      :html="toast.html"
+      :title="toast.title"
+    />
+  </transition-group>
+  <!-- </Teleport> -->
 </template>
 
 <style scoped>

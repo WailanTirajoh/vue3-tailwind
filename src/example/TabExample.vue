@@ -34,9 +34,11 @@ const handleAfterMove = (newTab: string) => {
 <template>
   <div>
     <h2 class="text-2xl font-bold">Tabs</h2>
-    <hr class="my-2 border" />
+    <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12 gap-2">
-      <div class="col-span-12 p-2 shadow-inner rounded bg-gray-200">
+      <div
+        class="col-span-12 p-2 shadow-inner rounded bg-gray-200 dark:bg-gray-900"
+      >
         <h3 class="text-base font-medium mb-2">Horizontal Tab - Line Bottom</h3>
         <TwTab
           ref="horizontalTabBottom"
@@ -45,10 +47,10 @@ const handleAfterMove = (newTab: string) => {
           :tabs="tabs"
           :current-tab="currentTab"
           nav-class="px-2 rounded-t gap-2 py-2"
-          tab-class="p-2 text-gray-900 rounded"
+          tab-class="p-2 text-gray-900 dark:text-gray-300 rounded"
           line-class="!bg-gray-700 rounded-t"
           tab-active-class="!font-bold"
-          body-class="bg-white shadow border rounded-b"
+          body-class="bg-white dark:bg-gray-800 shadow border rounded-b dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -56,7 +58,9 @@ const handleAfterMove = (newTab: string) => {
           <template #tab3> Tab 3 template </template>
         </TwTab>
       </div>
-      <div class="col-span-12 p-2 shadow-inner rounded bg-gray-200">
+      <div
+        class="col-span-12 p-2 shadow-inner rounded bg-gray-200 dark:bg-gray-900"
+      >
         <h3 class="text-base font-medium mb-2">Horizontal Tab - Line Top</h3>
         <TwTab
           ref="horizontalTabTop"
@@ -65,10 +69,10 @@ const handleAfterMove = (newTab: string) => {
           :tabs="tabs"
           :current-tab="currentTab"
           nav-class="px-2 rounded-t gap-2 py-2"
-          tab-class="p-2 text-gray-900 rounded"
+          tab-class="p-2 text-gray-900 dark:text-gray-300 rounded"
           line-class="!bg-gray-700 rounded-b"
           tab-active-class="!font-bold"
-          body-class="bg-white shadow border rounded-b"
+          body-class="bg-white dark:bg-gray-800 shadow border rounded-b dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -76,7 +80,9 @@ const handleAfterMove = (newTab: string) => {
           <template #tab3> Tab 3 template </template>
         </TwTab>
       </div>
-      <div class="col-span-12 p-2 shadow-inner rounded bg-gray-200">
+      <div
+        class="col-span-12 p-2 shadow-inner rounded bg-gray-200 dark:bg-gray-900"
+      >
         <h3 class="text-base font-medium mb-2">Vertical Tab - Line Left</h3>
         <TwTab
           ref="verticalTabLeft"
@@ -85,10 +91,10 @@ const handleAfterMove = (newTab: string) => {
           :tabs="tabs"
           :current-tab="currentTab"
           nav-class="px-2 rounded-l gap-2 py-2"
-          tab-class="p-2 text-gray-900 rounded text-left"
+          tab-class="p-2 text-gray-900 dark:text-gray-300 rounded text-left"
           line-class="!bg-gray-700 rounded-r"
           tab-active-class="!font-bold"
-          body-class="bg-white shadow rounded-r border"
+          body-class="bg-white dark:bg-gray-800 shadow rounded-r border dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>
@@ -96,7 +102,9 @@ const handleAfterMove = (newTab: string) => {
           <template #tab3> Tab 3 template </template>
         </TwTab>
       </div>
-      <div class="col-span-12 p-2 shadow-inner rounded bg-gray-200">
+      <div
+        class="col-span-12 p-2 shadow-inner rounded bg-gray-200 dark:bg-gray-900"
+      >
         <h3 class="text-base font-medium mb-2">Vertical Tab - Line Right</h3>
         <TwTab
           ref="verticalTabRight"
@@ -105,10 +113,10 @@ const handleAfterMove = (newTab: string) => {
           :tabs="tabs"
           :current-tab="currentTab"
           nav-class="px-2 rounded-l gap-2 py-2"
-          tab-class="p-2 text-gray-900 rounded text-center bg-gray-200 shadow-inset"
+          tab-class="p-2 text-gray-900 dark:text-gray-300 rounded text-center bg-gray-200 dark:bg-gray-900 shadow-inset"
           line-class="!bg-gray-700 rounded-l"
           tab-active-class="!font-bold"
-          body-class="bg-white shadow rounded-r border"
+          body-class="bg-white dark:bg-gray-800 shadow rounded-r border dark:border-gray-700"
           @after-move="handleAfterMove"
         >
           <template #tab1> Tab 1 template </template>

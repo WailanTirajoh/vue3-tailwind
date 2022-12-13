@@ -191,7 +191,7 @@ const datatableHook = (arg: any) => {
 <template>
   <div>
     <h2 class="text-2xl font-bold">Datatable Clientside</h2>
-    <hr class="my-2 border" />
+    <hr class="my-2 border dark:border-gray-700" />
     <TwDatatableClient
       v-model:search="data.search"
       v-model:limit="data.limit"

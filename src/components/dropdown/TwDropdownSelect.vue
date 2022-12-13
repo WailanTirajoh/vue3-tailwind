@@ -29,7 +29,7 @@ defineExpose({ toggleDropdown, closeDropdown });
     <div
       class="flex h-full rounded-t dark:text-gray-300"
       :class="{
-        'bg-white shadow-lg dark:bg-gray-900 border border-b-0 border-gray-100':
+        'bg-white shadow-lg dark:bg-gray-900 border border-b-0 border-gray-100 dark:border-gray-700':
           isShown,
       }"
     >
@@ -45,7 +45,7 @@ defineExpose({ toggleDropdown, closeDropdown });
         <slot name="body" />
         <button
           v-show="showClearData"
-          class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all duration-300 ease-in-out p-2"
+          class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all ease-in-out p-2"
           :disabled="disabled"
           @click.stop="$emit('clear-data')"
         >
@@ -59,7 +59,7 @@ defineExpose({ toggleDropdown, closeDropdown });
       </div>
       <button
         aria-label="dropdown-select-button"
-        class="p-3 flex items-center justify-center cursor-pointer transition-colors duration-300 rounded-r"
+        class="p-3 flex items-center justify-center cursor-pointer transition-colors rounded-r"
         :class="[
           !isShown ? dropdownBg : '',
           dropdownBorder,
@@ -73,7 +73,7 @@ defineExpose({ toggleDropdown, closeDropdown });
         @click="toggleDropdown"
       >
         <div
-          class="transition-all duration-300"
+          class="transition-all"
           :class="{
             'cst-rotate-180': isShown,
           }"
@@ -104,7 +104,7 @@ defineExpose({ toggleDropdown, closeDropdown });
       >
         <div
           v-if="isShown"
-          class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100"
+          class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
         >
           <slot name="list" />
         </div>

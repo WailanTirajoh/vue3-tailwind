@@ -50,7 +50,7 @@ onUnmounted(() => {
         @click="isOpen = false"
       >
         <div
-          class="rounded-md ring-1 ring-black ring-opacity-5 bg-white"
+          class="rounded-md ring-1 ring-black ring-opacity-5 bg-white dark:bg-gray-800"
           :class="contentClass"
         >
           <slot name="content" />

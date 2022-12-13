@@ -21,7 +21,7 @@ const inputData = ref(props.modelValue);
 
 <template>
   <div>
-    <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+    <label v-if="label" class="font-bold text-gray-700 dark:text-gray-200">
       {{ label }}
     </label>
     <div class="relative">

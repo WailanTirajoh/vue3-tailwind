@@ -33,7 +33,7 @@ const selectionList = [
 <template>
   <div>
     <h2 class="text-2xl font-bold">Form</h2>
-    <hr class="my-2 border" />
+    <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12 gap-2">
       <div class="col-span-12">
         <TwFile v-model="fileModel" />

@@ -20,7 +20,7 @@ const COLORS: Record<ButtonVariant, string> = {
   [ButtonVariant.SECONDARY]: "bg-gray-200 text-gray-800",
   [ButtonVariant.DANGER]: "bg-red-800 text-white",
   [ButtonVariant.SUCCESS]: "bg-green-800 text-white",
-  [ButtonVariant.LIGHT]: "bg-white text-gray-800",
+  [ButtonVariant.LIGHT]: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
   [ButtonVariant.WARNING]: "bg-yellow-800 text-white",
   [ButtonVariant.INFO]: "bg-sky-800 text-white",
   [ButtonVariant.OUTLINE_PRIMARY]:

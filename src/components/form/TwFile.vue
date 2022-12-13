@@ -86,7 +86,7 @@ const onDragOver = (e: DragEvent) => {
           >
             <img
               :src="url"
-              class="h-48 object-cover w-full rounded bg-white shadow border"
+              class="h-48 object-cover w-full rounded bg-white dark:bg-gray-900 shadow border"
               alt="preview"
             />
             <div
@@ -94,7 +94,7 @@ const onDragOver = (e: DragEvent) => {
               @click="removeImage(index)"
             >
               <div
-                class="duration-300 hover:bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center hover:bg-opacity-90"
+                class="hover:bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center hover:bg-opacity-90"
               >
                 <IconX />
               </div>
@@ -102,7 +102,7 @@ const onDragOver = (e: DragEvent) => {
           </div>
         </div>
         <button
-          class="transition-all duration-300 ease-in-out bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 shadow-sm w-full p-1 rounded-b sticky bottom-0"
+          class="transition-all ease-in-out bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 shadow-sm w-full p-1 rounded-b sticky bottom-0"
           @click="removeAllImage"
         >
           Remove All Image
@@ -113,7 +113,7 @@ const onDragOver = (e: DragEvent) => {
       <label
         @dragover="onDragOver"
         @drop.prevent="handleDropImage"
-        class="transition-all duration-300 ease-in-out w-full flex flex-col items-center px-4 py-6 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-300 text-gray-400 rounded-lg tracking-wide uppercase border-dashed border-2 border-gray-500 cursor-pointer"
+        class="transition-all ease-in-out w-full flex flex-col items-center px-4 py-6 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-300 text-gray-400 rounded-lg tracking-wide uppercase border-dashed border-2 border-gray-500 cursor-pointer"
       >
         <UploadSvg />
         <span class="mt-2 text-base leading-normal">

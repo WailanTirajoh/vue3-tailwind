@@ -88,7 +88,7 @@ defineExpose({ changeTab });
 
 <template>
   <div v-if="type === 'horizontal'">
-    <nav class="relative flex bg-gray-300" :class="[navClass]">
+    <nav class="relative flex" :class="[navClass]">
       <button
         class="py-1"
         :class="[tabClass, {
@@ -119,7 +119,7 @@ defineExpose({ changeTab });
     </div>
   </div>
   <div class="flex" v-else-if="type === 'vertical'">
-    <nav class="relative flex flex-col bg-gray-300 w-52" :class="[navClass]">
+    <nav class="relative flex flex-col w-44" :class="[navClass]">
       <button
         class="py-1"
         :class="[tabClass, {

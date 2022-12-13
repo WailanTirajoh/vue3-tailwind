@@ -7,7 +7,7 @@ import { ButtonVariant, DropdownAlign } from "@/components/type";
 <template>
   <div>
     <h2 class="text-2xl font-bold">Dropdown</h2>
-    <hr class="my-2 border" />
+    <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12">
       <div class="col-span-12 flex gap-2">
         <tw-dropdown :align="DropdownAlign.LEFT" width="48">
