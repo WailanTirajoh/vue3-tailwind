@@ -359,7 +359,7 @@ const checkAllClick = () => {
 .k-datatable .sorting::after {
   content: "\2304";
   font-size: 0.6rem;
-  top: 0.75rem;
+  top: 0.35rem;
   position: absolute;
   right: 0.5rem;
   opacity: 0.35;
@@ -368,7 +368,7 @@ const checkAllClick = () => {
 .k-datatable .sorting::before {
   content: "\2303";
   font-size: 0.6rem;
-  top: 0.75rem;
+  top: 0.35rem;
   position: absolute;
   right: 0.5rem;
   opacity: 0.35;

@@ -31,7 +31,7 @@ const changeCurrentPage = (page: number) => {
 </script>
 
 <template>
-  <div class="flex gap-2">
+  <div class="flex">
     <button
       aria-label="pagination-prev-button"
       class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
