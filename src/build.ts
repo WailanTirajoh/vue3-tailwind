@@ -10,7 +10,7 @@ import type {
   DropdownItemValue,
   DropdownItem,
 } from "./components/type";
-import Ripple from "./services/ripple";
+import Ripple from "./directives/ripple";
 import {
   TwFile,
   TwInput,

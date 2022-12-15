@@ -2,7 +2,7 @@ import { createApp, type Directive } from "vue";
 import App from "./App.vue";
 
 import "./assets/main.css";
-import Ripple from "./services/ripple";
+import Ripple from "./directives/ripple";
 
 const app = createApp(App);
 
