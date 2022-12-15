@@ -34,7 +34,7 @@ const changeCurrentPage = (page: number) => {
   <div class="flex gap-2">
     <button
       aria-label="pagination-prev-button"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out"
+      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
       :class="{
         'cursor-not-allowed': currentPage - 1 < 1,
         'cursor-wait': isLoading,
@@ -50,10 +50,10 @@ const changeCurrentPage = (page: number) => {
       </svg>
     </button>
     <button
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out overflow-hidden"
+      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
       :class="{
         '': currentPage != 1,
-        'bg-white rounded-lg': currentPage == 1,
+        'bg-white dark:bg-gray-700 rounded-lg': currentPage == 1,
         'cursor-wait': isLoading,
       }"
       :disabled="isLoading"
@@ -66,10 +66,11 @@ const changeCurrentPage = (page: number) => {
         <div v-for="index in arrEachSide" :key="index">
           <button
             v-if="totalPage - index > 1"
-            class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out overflow-hidden"
+            class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
             :class="{
               '': currentPage != totalPage - index,
-              'bg-white rounded-lg': currentPage == totalPage - index,
+              'bg-white dark:bg-gray-700 rounded-lg':
+                currentPage == totalPage - index,
               'cursor-wait': isLoading,
             }"
             :disabled="isLoading"
@@ -83,10 +84,11 @@ const changeCurrentPage = (page: number) => {
         <div v-for="index in eachSide" :key="index">
           <button
             v-if="index - 2 + currentPage > 1"
-            class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out overflow-hidden"
+            class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
             :class="{
               '': currentPage != index - 2 + currentPage,
-              'bg-white rounded-lg': currentPage == index - 2 + currentPage,
+              'bg-white dark:bg-gray-700 rounded-lg':
+                currentPage == index - 2 + currentPage,
               'cursor-wait': isLoading,
             }"
             :disabled="isLoading"
@@ -97,7 +99,7 @@ const changeCurrentPage = (page: number) => {
         </div>
         <button
           v-if="currentPage === 1"
-          class="p-2 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out"
+          class="p-2 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
           :class="{
             'cursor-wait': isLoading,
           }"
@@ -108,7 +110,7 @@ const changeCurrentPage = (page: number) => {
         </button>
         <button
           v-if="currentPage === 2 || currentPage === 1"
-          class="p-2 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out"
+          class="p-2 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
           :class="{
             'cursor-wait': isLoading,
           }"
@@ -121,10 +123,10 @@ const changeCurrentPage = (page: number) => {
     </template>
     <button
       v-if="totalPage - 1 > 0"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out overflow-hidden"
+      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
       :class="{
         '': currentPage != totalPage,
-        'bg-white rounded-lg': currentPage == totalPage,
+        'bg-white dark:bg-gray-700 rounded-lg': currentPage == totalPage,
         'cursor-wait': isLoading,
       }"
       :disabled="isLoading"
@@ -134,7 +136,7 @@ const changeCurrentPage = (page: number) => {
     </button>
     <button
       aria-label="pagination-next-button"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all duration-300 ease-in-out"
+      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
       :class="{
         'cursor-not-allowed': currentPage + 1 > totalPage,
         'cursor-wait': isLoading,

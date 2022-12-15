@@ -4,7 +4,7 @@ import ButtonExample from "@/example/ButtonExample.vue";
 import TabExample from "@/example/TabExample.vue";
 import ModalExample from "./example/ModalExample.vue";
 import OffcanvasExample from "./example/OffcanvasExample.vue";
-// import DatatableClientExample from "./example/DatatableClientExample.vue";
+import DatatableClientExample from "./example/DatatableClientExample.vue";
 import ToastExample from "./example/ToastExample.vue";
 import DropdownExample from "./example/DropdownExample.vue";
 import { TwToggle } from "./components";
@@ -86,11 +86,11 @@ onMounted(() => {
         >
           <ToastExample />
         </div>
-        <!-- <div
+        <div
           class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
         >
-           <DatatableClientExample />
-        </div> -->
+          <DatatableClientExample />
+        </div>
       </div>
     </div>
   </div>

@@ -192,7 +192,7 @@ const checkAllClick = () => {
         <div>
           <select
             v-model="limit"
-            class="p-2 rounded border dark:bg-gray-900 appearance-none focus:border focus:ring-0 focus:outline-none custor-pointer"
+            class="p-2 rounded border dark:bg-gray-900 appearance-none focus:border dark:border-gray-700 focus:ring-0 focus:outline-none custor-pointer"
           >
             <option
               :value="v.value"
@@ -215,11 +215,12 @@ const checkAllClick = () => {
         />
       </div>
     </div>
+    <!-- <div class="col-span-12">
+      {{ data }}
+    </div> -->
     <div class="col-span-12">
       <div class="relative">
-        <div
-          class="overflow-auto table-fix-head dark:border dark:border-gray-700"
-        >
+        <div class="overflow-auto table-fix-head">
           <table
             class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
@@ -258,12 +259,12 @@ const checkAllClick = () => {
             </thead>
             <tbody class="text-sm" v-if="data.length > 0">
               <tr
-                class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
+                class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
                 v-for="(d, i) in data"
                 :key="`body-${i}`"
               >
                 <td
-                  class="duration-300 p-1 bg-white dark:hover:bg-gray-900 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                  class="duration-300 p-1 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
                   style="box-shadow: 20px 3px 20px #0000000b"
                   v-if="setting.checkbox"
                   :style="{
@@ -279,15 +280,20 @@ const checkAllClick = () => {
                   </div>
                 </td>
                 <TwDatatableTd
-                  class="duration-300 p-1 bg-white dark:hover:bg-gray-900 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                  class="duration-300 p-1 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
                   style="box-shadow: 20px 3px 20px #0000000b"
-                  :copyText="d[h.field]"
+                  :copyText="d[h.field] ?? ''"
                   v-for="h in props.column"
                   :key="`body-${i}-${h.field}`"
                 >
-                  <slot name="row" :column="h" :data="d" :index="i"> </slot>
-                  <div v-if="h.component" @click="cellClick(h)">
-                    <!-- {{h.component(d,i)}} -->
+                  <slot
+                    name="row"
+                    :column="h"
+                    :data="d"
+                    :index="i"
+                    @click="cellClick"
+                  />
+                  <!-- <div v-if="h.component" @click="cellClick(h)">
                     <component
                       :is="h.component(d, i).component"
                       :props="h.component(d, i).props"
@@ -301,7 +307,7 @@ const checkAllClick = () => {
                   ></div>
                   <div v-else @click="cellClick(h)">
                     {{ d[h.field] }}
-                  </div>
+                  </div> -->
                 </TwDatatableTd>
               </tr>
             </tbody>

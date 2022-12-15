@@ -58,14 +58,14 @@ const copyTextToClipboard = (text: string | number | boolean) => {
     <div
       v-if="copyText"
       v-show="contextMenu.isShown"
-      class="fixed z-50 w-52 bg-white rounded-lg cst-shadow border text-gray-600 flex flex-col gap-3"
+      class="fixed z-50 w-52 bg-white dark:bg-gray-800 rounded-lg cst-shadow border dark:border-gray-700 text-gray-600 dark:text-gray-200 flex flex-col gap-3"
       :style="{
         left: contextMenu.clientX + 'px',
         top: contextMenu.clientY + 'px',
       }"
     >
       <div
-        class="bg-white hover:bg-gray-50 cursor-pointer p-2 rounded"
+        class="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 cursor-pointer p-2 rounded"
         @click="copyTextToClipboard(copyText)"
       >
         Copy to clipboard

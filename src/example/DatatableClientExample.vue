@@ -1,156 +1,35 @@
 <script setup lang="ts">
-import { TwDatatableClient } from "@/components";
+import { TwDatatableClient, TwButton } from "@/components";
 import type { DatatableColumn, DatatableData } from "@/components/type";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 const data = ref({
   column: [
     {
-      label: "Name",
-      field: "name",
+      label: "Brand",
+      field: "brand",
       width: "400px",
       sortable: true,
     },
     {
-      label: "Status",
-      field: "status",
+      label: "Category",
+      field: "category",
       width: "400px",
       sortable: true,
-      // Template string example
-      template: (data: DatatableData): string => `
-        <div class="flex justify-center">
-          <span class="${
-            data.status.toLowerCase() === "active"
-              ? "bg-green-600"
-              : "bg-red-600"
-          } p-2 rounded text-white">
-            ${data.status}
-          </span>
-        </div>
-      `,
+    },
+    {
+      label: "Description",
+      field: "description",
+      width: "400px",
+      sortable: true,
+    },
+    {
+      label: "Action",
+      field: "action",
+      width: "400px",
+      sortable: false,
     },
   ] as Array<DatatableColumn>,
-  data: [
-    {
-      id: 1,
-      name: "cWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 2,
-      name: "bWailan",
-      status: "Inactive",
-      test: "test",
-    },
-    {
-      id: 3,
-      name: "aWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 4,
-      name: "sWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 5,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 6,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 7,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 8,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 9,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 10,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 11,
-      name: "cWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 12,
-      name: "bWailan",
-      status: "Inactive",
-      test: "test",
-    },
-    {
-      id: 13,
-      name: "aWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 14,
-      name: "sWailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 15,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 16,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 17,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 18,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 19,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-    {
-      id: 20,
-      name: "Wailan",
-      status: "Active",
-      test: "test",
-    },
-  ] as Array<DatatableData>,
+  data: [] as Array<DatatableData>,
   limit: 5,
   search: "",
   selected: [],
@@ -186,13 +65,21 @@ const data = ref({
 const datatableHook = (arg: any) => {
   arg();
 };
+
+onMounted(() => {
+  fetch("https://dummyjson.com/products")
+    .then((res) => res.json())
+    .then((json) => {
+      data.value.data = json.products;
+    });
+});
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold">Datatable Clientside</h2>
     <hr class="my-2 border dark:border-gray-700" />
-    <TwDatatableClient
+    <tw-datatable-client
       v-model:search="data.search"
       v-model:limit="data.limit"
       v-model:selected="data.selected"
@@ -203,9 +90,30 @@ const datatableHook = (arg: any) => {
       :setting="data.setting"
       @datatable:column-hook="datatableHook"
     >
-      <template #empty> No Data </template>
-    </TwDatatableClient>
-    <hr class="my-2" />
+      <template #row="{ column, data }">
+        <template v-if="column.field === 'brand'">
+          {{ data.brand }}
+        </template>
+        <template v-if="column.field === 'category'">
+          {{ data.category }}
+        </template>
+        <template v-if="column.field === 'description'">
+          {{ data.description }}
+        </template>
+        <template v-if="column.field === 'action'">
+          <div class="flex gap-2 justify-center">
+            <tw-button variant="primary" class="border border-gray-900">
+              Edit
+            </tw-button>
+            <tw-button variant="danger"> Delete </tw-button>
+          </div>
+        </template>
+      </template>
+      <template #empty>
+        <div class="bg-white">No Data</div>
+      </template>
+    </tw-datatable-client>
+    <hr class="my-2 dark:border-gray-700" />
     <div>
       <div class="flex gap-2">
         <div class="w-32">Selected Data</div>
