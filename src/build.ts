@@ -10,7 +10,6 @@ import type {
   DropdownItemValue,
   DropdownItem,
 } from "./components/type";
-import Ripple from "./directives/ripple";
 import {
   TwFile,
   TwInput,
@@ -26,6 +25,8 @@ import {
   TwFeather,
   TwToast,
 } from "./components";
+import Ripple from "./directives/ripple";
+import Validator from "./services/validator/validator";
 import Toast from "@/composables/toast";
 import "./assets/build.css";
 
@@ -80,3 +81,5 @@ export {
   DropdownItemValue,
   DropdownItem,
 };
+
+export { Validator };
