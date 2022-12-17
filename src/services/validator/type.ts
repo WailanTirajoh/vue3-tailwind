@@ -1,23 +1,37 @@
-import type { validatorGate } from "./validator-gate";
+import type { baseValidatorRule } from "./base-rules";
 
-export type ValidatorGateKeys = keyof typeof validatorGate;
+export type BaseValidatorRule = typeof baseValidatorRule;
+
+export type CustomRules = {
+  [key: string]: (
+    ...args: any[]
+  ) => Promise<string | undefined> | string | undefined;
+};
+
+export type AnonimousRule = (
+  value: any,
+  formData: FormData
+) => Promise<string | undefined> | string | undefined;
+
 export type ValidationRule =
-  | ValidatorGateKeys
-  | ((value: any) => string | void);
+  | keyof BaseValidatorRule
+  | keyof CustomRules
+  | AnonimousRule;
 
-export interface ValidationRules {
+export type ValidationRules = {
   [key: string]: ValidationRule[];
-}
+};
 
-export interface ErrorBag {
+export type ErrorBag = {
   [key: string]: string[];
-}
+};
 
-export interface FormData {
+export type FormData = {
   [key: string]: any;
-}
+};
 
-export interface FormState {
+export type FormState = {
   formData: FormData;
-  rules: ValidationRules;
-}
+  rules?: ValidationRules;
+  customRules?: CustomRules;
+};

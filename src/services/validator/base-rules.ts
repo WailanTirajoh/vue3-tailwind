@@ -1,14 +1,15 @@
-import type { ValidatorGateKeys } from "./type";
+import type { BaseValidatorRule } from "./type";
 
-export const validatorErrorMessage: Record<ValidatorGateKeys, string> = {
+export const validatorErrorMessage: Record<keyof BaseValidatorRule, string> = {
   ["required"]: `The field cannot be empty`,
   ["array"]: `The field must be instance of Array`,
   ["integer"]: `The field must be integer`,
   ["numeric"]: `The field must be numeric`,
   ["string"]: `The field must be string`,
+  ["boolean"]: `The field must be a boolean`,
 };
 
-export const validatorGate = {
+export const baseValidatorRule = {
   required(value: any) {
     if (value === undefined || value === "" || value === null) {
       return validatorErrorMessage["required"];
@@ -36,6 +37,12 @@ export const validatorGate = {
   string(value: any) {
     if (typeof value !== "string") {
       return validatorErrorMessage["string"];
+    }
+  },
+
+  boolean(value: any) {
+    if (typeof value !== "boolean") {
+      return validatorErrorMessage["boolean"];
     }
   },
 };
