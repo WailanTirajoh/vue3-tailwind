@@ -58,14 +58,56 @@ export default class Validator {
     field: string;
     fieldRules: ValidationRule[];
   }): Promise<void> {
+    const fieldKeys = field.split(".");
+    if (fieldKeys.includes("*")) {
+      await this.validateArrayObjects(field, fieldKeys, fieldRules);
+    } else {
+      await this.validateFieldValue(field, fieldKeys, fieldRules);
+    }
+  }
+
+  private async validateArrayObjects(
+    field: string,
+    fieldKeys: string[],
+    fieldRules: ValidationRule[]
+  ): Promise<void> {
+    const arrayFieldKey = fieldKeys.indexOf("*");
+    const arrayField = this.formData[fieldKeys[arrayFieldKey - 1]];
+    for (let i = 0; i < arrayField.length; i++) {
+      // Check if the object has all its required fields filled
+      const requiredFieldsFilled = fieldRules.every((rule) => {
+        typeof this.getValidatorResult(field, arrayField[i], rule) ===
+          "undefined";
+      });
+      if (!requiredFieldsFilled) {
+        // Validate the object if any required fields are missing
+        // Replace the wildcard character with the current array index in the field name
+        const newField = field.replace("*", `${i}`);
+        await this.validateField({
+          field: newField,
+          fieldRules,
+        });
+      }
+    }
+  }
+
+  private async validateFieldValue(
+    field: string,
+    fieldKeys: string[],
+    fieldRules: ValidationRule[]
+  ): Promise<void> {
+    let fieldValue = this.formData;
+    for (const key of fieldKeys) {
+      fieldValue = fieldValue[key];
+    }
     // Get the results of validating each rule for the field
     const ruleResults = await Promise.all(
       fieldRules.map((rule) =>
         // If the validator result is a promise, return it directly,
         // otherwise wrap it in a resolved promise
-        typeof this.getValidatorResult(field, rule) === "object"
-          ? this.getValidatorResult(field, rule)
-          : Promise.resolve(this.getValidatorResult(field, rule))
+        typeof this.getValidatorResult(field, fieldValue, rule) === "object"
+          ? this.getValidatorResult(field, fieldValue, rule)
+          : Promise.resolve(this.getValidatorResult(field, fieldValue, rule))
       )
     );
     // Filter out the undefined results
@@ -79,7 +121,11 @@ export default class Validator {
    * @param field The field to validate.
    * @param rule The validation rule to apply to the field.
    */
-  private getValidatorResult(field: string, rule: ValidationRule) {
+  private getValidatorResult(
+    field: string,
+    fieldValue: any,
+    rule: ValidationRule
+  ) {
     let validatorResult;
     switch (typeof rule) {
       // String is a predefined validator function (Can check the function lists on ./validator-gates.ts)
@@ -89,7 +135,7 @@ export default class Validator {
       }
       // Its a custom callback function that returns either string if fail / void if success
       case "function": {
-        validatorResult = rule(this.formData[field], this.formData);
+        validatorResult = rule(fieldValue, this.formData);
         break;
       }
 
@@ -97,7 +143,6 @@ export default class Validator {
     }
     return validatorResult;
   }
-
   /**
    * Handles string rules by parsing the rule string and calling the corresponding
    * validator function with the provided arguments.
@@ -105,19 +150,28 @@ export default class Validator {
    * @param rule The string rule to handle.
    */
   private handleStringRule(field: string, rule: string) {
-    // Parse the validator name and arguments from the rule string
-    const [validatorName, paramArgs] = rule.split(":");
+    const [validatorName, parameters] = this.parseRule(rule);
 
-    // Return if the validator function does not exist
     if (!(validatorName in this.validator)) return;
+    if (field.includes("*")) return;
 
-    // Split the arguments string into an array of trimmed strings
+    try {
+      const value = field
+        .split(".")
+        .reduce((acc, part) => acc[part], this.formData);
+      return this.validator[validatorName](value, ...parameters);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Extract the logic for parsing the validator name and arguments into a separate function
+  private parseRule(rule: string): [string, string[]] {
+    const [validatorName, paramArgs] = rule.split(":");
     const parameters = paramArgs
       ? paramArgs.split(",").map((p) => p.trim())
       : [];
-
-    // Call the validator function with the field value and the arguments array
-    return this.validator[validatorName](this.formData[field], ...parameters);
+    return [validatorName, parameters];
   }
 
   /**
