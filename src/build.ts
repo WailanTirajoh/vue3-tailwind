@@ -26,7 +26,6 @@ import {
   TwToast,
 } from "./components";
 import Ripple from "./directives/ripple";
-import Validator from "./services/validator/validator";
 import Toast from "@/composables/toast";
 import "./assets/build.css";
 
@@ -81,5 +80,3 @@ export {
   DropdownItemValue,
   DropdownItem,
 };
-
-export { Validator };

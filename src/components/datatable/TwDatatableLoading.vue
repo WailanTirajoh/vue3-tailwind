@@ -29,7 +29,7 @@ withDefaults(defineProps<Props>(), {
           <TwDatatableCircleSpinner />
         </div>
       </div>
-      <div class="text-center text-gray-500">Please Wait</div>
+      <div class="text-center text-gray-900">Please Wait</div>
     </div>
   </transition>
 </template>

@@ -89,8 +89,8 @@ const btnColor = computed(() => {
 
 <template>
   <button
-    v-ripple="btnRipple"
     v-bind="$attrs"
+    v-ripple="btnRipple"
     :disabled="btnDisabled"
     class="p-2 rounded-md relative duration-200"
     :class="[btnColor, ...btnClasses, btnButtonTextPosition]"

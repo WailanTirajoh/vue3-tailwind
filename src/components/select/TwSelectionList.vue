@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import { computed, ref } from "vue";
-import TwDropdownSelect from "./TwDropdownSelect.vue";
+import TwDropdownSelect from "./TwSelect.vue";
 
 export interface Props {
   placeholder?: string;

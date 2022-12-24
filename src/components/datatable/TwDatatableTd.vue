@@ -2,7 +2,7 @@
 import { ref } from "vue";
 
 export interface Props {
-  copyText: string | number | boolean;
+  copyText?: string | number | boolean;
 }
 const props = defineProps<Props>();
 const contextMenu = ref({
@@ -36,7 +36,7 @@ const theadContextHandler = (e: MouseEvent) => {
 const theadContextCloseHandler = () => {
   contextMenu.value.isShown = false;
 };
-const copyTextToClipboard = (text: string | number | boolean) => {
+const copyTextToClipboard = (text: string | number | boolean | undefined) => {
   if (!text) return;
   if (typeof text !== "string") return;
   navigator.clipboard.writeText(text);

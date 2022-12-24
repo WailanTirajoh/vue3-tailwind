@@ -166,9 +166,6 @@ const columnClick = (column: DatatableColumn) => {
 const cellClick = (cellClick: DatatableColumn) => {
   if (cellClick.onCellClick) cellClick.onCellClick();
 };
-const columnHook = (arg: any) => {
-  emit("datatable:column-hook", arg);
-};
 
 // Method's
 const updateSort = (h: DatatableColumn) => {
@@ -241,20 +238,27 @@ const checkAllClick = () => {
                     />
                   </div>
                 </th>
-                <th
-                  class="select-none"
-                  :class="{
-                    asc: sortBy == h.field && sortType == 'asc',
-                    desc: sortBy == h.field && sortType == 'desc',
-                    sorting: h.sortable,
-                  }"
-                  :style="{ width: h.width }"
-                  @click="columnClick(h)"
-                  v-for="h in props.column"
-                  :key="h.field"
+                <slot
+                  name="column"
+                  :column="props.column"
+                  :sort-type="sortType"
+                  :sort-by="sortBy"
                 >
-                  {{ h.label }}
-                </th>
+                  <th
+                    class="select-none"
+                    :class="{
+                      asc: sortBy == h.field && sortType == 'asc',
+                      desc: sortBy == h.field && sortType == 'desc',
+                      sorting: h.sortable,
+                    }"
+                    :style="{ width: h.width }"
+                    @click="columnClick(h)"
+                    v-for="h in props.column"
+                    :key="h.field"
+                  >
+                    {{ h.label }}
+                  </th>
+                </slot>
               </tr>
             </thead>
             <tbody class="text-sm" v-if="data.length > 0">
@@ -292,22 +296,16 @@ const checkAllClick = () => {
                     :data="d"
                     :index="i"
                     @click="cellClick"
-                  />
-                  <!-- <div v-if="h.component" @click="cellClick(h)">
-                    <component
-                      :is="h.component(d, i).component"
-                      :props="h.component(d, i).props"
-                      @column-hook="columnHook"
-                    ></component>
-                  </div>
-                  <div
-                    v-else-if="h.template"
-                    v-html="h.template(d, i)"
-                    @click="cellClick(h)"
-                  ></div>
-                  <div v-else @click="cellClick(h)">
-                    {{ d[h.field] }}
-                  </div> -->
+                  >
+                    <div
+                      v-if="h.template"
+                      v-html="h.template(d, i)"
+                      @click="cellClick(h)"
+                    ></div>
+                    <div v-else @click="cellClick(h)">
+                      {{ d[h.field] }}
+                    </div>
+                  </slot>
                 </TwDatatableTd>
               </tr>
             </tbody>

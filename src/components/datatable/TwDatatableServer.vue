@@ -7,16 +7,21 @@
  * - sort column
  * - filter on each column
  */
-import { computed } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
+import TwDatatablePagination from "./TwDatatablePagination.vue";
+import TwDatatableLoading from "./TwDatatableLoading.vue";
+import TwDatatableTd from "./TwDatatableTd.vue";
 
 export interface Props {
   // Required props
-  data: Array<DatatableData>;
   column: Array<DatatableColumn>;
-  currentPage: number;
   limit: number;
-  totalData: number;
+  offset: number;
+  fetchData: () => Promise<{
+    totalData: number;
+    data: Array<DatatableData>;
+  }>;
   // Optional props
   isLoading?: boolean;
   sortBy?: string;
@@ -27,24 +32,34 @@ export interface Props {
   selected?: Array<string | never>;
 }
 
+const data = ref<Array<DatatableData>>([]);
 const props = defineProps<Props>();
 const emit = defineEmits([
   "on-sort-change",
   "on-enter-search",
   "update:search",
   "update:limit",
+  "update:offset",
   "update:selected",
 ]);
 
-const totalPage = computed(() => Math.ceil(props.totalData / props.limit));
+const isFetching = ref(false);
+const totalData = ref(0);
+
+const totalPage = computed(() => Math.ceil(totalData.value / props.limit));
+
+const currentPage = computed(() => props.offset / props.limit + 1);
+
 const showFrom = computed(
-  () => 1 + props.currentPage * props.limit - props.limit
+  () => 1 + currentPage.value * props.limit - props.limit
 );
+
 const showTo = computed(() =>
-  props.currentPage * props.limit < props.totalData
-    ? props.currentPage * props.limit
-    : props.totalData
+  currentPage.value * props.limit < totalData.value
+    ? currentPage.value * props.limit
+    : totalData.value
 );
+
 // v-model props
 const search = computed({
   get() {
@@ -54,12 +69,23 @@ const search = computed({
     emit("update:search", value);
   },
 });
+
 const limit = computed({
   get() {
     return props.limit;
   },
   set(value: number) {
     emit("update:limit", value);
+    emit("update:offset", 0);
+  },
+});
+
+const offset = computed({
+  get() {
+    return props.offset;
+  },
+  set(value: number) {
+    emit("update:offset", value);
   },
 });
 const selected = computed({
@@ -70,6 +96,10 @@ const selected = computed({
     emit("update:selected", value);
   },
 });
+
+const updateCurrentPage = (page: number) => {
+  offset.value = (page - 1) * limit.value;
+};
 
 const setting: DatatableSetting = props.setting ?? {
   checkbox: false,
@@ -97,19 +127,55 @@ const setting: DatatableSetting = props.setting ?? {
   ],
 };
 
-const clickSort = (key: string) =>
+const clickSort = (key: string) => {
   emit("on-sort-change", key, props.sortType === "asc" ? "desc" : "asc");
-const enterSearch = () => emit("on-enter-search");
-const thClick = (h: DatatableColumn) => {
+};
+
+const enterSearch = () => {
+  emit("on-enter-search");
+  emit("update:offset", 0);
+  fetchResult();
+};
+
+const columnClick = (h: DatatableColumn) => {
   clickSort(h.field);
   if (h.onColumnClick) {
     h.onColumnClick();
   }
+  fetchResult();
 };
 
-const cellClick = (c: DatatableColumn) => {
-  if (c.onCellClick) c.onCellClick();
+const fetchResult = async () => {
+  try {
+    isFetching.value = true;
+    const response = await props.fetchData();
+    data.value = response.data;
+    totalData.value = response.totalData;
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.log(`Fetch Data Error:`, e.message);
+      console.error(e);
+    }
+  } finally {
+    isFetching.value = false;
+  }
 };
+
+const cellClick = (column: DatatableColumn) => {
+  if (column.onCellClick) column.onCellClick();
+};
+
+watch(limit, () => {
+  fetchResult();
+});
+
+watch(offset, () => {
+  fetchResult();
+});
+
+onMounted(async () => {
+  fetchResult();
+});
 </script>
 
 <template>
@@ -145,11 +211,9 @@ const cellClick = (c: DatatableColumn) => {
     </div>
     <div class="col-span-12">
       <div class="relative">
-        <div
-          class="overflow-auto table-fix-head shadow-sm dark:border dark:border-gray-700"
-        >
+        <div class="overflow-auto table-fix-head">
           <table
-            class="w-full bg-white k-datatable resizable"
+            class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
           >
             <thead
@@ -158,105 +222,93 @@ const cellClick = (c: DatatableColumn) => {
               <tr>
                 <th
                   v-if="setting.checkbox"
-                  class="p-1 whitespace-nowrap select-none hover:bg-gray-200 dark:hover:bg-black border dark:border-gray-600 px-5"
-                ></th>
-                <th
-                  class="p-2 whitespace-nowrap select-none hover:bg-gray-200 dark:hover:bg-black border dark:border-gray-600 px-10"
-                  :class="{
-                    asc: sortBy == h.field && sortType == 'asc',
-                    desc: sortBy == h.field && sortType == 'desc',
-                    sorting: h.sortable,
+                  :style="{
+                    width: '20px',
                   }"
-                  :style="{ width: h.width }"
-                  @click="thClick(h)"
-                  v-for="h in props.column"
-                  :key="h.field"
+                ></th>
+                <slot
+                  name="column"
+                  :column="props.column"
+                  :sort-type="sortType"
+                  :sort-by="sortBy"
                 >
-                  {{ h.label }}
-                </th>
+                  <th
+                    class="select-none"
+                    :class="{
+                      asc: sortBy == h.field && sortType == 'asc',
+                      desc: sortBy == h.field && sortType == 'desc',
+                      sorting: h.sortable,
+                    }"
+                    :style="{ width: h.width }"
+                    @click="columnClick(h)"
+                    v-for="h in props.column"
+                    :key="h.field"
+                  >
+                    {{ h.label }}
+                  </th>
+                </slot>
               </tr>
             </thead>
-            <tbody class="text-sm" v-if="data.length > 0">
-              <tr
-                class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
-                v-for="(d, i) in data"
-                :key="`body-row-${i}`"
-              >
-                <td
-                  class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
-                  v-if="setting.checkbox"
-                  :style="{
-                    width: '20px',
-                  }"
+            <tbody class="text-sm">
+              <template v-if="data.length > 0">
+                <tr
+                  class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
+                  v-for="(d, i) in data"
+                  :key="`body-row-${i}`"
                 >
-                  <div class="flex justify-center items-center">
-                    <input
-                      type="checkbox"
-                      :value="d['id']"
-                      v-model="selected"
-                    />
-                  </div>
-                </td>
-                <TwDatatableTd
-                  class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
-                  :copyText="d[h.field]"
-                  v-for="(h, i) in props.column"
-                  :key="`datatable-td-${i}`"
+                  <TwDatatableTd
+                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                    style="box-shadow: 20px 3px 20px #0000000b"
+                    v-if="setting.checkbox"
+                    :style="{
+                      width: '20px',
+                    }"
+                  >
+                    <div class="flex justify-center items-center px-2">
+                      <input
+                        type="checkbox"
+                        :value="d['id']"
+                        v-model="selected"
+                      />
+                    </div>
+                  </TwDatatableTd>
+                  <TwDatatableTd
+                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                    :copyText="d[h.field]"
+                    v-for="(h, i) in props.column"
+                    :key="`datatable-td-${i}`"
+                  >
+                    <slot name="row" :column="h" :data="d" :index="i">
+                      <div
+                        v-if="h.template"
+                        v-html="h.template(d, i)"
+                        @click="cellClick(h)"
+                      ></div>
+                      <div v-else @click="cellClick(h)">
+                        {{ d[h.field] }}
+                      </div>
+                    </slot>
+                  </TwDatatableTd>
+                </tr>
+              </template>
+              <tempalte v-else>
+                <tr
+                  class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
                 >
-                  <slot name="row" :column="h" :data="d" :index="i"> </slot>
-                  <div
-                    v-if="h.template"
-                    v-html="h.template(d, i)"
-                    @click="cellClick(h)"
-                  ></div>
-                  <div v-else @click="cellClick(h)">
-                    {{ d[h.field] }}
-                  </div>
-                </TwDatatableTd>
-              </tr>
+                  <td
+                    class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
+                    :colspan="props.column.length + (setting.checkbox ? 1 : 0)"
+                  >
+                    <slot name="empty">
+                      <div class="p-2 rounded">No Data Available</div>
+                    </slot>
+                  </td>
+                </tr>
+              </tempalte>
             </tbody>
-            <tbody class="text-sm" v-else>
-              <tr
-                class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
-              >
-                <td
-                  class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
-                  :colspan="props.column.length + (setting.checkbox ? 1 : 0)"
-                >
-                  <slot name="empty"></slot>
-                </td>
-              </tr>
-            </tbody>
-            <tfoot
-              class="bg-gray-100 dark:bg-gray-900 dark:border-b dark:border-gray-700 text-gray-800"
-            >
-              <tr>
-                <th
-                  v-if="setting.checkbox"
-                  class="p-1 whitespace-nowrap select-none hover:bg-gray-200 dark:hover:bg-black border dark:border-gray-600 px-5"
-                  :style="{
-                    width: '20px',
-                  }"
-                ></th>
-                <th
-                  class="p-2 whitespace-nowrap select-none hover:bg-gray-200 dark:hover:bg-black border dark:border-gray-600"
-                  :class="{
-                    asc: sortBy == h.field && sortType == 'asc',
-                    desc: sortBy == h.field && sortType == 'desc',
-                    sorting: h.sortable,
-                  }"
-                  :style="{ width: h.width }"
-                  @click="cellClick(h)"
-                  v-for="h in props.column"
-                  :key="`tfoot-th-${h.field}`"
-                >
-                  {{ h.label }}
-                </th>
-              </tr>
-            </tfoot>
           </table>
         </div>
-        <TwDatatableLoading :show="isLoading" />
+        <TwDatatableLoading :show="isFetching" />
       </div>
     </div>
     <div class="col-span-12">
@@ -272,6 +324,7 @@ const cellClick = (c: DatatableColumn) => {
             :total-page="totalPage"
             :is-loading="isLoading"
             :per-page="limit"
+            @change-current-page="updateCurrentPage"
             class="text-xs shadow-sm"
           />
         </div>

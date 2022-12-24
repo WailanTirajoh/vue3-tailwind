@@ -17,9 +17,9 @@ withDefaults(defineProps<Props>(), {
   disabled: false,
 });
 
-const isShown = ref(false);
-const toggleDropdown = () => (isShown.value = !isShown.value);
-const closeDropdown = () => (isShown.value = false);
+const isOpen = ref(false);
+const toggleDropdown = () => (isOpen.value = !isOpen.value);
+const closeDropdown = () => (isOpen.value = false);
 
 defineExpose({ toggleDropdown, closeDropdown });
 </script>
@@ -30,13 +30,13 @@ defineExpose({ toggleDropdown, closeDropdown });
       class="flex h-full rounded-t dark:text-gray-300"
       :class="{
         'bg-white shadow-lg dark:bg-gray-900 border border-b-0 border-gray-100 dark:border-gray-700':
-          isShown,
+          isOpen,
       }"
     >
       <div
         class="flex items-center justify-between text-gray-700 w-full text-sm border-r-0 rounded-l h-10 cursor-pointer"
         :class="{
-          'bg-white border dark:bg-gray-800 dark:border-gray-700': !isShown,
+          'bg-white border dark:bg-gray-800 dark:border-gray-700': !isOpen,
           'rounded-l-md': !rounded,
           'bg-gray-100': disabled,
         }"
@@ -62,11 +62,11 @@ defineExpose({ toggleDropdown, closeDropdown });
         aria-label="dropdown-select-button"
         class="p-3 flex items-center justify-center cursor-pointer transition-colors rounded-r"
         :class="[
-          !isShown ? dropdownBg : '',
+          !isOpen ? dropdownBg : '',
           dropdownBorder,
           {
             'border hover:bg-gray-200 shadow-none bg-white dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900':
-              !isShown,
+              !isOpen,
             'rounded-r-md': !rounded,
           },
         ]"
@@ -76,7 +76,7 @@ defineExpose({ toggleDropdown, closeDropdown });
         <div
           class="transition-all"
           :class="{
-            'cst-rotate-180': isShown,
+            'cst-rotate-180': isOpen,
           }"
         >
           <svg
@@ -104,7 +104,7 @@ defineExpose({ toggleDropdown, closeDropdown });
         leave-to-class="transform opacity-0 scale-95"
       >
         <div
-          v-if="isShown"
+          v-if="isOpen"
           class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
         >
           <slot name="list" />

@@ -8,13 +8,14 @@ export interface Props {
 }
 const props = defineProps<Props>();
 
-const ALIGN_CLASSES: Record<DropdownAlign, string> = {
-  ["left"]: "origin-top-left left-0",
-  ["right"]: "origin-top-right right-0",
-};
 const alignmentClasses = computed(() => {
-  return ALIGN_CLASSES[props.align ?? "left"];
+  const align: Record<DropdownAlign, string> = {
+    ["left"]: "origin-top-left left-0",
+    ["right"]: "origin-top-right right-0",
+  };
+  return align[props.align ?? "left"];
 });
+
 const isOpen = ref(false);
 
 const closeOnEscape = (e: KeyboardEvent) => {

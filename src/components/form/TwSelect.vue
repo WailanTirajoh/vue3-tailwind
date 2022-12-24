@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import { ref } from "vue";
-import SelectionList from "../dropdown/TwSelectionList.vue";
+import SelectionList from "../select/TwSelectionList.vue";
 
 export interface Props {
   modelValue?: string | number;

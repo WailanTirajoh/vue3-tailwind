@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { TwButton } from "@/components";
-import TwDropdown from "@/components/dropdown/TwDropdown.vue";
+import TwDropdownMenu from "@/components/dropdown/TwDropdownMenu.vue";
 </script>
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Dropdown</h2>
+    <h2 class="text-2xl font-bold">Dropdown Menu</h2>
     <hr class="my-2 border dark:border-gray-700" />
     <div class="grid grid-cols-12">
       <div class="col-span-12 flex gap-2">
-        <tw-dropdown align="left" width="48">
+        <tw-dropdown-menu align="left" width="48">
           <template #trigger>
             <tw-button variant="light"> Dropdown left align </tw-button>
           </template>
@@ -30,8 +30,8 @@ import TwDropdown from "@/components/dropdown/TwDropdown.vue";
               </div>
             </div>
           </template>
-        </tw-dropdown>
-        <tw-dropdown align="right" width="48">
+        </tw-dropdown-menu>
+        <tw-dropdown-menu align="right" width="48">
           <template #trigger>
             <tw-button variant="light"> Dropdown right align </tw-button>
           </template>
@@ -52,7 +52,7 @@ import TwDropdown from "@/components/dropdown/TwDropdown.vue";
               </div>
             </div>
           </template>
-        </tw-dropdown>
+        </tw-dropdown-menu>
       </div>
     </div>
   </div>
