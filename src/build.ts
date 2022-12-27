@@ -32,7 +32,7 @@ export type {
   DropdownItem,
 } from "./components/type";
 
-const TwComponents = {
+export const Vue3Tailwind = {
   install(app: App) {
     app.component("TwFile", TwFile);
     app.component("TwInput", TwInput);
@@ -55,8 +55,6 @@ const TwComponents = {
     app.directive("ripple", Ripple as Directive<any, any>);
   },
 };
-
-export default TwComponents;
 
 export {
   TwFile,
