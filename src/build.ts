@@ -1,15 +1,4 @@
 import type { App, Directive } from "vue";
-import type {
-  ButtonVariant,
-  ButtonIconPosition,
-  ButtonTextPosition,
-  DatatableColumn,
-  DatatableData,
-  DatatableSetting,
-  DropdownAlign,
-  DropdownItemValue,
-  DropdownItem,
-} from "./components/type";
 import {
   TwFile,
   TwInput,
@@ -22,12 +11,25 @@ import {
   TwOffcanvas,
   TwModal,
   TwDatatableClient,
+  TwDatatableServer,
   TwFeather,
   TwToast,
 } from "./components";
 import Ripple from "./directives/ripple";
 import Toast from "@/composables/toast";
 import "./assets/build.css";
+
+export type {
+  ButtonVariant,
+  ButtonIconPosition,
+  ButtonTextPosition,
+  DatatableColumn,
+  DatatableData,
+  DatatableSetting,
+  DropdownAlign,
+  DropdownItemValue,
+  DropdownItem,
+} from "./components/type";
 
 const TwComponents = {
   install(app: App) {
@@ -42,6 +44,7 @@ const TwComponents = {
     app.component("TwOffcanvas", TwOffcanvas);
     app.component("TwModal", TwModal);
     app.component("TwDatatableClient", TwDatatableClient);
+    app.component("TwDatatableServer", TwDatatableServer);
     app.component("TwFeather", TwFeather);
 
     Ripple.color = "rgba(255, 255, 255, 0.35)";
@@ -64,19 +67,8 @@ export {
   TwOffcanvas,
   TwModal,
   TwDatatableClient,
+  TwDatatableServer,
   TwFeather,
   TwToast,
   Toast,
-};
-
-export {
-  ButtonVariant,
-  ButtonIconPosition,
-  ButtonTextPosition,
-  DatatableColumn,
-  DatatableData,
-  DatatableSetting,
-  DropdownAlign,
-  DropdownItemValue,
-  DropdownItem,
 };
