@@ -1,3 +1,3 @@
 # Vue 3 Tailwind
-- Components Preview: https://vue3-tailwind-one.vercel.app/
+Ongoing Development, please visit this docs site for details:
 - Documentation Site: https://vue3-tailwind-docs.vercel.app/guide/getting-started.html
