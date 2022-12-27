@@ -16,7 +16,7 @@ import {
   TwToast,
 } from "./components";
 import Ripple from "./directives/ripple";
-import Toast from "@/composables/toast";
+import Toast from "./composables/toast";
 import "./assets/build.css";
 
 export type {
@@ -46,6 +46,7 @@ const TwComponents = {
     app.component("TwDatatableClient", TwDatatableClient);
     app.component("TwDatatableServer", TwDatatableServer);
     app.component("TwFeather", TwFeather);
+    app.component("TwToast", TwToast);
 
     Ripple.color = "rgba(255, 255, 255, 0.35)";
     Ripple.zIndex = "55";
