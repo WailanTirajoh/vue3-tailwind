@@ -104,7 +104,7 @@ const btnColor = computed(() => {
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded bg-opacity-20"
+        class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded !bg-opacity-20"
         v-if="btnDisabled || loading"
       ></div>
     </transition>
