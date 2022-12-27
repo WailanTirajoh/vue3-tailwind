@@ -23,6 +23,7 @@ let build = {
 if (process.env.BUILD_MODE === "VERCEL") {
   build = {};
 }
+console.log(build)
 // https://vitejs.dev/config/
 export default defineConfig({
   build: build,
