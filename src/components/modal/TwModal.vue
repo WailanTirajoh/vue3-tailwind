@@ -83,7 +83,7 @@ defineExpose({ closeModal, openModal });
         <div
           v-show="isOpen"
           @click.self="backdropClick"
-          class="fixed inset-0 transform transition-all z-10 bg-gray-900 !bg-opacity-50 pt-12"
+          class="fixed inset-0 transform transition-all z-50 bg-gray-900 !bg-opacity-50 pt-12"
           :class="[props.backdropClass]"
         >
           <transition

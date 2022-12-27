@@ -60,7 +60,7 @@ defineExpose({ openOffCanvas, closeOffCanvas });
     <transition name="slide-fade">
       <div
         v-if="isOpen"
-        class="fixed z-40 flex flex-col max-w-full bg-white dark:bg-gray-800 dark:text-gray-300 bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
+        class="fixed z-50 flex flex-col max-w-full bg-white dark:bg-gray-800 dark:text-gray-300 bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
         :class="[classPosition, position]"
         :style="{
           width: width,
