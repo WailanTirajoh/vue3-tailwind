@@ -54,14 +54,8 @@ watch(
   (newValue) => {
     if (newValue) {
       emit("on-open");
-      if (document) {
-        document.body.style.overflow = "hidden";
-      }
     } else {
       emit("on-close");
-      if (document) {
-        document.body.style.overflow = "";
-      }
     }
   },
   {
