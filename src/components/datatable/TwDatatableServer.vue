@@ -186,7 +186,7 @@ onMounted(async () => {
         <div>
           <select
             v-model="limit"
-            class="p-2 rounded bg-white dark:bg-gray-900 appearance-none focus:border-transparent focus:ring-0 focus:outline-none custor-pointer"
+            class="p-2 rounded border dark:bg-gray-900 appearance-none focus:border dark:border-gray-700 focus:ring-0 focus:outline-none custor-pointer"
           >
             <option
               :value="v.value"
@@ -216,9 +216,7 @@ onMounted(async () => {
             class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
           >
-            <thead
-              class="bg-gray-100 dark:bg-gray-900 dark:border-b dark:border-gray-700 text-gray-800"
-            >
+            <thead>
               <tr>
                 <th
                   v-if="setting.checkbox"
@@ -291,20 +289,20 @@ onMounted(async () => {
                   </TwDatatableTd>
                 </tr>
               </template>
-              <tempalte v-else>
+              <template v-else>
                 <tr
                   class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
                 >
-                  <td
-                    class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
+                  <TwDatatableTd
+                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
                     :colspan="props.column.length + (setting.checkbox ? 1 : 0)"
                   >
                     <slot name="empty">
                       <div class="p-2 rounded">No Data Available</div>
                     </slot>
-                  </td>
+                  </TwDatatableTd>
                 </tr>
-              </tempalte>
+              </template>
             </tbody>
           </table>
         </div>

@@ -108,12 +108,14 @@ const btnColor = computed(() => {
         v-if="btnDisabled || loading"
       ></div>
     </transition>
-    <tw-feather
-      v-if="icon || loading"
-      :class="[btnIconPosition]"
-      :type="btnIcon"
-      :animation="btnLoading ? 'spin' : ''"
-    />
+    <slot name="icon">
+      <tw-feather
+        v-if="icon || loading"
+        :class="[btnIconPosition]"
+        :type="btnIcon"
+        :animation="btnLoading ? 'spin' : ''"
+      />
+    </slot>
     <div v-if="$slots.hasOwnProperty('default')" class="mx-2 inline-block">
       <slot />
     </div>

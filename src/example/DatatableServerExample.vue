@@ -82,10 +82,6 @@ const fetchData = async () => {
     totalData: responseJson["total"],
   };
 };
-
-const datatableHook = (arg: any) => {
-  arg();
-};
 </script>
 
 <template>
@@ -102,7 +98,6 @@ const datatableHook = (arg: any) => {
       v-model:sort-type="data.sortType"
       :column="data.column"
       :setting="data.setting"
-      @datatable:column-hook="datatableHook"
     >
       <template #row="{ column, data }">
         <template v-if="column.field === 'brand'">
