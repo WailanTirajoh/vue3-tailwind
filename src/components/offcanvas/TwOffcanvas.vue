@@ -41,20 +41,6 @@ const classPosition = computed(() => {
   }
 });
 
-watch(
-  isOpen,
-  (newValue) => {
-    if (newValue) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  },
-  {
-    immediate: true,
-  }
-);
-
 const openOffCanvas = () => {
   isOpen.value = true;
 };
