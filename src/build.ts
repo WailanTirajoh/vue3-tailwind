@@ -74,5 +74,5 @@ export {
   TwFeather,
   TwToast,
   TwDropdownMenu,
-  Toast as useTwToast,
+  Toast,
 };
