@@ -15,6 +15,7 @@ import {
   TwFeather,
   TwToast,
   TwDropdownMenu,
+  TwAccordion,
 } from "./components";
 import Ripple from "./directives/ripple";
 import Toast from "./composables/toast";
@@ -32,29 +33,34 @@ export type {
   DropdownItem,
 } from "./components/type";
 
-export const Vue3Tailwind = {
-  install(app: App) {
-    app.component("TwFile", TwFile);
-    app.component("TwInput", TwInput);
-    app.component("TwMultiSelect", TwMultiSelect);
-    app.component("TwSelect", TwSelect);
-    app.component("TwTextarea", TwTextarea);
-    app.component("TwToggle", TwToggle);
-    app.component("TwButton", TwButton);
-    app.component("TwTab", TwTab);
-    app.component("TwOffcanvas", TwOffcanvas);
-    app.component("TwModal", TwModal);
-    app.component("TwDatatableClient", TwDatatableClient);
-    app.component("TwDatatableServer", TwDatatableServer);
-    app.component("TwFeather", TwFeather);
-    app.component("TwToast", TwToast);
-    app.component("TwDropdownMenu", TwDropdownMenu);
+export const Vue3Tailwind = install;
 
-    Ripple.color = "rgba(255, 255, 255, 0.35)";
-    Ripple.zIndex = "55";
-    app.directive("ripple", Ripple as Directive<any, any>);
-  },
-};
+function install(app: App) {
+  const components = {
+    TwFile,
+    TwInput,
+    TwMultiSelect,
+    TwSelect,
+    TwTextarea,
+    TwToggle,
+    TwButton,
+    TwTab,
+    TwOffcanvas,
+    TwModal,
+    TwDatatableClient,
+    TwDatatableServer,
+    TwFeather,
+    TwToast,
+    TwDropdownMenu,
+    TwAccordion,
+  };
+
+  Object.values(components).forEach((component) => {
+    app.component(component.name, component);
+  });
+
+  app.directive("ripple", Ripple as Directive<any, any>);
+}
 
 export {
   TwFile,
@@ -72,5 +78,6 @@ export {
   TwFeather,
   TwToast,
   TwDropdownMenu,
+  TwAccordion,
   Toast,
 };

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { OffcanvasPosition } from "../type";
 
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { TwFeather } from "@/components";
 
 export interface Props {

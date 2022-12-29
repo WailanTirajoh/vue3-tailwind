@@ -8,6 +8,7 @@ import DatatableClientExample from "./example/DatatableClientExample.vue";
 import DatatableServerExample from "./example/DatatableServerExample.vue";
 import ToastExample from "./example/ToastExample.vue";
 import DropdownExample from "./example/DropdownExample.vue";
+import AccordionExample from "./example/AccordionExample.vue";
 import { TwToggle } from "./components";
 import { onMounted, ref, watch } from "vue";
 
@@ -52,6 +53,11 @@ onMounted(() => {
       class="flex justify-center py-4 bg-gray-300 min-h-screen dark:bg-gray-800"
     >
       <div class="grid gap-2">
+        <div
+          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+        >
+          <AccordionExample />
+        </div>
         <div
           class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
         >

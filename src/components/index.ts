@@ -15,6 +15,7 @@ import TwDatatableClient from "./datatable/TwDatatableClient.vue";
 import TwDatatableServer from "./datatable/TwDatatableServer.vue";
 import TwToast from "./toast/TwToast.vue";
 import TwDropdownMenu from "./dropdown/TwDropdownMenu.vue";
+import TwAccordion from "./accordion/TwAccordion.vue";
 
 export {
   TwFile,
@@ -33,4 +34,5 @@ export {
   TwDatatableServer,
   TwToast,
   TwDropdownMenu,
+  TwAccordion,
 };

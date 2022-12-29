@@ -2,7 +2,7 @@
 import { defineComponent, h } from "vue";
 import * as feather from "feather-icons";
 export default defineComponent({
-  name: "VueFeather",
+  name: "TwFeather",
   props: {
     animation: {
       type: String,
