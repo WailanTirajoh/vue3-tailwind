@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import { computed, ref } from "vue";
-import TwDropdownSelect from "./TwSelect.vue";
+import TwSelect from "./TwSelect.vue";
 
 export interface Props {
   placeholder?: string;
@@ -46,62 +46,91 @@ const updateValue = (value: any) => {
 
 <template>
   <div>
-    <TwDropdownSelect
+    <TwSelect
       ref="dropdownSelect"
       :rounded="true"
       :disabled="disabled"
       @clear-data="updateValue(null)"
     >
-      <template #body>
-        <div v-if="modelValue" class="p-2 text-left dark:text-gray-200">
-          {{ valueText }}
-        </div>
-        <div v-else class="p-2 text-gray-400 italic text-left">
-          {{ placeholder }}
-        </div>
+      <template #bodyText="{ isOpen }">
+        <slot :is-open="isOpen" :model-value="modelValue">
+          <div v-if="modelValue" class="p-2 text-left dark:text-gray-200">
+            {{ valueText }}
+          </div>
+          <div v-else class="p-2 text-gray-400 italic text-left">
+            {{ placeholder }}
+          </div>
+        </slot>
       </template>
-      <template #list>
-        <div class="w-full p-2">
-          <input
-            v-model="search"
-            class="block w-full rounded text-gray-600 dark:text-gray-300 text-xs focus:border-transparent focus:ring-0 focus:outline-none p-3 bg-gray-100 dark:bg-gray-700"
-            type="text"
-            placeholder="Type something"
-          />
-        </div>
-        <div class="max-h-52 overflow-y-auto">
-          <template v-if="items.length === 0">
-            <button
-              class="p-3 w-full text-sm text-center overflow-hidden break-words"
+      <template #list="{ isOpen }">
+        <slot
+          name="dropdownList"
+          :is-open="isOpen"
+          :update-value="updateValue"
+          :model-value="modelValue"
+        >
+          <transition
+            enter-from-class="transform opacity-0 scale-95"
+            enter-active-class="transition ease-out duration-200"
+            enter-to-class="transform opacity-100 scale-100"
+            leave-from-class="transform opacity-100 scale-100"
+            leave-active-class="transition ease-in duration-75"
+            leave-to-class="transform opacity-0 scale-95"
+          >
+            <div
+              v-if="isOpen"
+              class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
             >
-              No Data
-            </button>
-          </template>
-          <template v-else-if="filterredItems.length > 0">
-            <button
-              v-for="item in filterredItems"
-              :key="'dropdown-' + item.value"
-              class="p-3 cursor-pointer w-full text-sm text-left"
-              :class="{
-                'bg-gray-800 dark:bg-gray-700 text-white':
-                  modelValue === item.value,
-                'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-400':
-                  modelValue !== item.value,
-              }"
-              @click="updateValue(item.value)"
-            >
-              {{ item.label }}
-            </button>
-          </template>
-          <template v-else>
-            <button
-              class="p-3 w-full text-sm text-center overflow-hidden break-words"
-            >
-              No matching data for key "{{ search }}"
-            </button>
-          </template>
-        </div>
+              <div class="w-full p-2">
+                <input
+                  v-focus-outline
+                  v-model="search"
+                  class="block w-full rounded text-gray-600 dark:text-gray-300 text-xs p-3 bg-gray-100 dark:bg-gray-700"
+                  type="text"
+                  placeholder="Type something"
+                />
+              </div>
+              <ul class="max-h-52 overflow-y-auto">
+                <template v-if="items.length === 0">
+                  <li
+                    class="p-3 w-full text-sm text-center overflow-hidden break-words"
+                  >
+                    No Data
+                  </li>
+                </template>
+                <template v-else-if="filterredItems.length > 0">
+                  <li
+                    v-for="item in filterredItems"
+                    :key="'dropdown-' + item.value"
+                  >
+                    <a
+                      v-focus-outline
+                      class="p-3 cursor-pointer w-full text-sm text-left block"
+                      :class="{
+                        'bg-gray-800 dark:bg-gray-700 text-white':
+                          modelValue === item.value,
+                        'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-400':
+                          modelValue !== item.value,
+                      }"
+                      href="#"
+                      @click.prevent="updateValue(item.value)"
+                    >
+                      {{ item.label }}
+                    </a>
+                  </li>
+                </template>
+                <template v-else>
+                  <li
+                    class="p-3 w-full text-sm text-center overflow-hidden break-words"
+                  >
+                    No matching data for key "{{ search }}"
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </transition>
+        </slot>
       </template>
-    </TwDropdownSelect>
+    </TwSelect>
   </div>
 </template>
