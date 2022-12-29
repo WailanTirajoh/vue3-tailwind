@@ -112,7 +112,6 @@ const closeDropdown = () => {
             >
               <div class="w-full p-2">
                 <input
-                  v-focus-outline
                   v-model="search"
                   class="block w-full rounded text-gray-600 text-xs focus:border-transparent p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
                   type="text"
@@ -126,7 +125,6 @@ const closeDropdown = () => {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      v-focus-outline
                       class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left"
                       :class="{
                         'bg-gray-800 text-white': modelValue.includes(

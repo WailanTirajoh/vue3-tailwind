@@ -83,7 +83,6 @@ const updateValue = (value: any) => {
             >
               <div class="w-full p-2">
                 <input
-                  v-focus-outline
                   v-model="search"
                   class="block w-full rounded text-gray-600 dark:text-gray-300 text-xs p-3 bg-gray-100 dark:bg-gray-700"
                   type="text"
@@ -104,7 +103,6 @@ const updateValue = (value: any) => {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      v-focus-outline
                       class="p-3 cursor-pointer w-full text-sm text-left block"
                       :class="{
                         'bg-gray-800 dark:bg-gray-700 text-white':

@@ -51,7 +51,6 @@ defineExpose({ toggleDropdown, closeDropdown });
             :disabled="disabled"
           >
             <button
-              v-focus-outline
               v-show="showClearData"
               class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all ease-in-out p-2"
               :disabled="disabled"
@@ -75,7 +74,6 @@ defineExpose({ toggleDropdown, closeDropdown });
         >
           <TwButton
             variant="none"
-            v-focus-outline="true"
             aria-label="dropdown-select-button"
             class="p-1 flex items-center justify-center cursor-pointer transition-colors !rounded-r rounded-l-none"
             :class="[
