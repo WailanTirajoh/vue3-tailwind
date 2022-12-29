@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwOffcanvas",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { OffcanvasPosition } from "../type";
 

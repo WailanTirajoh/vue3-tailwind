@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwDatatableLoading",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import TwDatatableCircleSpinner from "./TwDatatableCircleSpinner.vue";
 

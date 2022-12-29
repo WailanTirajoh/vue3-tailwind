@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwFile",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import UploadSvg from "../svg/TwUpload.vue";

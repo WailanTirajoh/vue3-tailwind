@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwRadio",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { RadioOption } from "../type";
 

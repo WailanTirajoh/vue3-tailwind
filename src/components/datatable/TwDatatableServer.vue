@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwDatatableServer",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 /**
  * Uncomplete

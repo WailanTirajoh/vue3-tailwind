@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwToast",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { Toast } from "@/components/type";
 import { computed, ref } from "vue";

@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwDropdownMenu",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { DropdownAlign } from "../type";
 import { computed, ref, onMounted, onUnmounted } from "vue";

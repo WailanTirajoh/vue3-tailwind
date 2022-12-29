@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwDatatableClient",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
 

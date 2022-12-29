@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwButton",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type {
   ButtonIconPosition,

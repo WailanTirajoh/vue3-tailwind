@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwTab",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { computed, ref, watch, onMounted } from "vue";
 

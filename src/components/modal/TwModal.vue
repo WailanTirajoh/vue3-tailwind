@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwModal",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { ModalBackdrop } from "@/components/type";
 

@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwSelectionList",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import { computed, ref } from "vue";

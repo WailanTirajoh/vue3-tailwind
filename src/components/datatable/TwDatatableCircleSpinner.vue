@@ -1,3 +1,12 @@
+<script>
+export default {
+  name: "TwDatatableCircleSpinner",
+  inheritAttrs: false,
+};
+</script>
+
+<script setup lang="ts"></script>
+
 <template>
   <div class="">
     <svg

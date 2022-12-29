@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwSelect",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { TwButton } from "..";

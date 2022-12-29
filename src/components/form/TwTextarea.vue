@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwTextarea",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue";
 

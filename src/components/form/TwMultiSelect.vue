@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwMultiSelect",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import type { DropdownItem, DropdownItemValue } from "../type";
 

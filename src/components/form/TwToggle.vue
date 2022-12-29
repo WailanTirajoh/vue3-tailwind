@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwToggle",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue";
 import { TwFeather } from "..";

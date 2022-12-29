@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwAccordion",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { useAnimationOpenClose } from "@/composables/animation";
 import { ref } from "vue";

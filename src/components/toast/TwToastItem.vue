@@ -1,3 +1,10 @@
+<script>
+export default {
+  name: "TwToastItem",
+  inheritAttrs: false,
+};
+</script>
+
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import useToast from "@/composables/toast";
