@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TwFeather } from "@/components";
+import { TwButton, TwFeather } from "@/components";
 import TwAccordion from "@/components/accordion/TwAccordion.vue";
 
 const accordion = [
@@ -14,14 +14,17 @@ const accordion = [
 
 <template>
   <div>
-    <TwAccordion class="bg-white rounded overflow-hidden" :data="accordion">
+    <TwAccordion
+      class="bg-white rounded overflow-hidden shadow"
+      :data="accordion"
+    >
       <template #header_example1="{ toggleAccordion, ref, isActive }">
         <div
-          class="bg-sky-100 text-sky-600 p-4 flex justify-between items-center cursor-pointer"
+          class="bg-gray-100 text-gray-800 p-4 flex justify-between items-center cursor-pointer border-b-2 border-gray-200"
           @click="toggleAccordion(ref)"
         >
           <div>Header</div>
-          <button class="flex items-center">
+          <TwButton variant="none" class="flex items-center p-0">
             <TwFeather
               class="transition-all duration-400"
               type="chevron-down"
@@ -29,7 +32,7 @@ const accordion = [
                 'rotate-180': isActive,
               }"
             ></TwFeather>
-          </button>
+          </TwButton>
         </div>
       </template>
       <template #example1>
@@ -37,11 +40,11 @@ const accordion = [
       </template>
       <template #header_example2="{ toggleAccordion, ref, isActive }">
         <div
-          class="bg-sky-100 text-sky-600 p-4 flex justify-between items-center cursor-pointer"
+          class="bg-gray-100 text-gray-800 p-4 flex justify-between items-center cursor-pointer"
           @click="toggleAccordion(ref)"
         >
           <div>Header 2</div>
-          <button class="flex items-center">
+          <TwButton variant="none" class="flex items-center p-0">
             <TwFeather
               class="transition-all duration-400"
               type="chevron-down"
@@ -49,7 +52,7 @@ const accordion = [
                 'rotate-180': isActive,
               }"
             ></TwFeather>
-          </button>
+          </TwButton>
         </div>
       </template>
       <template #example2>

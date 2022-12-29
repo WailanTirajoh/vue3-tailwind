@@ -46,6 +46,7 @@ const COLORS: Record<ButtonVariant, string> = {
 const ICON_POSITIONS: Record<ButtonIconPosition, string> = {
   ["left"]: "float-left",
   ["right"]: "float-right",
+  ["center"]: "",
 };
 
 const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
@@ -92,7 +93,7 @@ const btnColor = computed(() => {
     v-bind="$attrs"
     v-ripple="btnRipple"
     :disabled="btnDisabled"
-    class="p-2 rounded-md relative duration-200"
+    class="p-2 relative duration-200 rounded-md"
     :class="[btnColor, ...btnClasses, btnButtonTextPosition]"
   >
     <transition
@@ -111,13 +112,18 @@ const btnColor = computed(() => {
     <slot name="icon">
       <tw-feather
         v-if="icon || loading"
-        :class="[btnIconPosition]"
+        :class="[
+          btnIconPosition,
+          props.iconPosition === 'left'
+            ? 'mr-2'
+            : props.iconPosition === 'center'
+            ? 'mx-2'
+            : 'ml-2',
+        ]"
         :type="btnIcon"
         :animation="btnLoading ? 'spin' : ''"
       />
     </slot>
-    <div v-if="$slots.hasOwnProperty('default')" class="mx-2 inline-block">
-      <slot />
-    </div>
+    <slot />
   </button>
 </template>

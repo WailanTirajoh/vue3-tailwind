@@ -17,7 +17,7 @@ export type ButtonVariant =
   | "outline-info"
   | "none";
 
-export type ButtonIconPosition = "left" | "right";
+export type ButtonIconPosition = "left" | "right" | "center";
 
 export type ButtonTextPosition = "left" | "right" | "center";
 // Datatable

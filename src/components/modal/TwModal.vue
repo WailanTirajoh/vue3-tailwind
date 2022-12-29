@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ModalBackdrop } from "@/components/type";
 
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { TwFeather } from "..";
 
 export interface Props {
@@ -49,21 +49,19 @@ const backdropClick = () => {
   toggleModal();
 };
 
-watch(
-  isOpen,
-  (newValue) => {
+defineExpose({ closeModal, openModal });
+
+onMounted(() => {
+  watch(isOpen, (newValue) => {
     if (newValue) {
+      document.body.style.overflow = "hidden";
       emit("on-open");
     } else {
+      document.body.style.overflow = "auto";
       emit("on-close");
     }
-  },
-  {
-    immediate: true,
-  }
-);
-
-defineExpose({ closeModal, openModal });
+  });
+});
 </script>
 
 <template>
@@ -110,13 +108,15 @@ defineExpose({ closeModal, openModal });
                   :class="[props.modalHeaderClass]"
                 >
                   <slot name="header"></slot>
-                  <button
-                    v-if="props.showCloseIcon"
-                    class="duration-200 p-1 ml-auto transition-opacity bg-transparent border-0 text-black opacity-30 hover:opacity-60 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    @click="toggleModal()"
-                  >
-                    <tw-feather type="x" />
-                  </button>
+                  <slot name="headerCloseButton">
+                    <button
+                      v-if="props.showCloseIcon"
+                      class="duration-200 p-1 ml-auto transition-opacity bg-transparent border-0 text-black opacity-30 hover:opacity-60 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                      @click="toggleModal()"
+                    >
+                      <tw-feather type="x" />
+                    </button>
+                  </slot>
                 </div>
                 <div
                   class="relative p-6 flex-auto overflow-y-auto"

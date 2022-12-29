@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { OffcanvasPosition } from "../type";
 
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { TwFeather } from "@/components";
 
 export interface Props {
@@ -11,6 +11,8 @@ export interface Props {
 }
 
 const props = defineProps<Props>();
+
+const emit = defineEmits(["on-close", "on-open", "backdrop-click"]);
 
 const isOpen = ref(false);
 const position = computed(() => {
@@ -50,6 +52,18 @@ const closeOffCanvas = () => {
 
 // Expose open / close so we can programaticaly close / open canvas base of ref
 defineExpose({ openOffCanvas, closeOffCanvas });
+
+onMounted(() => {
+  watch(isOpen, (newValue) => {
+    if (newValue) {
+      document.body.style.overflow = "hidden";
+      emit("on-open");
+    } else {
+      document.body.style.overflow = "auto";
+      emit("on-close");
+    }
+  });
+});
 </script>
 
 <template>
@@ -69,22 +83,22 @@ defineExpose({ openOffCanvas, closeOffCanvas });
           maxHeight: '100vh',
         }"
       >
-        <div
-          class="flex justify-between p-4 border-b-2 dark:border-gray-700 border-b-gray-200 items-center"
-        >
-          <h3 class="font-medium text-2xl" @click="closeOffCanvas()">
-            <slot name="header"></slot>
-          </h3>
-          <button
-            class="duration-200 p-1 ml-auto bg-transparent border-0 text-black opacity-30 hover:opacity-80 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-            @click="closeOffCanvas()"
+        <slot name="header">
+          <div
+            class="flex justify-between p-4 border-b-2 dark:border-gray-700 border-b-gray-200 items-center"
           >
-            <TwFeather type="x" />
-          </button>
-        </div>
-        <div class="p-4 overflow-y-auto">
-          <slot />
-        </div>
+            <slot name="headerTitle"></slot>
+            <slot name="headerButton">
+              <button
+                class="duration-200 p-1 ml-auto bg-transparent border-0 text-black dark:text-gray-50 opacity-30 hover:opacity-80 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                @click="closeOffCanvas()"
+              >
+                <TwFeather type="x" />
+              </button>
+            </slot>
+          </div>
+        </slot>
+        <slot :close-off-canvas="closeOffCanvas" :is-open="isOpen" />
       </div>
     </transition>
     <transition
@@ -95,12 +109,17 @@ defineExpose({ openOffCanvas, closeOffCanvas });
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div v-if="isOpen" class="fixed inset-0 transform transition-all z-10">
-        <div
-          class="absolute inset-0 bg-gray-900 opacity-50"
-          @click="closeOffCanvas"
-        ></div>
-      </div>
+      <slot name="backdrop">
+        <div v-if="isOpen" class="fixed inset-0 transform transition-all z-10">
+          <div
+            class="absolute inset-0 bg-gray-900 opacity-50"
+            @click="
+              closeOffCanvas();
+              emit('backdrop-click');
+            "
+          ></div>
+        </div>
+      </slot>
     </transition>
   </Teleport>
 </template>
