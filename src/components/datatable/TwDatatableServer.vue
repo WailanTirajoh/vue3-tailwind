@@ -223,94 +223,100 @@ onMounted(async () => {
             class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
           >
-            <thead>
-              <tr>
-                <th
-                  v-if="setting.checkbox"
-                  :style="{
-                    width: '20px',
-                  }"
-                ></th>
-                <slot
-                  name="column"
-                  :column="props.column"
-                  :sort-type="sortType"
-                  :sort-by="sortBy"
-                >
+            <slot name="thead" :data="data" :column="props.column">
+              <thead>
+                <tr>
                   <th
-                    class="select-none"
-                    :class="{
-                      asc: sortBy == h.field && sortType == 'asc',
-                      desc: sortBy == h.field && sortType == 'desc',
-                      sorting: h.sortable,
-                    }"
-                    :style="{ width: h.width }"
-                    @click="columnClick(h)"
-                    v-for="h in props.column"
-                    :key="h.field"
-                  >
-                    {{ h.label }}
-                  </th>
-                </slot>
-              </tr>
-            </thead>
-            <tbody class="text-sm">
-              <template v-if="data.length > 0">
-                <tr
-                  class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
-                  v-for="(d, i) in data"
-                  :key="`body-row-${i}`"
-                >
-                  <TwDatatableTd
-                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
-                    style="box-shadow: 20px 3px 20px #0000000b"
                     v-if="setting.checkbox"
                     :style="{
                       width: '20px',
                     }"
+                  ></th>
+                  <slot
+                    name="column"
+                    :column="props.column"
+                    :sort-type="sortType"
+                    :sort-by="sortBy"
                   >
-                    <div class="flex justify-center items-center px-2">
-                      <input
-                        type="checkbox"
-                        :value="d['id']"
-                        v-model="selected"
-                      />
-                    </div>
-                  </TwDatatableTd>
-                  <TwDatatableTd
-                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
-                    :copyText="d[h.field]"
-                    v-for="(h, i) in props.column"
-                    :key="`datatable-td-${i}`"
+                    <th
+                      class="select-none"
+                      :class="{
+                        asc: sortBy == h.field && sortType == 'asc',
+                        desc: sortBy == h.field && sortType == 'desc',
+                        sorting: h.sortable,
+                      }"
+                      :style="{ width: h.width }"
+                      @click="columnClick(h)"
+                      v-for="h in props.column"
+                      :key="h.field"
+                    >
+                      {{ h.label }}
+                    </th>
+                  </slot>
+                </tr>
+              </thead>
+            </slot>
+            <slot name="tbody" :data="data" :column="props.column">
+              <tbody class="text-sm">
+                <template v-if="data.length > 0">
+                  <tr
+                    class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
+                    v-for="(d, i) in data"
+                    :key="`body-row-${i}`"
                   >
-                    <slot name="row" :column="h" :data="d" :index="i">
-                      <div
-                        v-if="h.template"
-                        v-html="h.template(d, i)"
-                        @click="cellClick(h)"
-                      ></div>
-                      <div v-else @click="cellClick(h)">
-                        {{ d[h.field] }}
+                    <TwDatatableTd
+                      class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                      style="box-shadow: 20px 3px 20px #0000000b"
+                      v-if="setting.checkbox"
+                      :style="{
+                        width: '20px',
+                      }"
+                    >
+                      <div class="flex justify-center items-center px-2">
+                        <input
+                          type="checkbox"
+                          :value="d['id']"
+                          v-model="selected"
+                        />
                       </div>
-                    </slot>
-                  </TwDatatableTd>
-                </tr>
-              </template>
-              <template v-else>
-                <tr
-                  class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
-                >
-                  <TwDatatableTd
-                    class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
-                    :colspan="props.column.length + (setting.checkbox ? 1 : 0)"
+                    </TwDatatableTd>
+                    <TwDatatableTd
+                      class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                      :copyText="d[h.field]"
+                      v-for="(h, i) in props.column"
+                      :key="`datatable-td-${i}`"
+                    >
+                      <slot name="row" :column="h" :data="d" :index="i">
+                        <div
+                          v-if="h.template"
+                          v-html="h.template(d, i)"
+                          @click="cellClick(h)"
+                        ></div>
+                        <div v-else @click="cellClick(h)">
+                          {{ d[h.field] }}
+                        </div>
+                      </slot>
+                    </TwDatatableTd>
+                  </tr>
+                </template>
+                <template v-else>
+                  <tr
+                    class="duration-300 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
                   >
-                    <slot name="empty">
-                      <div class="p-2 rounded">No Data Available</div>
-                    </slot>
-                  </TwDatatableTd>
-                </tr>
-              </template>
-            </tbody>
+                    <TwDatatableTd
+                      class="duration-300 p-1 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                      :colspan="
+                        props.column.length + (setting.checkbox ? 1 : 0)
+                      "
+                    >
+                      <slot name="empty">
+                        <div class="p-2 rounded">No Data Available</div>
+                      </slot>
+                    </TwDatatableTd>
+                  </tr>
+                </template>
+              </tbody>
+            </slot>
           </table>
         </div>
         <TwDatatableLoading :show="isFetching" />

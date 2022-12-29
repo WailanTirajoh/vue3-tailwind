@@ -53,7 +53,7 @@ const copyTextToClipboard = (text: string | number | boolean | undefined) => {
 </script>
 
 <template>
-  <td @contextmenu="theadContextHandler($event)">
+  <td v-bind="$attrs" @contextmenu="theadContextHandler($event)">
     <slot />
     <div
       v-show="contextMenu.isShown"
