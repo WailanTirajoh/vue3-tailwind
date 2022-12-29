@@ -30,7 +30,7 @@ const toggleAccordion = (ref: string): void => {
 </script>
 
 <template>
-  <div>
+  <div v-bind="$attrs">
     <div v-for="data in props.data" :key="data.ref">
       <slot
         :name="`${'header_' + data.ref}`"
@@ -56,7 +56,7 @@ const toggleAccordion = (ref: string): void => {
 <style scoped>
 .expand-enter-active,
 .expand-leave-active {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.25s ease-in-out;
   overflow: hidden;
 }
 </style>
