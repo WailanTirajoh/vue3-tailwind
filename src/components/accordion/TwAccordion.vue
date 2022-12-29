@@ -2,7 +2,7 @@
 import { useAnimationOpenClose } from "@/composables/animation";
 import { ref } from "vue";
 
-interface Props {
+export interface Props {
   data: Array<{
     ref: string;
   }>;
