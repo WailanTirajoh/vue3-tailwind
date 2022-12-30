@@ -1,6 +1,6 @@
 {
   "name": "vue3-tailwind",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "main": "./dist/vue3-tailwind.js",
   "module": "./dist/vue3-tailwind.js",
   "types": "./dist/build.d.ts",
