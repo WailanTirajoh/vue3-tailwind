@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "feather-icons": "^4.29.0",
+    "js-formdata-validator": "^0.0.4",
     "vue": "^3.2.45"
   },
   "devDependencies": {

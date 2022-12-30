@@ -1,17 +1,14 @@
 <script lang="ts">
 export default {
   name: "TwInput",
-  inheritAttrs: false,
 };
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
 export interface Props {
   label: string;
   placeholder: string;
-  modelValue?: string | number;
+  modelValue?: string | number | null;
   type?: string;
   disabled?: boolean;
 }
@@ -20,7 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
   disabled: false,
 });
 const emit = defineEmits(["update:modelValue"]);
-const inputData = ref(props.modelValue);
 </script>
 
 <template>
@@ -31,7 +27,7 @@ const inputData = ref(props.modelValue);
     <div>
       <input
         v-bind="$attrs"
-        v-model="inputData"
+        :value="props.modelValue"
         :type="type"
         class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
         :class="{
@@ -39,7 +35,7 @@ const inputData = ref(props.modelValue);
         }"
         :placeholder="placeholder"
         :disabled="disabled"
-        @input="emit('update:modelValue', inputData)"
+        @input="emit('update:modelValue', $event.currentTarget?.value ?? null)"
       />
     </div>
   </div>

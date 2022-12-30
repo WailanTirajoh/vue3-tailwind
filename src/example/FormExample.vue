@@ -1,18 +1,32 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { Validator } from "js-formdata-validator";
 import {
+  TwButton,
   TwFile,
   TwInput,
   TwMultiSelect,
   TwSelect,
   TwToggle,
-} from "@/components";
+  Toast,
+  TwTextarea,
+} from "@/build";
+import { reactive } from "vue";
 
-const fileModel = ref([]);
-const selectExample = ref();
-const multiSelectExample = ref([]);
-const inputExample = ref();
-const toggleExample = ref();
+const formData = reactive({
+  fileModel: null,
+  selectExample: null,
+  multiSelectExample: null,
+  inputExample: null,
+  toggleExample: null,
+});
+
+const errors = reactive({
+  fileModel: [],
+  selectExample: [],
+  multiSelectExample: [],
+  inputExample: [],
+  toggleExample: [],
+});
 
 const selectionList = [
   {
@@ -28,43 +42,141 @@ const selectionList = [
     value: "test3",
   },
 ];
+
+const submit = async () => {
+  resetError();
+  const validator = new Validator({
+    formData: formData,
+    rules: {
+      inputExample: ["required"],
+      selectExample: ["required"],
+      toggleExample: [
+        (value) => {
+          if (!value) return "Value must be true";
+        },
+      ],
+      multiSelectExample: ["required", "array"],
+    },
+  });
+
+  await validator.validate();
+
+  if (validator.fail()) {
+    const errorMessage = validator.getErrorMessage();
+    const errorResponse = validator.getErrorBag();
+
+    const { error } = Toast();
+    error({
+      message: errorMessage,
+    });
+
+    for (const errorKey in errorResponse) {
+      errors[errorKey] = errorResponse[errorKey];
+    }
+  }
+};
+
+const reset = () => {
+  resetForm();
+  resetError();
+};
+
+const resetError = () => {
+  for (const errorKey of Object.keys(errors)) {
+    errors[errorKey] = [];
+  }
+};
+
+const resetForm = () => {
+  formData.fileModel = [];
+  formData.selectExample = null;
+  formData.multiSelectExample = [];
+  formData.inputExample = null;
+  formData.toggleExample = false;
+
+  console.log(formData);
+};
 </script>
 
 <template>
   <div>
     <h2 class="text-2xl font-bold">Form</h2>
     <hr class="my-2 border dark:border-gray-700" />
-    <div class="grid grid-cols-12 gap-2">
-      <div class="col-span-12">
-        <TwFile v-model="fileModel" />
-      </div>
-      <div class="col-span-12">
-        <TwInput
-          v-model="inputExample"
-          label="Input"
-          placeholder="Input Field"
-          type="text"
-        />
-      </div>
-      <div class="col-span-12">
-        <TwSelect
-          v-model="selectExample"
-          :items="selectionList"
-          label="Single Select"
-          placeholder="Choose select"
-        />
-      </div>
-      <div class="col-span-12">
-        <TwMultiSelect
-          v-model="multiSelectExample"
-          :items="selectionList"
-          label="Multi Select"
-          placeholder="Choose select"
-        />
-      </div>
-      <div class="col-span-12">
-        <TwToggle id="toggle" v-model="toggleExample" label="Toggle" />
-      </div>
+    <div class="bg-white rounded-lg p-2 shadow">
+      <form @submit.prevent="submit" class="grid grid-cols-12 gap-2">
+        <div class="col-span-12">
+          <TwFile v-model="formData.fileModel" />
+        </div>
+        <div class="col-span-12">
+          <TwInput
+            v-model="formData.inputExample"
+            label="Input"
+            placeholder="Input Field"
+            type="text"
+          />
+          <div class="text-red-800 text-sm italic" v-if="errors.inputExample">
+            {{ errors.inputExample.join(",") }}
+          </div>
+        </div>
+        <div class="col-span-12">
+          <TwTextarea
+            v-model="formData.inputExample"
+            label="Textarea"
+            placeholder="Textarea Field"
+            type="text"
+          />
+          <div class="text-red-800 text-sm italic" v-if="errors.inputExample">
+            {{ errors.inputExample.join(",") }}
+          </div>
+        </div>
+        <div class="col-span-12">
+          <TwSelect
+            v-model="formData.selectExample"
+            :items="selectionList"
+            label="Single Select"
+            placeholder="Choose select"
+          />
+          <div class="text-red-800 text-sm italic" v-if="errors.selectExample">
+            {{ errors.selectExample.join(",") }}
+          </div>
+        </div>
+        <div class="col-span-12">
+          <TwMultiSelect
+            v-model="formData.multiSelectExample"
+            :items="selectionList"
+            label="Multi Select"
+            placeholder="Choose select"
+          />
+          <div
+            class="text-red-800 text-sm italic"
+            v-if="errors.multiSelectExample"
+          >
+            {{ errors.multiSelectExample.join(",") }}
+          </div>
+        </div>
+        <div class="col-span-12">
+          <TwToggle
+            id="toggle"
+            v-model="formData.toggleExample"
+            label="Toggle"
+          />
+          <div class="text-red-800 text-sm italic" v-if="errors.toggleExample">
+            {{ errors.toggleExample.join(",") }}
+          </div>
+        </div>
+        <div class="col-span-12 flex justify-end gap-1">
+          <TwButton
+            ripple
+            variant="secondary"
+            type="button"
+            class="px-4"
+            @click="reset"
+          >
+            Reset
+          </TwButton>
+          <TwButton ripple type="submit" class="px-4"> Submit </TwButton>
+        </div>
+      </form>
     </div>
   </div>
 </template>

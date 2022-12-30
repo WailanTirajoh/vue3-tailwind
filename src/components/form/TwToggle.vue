@@ -13,7 +13,7 @@ export interface Props {
   id: string;
   label?: string;
   placeholder?: string;
-  modelValue?: boolean;
+  modelValue?: boolean | null;
   disabled?: boolean;
   activeText?: string;
   inactiveText?: string;

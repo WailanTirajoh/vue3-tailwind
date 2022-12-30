@@ -7,22 +7,20 @@ export default {
 
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
-import { ref } from "vue";
 import SelectionList from "../select/TwSelectionList.vue";
 
 export interface Props {
-  modelValue?: string | number;
+  modelValue?: string | number | null;
   label?: string;
   placeholder?: string;
   items: Array<DropdownItem>;
   disabled?: boolean;
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   disabled: false,
   placeholder: "",
+  modelValue: () => "",
 });
-
-const inputData = ref(props.modelValue);
 </script>
 
 <template>
@@ -33,12 +31,12 @@ const inputData = ref(props.modelValue);
     <div class="relative">
       <SelectionList
         v-bind="$attrs"
-        v-model="inputData"
+        :model-value="modelValue"
         :items="items"
-        :placeholder="props.placeholder"
+        :placeholder="placeholder"
         :close-on-select="true"
         :disabled="disabled"
-        @update:modelValue="$emit('update:modelValue', inputData)"
+        @update:modelValue="(value) => $emit('update:modelValue', value)"
       />
       <div
         v-if="disabled"

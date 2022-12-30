@@ -6,12 +6,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed } from "vue";
 
 export interface Props {
   label: string;
   placeholder?: string;
-  modelValue?: string | number;
+  modelValue?: string | number | null;
   disabled?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
@@ -20,7 +20,15 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: "",
 });
 const emit = defineEmits(["update:modelValue"]);
-const inputData = ref(props.modelValue);
+
+const inputData = computed({
+  get() {
+    return props.modelValue ?? "";
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <template>
@@ -37,7 +45,6 @@ const inputData = ref(props.modelValue);
       }"
       :placeholder="placeholder"
       :disabled="disabled"
-      @input="emit('update:modelValue', inputData)"
     />
   </div>
 </template>

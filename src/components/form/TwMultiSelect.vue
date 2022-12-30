@@ -7,23 +7,19 @@ export default {
 
 <script setup lang="ts">
 import type { DropdownItem, DropdownItemValue } from "../type";
-
-import { ref } from "vue";
 import MultiSelectionList from "../select/TwMultiSelectionList.vue";
 
 export interface Props {
-  modelValue: Array<DropdownItemValue>;
+  modelValue: Array<DropdownItemValue> | null;
   items: Array<DropdownItem>;
   label?: string;
   placeholder?: string;
   disabled?: boolean;
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   placeholder: "",
   disabled: false,
 });
-
-const inputData = ref(props.modelValue);
 </script>
 
 <template>
@@ -34,11 +30,11 @@ const inputData = ref(props.modelValue);
     <div class="relative">
       <MultiSelectionList
         v-bind="$attrs"
-        v-model="inputData"
+        :model-value="modelValue"
         :items="items"
-        :placeholder="props.placeholder"
+        :placeholder="placeholder"
         :disabled="disabled"
-        @update:modelValue="$emit('update:modelValue', inputData)"
+        @update:modelValue="(value) => $emit('update:modelValue', value)"
       />
       <div
         v-if="disabled"

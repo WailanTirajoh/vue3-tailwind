@@ -14,12 +14,13 @@ import { TwButton } from "..";
 export interface Props {
   placeholder?: string;
   items: Array<DropdownItem>;
-  modelValue: readonly DropdownItemValue[];
+  modelValue?: Array<any>;
   closeOnSelect?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   placeholder: "",
   closeOnSelect: false,
+  modelValue: () => [],
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -34,9 +35,11 @@ const filterredItems = computed(() => {
   });
 });
 
+const computedModelValue = computed(() => props.modelValue ?? []);
+
 const updateValue = (value: DropdownItemValue) => {
   const tempValue: DropdownItemValue[] = [];
-  props.modelValue.forEach((v: DropdownItemValue) => tempValue.push(v));
+  computedModelValue.value.forEach((v: DropdownItemValue) => tempValue.push(v));
   if (tempValue.includes(value)) tempValue.splice(tempValue.indexOf(value), 1);
   else tempValue.push(value);
   emit("update:modelValue", tempValue);
@@ -67,31 +70,43 @@ const closeDropdown = () => {
     >
       <template #bodyText="{ isOpen }">
         <slot
-          :model-value="modelValue"
+          :model-value="computedModelValue"
           :remove-selected-value="removeSelectedValue"
           :is-open="isOpen"
         >
-          <div v-if="modelValue.length > 0" class="p-2 text-left flex gap-1">
-            <div
-              v-for="v in modelValue"
-              :key="v"
-              class="inline-block border dark:border-gray-700 dark:bg-gray-800 rounded overflow-hidden dark:text-gray-200"
+          <div
+            v-if="computedModelValue.length > 0"
+            class="p-2 text-left flex gap-1"
+          >
+            <TransitionGroup
+              as="ul"
+              name="list"
+              class="w-80 fixed inset-x-0 z-50 grid gap-2 break-words pt-3 px-4"
+              style="overflow-wrap: anywhere"
+              appear
             >
-              <div class="flex items-center gap-2">
-                <div
-                  class="text-xs rounded text-gray-800 dark:text-gray-200 p-1 bg-white dark:bg-gray-800 h-full w-full"
-                >
-                  {{ v }}
+              <li
+                v-for="v in computedModelValue"
+                :key="v"
+                class="inline-block border dark:border-gray-700 dark:bg-gray-800 rounded overflow-hidden dark:text-gray-200"
+              >
+                <div class="flex items-center gap-2">
+                  <div
+                    class="text-xs rounded text-gray-800 dark:text-gray-200 p-1 bg-white dark:bg-gray-800 h-full w-full"
+                  >
+                    {{ v }}
+                  </div>
+                  <TwButton
+                    type="button"
+                    variant="none"
+                    class="cursor-pointer bg-gray-200 dark:bg-gray-900 !p-1 w-5 h-full rounded-none flex items-center justify-center"
+                    @click.stop="removeSelectedValue(v)"
+                  >
+                    &#10005;
+                  </TwButton>
                 </div>
-                <TwButton
-                  variant="none"
-                  class="cursor-pointer bg-gray-200 dark:bg-gray-900 !p-1 w-5 h-full rounded-none flex items-center justify-center"
-                  @click.stop="removeSelectedValue(v)"
-                >
-                  &#10005;
-                </TwButton>
-              </div>
-            </div>
+              </li>
+            </TransitionGroup>
           </div>
           <div v-else class="p-2 text-gray-400 italic text-left">
             {{ placeholder }}
@@ -103,7 +118,7 @@ const closeDropdown = () => {
           name="dropdownList"
           :is-open="isOpen"
           :update-value="updateValue"
-          :model-value="modelValue"
+          :model-value="computedModelValue"
         >
           <transition
             enter-from-class="transform opacity-0 scale-95"
@@ -134,11 +149,11 @@ const closeDropdown = () => {
                     <a
                       class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left"
                       :class="{
-                        'bg-gray-800 text-white': modelValue.includes(
+                        'bg-gray-800 text-white': computedModelValue.includes(
                           item.value
                         ),
                         'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300':
-                          !modelValue.includes(item.value),
+                          !computedModelValue.includes(item.value),
                       }"
                       href="#"
                       @click.prevent="updateValue(item.value)"
@@ -162,3 +177,21 @@ const closeDropdown = () => {
     </TwSelect>
   </div>
 </template>
+
+<style scoped>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+</style>

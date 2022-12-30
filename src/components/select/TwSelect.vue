@@ -58,6 +58,7 @@ defineExpose({ toggleDropdown, closeDropdown });
             :disabled="disabled"
           >
             <button
+              type="button"
               v-show="showClearData"
               class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all ease-in-out p-2"
               :disabled="disabled"
@@ -80,6 +81,7 @@ defineExpose({ toggleDropdown, closeDropdown });
           :toggle-dropdown="toggleDropdown"
         >
           <TwButton
+            type="button"
             variant="none"
             aria-label="dropdown-select-button"
             class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r !rounded-l-none"
