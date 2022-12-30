@@ -82,7 +82,7 @@ defineExpose({ toggleDropdown, closeDropdown });
           <TwButton
             variant="none"
             aria-label="dropdown-select-button"
-            class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r rounded-l-none"
+            class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r !rounded-l-none"
             :class="[
               !isOpen ? dropdownBg : '',
               dropdownBorder,
