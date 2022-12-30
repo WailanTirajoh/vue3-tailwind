@@ -32,6 +32,7 @@ const inputData = ref(props.modelValue);
     </label>
     <div class="relative">
       <SelectionList
+        v-bind="$attrs"
         v-model="inputData"
         :items="items"
         :placeholder="props.placeholder"

@@ -78,64 +78,73 @@ const onDragOver = (e: DragEvent) => {
     <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
       {{ label }}
     </label>
-    <div
-      v-if="dataImgUrls && dataImgUrls.length > 0"
-      class="w-full flex items-center justify-center mt-2"
+    <slot
+      :image-urls="dataImgUrls"
+      :remove-image="removeImage"
+      :remove-all-image="removeAllImage"
+      :on-drag-over="onDragOver"
+      :handle-drop-image="handleDropImage"
+      :handle-input-image="handleInputImage"
     >
       <div
-        class="border rounded-lg w-full dark:border-gray-700 max-h-96 overflow-auto relative select-none"
+        v-if="dataImgUrls && dataImgUrls.length > 0"
+        class="w-full flex items-center justify-center mt-2"
       >
-        <div class="grid grid-cols-12 justify-left gap-4 p-4">
-          <div
-            class="relative col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2"
-            v-for="(url, index) in dataImgUrls"
-            :key="`form-image-${index}`"
-          >
-            <img
-              :src="url"
-              class="h-48 object-cover w-full rounded bg-white dark:bg-gray-900 shadow border"
-              alt="preview"
-            />
+        <div
+          class="border rounded-lg w-full dark:border-gray-700 max-h-96 overflow-auto relative select-none"
+        >
+          <div class="grid grid-cols-12 justify-left gap-4 p-4">
             <div
-              class="cursor-pointer absolute top-2 right-2"
-              @click="removeImage(index)"
+              class="relative col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2"
+              v-for="(url, index) in dataImgUrls"
+              :key="`form-image-${index}`"
             >
+              <img
+                :src="url"
+                class="h-48 object-cover w-full rounded bg-white dark:bg-gray-900 shadow border"
+                alt="preview"
+              />
               <div
-                class="hover:bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center hover:bg-opacity-90"
+                class="cursor-pointer absolute top-2 right-2"
+                @click="removeImage(index)"
               >
-                <IconX />
+                <div
+                  class="hover:bg-gray-50 w-8 h-8 rounded-full flex items-center justify-center hover:bg-opacity-90"
+                >
+                  <IconX />
+                </div>
               </div>
             </div>
           </div>
+          <button
+            class="transition-all ease-in-out bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 shadow-sm w-full p-1 rounded-b sticky bottom-0"
+            @click="removeAllImage"
+          >
+            Remove All Image
+          </button>
         </div>
-        <button
-          class="transition-all ease-in-out bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 shadow-sm w-full p-1 rounded-b sticky bottom-0"
-          @click="removeAllImage"
-        >
-          Remove All Image
-        </button>
       </div>
-    </div>
-    <div v-else class="flex w-full items-center justify-center">
-      <label
-        @dragover="onDragOver"
-        @drop.prevent="handleDropImage"
-        class="transition-all ease-in-out w-full flex flex-col items-center px-4 py-6 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-300 text-gray-400 rounded-lg tracking-wide uppercase border-dashed border-2 border-gray-500 cursor-pointer"
-      >
-        <UploadSvg />
-        <span class="mt-2 text-base leading-normal">
-          Select or Drop file here
-        </span>
-        <input
-          ref="file"
-          type="file"
-          style="display: none"
-          class="hidden"
-          accept="image/png, image/gif, image/jpeg"
-          multiple
-          @change="handleInputImage"
-        />
-      </label>
-    </div>
+      <div v-else class="flex w-full items-center justify-center">
+        <label
+          @dragover="onDragOver"
+          @drop.prevent="handleDropImage"
+          class="transition-all ease-in-out w-full flex flex-col items-center px-4 py-6 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700 dark:text-gray-300 text-gray-400 rounded-lg tracking-wide uppercase border-dashed border-2 border-gray-500 cursor-pointer"
+        >
+          <UploadSvg />
+          <span class="mt-2 text-base leading-normal">
+            Select or Drop file here
+          </span>
+          <input
+            ref="file"
+            type="file"
+            style="display: none"
+            class="hidden"
+            accept="image/png, image/gif, image/jpeg"
+            multiple
+            @change="handleInputImage"
+          />
+        </label>
+      </div>
+    </slot>
   </div>
 </template>

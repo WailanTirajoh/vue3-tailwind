@@ -30,6 +30,7 @@ const inputData = ref(props.modelValue);
     </label>
     <div>
       <input
+        v-bind="$attrs"
         v-model="inputData"
         :type="type"
         class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"

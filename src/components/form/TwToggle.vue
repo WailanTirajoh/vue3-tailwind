@@ -45,6 +45,7 @@ const inputData = ref(props.modelValue);
         <label :for="id" class="flex items-center cursor-pointer">
           <div class="relative">
             <input
+              v-bind="$attrs"
               :id="id"
               v-model="inputData"
               type="checkbox"

@@ -35,6 +35,7 @@ const emit = defineEmits(["update:modelValue"]);
       class="font-bold text-gray-700 dark:text-gray-400 block"
     >
       <input
+        v-bind="$attrs"
         type="radio"
         :name="id"
         :value="option.value"
