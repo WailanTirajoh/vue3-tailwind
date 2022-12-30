@@ -13,14 +13,16 @@ import {
 import { reactive } from "vue";
 
 const formData = reactive({
-  fileModel: null,
-  selectExample: null,
-  multiSelectExample: null,
-  inputExample: null,
-  toggleExample: null,
+  fileModel: null as null | File,
+  selectExample: null as null | string,
+  multiSelectExample: null as null | Array<any>,
+  inputExample: null as null | string,
+  toggleExample: null as null | boolean,
 });
 
-const errors = reactive({
+const errors: {
+  [key: string]: any;
+} = reactive({
   fileModel: [],
   selectExample: [],
   multiSelectExample: [],
@@ -88,13 +90,11 @@ const resetError = () => {
 };
 
 const resetForm = () => {
-  formData.fileModel = [];
+  formData.fileModel = null;
   formData.selectExample = null;
-  formData.multiSelectExample = [];
+  formData.multiSelectExample = null;
   formData.inputExample = null;
-  formData.toggleExample = false;
-
-  console.log(formData);
+  formData.toggleExample = null;
 };
 </script>
 

@@ -6,7 +6,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { TwFeather } from "..";
 
 export interface Props {
@@ -32,7 +32,14 @@ const props = withDefaults(defineProps<Props>(), {
   noIcon: true,
 });
 const emit = defineEmits(["update:modelValue"]);
-const inputData = ref(props.modelValue);
+const inputData = computed({
+  get() {
+    return props.modelValue ?? false;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 </script>
 
 <template>
@@ -50,7 +57,6 @@ const inputData = ref(props.modelValue);
               v-model="inputData"
               type="checkbox"
               class="sr-only"
-              @input="emit('update:modelValue', !inputData)"
               :disabled="disabled"
               :aria-label="`${id}-checkbox`"
             />
