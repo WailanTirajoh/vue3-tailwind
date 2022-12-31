@@ -16,7 +16,11 @@ const formName = inject("formName") as string;
 
 const composableForm = useForm();
 const errors = computed(() => {
-  return composableForm.getErrors(formName, props.name);
+  try {
+    return composableForm.getErrors(formName, props.name);
+  } catch {
+    return [];
+  }
 });
 </script>
 
