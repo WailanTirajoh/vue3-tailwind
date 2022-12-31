@@ -63,6 +63,8 @@ function install(app: App) {
     app.component(component.name, component);
   });
 
+  Ripple.color = "rgba(255, 255, 255, 0.35)";
+  Ripple.zIndex = "55";
   app.directive("ripple", Ripple as Directive<any, any>);
 }
 
@@ -84,5 +86,6 @@ export {
   TwDropdownMenu,
   TwAccordion,
   TwForm,
+  TwErrorMessage,
   Toast,
 };
