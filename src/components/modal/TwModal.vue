@@ -46,11 +46,11 @@ const openModal = () => (isOpen.value = true);
 const backdropClick = () => {
   emit("backdrop-click");
   if (props.backdrop === "static") {
-    modalContainer.value?.classList.add("scale-105");
+    modalContainer.value?.classList.add("tw-shake");
     const styleTimeout = setTimeout(() => {
-      modalContainer.value?.classList.remove("scale-105");
+      modalContainer.value?.classList.remove("tw-shake");
       clearTimeout(styleTimeout);
-    }, 100);
+    }, 1000);
     return;
   }
   toggleModal();

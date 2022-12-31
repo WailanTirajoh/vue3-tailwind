@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Validator } from "js-formdata-validator";
 import {
   TwButton,
   TwFile,
@@ -7,27 +6,23 @@ import {
   TwMultiSelect,
   TwSelect,
   TwToggle,
-  Toast,
   TwTextarea,
 } from "@/build";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import TwForm from "@/components/form/TwForm.vue";
+import useToast from "@/composables/toast";
+import TwErrorMessage from "@/components/form/TwErrorMessage.vue";
+
+const formA = ref();
+const toast = useToast();
 
 const formData = reactive({
   fileModel: null as null | File,
   selectExample: null as null | string,
   multiSelectExample: null as null | Array<any>,
   inputExample: null as null | string,
+  textAreaExample: null as null | string,
   toggleExample: null as null | boolean,
-});
-
-const errors: {
-  [key: string]: any;
-} = reactive({
-  fileModel: [],
-  selectExample: [],
-  multiSelectExample: [],
-  inputExample: [],
-  toggleExample: [],
 });
 
 const selectionList = [
@@ -45,56 +40,23 @@ const selectionList = [
   },
 ];
 
+const formError = ref(false);
+
 const submit = async () => {
-  resetError();
-  const validator = new Validator({
-    formData: formData,
-    rules: {
-      inputExample: ["required"],
-      selectExample: ["required"],
-      toggleExample: [
-        (value) => {
-          if (!value) return "Value must be true";
-        },
-      ],
-      multiSelectExample: ["required", "array"],
-    },
-  });
-
+  const validator = formA.value.validator();
+  validator.clearErrors();
   await validator.validate();
-
   if (validator.fail()) {
-    const errorMessage = validator.getErrorMessage();
-    const errorResponse = validator.getErrorBag();
-
-    const { error } = Toast();
-    error({
-      message: errorMessage,
+    toast.error({
+      message: validator.getErrorMessage(),
     });
 
-    for (const errorKey in errorResponse) {
-      errors[errorKey] = errorResponse[errorKey];
-    }
+    formError.value = true;
+
+    setTimeout(() => {
+      formError.value = false;
+    }, 500);
   }
-};
-
-const reset = () => {
-  resetForm();
-  resetError();
-};
-
-const resetError = () => {
-  for (const errorKey of Object.keys(errors)) {
-    errors[errorKey] = [];
-  }
-};
-
-const resetForm = () => {
-  formData.fileModel = null;
-  formData.selectExample = null;
-  formData.multiSelectExample = null;
-  formData.inputExample = null;
-  formData.toggleExample = null;
 };
 </script>
 
@@ -102,32 +64,48 @@ const resetForm = () => {
   <div>
     <h2 class="text-2xl font-bold">Form</h2>
     <hr class="my-2 border dark:border-gray-700" />
-    <div class="bg-white rounded-lg p-2 shadow">
-      <form @submit.prevent="submit" class="grid grid-cols-12 gap-2">
+    <div>
+      <TwForm
+        class="grid grid-cols-12 gap-2 bg-white rounded-lg p-2 shadow"
+        :class="{
+          'tw-shake': formError,
+        }"
+        name="formA"
+        ref="formA"
+        @submit="submit"
+        :rules="{
+          inputExample: ['required', 'string'],
+          textAreaExample: [
+            'required',
+            'string',
+            (value: string) => {
+              if (!value || value.length < 3) return 'Min length is 3';
+            },
+          ],
+        }"
+      >
         <div class="col-span-12">
           <TwFile v-model="formData.fileModel" />
         </div>
         <div class="col-span-12">
           <TwInput
+            name="inputExample"
             v-model="formData.inputExample"
             label="Input"
             placeholder="Input Field"
             type="text"
           />
-          <div class="text-red-800 text-sm italic" v-if="errors.inputExample">
-            {{ errors.inputExample.join(",") }}
-          </div>
+          <TwErrorMessage name="inputExample"></TwErrorMessage>
         </div>
         <div class="col-span-12">
           <TwTextarea
-            v-model="formData.inputExample"
+            name="textAreaExample"
+            v-model="formData.textAreaExample"
             label="Textarea"
             placeholder="Textarea Field"
             type="text"
           />
-          <div class="text-red-800 text-sm italic" v-if="errors.inputExample">
-            {{ errors.inputExample.join(",") }}
-          </div>
+          <TwErrorMessage name="textAreaExample"></TwErrorMessage>
         </div>
         <div class="col-span-12">
           <TwSelect
@@ -136,9 +114,6 @@ const resetForm = () => {
             label="Single Select"
             placeholder="Choose select"
           />
-          <div class="text-red-800 text-sm italic" v-if="errors.selectExample">
-            {{ errors.selectExample.join(",") }}
-          </div>
         </div>
         <div class="col-span-12">
           <TwMultiSelect
@@ -147,12 +122,6 @@ const resetForm = () => {
             label="Multi Select"
             placeholder="Choose select"
           />
-          <div
-            class="text-red-800 text-sm italic"
-            v-if="errors.multiSelectExample"
-          >
-            {{ errors.multiSelectExample.join(",") }}
-          </div>
         </div>
         <div class="col-span-12">
           <TwToggle
@@ -160,23 +129,14 @@ const resetForm = () => {
             v-model="formData.toggleExample"
             label="Toggle"
           />
-          <div class="text-red-800 text-sm italic" v-if="errors.toggleExample">
-            {{ errors.toggleExample.join(",") }}
-          </div>
         </div>
         <div class="col-span-12 flex justify-end gap-1">
-          <TwButton
-            ripple
-            variant="secondary"
-            type="button"
-            class="px-4"
-            @click="reset"
-          >
+          <TwButton ripple variant="secondary" type="button" class="px-4">
             Reset
           </TwButton>
           <TwButton ripple type="submit" class="px-4"> Submit </TwButton>
         </div>
-      </form>
+      </TwForm>
     </div>
   </div>
 </template>

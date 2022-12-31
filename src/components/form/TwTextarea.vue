@@ -6,10 +6,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { useForm } from "../../composables/form";
+import { computed, inject, onMounted, watch } from "vue";
 
 export interface Props {
-  label: string;
+  name?: string;
+  label?: string;
   placeholder?: string;
   modelValue?: string | number | null;
   disabled?: boolean;
@@ -21,13 +23,30 @@ const props = withDefaults(defineProps<Props>(), {
 });
 const emit = defineEmits(["update:modelValue"]);
 
-const inputData = computed({
+const computedValue = computed({
   get() {
     return props.modelValue ?? "";
   },
   set(value) {
     emit("update:modelValue", value);
   },
+});
+
+// Form
+const composableForm = useForm();
+
+const formName = inject("formName") as string;
+
+watch(computedValue, async () => {
+  if (formName && props.name) {
+    composableForm.updateFormData(formName, props.name, computedValue.value);
+  }
+});
+
+onMounted(() => {
+  if (formName && props.name) {
+    composableForm.initFormData(formName, props.name);
+  }
 });
 </script>
 
@@ -38,7 +57,7 @@ const inputData = computed({
     </label>
     <textarea
       v-bind="$attrs"
-      v-model="inputData"
+      v-model="computedValue"
       class="block transition duration-300 ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700"
       :class="{
         'bg-gray-100 cursor-not-allowed': disabled,

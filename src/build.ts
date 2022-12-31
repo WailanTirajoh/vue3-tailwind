@@ -16,6 +16,8 @@ import {
   TwToast,
   TwDropdownMenu,
   TwAccordion,
+  TwForm,
+  TwErrorMessage,
 } from "./components";
 import Ripple from "./directives/ripple";
 import Toast from "./composables/toast";
@@ -53,6 +55,8 @@ function install(app: App) {
     TwToast,
     TwDropdownMenu,
     TwAccordion,
+    TwForm,
+    TwErrorMessage,
   };
 
   Object.values(components).forEach((component) => {
