@@ -39,7 +39,6 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <pre>{{ form }}</pre>
   <form v-bind="$attrs" @submit.prevent="emit('submit')">
     <slot></slot>
   </form>
