@@ -23,6 +23,16 @@ const formData = reactive({
   inputExample: null as null | string,
   textAreaExample: null as null | string,
   toggleExample: null as null | boolean,
+  rules: {
+    inputExample: ["required", "string"],
+    textAreaExample: [
+      "required",
+      "string",
+      (value: string) => {
+        if (!value || value.length < 3) return "Min length is 3";
+      },
+    ],
+  },
 });
 
 const selectionList = [
@@ -85,16 +95,7 @@ const clear = () => {
         name="formA"
         ref="formA"
         @submit="submit"
-        :rules="{
-          inputExample: ['required', 'string'],
-          textAreaExample: [
-            'required',
-            'string',
-            (value: string) => {
-              if (!value || value.length < 3) return 'Min length is 3';
-            },
-          ],
-        }"
+        :rules="formData.rules"
       >
         <div class="col-span-12">
           <TwFile v-model="formData.fileModel" />
@@ -127,6 +128,7 @@ const clear = () => {
             label="Single Select"
             placeholder="Choose select"
           />
+          <TwErrorMessage name="selectExample"></TwErrorMessage>
         </div>
         <div class="col-span-12">
           <TwMultiSelect
@@ -136,6 +138,7 @@ const clear = () => {
             label="Multi Select"
             placeholder="Choose select"
           />
+          <TwErrorMessage name="multiSelectExample"></TwErrorMessage>
         </div>
         <div class="col-span-12">
           <TwToggle
@@ -144,6 +147,7 @@ const clear = () => {
             v-model="formData.toggleExample"
             label="Toggle"
           />
+          <TwErrorMessage name="toggleExample"></TwErrorMessage>
         </div>
         <div class="col-span-12 flex justify-end gap-1">
           <TwButton

@@ -5,7 +5,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { computed, onBeforeMount, provide } from "vue";
+import { computed, onBeforeMount, provide, watch } from "vue";
 import { useForm } from "../../composables/form";
 import { generateId } from "../../utils/generateId";
 import type { ValidationRules } from "js-formdata-validator/dist/type";
@@ -15,9 +15,11 @@ const props = defineProps<{
   rules: ValidationRules;
 }>();
 
+const emit = defineEmits(["submit"]);
+
 const formName = computed(() => props.name ?? generateId());
 
-provide("formName", formName.value);
+const rules = computed(() => props.rules);
 
 const composableForm = useForm();
 
@@ -25,18 +27,25 @@ const form = computed(() => {
   return composableForm.getForm(formName.value);
 });
 
-const emit = defineEmits(["submit"]);
-
 const validator = () => {
   return form.value.validator;
 };
 
-defineExpose({ validator });
-
+// Add form & set initial form rules
 onBeforeMount(() => {
   composableForm.addForm(formName.value);
-  composableForm.setFormRules(formName.value, props.rules);
+  composableForm.setFormRules(formName.value, rules.value);
 });
+
+// Update validator rules whenever rules change
+watch(rules, (value) => {
+  composableForm.setFormRules(formName.value, value);
+});
+
+defineExpose({ validator });
+
+// Provide form name to be injected by form child components
+provide("formName", formName.value);
 </script>
 
 <template>
