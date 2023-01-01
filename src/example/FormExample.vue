@@ -26,16 +26,25 @@ const formData = reactive({
   rules: {
     inputExample: ["required", "string"],
     textAreaExample: [
+      "test",
       "required",
       "string",
       (value: string) => {
-        if (!value || value.length < 3) return "Min length is 3";
+        const minLength = 15;
+        if (!value || value.length < minLength) {
+          return `Min length is ${minLength}, current length is ${
+            value ? value.length : 0
+          }`;
+        }
       },
     ],
     selectExample: [
       "required",
       (value: string, formData: any) => {
-        if (formData.multiSelectExample.includes("test")) {
+        if (
+          formData.multiSelectExample &&
+          formData.multiSelectExample.includes("test")
+        ) {
           if (value !== "test")
             return "Selected multiselect has test, value must be test";
         }

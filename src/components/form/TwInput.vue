@@ -1,12 +1,13 @@
 <script lang="ts">
 export default {
   name: "TwInput",
+  inheritAttrs: false,
 };
 </script>
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, inject, onMounted, ref, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -16,10 +17,12 @@ export interface Props {
   modelValue?: string | number | null;
   type?: string;
   disabled?: boolean;
+  errorClass?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   disabled: false,
+  errorClass: "",
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -37,7 +40,7 @@ const computedValue = computed({
 const composableForm = useForm();
 const fieldValidator = new FieldValidator();
 
-const formName = inject("formName") as string;
+const formName = inject("formName", null) as string | null;
 
 watch(computedValue, async () => {
   if (formName && props.name) {
@@ -53,6 +56,11 @@ onMounted(() => {
     composableForm.initFormData(formName, props.name);
     fieldValidator.setFieldName(props.name);
     fieldValidator.setFieldRules(fieldRules.value);
+
+    const customRules = composableForm.getCustomRules();
+    if (customRules) {
+      fieldValidator.setCustomRules(customRules);
+    }
   }
 });
 
@@ -61,6 +69,13 @@ const fieldRules = computed(() => {
     return composableForm.getFieldRules(formName, props.name);
   }
   return [];
+});
+
+const isError = computed(() => {
+  if (formName && props.name) {
+    return composableForm.hasError(formName, props.name);
+  }
+  return false;
 });
 
 const validateField = async () => {
@@ -81,17 +96,22 @@ const validateField = async () => {
       {{ label }}
     </label>
     <div>
-      <input
-        v-bind="$attrs"
-        v-model="computedValue"
-        :type="type"
-        class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
-        :class="{
-          '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
-        }"
-        :placeholder="placeholder"
-        :disabled="disabled"
-      />
+      <slot :is-error="isError">
+        <input
+          v-bind="$attrs"
+          v-model="computedValue"
+          :type="type"
+          class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
+          :class="[
+            {
+              '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
+            },
+            isError ? errorClass : '',
+          ]"
+          :placeholder="placeholder"
+          :disabled="disabled"
+        />
+      </slot>
     </div>
   </div>
 </template>

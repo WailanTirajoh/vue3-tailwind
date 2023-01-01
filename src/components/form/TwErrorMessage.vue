@@ -15,7 +15,7 @@ export interface Props {
 
 const props = defineProps<Props>();
 
-const formName = inject("formName") as string;
+const formName = inject("formName", null) as string | null;
 
 const composableForm = useForm();
 
