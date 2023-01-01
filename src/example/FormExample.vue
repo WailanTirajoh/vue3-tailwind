@@ -32,7 +32,17 @@ const formData = reactive({
         if (!value || value.length < 3) return "Min length is 3";
       },
     ],
+    selectExample: [
+      "required",
+      (value: string, formData: any) => {
+        if (formData.multiSelectExample.includes("test")) {
+          if (value !== "test")
+            return "Selected multiselect has test, value must be test";
+        }
+      },
+    ],
     toggleExample: [
+      "required",
       (value: string) => {
         if (!value) return "Value must be true";
       },

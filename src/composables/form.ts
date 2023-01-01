@@ -22,6 +22,10 @@ export const useForm = () => {
     forms.value[formId].validator.setFormKeyValue(key, null);
   };
 
+  const getFormData = (formId: string) => {
+    return forms.value[formId].validator.getFormData();
+  };
+
   const updateFormData = (formId: string, key: string, value: any) => {
     forms.value[formId].validator.setFormKeyValue(key, value);
   };
@@ -60,6 +64,7 @@ export const useForm = () => {
     addForm,
     getForm,
     initFormData,
+    getFormData,
     updateFormData,
     setFormRules,
     getFieldRules,

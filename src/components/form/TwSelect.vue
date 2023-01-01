@@ -71,7 +71,7 @@ const fieldRules = computed(() => {
 const validateField = async () => {
   if (formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
-
+    fieldValidator.setFormData(composableForm.getFormData(formName));
     await fieldValidator.validate();
 
     const error = fieldValidator.getErrorBag();
