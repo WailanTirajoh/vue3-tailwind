@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useForm } from "@/composables/form";
+import { useForm } from "../../composables/form";
 import { computed, inject, onMounted, watch } from "vue";
 
 export interface Props {

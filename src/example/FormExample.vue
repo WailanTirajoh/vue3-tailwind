@@ -58,6 +58,18 @@ const submit = async () => {
     }, 500);
   }
 };
+
+const clear = () => {
+  formData.fileModel = null;
+  formData.selectExample = null;
+  formData.multiSelectExample = null;
+  formData.inputExample = null;
+  formData.textAreaExample = null;
+  formData.toggleExample = null;
+
+  const validator = formA.value.validator();
+  validator.clearErrors();
+};
 </script>
 
 <template>
@@ -109,6 +121,7 @@ const submit = async () => {
         </div>
         <div class="col-span-12">
           <TwSelect
+            name="selectExample"
             v-model="formData.selectExample"
             :items="selectionList"
             label="Single Select"
@@ -117,6 +130,7 @@ const submit = async () => {
         </div>
         <div class="col-span-12">
           <TwMultiSelect
+            name="multiSelectExample"
             v-model="formData.multiSelectExample"
             :items="selectionList"
             label="Multi Select"
@@ -126,12 +140,19 @@ const submit = async () => {
         <div class="col-span-12">
           <TwToggle
             id="toggle"
+            name="toggleExample"
             v-model="formData.toggleExample"
             label="Toggle"
           />
         </div>
         <div class="col-span-12 flex justify-end gap-1">
-          <TwButton ripple variant="secondary" type="button" class="px-4">
+          <TwButton
+            ripple
+            variant="secondary"
+            type="button"
+            class="px-4"
+            @click="clear"
+          >
             Reset
           </TwButton>
           <TwButton ripple type="submit" class="px-4"> Submit </TwButton>

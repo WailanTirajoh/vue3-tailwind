@@ -16,11 +16,13 @@ export interface Props {
   modelValue?: string | number | null;
   disabled?: boolean;
 }
+
 const props = withDefaults(defineProps<Props>(), {
   type: "text",
   disabled: false,
   placeholder: "",
 });
+
 const emit = defineEmits(["update:modelValue"]);
 
 const computedValue = computed({

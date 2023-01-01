@@ -24,7 +24,9 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(["update:modelValue", "imageChanged"]);
 
 const dataImgUrls = ref<string[] | never[]>(props.imgUrls);
+
 const file = ref<HTMLInputElement>();
+
 const files = ref<File[] | null>();
 
 const handleDropImage = (e: DragEvent) => {

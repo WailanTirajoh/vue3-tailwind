@@ -6,9 +6,12 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { useForm } from "../../composables/form";
+import { computed, inject, onMounted, watch } from "vue";
 import type { RadioOption } from "../type";
 
 export interface Props {
+  name?: string;
   label: string;
   id: string;
   modelValue?: string | number;
@@ -16,11 +19,39 @@ export interface Props {
   disabled?: boolean;
   options: RadioOption[];
 }
-withDefaults(defineProps<Props>(), {
+
+const props = withDefaults(defineProps<Props>(), {
   type: "text",
   disabled: false,
 });
+
 const emit = defineEmits(["update:modelValue"]);
+
+const computedValue = computed({
+  get() {
+    return props.modelValue ?? [];
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
+
+// Form
+const composableForm = useForm();
+
+const formName = inject("formName") as string;
+
+watch(computedValue, async () => {
+  if (formName && props.name) {
+    composableForm.updateFormData(formName, props.name, computedValue.value);
+  }
+});
+
+onMounted(() => {
+  if (formName && props.name) {
+    composableForm.initFormData(formName, props.name);
+  }
+});
 </script>
 
 <template>
@@ -36,13 +67,12 @@ const emit = defineEmits(["update:modelValue"]);
     >
       <input
         v-bind="$attrs"
+        v-model="computedValue"
         type="radio"
         :name="id"
-        :value="option.value"
         :id="`${option.label}-${id}`"
         :disabled="disabled"
-        :checked="option.value === modelValue"
-        @input="emit('update:modelValue', option.value)"
+        :value="option.value"
       />
       {{ option.label }}
     </label>

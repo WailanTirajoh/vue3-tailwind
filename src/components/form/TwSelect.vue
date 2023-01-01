@@ -8,18 +8,50 @@ export default {
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import SelectionList from "../select/TwSelectionList.vue";
+import { useForm } from "../../composables/form";
+import { computed, inject, onMounted, watch } from "vue";
 
 export interface Props {
+  name?: string;
   modelValue?: string | number | null;
   label?: string;
   placeholder?: string;
   items: Array<DropdownItem>;
   disabled?: boolean;
 }
-withDefaults(defineProps<Props>(), {
+
+const props = withDefaults(defineProps<Props>(), {
   disabled: false,
   placeholder: "",
   modelValue: () => "",
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const computedValue = computed({
+  get() {
+    return props.modelValue || null;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
+
+// Form
+const composableForm = useForm();
+
+const formName = inject("formName") as string;
+
+watch(computedValue, async () => {
+  if (formName && props.name) {
+    composableForm.updateFormData(formName, props.name, computedValue.value);
+  }
+});
+
+onMounted(() => {
+  if (formName && props.name) {
+    composableForm.initFormData(formName, props.name);
+  }
 });
 </script>
 
@@ -31,12 +63,11 @@ withDefaults(defineProps<Props>(), {
     <div class="relative">
       <SelectionList
         v-bind="$attrs"
-        :model-value="modelValue"
+        v-model="computedValue"
         :items="items"
         :placeholder="placeholder"
         :close-on-select="true"
         :disabled="disabled"
-        @update:modelValue="(value) => $emit('update:modelValue', value)"
       />
       <div
         v-if="disabled"

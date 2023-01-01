@@ -6,15 +6,19 @@ export default {
 </script>
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
+
 import { computed, inject } from "vue";
 
 export interface Props {
   name: string;
 }
+
 const props = defineProps<Props>();
+
 const formName = inject("formName") as string;
 
 const composableForm = useForm();
+
 const errors = computed(() => {
   try {
     return composableForm.getErrors(formName, props.name);

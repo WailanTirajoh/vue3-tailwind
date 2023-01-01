@@ -9,6 +9,7 @@ import { computed, onBeforeMount, provide } from "vue";
 import { useForm } from "../../composables/form";
 import { generateId } from "../../utils/generateId";
 import type { ValidationRules } from "js-formdata-validator/dist/type";
+
 const props = defineProps<{
   name?: string;
   rules: ValidationRules;
