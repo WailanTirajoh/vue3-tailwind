@@ -49,7 +49,7 @@ watch(computedValue, async () => {
 });
 
 onMounted(() => {
-  if (formName && props.name && fieldRules.value) {
+  if (formName && props.name) {
     composableForm.initFormData(formName, props.name);
     fieldValidator.setFieldName(props.name);
     fieldValidator.setFieldRules(fieldRules.value);
