@@ -15,12 +15,12 @@ const accordion = [
 <template>
   <div>
     <TwAccordion
-      class="bg-white rounded overflow-hidden shadow"
+      class="bg-white dark:bg-gray-700 rounded overflow-hidden shadow"
       :data="accordion"
     >
       <template #header_example1="{ toggleAccordion, ref, isActive }">
         <div
-          class="bg-gray-100 text-gray-800 p-4 flex justify-between items-center cursor-pointer border-b-2 border-gray-200"
+          class="bg-gray-100 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 text-gray-800 p-4 flex justify-between items-center cursor-pointer border-b-2 border-gray-200"
           @click="toggleAccordion(ref)"
         >
           <div>Header</div>
@@ -40,7 +40,7 @@ const accordion = [
       </template>
       <template #header_example2="{ toggleAccordion, ref, isActive }">
         <div
-          class="bg-gray-100 text-gray-800 p-4 flex justify-between items-center cursor-pointer"
+          class="bg-gray-100 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 text-gray-800 p-4 flex justify-between items-center cursor-pointer"
           @click="toggleAccordion(ref)"
         >
           <div>Header 2</div>

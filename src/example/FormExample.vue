@@ -32,6 +32,11 @@ const formData = reactive({
         if (!value || value.length < 3) return "Min length is 3";
       },
     ],
+    toggleExample: [
+      (value: string) => {
+        if (!value) return "Value must be true";
+      },
+    ],
   },
 });
 
@@ -88,7 +93,7 @@ const clear = () => {
     <hr class="my-2 border dark:border-gray-700" />
     <div>
       <TwForm
-        class="grid grid-cols-12 gap-2 bg-white rounded-lg p-2 shadow"
+        class="grid grid-cols-12 gap-2 bg-white dark:bg-gray-900 dark:border-gray-700 dark:border rounded-lg p-2 shadow"
         :class="{
           'tw-shake': formError,
         }"

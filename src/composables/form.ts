@@ -30,6 +30,18 @@ export const useForm = () => {
     forms.value[formId].validator.setRules(rules);
   };
 
+  const getFieldRules = (formId: string, fieldName: string) => {
+    return forms.value[formId].validator.getRules()[fieldName];
+  };
+
+  const setFieldErrors = (
+    formId: string,
+    fieldName: string,
+    fieldErrors: string[]
+  ) => {
+    forms.value[formId].validator.setFieldErrors(fieldName, fieldErrors);
+  };
+
   const validate = async (formId: string) => {
     forms.value[formId].validator.clearErrors();
     await forms.value[formId].validator.validate();
@@ -50,6 +62,8 @@ export const useForm = () => {
     initFormData,
     updateFormData,
     setFormRules,
+    getFieldRules,
+    setFieldErrors,
     validate,
     getError,
     getErrors,
