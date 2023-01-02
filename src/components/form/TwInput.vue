@@ -7,7 +7,7 @@ export default {
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, ref, watch } from "vue";
+import { computed, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -53,7 +53,7 @@ watch(computedValue, async () => {
 
 onMounted(() => {
   if (formName && props.name) {
-    composableForm.initFormData(formName, props.name);
+    composableForm.updateFormData(formName, props.name, computedValue.value);
     fieldValidator.setFieldName(props.name);
     fieldValidator.setFieldRules(fieldRules.value);
 
