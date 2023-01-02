@@ -21,7 +21,7 @@ const composableForm = useForm();
 
 const errors = computed(() => {
   try {
-    return composableForm.getErrors(formName, props.name);
+    return formName ? composableForm.getErrors(formName, props.name) : [];
   } catch {
     return [];
   }
