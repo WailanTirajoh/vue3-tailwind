@@ -7,7 +7,6 @@ export default {
 
 <script setup lang="ts">
 import type { ModalBackdrop } from "@/components/type";
-
 import { computed, onMounted, ref, watch } from "vue";
 import { TwFeather } from "..";
 
@@ -22,6 +21,7 @@ export interface Props {
   modalFooterClass?: string;
   backdropClass?: string;
 }
+
 const props = withDefaults(defineProps<Props>(), {
   fullHeight: true,
   width: "800px",
@@ -43,6 +43,7 @@ const modalContainer = ref<HTMLElement>();
 const toggleModal = () => (isOpen.value = !isOpen.value);
 const closeModal = () => (isOpen.value = false);
 const openModal = () => (isOpen.value = true);
+
 const backdropClick = () => {
   emit("backdrop-click");
   if (props.backdrop === "static") {
