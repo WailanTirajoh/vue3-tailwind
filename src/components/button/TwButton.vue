@@ -72,25 +72,17 @@ const btnButtonTextPosition = computed(() => {
   return TEXT_POSITIONS[props.buttonTextPosition];
 });
 
-const btnLoading = computed(() => {
-  return props.loading;
+const btnIcon = computed(() => {
+  return props.loading ? "loader" : props.icon;
 });
 
-const btnIcon = computed(() => {
-  return btnLoading.value ? "loader" : props.icon;
-});
 const btnIconPosition = computed(() => {
   return ICON_POSITIONS[props.iconPosition];
 });
-const btnDisabled = computed(() => {
-  return props.disabled;
-});
-const btnRipple = computed(() => {
-  return props.ripple;
-});
+
 const btnColor = computed(() => {
   let color = COLORS[props.variant];
-  if (!btnDisabled.value) {
+  if (!props.disabled) {
     color += " active:bg-opacity-90 hover:bg-opacity-90";
   }
   return color;
@@ -100,8 +92,8 @@ const btnColor = computed(() => {
 <template>
   <button
     v-bind="$attrs"
-    v-ripple="btnRipple"
-    :disabled="btnDisabled"
+    v-ripple="props.ripple"
+    :disabled="props.disabled"
     class="p-2 relative duration-200 rounded-md"
     :class="[btnColor, btnButtonTextPosition]"
   >
@@ -115,7 +107,7 @@ const btnColor = computed(() => {
     >
       <div
         class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded !bg-opacity-20"
-        v-if="btnDisabled || loading"
+        v-if="props.disabled || loading"
       ></div>
     </transition>
     <slot name="icon">
@@ -130,7 +122,7 @@ const btnColor = computed(() => {
             : 'ml-2',
         ]"
         :type="btnIcon"
-        :animation="btnLoading ? 'spin' : ''"
+        :animation="props.loading ? 'spin' : ''"
       />
     </slot>
     <slot />
