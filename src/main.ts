@@ -1,7 +1,7 @@
 import { createApp, type Directive } from "vue";
 import App from "./App.vue";
 
-import "./assets/main.css";
+import "./assets/dev/main.css";
 import { useForm } from "./composables/form";
 import Ripple from "./directives/ripple";
 

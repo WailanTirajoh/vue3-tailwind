@@ -1,4 +1,4 @@
-import "../assets/build.css";
+import "../assets/build/build.css";
 import TwButton from "./button/TwButton.vue";
 import TwFeather from "./icon/TwFeather.vue";
 import TwTab from "./tab/TwTab.vue";

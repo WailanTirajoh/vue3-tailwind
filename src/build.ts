@@ -21,7 +21,7 @@ import {
 } from "./components";
 import Ripple from "./directives/ripple";
 import Toast from "./composables/toast";
-import "./assets/build.css";
+import "./assets/build/build.css";
 
 export type {
   ButtonVariant,
