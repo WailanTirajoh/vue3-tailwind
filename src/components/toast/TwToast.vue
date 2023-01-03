@@ -55,18 +55,24 @@ const classPosition = computed(() => {
       style="overflow-wrap: anywhere"
       appear
     >
-      <tw-toast-item
-        v-for="toast in props.toasts"
-        :id="toast?.id"
-        :key="`toast-${toast.id}`"
-        class="w-full"
-        :message="toast.message"
-        :type="toast.type"
-        :lifetime="toast.lifetime"
-        :json-message="toast.jsonMessage"
-        :html="toast.html"
-        :title="toast.title"
-      />
+      <slot
+        name="toast"
+        :toasts="toasts"
+        :classes="[classPosition, position, wrapperClass]"
+      >
+        <tw-toast-item
+          v-for="toast in props.toasts"
+          :id="toast?.id"
+          :key="`toast-${toast.id}`"
+          class="w-full"
+          :message="toast.message"
+          :type="toast.type"
+          :lifetime="toast.lifetime"
+          :json-message="toast.jsonMessage"
+          :html="toast.html"
+          :title="toast.title"
+        />
+      </slot>
     </transition-group>
   </Teleport>
 </template>
