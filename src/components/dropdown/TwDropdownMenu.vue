@@ -15,12 +15,13 @@ export interface Props {
 }
 const props = defineProps<Props>();
 
+const alignClass: Record<DropdownAlign, string> = {
+  ["left"]: "origin-top-left left-0",
+  ["right"]: "origin-top-right right-0",
+};
+
 const alignmentClasses = computed(() => {
-  const align: Record<DropdownAlign, string> = {
-    ["left"]: "origin-top-left left-0",
-    ["right"]: "origin-top-right right-0",
-  };
-  return align[props.align ?? "left"];
+  return alignClass[props.align ?? "left"];
 });
 
 const isOpen = ref(false);
@@ -28,9 +29,11 @@ const isOpen = ref(false);
 const closeOnEscape = (e: KeyboardEvent) => {
   if (isOpen.value && e.key === "Escape") isOpen.value = false;
 };
+
 onMounted(() => {
   document.addEventListener("keydown", closeOnEscape);
 });
+
 onUnmounted(() => {
   document.removeEventListener("keydown", closeOnEscape);
 });
