@@ -16,7 +16,6 @@ import { computed } from "vue";
 import TwFeather from "../icon/TwFeather.vue";
 
 export interface Props {
-  classes?: Array<string>;
   variant?: ButtonVariant;
   icon?: string;
   disabled?: boolean;
@@ -25,7 +24,14 @@ export interface Props {
   loading?: boolean;
   buttonTextPosition?: ButtonTextPosition;
 }
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  variant: "primary",
+  disabled: false,
+  ripple: false,
+  iconPosition: "left",
+  loading: false,
+  buttonTextPosition: "left",
+});
 
 const COLORS: Record<ButtonVariant, string> = {
   ["primary"]: "bg-gray-800 text-white",
@@ -63,7 +69,7 @@ const TEXT_POSITIONS: Record<ButtonTextPosition, string> = {
 };
 
 const btnButtonTextPosition = computed(() => {
-  return TEXT_POSITIONS[props.buttonTextPosition ?? "left"];
+  return TEXT_POSITIONS[props.buttonTextPosition];
 });
 
 const btnLoading = computed(() => {
@@ -74,20 +80,16 @@ const btnIcon = computed(() => {
   return btnLoading.value ? "loader" : props.icon;
 });
 const btnIconPosition = computed(() => {
-  return ICON_POSITIONS[props.iconPosition ?? "left"];
-});
-const btnClasses = computed(() => {
-  if (!props.classes) return [];
-  return props.classes;
+  return ICON_POSITIONS[props.iconPosition];
 });
 const btnDisabled = computed(() => {
-  return props.disabled ?? false;
+  return props.disabled;
 });
 const btnRipple = computed(() => {
   return props.ripple;
 });
 const btnColor = computed(() => {
-  let color = COLORS[props.variant ?? "primary"];
+  let color = COLORS[props.variant];
   if (!btnDisabled.value) {
     color += " active:bg-opacity-90 hover:bg-opacity-90";
   }
@@ -101,7 +103,7 @@ const btnColor = computed(() => {
     v-ripple="btnRipple"
     :disabled="btnDisabled"
     class="p-2 relative duration-200 rounded-md"
-    :class="[btnColor, ...btnClasses, btnButtonTextPosition]"
+    :class="[btnColor, btnButtonTextPosition]"
   >
     <transition
       enter-active-class="ease-out duration-300"
