@@ -28,7 +28,10 @@ const form = computed(() => {
 });
 
 const validator = () => {
-  return form.value.validator;
+  if (form.value) {
+    return form.value.validator;
+  }
+  return form.value;
 };
 
 // Add form & set initial form rules
