@@ -37,8 +37,8 @@ const computedValue = computed({
 });
 
 // Form
+let fieldValidator: FieldValidator;
 const composableForm = useForm();
-const fieldValidator = new FieldValidator();
 
 const formName = inject("formName", null) as string | null;
 
@@ -52,7 +52,8 @@ watch(computedValue, async () => {
 });
 
 onMounted(() => {
-  if (fieldValidator && formName && props.name) {
+  fieldValidator = new FieldValidator();
+  if (formName && props.name) {
     composableForm.updateFormData(formName, props.name, computedValue.value);
     fieldValidator.setFieldName(props.name);
     fieldValidator.setFieldRules(fieldRules.value);
