@@ -7,7 +7,6 @@ export default {
 
 <script setup lang="ts">
 import type { OffcanvasPosition } from "../type";
-
 import { computed, onMounted, ref, watch } from "vue";
 import { TwFeather } from "@/components";
 
@@ -17,45 +16,39 @@ export interface Props {
   height?: string;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  position: "right",
+});
 
 const emit = defineEmits(["on-close", "on-open", "backdrop-click"]);
 
 const isOpen = ref(false);
-const position = computed(() => {
-  return props.position ?? "right";
-});
+
 const height = computed(() => {
-  if (["right", "left"].includes(position.value)) {
+  if (["right", "left"].includes(props.position)) {
     return props.height;
   }
   return props.height ?? "500px";
 });
+
 const width = computed(() => {
-  if (["right", "left"].includes(position.value)) {
+  if (["right", "left"].includes(props.position)) {
     return props.width ?? "400px";
   }
   return props.width ?? "100%";
 });
-const classPosition = computed(() => {
-  switch (position.value) {
-    case "right":
-      return "top-0 right-0";
-    case "top":
-      return "left-0 top-0";
-    case "bottom":
-      return "left-0 bottom-0";
-    default:
-      return "top-0 left-0";
-  }
-});
 
-const openOffCanvas = () => {
-  isOpen.value = true;
+const classMap: Record<OffcanvasPosition, string> = {
+  ["right"]: "top-0 right-0",
+  ["top"]: "left-0 top-0",
+  ["bottom"]: "left-0 bottom-0",
+  ["left"]: "top-0 left-0",
 };
-const closeOffCanvas = () => {
-  isOpen.value = false;
-};
+
+const classPosition = computed(() => classMap[props.position]);
+
+const openOffCanvas = () => (isOpen.value = true);
+const closeOffCanvas = () => (isOpen.value = false);
 
 // Expose open / close so we can programaticaly close / open canvas base of ref
 defineExpose({ openOffCanvas, closeOffCanvas });
@@ -63,10 +56,10 @@ defineExpose({ openOffCanvas, closeOffCanvas });
 onMounted(() => {
   watch(isOpen, (newValue) => {
     if (newValue) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("overflow-hidden");
       emit("on-open");
     } else {
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("overflow-hidden");
       emit("on-close");
     }
   });

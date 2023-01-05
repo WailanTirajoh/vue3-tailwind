@@ -62,10 +62,10 @@ defineExpose({ closeModal, openModal });
 onMounted(() => {
   watch(isOpen, (newValue) => {
     if (newValue) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("overflow-hidden");
       emit("on-open");
     } else {
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("overflow-hidden");
       emit("on-close");
     }
   });
