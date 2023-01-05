@@ -206,7 +206,7 @@ onMounted(async () => {
         </div>
         <div>entries</div>
       </div>
-      <div class="w-full md:w-48 flex items-center">
+      <div>
         <input
           v-model="search"
           type="text"
