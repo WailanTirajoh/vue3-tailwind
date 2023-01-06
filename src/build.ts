@@ -21,6 +21,7 @@ import {
 } from "./components";
 import Ripple from "./directives/ripple";
 import Toast from "./composables/toast";
+import { useForm } from "./composables/form";
 import "./assets/build/build.css";
 
 export type {
@@ -88,4 +89,5 @@ export {
   TwForm,
   TwErrorMessage,
   Toast,
+  useForm,
 };
