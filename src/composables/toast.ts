@@ -9,18 +9,19 @@ import { generateId } from "@/utils/generateId";
 import { ref } from "vue";
 
 const toasts = ref<Array<Toast>>([]);
+
 const useToast = () => {
-  const addToast = (params: Toast) => {
+  function addToast(params: Toast) {
     params.id = generateId();
     toasts.value.push(params);
-  };
+  }
 
-  const removeToast = (id: string) => {
+  function removeToast(id: string) {
     const index = toasts.value.findIndex((toast) => toast.id === id);
     toasts.value.splice(index, 1);
-  };
+  }
 
-  const success = (params: ToastSuccess) => {
+  function success(params: ToastSuccess) {
     addToast({
       id: "",
       message: params.message,
@@ -28,9 +29,9 @@ const useToast = () => {
       type: "success",
       title: params.title || "Success",
     });
-  };
+  }
 
-  const error = (params: ToastError) => {
+  function error(params: ToastError) {
     addToast({
       id: "",
       message: params.message,
@@ -38,9 +39,9 @@ const useToast = () => {
       type: "error",
       title: params.title || "Error",
     });
-  };
+  }
 
-  const warning = (params: ToastWarning) => {
+  function warning(params: ToastWarning) {
     addToast({
       id: "",
       message: params.message,
@@ -48,9 +49,9 @@ const useToast = () => {
       type: "warning",
       title: params.title || "Warning",
     });
-  };
+  }
 
-  const info = (params: ToastInfo) => {
+  function info(params: ToastInfo) {
     addToast({
       id: "",
       message: params.message,
@@ -58,7 +59,7 @@ const useToast = () => {
       type: "info",
       title: params.title || "Info",
     });
-  };
+  }
 
   return {
     toasts,
