@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwAccordion",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import { useAnimationOpenClose } from "@/composables/animation";
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 
 export interface Props {
   data: Array<{
@@ -15,6 +15,7 @@ export interface Props {
   }>;
   keepAlive?: boolean;
 }
+
 const props = withDefaults(defineProps<Props>(), {
   keepAlive: false,
 });
@@ -38,25 +39,27 @@ const toggleAccordion = (ref: string): void => {
 
 <template>
   <div v-bind="$attrs">
-    <div v-for="data in props.data" :key="data.ref">
-      <slot
-        :name="`${'header_' + data.ref}`"
-        :is-active="activeState.includes(data.ref)"
-        :toggle-accordion="toggleAccordion"
-        :ref="data.ref"
-      />
+    <slot :active-state="activeState" :toggle-accordion="toggleAccordion">
+      <div v-for="data in props.data" :key="data.ref">
+        <slot
+          :name="`${'header_' + data.ref}`"
+          :is-active="activeState.includes(data.ref)"
+          :toggle-accordion="toggleAccordion"
+          :ref="data.ref"
+        />
 
-      <transition
-        name="expand"
-        @enter="animationOpenClose.animateEnter"
-        @after-enter="animationOpenClose.animateAfterEnter"
-        @leave="animationOpenClose.animateLeave"
-      >
-        <div v-show="activeState.includes(data.ref)">
-          <slot :name="data.ref" />
-        </div>
-      </transition>
-    </div>
+        <transition
+          name="expand"
+          @enter="animationOpenClose.animateEnter"
+          @after-enter="animationOpenClose.animateAfterEnter"
+          @leave="animationOpenClose.animateLeave"
+        >
+          <div v-show="activeState.includes(data.ref)">
+            <slot :name="data.ref" />
+          </div>
+        </transition>
+      </div>
+    </slot>
   </div>
 </template>
 

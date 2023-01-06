@@ -1,12 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwSelect",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { TwButton } from "..";
 export interface Props {
   rounded?: boolean;
@@ -16,6 +16,7 @@ export interface Props {
   fixedHeight?: boolean;
   disabled?: boolean;
 }
+
 withDefaults(defineProps<Props>(), {
   rounded: false,
   showClearData: true,
@@ -26,10 +27,20 @@ withDefaults(defineProps<Props>(), {
 });
 
 const isOpen = ref(false);
-const toggleDropdown = () => (isOpen.value = !isOpen.value);
-const closeDropdown = () => (isOpen.value = false);
 
-defineExpose({ toggleDropdown, closeDropdown });
+function toggleDropdown() {
+  isOpen.value = !isOpen.value;
+}
+
+function closeDropdown() {
+  isOpen.value = false;
+}
+
+function openDropdown() {
+  isOpen.value = false;
+}
+
+defineExpose({ toggleDropdown, closeDropdown, openDropdown });
 </script>
 
 <template>

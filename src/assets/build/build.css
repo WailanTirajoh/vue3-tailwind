@@ -1,3 +1,3 @@
-@import "./shake.css";
-@tailwind components;
-@tailwind utilities;
+@import "./tailwind.css";
+@import "../shared/shake.css";
+@import "../shared/datatable.css";

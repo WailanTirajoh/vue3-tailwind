@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwSelectionList",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
-import { computed, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import TwSelect from "./TwSelect.vue";
 
 export interface Props {
@@ -45,10 +45,10 @@ const valueText = computed(() => {
   return "";
 });
 
-const updateValue = (value: any) => {
+function updateValue(value: any) {
   emit("update:modelValue", value);
   if (props.closeOnSelect) dropdownSelect.value.closeDropdown();
-};
+}
 </script>
 
 <template>

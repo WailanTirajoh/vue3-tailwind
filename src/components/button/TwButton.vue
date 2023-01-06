@@ -1,8 +1,8 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwButton",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
@@ -12,7 +12,7 @@ import type {
   ButtonVariant,
 } from "../type";
 
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 import TwFeather from "../icon/TwFeather.vue";
 
 export interface Props {

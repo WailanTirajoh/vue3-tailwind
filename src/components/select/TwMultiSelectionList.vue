@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwMultiSelectionList",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { DropdownItem, DropdownItemValue } from "../type";
-import { computed, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import TwSelect from "./TwSelect.vue";
 import { TwButton } from "..";
 
@@ -37,27 +37,27 @@ const filterredItems = computed(() => {
 
 const computedModelValue = computed(() => props.modelValue ?? []);
 
-const updateValue = (value: DropdownItemValue) => {
+function updateValue(value: DropdownItemValue) {
   const tempValue: DropdownItemValue[] = [];
   computedModelValue.value.forEach((v: DropdownItemValue) => tempValue.push(v));
   if (tempValue.includes(value)) tempValue.splice(tempValue.indexOf(value), 1);
   else tempValue.push(value);
   emit("update:modelValue", tempValue);
   closeDropdown();
-};
+}
 
-const removeSelectedValue = (value: DropdownItemValue) => {
+function removeSelectedValue(value: DropdownItemValue) {
   updateValue(value);
-};
+}
 
-const clearData = () => {
+function clearData() {
   emit("update:modelValue", []);
   closeDropdown();
-};
+}
 
-const closeDropdown = () => {
+function closeDropdown() {
   if (props.closeOnSelect) dropdownSelect.value.closeDropdown();
-};
+}
 </script>
 
 <template>

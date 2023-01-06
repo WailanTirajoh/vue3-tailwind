@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwTextarea",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -71,7 +71,7 @@ const fieldRules = computed(() => {
   return [];
 });
 
-const validateField = async () => {
+async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
     fieldValidator.setFormData(composableForm.getFormData(formName));
@@ -80,23 +80,21 @@ const validateField = async () => {
     const error = fieldValidator.getErrorBag();
     composableForm.setFieldErrors(formName, props.name, error);
   }
-};
+}
 </script>
 
 <template>
-  <div class="">
-    <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
-      {{ label }}
-    </label>
-    <textarea
-      v-bind="$attrs"
-      v-model="computedValue"
-      class="block transition duration-300 ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700"
-      :class="{
-        'bg-gray-100 cursor-not-allowed': disabled,
-      }"
-      :placeholder="placeholder"
-      :disabled="disabled"
-    />
-  </div>
+  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+    {{ label }}
+  </label>
+  <textarea
+    v-bind="$attrs"
+    v-model="computedValue"
+    class="block transition duration-300 ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+    :class="{
+      'bg-gray-100 cursor-not-allowed': disabled,
+    }"
+    :placeholder="placeholder"
+    :disabled="disabled"
+  />
 </template>

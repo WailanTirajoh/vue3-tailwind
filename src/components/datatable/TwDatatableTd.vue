@@ -1,12 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDatatableTd",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { defineComponent, ref } from "vue";
 
 export interface Props {
   copyText?: string | number | boolean;
@@ -22,7 +22,7 @@ const contextMenu = ref({
   screenY: 0,
 });
 
-const theadContextHandler = (e: MouseEvent) => {
+function theadContextHandler(e: MouseEvent) {
   if (!props.copyText) return;
 
   e.preventDefault();
@@ -39,17 +39,19 @@ const theadContextHandler = (e: MouseEvent) => {
   // screenX/Y gives the coordinates relative to the screen in device pixels.
   contextMenu.value.screenX = e.screenX;
   contextMenu.value.screenY = e.screenY;
-};
-const theadContextCloseHandler = () => {
+}
+
+function theadContextCloseHandler() {
   contextMenu.value.isShown = false;
-};
-const copyTextToClipboard = (text: string | number | boolean | undefined) => {
+}
+
+function copyTextToClipboard(text: string | number | boolean | undefined) {
   if (!text) return;
   if (typeof text !== "string") return;
   navigator.clipboard.writeText(text);
   theadContextCloseHandler();
   alert("text coppied!");
-};
+}
 </script>
 
 <template>

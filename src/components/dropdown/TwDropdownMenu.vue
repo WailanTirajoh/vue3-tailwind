@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDropdownMenu",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { DropdownAlign } from "../type";
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted, defineComponent } from "vue";
 
 export interface Props {
   align: DropdownAlign;
@@ -26,9 +26,9 @@ const alignmentClasses = computed(() => {
 
 const isOpen = ref(false);
 
-const closeOnEscape = (e: KeyboardEvent) => {
+function closeOnEscape(e: KeyboardEvent) {
   if (isOpen.value && e.key === "Escape") isOpen.value = false;
-};
+}
 
 onMounted(() => {
   document.addEventListener("keydown", closeOnEscape);
@@ -55,7 +55,7 @@ onUnmounted(() => {
     >
       <div
         v-show="isOpen"
-        class="absolute z-50 mt-4 rounded-md shadow-lg w-48 overflow-hidden"
+        class="absolute z-50 mt-2 rounded-md shadow-lg w-48 overflow-hidden"
         :class="[alignmentClasses]"
         style="display: none"
         @click="isOpen = false"

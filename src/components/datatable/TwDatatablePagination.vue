@@ -1,12 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDatatablePagination",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 
 export interface Props {
   currentPage: number;
@@ -15,6 +15,7 @@ export interface Props {
   isLoading?: boolean;
   eachSide?: number;
 }
+
 const props = withDefaults(defineProps<Props>(), {
   isLoading: false,
   eachSide: 3,
@@ -32,9 +33,9 @@ const arrEachSide = computed(() => {
   return each;
 });
 
-const changeCurrentPage = (page: number) => {
+function changeCurrentPage(page: number) {
   emit("change-current-page", page);
-};
+}
 </script>
 
 <template>

@@ -1,11 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDatatableLoading",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
+import { defineComponent } from "vue";
 import TwDatatableCircleSpinner from "./TwDatatableCircleSpinner.vue";
 
 export interface Props {

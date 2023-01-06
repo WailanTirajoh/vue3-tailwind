@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwRadio",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import type { RadioOption } from "../type";
 import { FieldValidator } from "js-formdata-validator";
 
@@ -73,7 +73,7 @@ const fieldRules = computed(() => {
   return [];
 });
 
-const validateField = async () => {
+async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
     fieldValidator.setFormData(composableForm.getFormData(formName));
@@ -82,30 +82,29 @@ const validateField = async () => {
     const error = fieldValidator.getErrorBag();
     composableForm.setFieldErrors(formName, props.name, error);
   }
-};
+}
 </script>
 
 <template>
-  <div class="">
-    <label class="font-bold text-gray-700 dark:text-gray-400">
-      {{ label }}
-    </label>
-    <label
-      :for="`${option.label}-${id}`"
-      v-for="option in options"
-      :key="`${option.label}-${id}`"
-      class="font-bold text-gray-700 dark:text-gray-400 block"
-    >
-      <input
-        v-bind="$attrs"
-        v-model="computedValue"
-        type="radio"
-        :name="id"
-        :id="`${option.label}-${id}`"
-        :disabled="disabled"
-        :value="option.value"
-      />
-      {{ option.label }}
-    </label>
-  </div>
+  <label class="font-bold text-gray-700 dark:text-gray-400">
+    {{ label }}
+  </label>
+  <label
+    :for="`${option.label}-${id}`"
+    v-for="option in options"
+    :key="`${option.label}-${id}`"
+    class="font-bold text-gray-700 dark:text-gray-400 block"
+    :class="[$attrs.class]"
+  >
+    <input
+      v-bind="$attrs"
+      v-model="computedValue"
+      type="radio"
+      :name="id"
+      :id="`${option.label}-${id}`"
+      :disabled="disabled"
+      :value="option.value"
+    />
+    {{ option.label }}
+  </label>
 </template>

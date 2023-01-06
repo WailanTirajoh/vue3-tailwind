@@ -1,8 +1,8 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDatatableServer",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
@@ -14,7 +14,7 @@ export default {
  * - sort column
  * - filter on each column
  */
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
 import TwDatatablePagination from "./TwDatatablePagination.vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
@@ -40,7 +40,39 @@ export interface Props {
 }
 
 const data = ref<Array<DatatableData>>([]);
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  isLoading: false,
+  sortBy: "",
+  sortType: "asc",
+  summary: "",
+  search: "",
+  setting: () => ({
+    checkbox: false,
+    limitOption: [
+      {
+        label: "5",
+        value: 5,
+      },
+      {
+        label: "10",
+        value: 10,
+      },
+      {
+        label: "50",
+        value: 50,
+      },
+      {
+        label: "100",
+        value: 100,
+      },
+      {
+        label: "200",
+        value: 200,
+      },
+    ],
+  }),
+  selected: () => [],
+});
 const emit = defineEmits([
   "on-sort-change",
   "on-enter-search",
@@ -54,9 +86,7 @@ const isFetching = ref(false);
 const totalData = ref(0);
 
 const totalPage = computed(() => Math.ceil(totalData.value / props.limit));
-
 const currentPage = computed(() => props.offset / props.limit + 1);
-
 const showFrom = computed(
   () => 1 + currentPage.value * props.limit - props.limit
 );
@@ -95,64 +125,39 @@ const offset = computed({
     emit("update:offset", value);
   },
 });
+
 const selected = computed({
   get() {
-    return props.selected ?? [];
+    return props.selected;
   },
   set(value: Array<string>) {
     emit("update:selected", value);
   },
 });
 
-const updateCurrentPage = (page: number) => {
+function updateCurrentPage(page: number) {
   offset.value = (page - 1) * limit.value;
-};
+}
 
-const setting: DatatableSetting = props.setting ?? {
-  checkbox: false,
-  limitOption: [
-    {
-      label: "5",
-      value: 5,
-    },
-    {
-      label: "10",
-      value: 10,
-    },
-    {
-      label: "50",
-      value: 50,
-    },
-    {
-      label: "100",
-      value: 100,
-    },
-    {
-      label: "200",
-      value: 200,
-    },
-  ],
-};
-
-const clickSort = (key: string) => {
+function clickSort(key: string) {
   emit("on-sort-change", key, props.sortType === "asc" ? "desc" : "asc");
-};
+}
 
-const enterSearch = () => {
+function enterSearch() {
   emit("on-enter-search");
   emit("update:offset", 0);
   fetchResult();
-};
+}
 
-const columnClick = (h: DatatableColumn) => {
+function columnClick(h: DatatableColumn) {
   clickSort(h.field);
   if (h.onColumnClick) {
     h.onColumnClick();
   }
   fetchResult();
-};
+}
 
-const fetchResult = async () => {
+async function fetchResult() {
   try {
     isFetching.value = true;
     const response = await props.fetchData();
@@ -166,11 +171,11 @@ const fetchResult = async () => {
   } finally {
     isFetching.value = false;
   }
-};
+}
 
-const cellClick = (column: DatatableColumn) => {
+function cellClick(column: DatatableColumn) {
   if (column.onCellClick) column.onCellClick();
-};
+}
 
 watch(limit, () => {
   fetchResult();
@@ -220,7 +225,7 @@ onMounted(async () => {
       <div class="relative">
         <div class="overflow-auto table-fix-head">
           <table
-            class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
+            class="tw-datatable resizable w-full rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
           >
             <slot name="thead" :data="data" :column="props.column">
@@ -343,36 +348,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.k-datatable .sorting {
-  position: relative;
-  cursor: pointer;
-}
-
-.k-datatable .sorting::after {
-  content: "\2304";
-  font-size: 0.6rem;
-  top: 0.75rem;
-  position: absolute;
-  right: 0.5rem;
-  opacity: 0.35;
-}
-
-.k-datatable .sorting::before {
-  content: "\2303";
-  font-size: 0.6rem;
-  top: 0.75rem;
-  position: absolute;
-  right: 0.5rem;
-  opacity: 0.35;
-}
-
-.k-datatable .sorting.desc::after {
-  opacity: 1;
-}
-
-.k-datatable .sorting.asc::before {
-  opacity: 1;
-}
-</style>

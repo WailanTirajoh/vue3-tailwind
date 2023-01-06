@@ -1,12 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwToastItem",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import useToast from "@/composables/toast";
 import type { ToastType } from "../type";
 import { TwFeather } from "..";
@@ -96,10 +96,10 @@ onMounted(() => {
   }, 10);
 });
 
-const removeToast = () => {
+function removeToast() {
   clearInterval(interval.value);
   toast.removeToast(props.id);
-};
+}
 </script>
 
 <template>

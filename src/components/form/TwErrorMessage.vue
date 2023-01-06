@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwErrorMessage",
   inheritAttrs: false,
-};
+});
 </script>
+
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-
-import { computed, inject } from "vue";
+import { computed, defineComponent, inject } from "vue";
 
 export interface Props {
   name: string;

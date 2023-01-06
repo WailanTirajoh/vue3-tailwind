@@ -1,15 +1,15 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwSelect",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { DropdownItem } from "../type";
 import SelectionList from "../select/TwSelectionList.vue";
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -74,7 +74,7 @@ const fieldRules = computed(() => {
   return [];
 });
 
-const validateField = async () => {
+async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
     fieldValidator.setFormData(composableForm.getFormData(formName));
@@ -83,27 +83,25 @@ const validateField = async () => {
     const error = fieldValidator.getErrorBag();
     composableForm.setFieldErrors(formName, props.name, error);
   }
-};
+}
 </script>
 
 <template>
-  <div>
-    <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
-      {{ label }}
-    </label>
-    <div class="relative">
-      <SelectionList
-        v-bind="$attrs"
-        v-model="computedValue"
-        :items="items"
-        :placeholder="placeholder"
-        :close-on-select="true"
-        :disabled="disabled"
-      />
-      <div
-        v-if="disabled"
-        class="w-full h-full absolute top-0 left-0 rounded bg-gray-100 bg-opacity-5 cursor-not-allowed"
-      ></div>
-    </div>
+  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+    {{ label }}
+  </label>
+  <div class="relative">
+    <SelectionList
+      v-bind="$attrs"
+      v-model="computedValue"
+      :items="items"
+      :placeholder="placeholder"
+      :close-on-select="true"
+      :disabled="disabled"
+    />
+    <div
+      v-if="disabled"
+      class="w-full h-full absolute top-0 left-0 rounded bg-gray-100 bg-opacity-5 cursor-not-allowed"
+    ></div>
   </div>
 </template>

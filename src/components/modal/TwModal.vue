@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwModal",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { ModalBackdrop } from "@/components/type";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { TwFeather } from "..";
 
 export interface Props {
@@ -40,11 +40,16 @@ const isOpen = ref(false);
 const bodyHeight = computed(() => (props.fullHeight ? "75vh" : "auto"));
 const modalContainer = ref<HTMLElement>();
 
-const toggleModal = () => (isOpen.value = !isOpen.value);
-const closeModal = () => (isOpen.value = false);
-const openModal = () => (isOpen.value = true);
-
-const backdropClick = () => {
+function toggleModal() {
+  isOpen.value = !isOpen.value;
+}
+function closeModal() {
+  isOpen.value = false;
+}
+function openModal() {
+  isOpen.value = true;
+}
+function backdropClick() {
   emit("backdrop-click");
   if (props.backdrop === "static") {
     modalContainer.value?.classList.add("tw-shake");
@@ -55,9 +60,9 @@ const backdropClick = () => {
     return;
   }
   toggleModal();
-};
+}
 
-defineExpose({ closeModal, openModal });
+defineExpose({ closeModal, openModal, toggleModal });
 
 onMounted(() => {
   watch(isOpen, (newValue) => {

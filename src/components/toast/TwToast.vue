@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwToast",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { Toast } from "@/components/type";
-import { computed, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import TwToastItem from "./TwToastItem.vue";
 
 export type Position =

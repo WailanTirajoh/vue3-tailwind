@@ -1,14 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwDatatableClient",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
-
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, defineComponent } from "vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
 import TwDatatablePagination from "./TwDatatablePagination.vue";
 import TwDatatableTd from "./TwDatatableTd.vue";
@@ -23,12 +22,47 @@ export interface Props {
   search?: string;
   setting?: DatatableSetting;
   selected?: Array<string | never>;
-  serverSide?: boolean;
   sortBy?: string;
   sortType?: string;
   summary?: string;
 }
-const props = defineProps<Props>();
+
+const props = withDefaults(defineProps<Props>(), {
+  currentPage: 1,
+  totalData: undefined,
+  isLoading: false,
+  search: "",
+  setting: () => ({
+    checkbox: false,
+    limitOption: [
+      {
+        label: "5",
+        value: 5,
+      },
+      {
+        label: "10",
+        value: 10,
+      },
+      {
+        label: "50",
+        value: 50,
+      },
+      {
+        label: "100",
+        value: 100,
+      },
+      {
+        label: "200",
+        value: 200,
+      },
+    ],
+  }),
+  selected: () => [],
+  sortBy: undefined,
+  sortType: "asc",
+  summary: "",
+});
+
 const emit = defineEmits([
   "on-change-sort",
   "on-enter-search",
@@ -40,36 +74,10 @@ const emit = defineEmits([
   "datatable:column-hook",
 ]);
 
-const setting: DatatableSetting = props.setting ?? {
-  checkbox: false,
-  limitOption: [
-    {
-      label: "5",
-      value: 5,
-    },
-    {
-      label: "10",
-      value: 10,
-    },
-    {
-      label: "50",
-      value: 50,
-    },
-    {
-      label: "100",
-      value: 100,
-    },
-    {
-      label: "200",
-      value: 200,
-    },
-  ],
-};
-
-const search = ref(props.search ?? "");
-const currentPage = ref(props.currentPage ?? 1);
+const search = ref(props.search);
+const currentPage = ref(props.currentPage);
 const sortBy = ref(props.sortBy ?? Object.keys(props.column[0])[0]);
-const sortType = ref(props.sortType ?? "asc");
+const sortType = ref(props.sortType);
 const checkAll = ref(false);
 
 const filteredData = computed(() => {
@@ -141,6 +149,7 @@ const limit = computed({
     emit("update:limit", value);
   },
 });
+
 const selected = computed({
   get() {
     return props.selected ?? [];
@@ -159,33 +168,39 @@ watch(selected, (value) => {
   else checkAll.value = false;
 });
 
-// Event's
-const clickSort = (key: string) =>
+function clickSort(key: string) {
   emit("on-change-sort", key, props.sortType === "asc" ? "desc" : "asc");
-const enterSearch = () => emit("on-enter-search");
-const columnClick = (column: DatatableColumn) => {
+}
+
+function enterSearch() {
+  emit("on-enter-search");
+}
+
+function columnClick(column: DatatableColumn) {
   if (column.onColumnClick) column.onColumnClick();
   if (column.sortable) {
     clickSort(column.field);
     updateSort(column);
   }
-};
-const cellClick = (cellClick: DatatableColumn) => {
-  if (cellClick.onCellClick) cellClick.onCellClick();
-};
+}
 
-// Method's
-const updateSort = (h: DatatableColumn) => {
+function cellClick(cellClick: DatatableColumn) {
+  if (cellClick.onCellClick) cellClick.onCellClick();
+}
+
+function updateSort(h: DatatableColumn) {
   sortBy.value = h.field;
   sortType.value = sortType.value === "asc" ? "desc" : "asc";
-};
-const updateCurrentPage = (page: number) => {
+}
+
+function updateCurrentPage(page: number) {
   currentPage.value = page;
-};
-const checkAllClick = () => {
+}
+
+function checkAllClick() {
   if (checkAll.value) selected.value = [];
   else selected.value = props.data.map((data) => data.id);
-};
+}
 </script>
 
 <template>
@@ -219,14 +234,11 @@ const checkAllClick = () => {
         />
       </div>
     </div>
-    <!-- <div class="col-span-12">
-      {{ data }}
-    </div> -->
     <div class="col-span-12">
       <div class="relative">
         <div class="overflow-auto table-fix-head">
           <table
-            class="w-full k-datatable resizable rounded-lg border-separate border-spacing-y-4"
+            class="tw-datatable resizable w-full rounded-lg border-separate border-spacing-y-4"
             :summary="summary"
           >
             <slot name="thead" :data="data" :column="props.column">
@@ -358,36 +370,3 @@ const checkAllClick = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.k-datatable .sorting {
-  position: relative;
-  cursor: pointer;
-}
-
-.k-datatable .sorting::after {
-  content: "\2304";
-  font-size: 0.6rem;
-  top: 0.35rem;
-  position: absolute;
-  right: 0.5rem;
-  opacity: 0.35;
-}
-
-.k-datatable .sorting::before {
-  content: "\2303";
-  font-size: 0.6rem;
-  top: 0.35rem;
-  position: absolute;
-  right: 0.5rem;
-  opacity: 0.35;
-}
-
-.k-datatable .sorting.desc::after {
-  opacity: 1;
-}
-
-.k-datatable .sorting.asc::before {
-  opacity: 1;
-}
-</style>

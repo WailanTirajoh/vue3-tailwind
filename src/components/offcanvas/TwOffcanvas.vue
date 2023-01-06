@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwOffcanvas",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import type { OffcanvasPosition } from "../type";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { TwFeather } from "@/components";
 
 export interface Props {
@@ -47,11 +47,18 @@ const classMap: Record<OffcanvasPosition, string> = {
 
 const classPosition = computed(() => classMap[props.position]);
 
-const openOffCanvas = () => (isOpen.value = true);
-const closeOffCanvas = () => (isOpen.value = false);
+function openOffCanvas() {
+  isOpen.value = true;
+}
+function closeOffCanvas() {
+  isOpen.value = false;
+}
+function toggleOffCanvas() {
+  isOpen.value = !isOpen.value;
+}
 
 // Expose open / close so we can programaticaly close / open canvas base of ref
-defineExpose({ openOffCanvas, closeOffCanvas });
+defineExpose({ openOffCanvas, closeOffCanvas, toggleOffCanvas });
 
 onMounted(() => {
   watch(isOpen, (newValue) => {

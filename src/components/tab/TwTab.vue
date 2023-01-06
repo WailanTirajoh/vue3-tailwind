@@ -1,12 +1,12 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwTab",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from "vue";
+import { computed, ref, watch, onMounted, defineComponent } from "vue";
 
 export type Position = "bottom" | "top" | "left" | "right";
 export type Type = "horizontal" | "vertical";
@@ -59,7 +59,7 @@ watch(currentTab, (newValue) => {
   move(newValue);
 });
 
-const move = (newActiveTab: string) => {
+function move(newActiveTab: string) {
   if (!currentTab.value) return;
 
   const element = tabRefs.value[newActiveTab];
@@ -70,21 +70,21 @@ const move = (newActiveTab: string) => {
   }
 
   emit("after-move", currentTab.value);
-};
+}
 
-const setHorizontalLineProperties = (element: HTMLElement) => {
+function setHorizontalLineProperties(element: HTMLElement) {
   hlineWidth.value = element.clientWidth;
   hlineOffset.value = element.offsetLeft;
-};
+}
 
-const setVerticalLineProperties = (element: HTMLElement) => {
+function setVerticalLineProperties(element: HTMLElement) {
   vlineHeight.value = element.clientHeight;
   vlineOffset.value = element.offsetTop;
-};
+}
 
-const changeTab = (ref: string) => {
+function changeTab(ref: string) {
   currentTab.value = ref;
-};
+}
 
 onMounted(async () => {
   move(currentTab.value);

@@ -1,13 +1,13 @@
 <script lang="ts">
-export default {
+export default defineComponent({
   name: "TwInput",
   inheritAttrs: false,
-};
+});
 </script>
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, inject, onMounted, watch } from "vue";
+import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -79,7 +79,7 @@ const isError = computed(() => {
   return false;
 });
 
-const validateField = async () => {
+async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
     fieldValidator.setFormData(composableForm.getFormData(formName));
@@ -88,31 +88,29 @@ const validateField = async () => {
     const error = fieldValidator.getErrorBag();
     composableForm.setFieldErrors(formName, props.name, error);
   }
-};
+}
 </script>
 
 <template>
-  <div class="">
-    <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
-      {{ label }}
-    </label>
-    <div>
-      <slot :is-error="isError">
-        <input
-          v-bind="$attrs"
-          v-model="computedValue"
-          :type="type"
-          class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
-          :class="[
-            {
-              '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
-            },
-            isError ? errorClass : '',
-          ]"
-          :placeholder="placeholder"
-          :disabled="disabled"
-        />
-      </slot>
-    </div>
+  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+    {{ label }}
+  </label>
+  <div>
+    <slot :is-error="isError">
+      <input
+        v-bind="$attrs"
+        v-model="computedValue"
+        :type="type"
+        class="transition ease-in-out border p-2 relative text-sm w-full focus:ring-0 focus:outline-none focus:shadow rounded bg-white dark:bg-gray-800 dark:border-gray-700 h-10 placeholder:italic"
+        :class="[
+          {
+            '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
+          },
+          isError ? errorClass : '',
+        ]"
+        :placeholder="placeholder"
+        :disabled="disabled"
+      />
+    </slot>
   </div>
 </template>
