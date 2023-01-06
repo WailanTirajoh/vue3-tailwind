@@ -45,14 +45,18 @@ watch(files, () => {
 function handleDropImage(e: DragEvent) {
   e.preventDefault();
   if (!e.dataTransfer) return;
-  const fileList = Array.from(e.dataTransfer.files).concat(files.value);
+  const fileList = Array.from(e.dataTransfer.files).concat(
+    files.value as Array<File>
+  );
   if (!fileList) return;
   files.value = fileList;
 }
 
 function handleInputImage() {
   if (!fileElement.value || !fileElement.value.files) return;
-  files.value = Array.from(fileElement.value.files).concat(files.value);
+  files.value = Array.from(fileElement.value.files).concat(
+    files.value as Array<File>
+  );
 }
 
 function updateImageUrl() {
