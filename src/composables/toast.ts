@@ -10,7 +10,7 @@ import { ref } from "vue";
 
 const toasts = ref<Array<Toast>>([]);
 
-const useToast = () => {
+export const useToast = () => {
   function addToast(params: Toast) {
     params.id = generateId();
     toasts.value.push(params);
@@ -71,4 +71,3 @@ const useToast = () => {
     info,
   };
 };
-export default useToast;

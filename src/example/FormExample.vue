@@ -10,8 +10,9 @@ import {
 } from "@/build";
 import { reactive, ref } from "vue";
 import TwForm from "@/components/form/TwForm.vue";
-import useToast from "@/composables/toast";
 import TwErrorMessage from "@/components/form/TwErrorMessage.vue";
+import { useToast } from "@/composables/toast";
+import { useDialog } from "@/composables/dialog";
 
 const formA = ref();
 const toast = useToast();
@@ -75,8 +76,15 @@ const selectionList = [
 ];
 
 const formError = ref(false);
+const dialog = useDialog();
 
 const submit = async () => {
+  const result = await dialog.fire({
+    title: "Are you sure you want to submit this?",
+    description: "This action is irreversible!",
+  });
+  if (!result) return;
+
   const validator = formA.value.validator();
   validator.clearErrors();
   await validator.validate();
