@@ -10,8 +10,8 @@ import {
 } from "@/build";
 import { reactive, ref } from "vue";
 import TwForm from "@/components/form/TwForm.vue";
-import useToast from "@/composables/toast";
 import TwErrorMessage from "@/components/form/TwErrorMessage.vue";
+import { useToast } from "@/composables/toast";
 import { useDialog } from "@/composables/dialog";
 
 const formA = ref();
