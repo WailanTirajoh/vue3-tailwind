@@ -86,7 +86,7 @@ async function validateField() {
 </script>
 
 <template>
-  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-200">
+  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
     {{ label }}
   </label>
   <div class="relative">
