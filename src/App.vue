@@ -11,6 +11,8 @@ import DropdownExample from "./example/DropdownExample.vue";
 import AccordionExample from "./example/AccordionExample.vue";
 import { TwToggle } from "./components";
 import { onMounted, ref, watch } from "vue";
+import TwDialog from "./components/dialog/TwDialog.vue";
+import { useDialog } from "./composables/dialog";
 
 const dark = ref(false);
 watch(dark, (value) => {
@@ -21,7 +23,7 @@ watch(dark, (value) => {
   }
 });
 
-onMounted(() => {
+onMounted(async () => {
   const windowPreferenceDark =
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -105,5 +107,8 @@ onMounted(() => {
         </div>
       </div>
     </div>
+    <Teleport to="body">
+      <TwDialog title="Are you sure you want to submit this?"></TwDialog>
+    </Teleport>
   </div>
 </template>

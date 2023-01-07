@@ -21,6 +21,8 @@ import TwToggle from "./form/TwToggle.vue";
 import TwInput from "./form/TwInput.vue";
 import TwRadio from "./form/TwRadio.vue";
 
+import TwDialog from "./dialog/TwDialog.vue";
+
 export {
   TwFile,
   TwInput,
@@ -41,4 +43,5 @@ export {
   TwAccordion,
   TwForm,
   TwErrorMessage,
+  TwDialog,
 };

@@ -18,10 +18,12 @@ import {
   TwAccordion,
   TwForm,
   TwErrorMessage,
+  TwDialog,
 } from "./components";
 import Ripple from "./directives/ripple";
-import Toast from "./composables/toast";
+import { useToast } from "./composables/toast";
 import { useForm } from "./composables/form";
+import { useDialog } from "./composables/dialog";
 import "./assets/build/build.css";
 
 export type {
@@ -58,6 +60,7 @@ function install(app: App) {
     TwAccordion,
     TwForm,
     TwErrorMessage,
+    TwDialog,
   };
 
   Object.values(components).forEach((component) => {
@@ -70,6 +73,7 @@ function install(app: App) {
 }
 
 export {
+  // Components
   TwFile,
   TwInput,
   TwMultiSelect,
@@ -88,6 +92,10 @@ export {
   TwAccordion,
   TwForm,
   TwErrorMessage,
-  Toast,
+  TwDialog,
+
+  // Composable
+  useToast,
   useForm,
+  useDialog,
 };
