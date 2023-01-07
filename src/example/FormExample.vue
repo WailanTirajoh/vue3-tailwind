@@ -17,10 +17,7 @@ const formA = ref();
 const toast = useToast();
 
 const formData = reactive({
-  fileModel: [
-    "https://scontent.fcgk37-2.fna.fbcdn.net/v/t1.6435-9/158424150_3914578115274875_634062980540478240_n.jpg?stp=dst-jpg_p640x640&_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeEI48vqnPT1OGBBbwmEQghT12SgCcS90ZXXZKAJxL3RlVGGSxLxDBzjpG_HoNAwmBIbUn7MDQxbt5pew9UnvokW&_nc_ohc=iPC-VZFlraIAX-nPnKq&_nc_ht=scontent.fcgk37-2.fna&oh=00_AfADZ2-kyYo-hZ14zJt9MWqVBUVHyDASGFxtw19R6ot8Yw&oe=63DFE541",
-    "https://scontent.fcgk37-2.fna.fbcdn.net/v/t1.6435-9/158424150_3914578115274875_634062980540478240_n.jpg?stp=dst-jpg_p640x640&_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeEI48vqnPT1OGBBbwmEQghT12SgCcS90ZXXZKAJxL3RlVGGSxLxDBzjpG_HoNAwmBIbUn7MDQxbt5pew9UnvokW&_nc_ohc=iPC-VZFlraIAX-nPnKq&_nc_ht=scontent.fcgk37-2.fna&oh=00_AfADZ2-kyYo-hZ14zJt9MWqVBUVHyDASGFxtw19R6ot8Yw&oe=63DFE541",
-  ],
+  fileModel: null as null | Array<any>,
   selectExample: null as null | string,
   multiSelectExample: null as null | Array<any>,
   inputExample: null as null | string,
@@ -107,11 +104,6 @@ const clear = () => {
   const validator = formA.value.validator();
   validator.clearErrors();
 };
-
-const imageUrls = ref([
-  "https://scontent.fcgk37-2.fna.fbcdn.net/v/t1.6435-9/158424150_3914578115274875_634062980540478240_n.jpg?stp=dst-jpg_p640x640&_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeEI48vqnPT1OGBBbwmEQghT12SgCcS90ZXXZKAJxL3RlVGGSxLxDBzjpG_HoNAwmBIbUn7MDQxbt5pew9UnvokW&_nc_ohc=iPC-VZFlraIAX-nPnKq&_nc_ht=scontent.fcgk37-2.fna&oh=00_AfADZ2-kyYo-hZ14zJt9MWqVBUVHyDASGFxtw19R6ot8Yw&oe=63DFE541",
-  "https://scontent.fcgk37-2.fna.fbcdn.net/v/t1.6435-9/158424150_3914578115274875_634062980540478240_n.jpg?stp=dst-jpg_p640x640&_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeEI48vqnPT1OGBBbwmEQghT12SgCcS90ZXXZKAJxL3RlVGGSxLxDBzjpG_HoNAwmBIbUn7MDQxbt5pew9UnvokW&_nc_ohc=iPC-VZFlraIAX-nPnKq&_nc_ht=scontent.fcgk37-2.fna&oh=00_AfADZ2-kyYo-hZ14zJt9MWqVBUVHyDASGFxtw19R6ot8Yw&oe=63DFE541",
-]);
 </script>
 
 <template>
