@@ -23,10 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits(["update:modelValue", "update:imageUrls"]);
-const stringModelValue = props.modelValue.filter(
-  (mv) => typeof mv === "string"
-) as string[];
-const imageUrls = ref<string[]>(stringModelValue);
+const imageUrls = ref<string[]>((props.modelValue as string[]) ?? []);
 
 const fileElement = ref<HTMLInputElement>();
 const files = computed({
