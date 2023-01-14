@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import type { DropdownItem, DropdownItemValue } from "../type";
+import type { DropdownItem, DropdownItemValue } from "../../type";
 import { computed, defineComponent, ref } from "vue";
 import TwSelect from "./TwSelect.vue";
 import { TwButton, TwInput } from "..";

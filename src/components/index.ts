@@ -1,8 +1,9 @@
-import "../assets/build/build.css";
-
 import TwButton from "./button/TwButton.vue";
 import TwFeather from "./icon/TwFeather.vue";
 import TwTab from "./tab/TwTab.vue";
+import TwTabWrapper from "./tab/TwTabWrapper.vue";
+import TwTabNavigator from "./tab/TwTabNavigator.vue";
+import TwTabBody from "./tab/TwTabBody.vue";
 import TwOffcanvas from "./offcanvas/TwOffcanvas.vue";
 import TwModal from "./modal/TwModal.vue";
 import TwDatatableClient from "./datatable/TwDatatableClient.vue";
@@ -44,4 +45,7 @@ export {
   TwForm,
   TwErrorMessage,
   TwDialog,
+  TwTabWrapper,
+  TwTabNavigator,
+  TwTabBody,
 };

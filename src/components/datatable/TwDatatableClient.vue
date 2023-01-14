@@ -6,7 +6,11 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
+import type {
+  DatatableData,
+  DatatableColumn,
+  DatatableSetting,
+} from "../../type";
 import { ref, computed, watch, defineComponent } from "vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
 import TwDatatablePagination from "./TwDatatablePagination.vue";

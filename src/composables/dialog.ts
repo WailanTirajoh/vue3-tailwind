@@ -1,12 +1,6 @@
+import type { Dialog } from "../type";
 import { reactive, ref, watch, type WatchStopHandle } from "vue";
 
-export interface Dialog {
-  title: string;
-  description?: string;
-  rejectText?: string;
-  acceptText?: string;
-  icon?: string;
-}
 const dialog = reactive<Dialog>({
   title: "",
 });

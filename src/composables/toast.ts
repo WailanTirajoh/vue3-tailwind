@@ -4,7 +4,7 @@ import type {
   ToastWarning,
   ToastInfo,
   ToastError,
-} from "@/components/type";
+} from "@/type";
 import { generateId } from "@/utils/generateId";
 import { ref } from "vue";
 

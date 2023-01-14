@@ -1,4 +1,5 @@
 import type { Component } from "vue";
+
 // Buttons
 export type ButtonVariant =
   | "primary"
@@ -16,10 +17,9 @@ export type ButtonVariant =
   | "outline-warning"
   | "outline-info"
   | "none";
-
 export type ButtonIconPosition = "left" | "right" | "center";
-
 export type ButtonTextPosition = "left" | "right" | "center";
+
 // Datatable
 export interface DatatableColumn {
   label: string;
@@ -38,11 +38,9 @@ export interface DatatableColumn {
   onColumnClick?: () => void;
   onCellClick?: () => void;
 }
-
 export interface DatatableData {
   [key: string]: any;
 }
-
 export type DatatableSetting = {
   checkbox: boolean;
   limitOption?: Array<{
@@ -76,7 +74,6 @@ export interface Toast {
   jsonMessage?: object | null;
   title?: string | null;
 }
-
 export interface ToastDeafult {
   message: string;
   lifetime?: number;
@@ -92,3 +89,23 @@ export type ModalBackdrop = "" | "static";
 
 // Offcanvas
 export type OffcanvasPosition = "top" | "left" | "right" | "bottom";
+
+// Tabs
+export interface TabRefs {
+  [key: string]: HTMLElement;
+}
+export type TabChildren = string | number;
+export interface Tab {
+  active: TabChildren;
+  childrens: Array<TabChildren>;
+}
+
+// Dialog
+
+export interface Dialog {
+  title: string;
+  description?: string;
+  rejectText?: string;
+  acceptText?: string;
+  icon?: string;
+}

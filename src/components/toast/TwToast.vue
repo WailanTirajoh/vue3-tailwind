@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import type { Toast } from "@/components/type";
+import type { Toast } from "../../type";
 import { computed, defineComponent, ref } from "vue";
 import TwToastItem from "./TwToastItem.vue";
 

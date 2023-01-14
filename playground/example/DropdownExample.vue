@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TwButton, TwDropdownMenu } from "@/build";
+import { TwButton, TwDropdownMenu } from "../../src/build";
 </script>
 
 <template>

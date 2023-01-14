@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TwDatatableClient, TwButton } from "@/build";
-import type { DatatableColumn, DatatableData } from "@/build";
+import { TwDatatableClient, TwButton } from "../../src/build";
+import type { DatatableColumn, DatatableData } from "../../src/build";
 import { onMounted, ref } from "vue";
 const data = ref({
   column: [

@@ -8,7 +8,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useToast } from "@/composables/toast";
-import type { ToastType } from "../type";
+import type { ToastType } from "../../type";
 import { TwFeather } from "..";
 
 export interface Props {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TwButton, TwFeather, TwAccordion } from "@/build";
+import { TwButton, TwFeather, TwAccordion } from "../../src/build";
 
 const accordion = [
   {

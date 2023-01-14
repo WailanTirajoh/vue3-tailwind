@@ -3,8 +3,8 @@ import type {
   ButtonIconPosition,
   ButtonTextPosition,
   ButtonVariant,
-} from "@/build";
-import { TwToggle, TwRadio, TwInput, TwButton } from "@/build";
+} from "../../src/build";
+import { TwToggle, TwRadio, TwInput, TwButton } from "../../src/build";
 import { computed, ref } from "vue";
 
 const buttonVariants = computed(() =>

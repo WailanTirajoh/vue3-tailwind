@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import type { ModalBackdrop } from "@/components/type";
+import type { ModalBackdrop } from "../../type";
 import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import { TwFeather } from "..";
 

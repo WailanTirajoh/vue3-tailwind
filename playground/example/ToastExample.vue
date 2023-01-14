@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToast, TwToast, TwButton } from "@/build";
+import { useToast, TwToast, TwButton } from "../../src/build";
 
 const { toasts, success, error, warning, info } = useToast();
 </script>

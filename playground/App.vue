@@ -10,7 +10,7 @@ import ToastExample from "./example/ToastExample.vue";
 import DropdownExample from "./example/DropdownExample.vue";
 import AccordionExample from "./example/AccordionExample.vue";
 
-import { TwToggle, TwDialog } from "../components";
+import { TwToggle, TwDialog } from "../src/build";
 import { onMounted, ref, watch } from "vue";
 
 const dark = ref(false);

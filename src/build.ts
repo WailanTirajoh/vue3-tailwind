@@ -1,5 +1,9 @@
+import "./assets/build/build.css";
 import type { App, Directive } from "vue";
-import {
+import Ripple from "./directives/ripple";
+export * from "./type";
+import * as components from "./components";
+export {
   TwFile,
   TwInput,
   TwMultiSelect,
@@ -20,52 +24,12 @@ import {
   TwErrorMessage,
   TwDialog,
   TwRadio,
+  TwTabWrapper,
+  TwTabNavigator,
+  TwTabBody,
 } from "./components";
-import Ripple from "./directives/ripple";
-import { useToast } from "./composables/toast";
-import { useForm } from "./composables/form";
-import { useDialog } from "./composables/dialog";
-import { useBreakpoints } from "./composables/breakpoints";
-import "./assets/build/build.css";
-
-export type {
-  ButtonVariant,
-  ButtonIconPosition,
-  ButtonTextPosition,
-  DatatableColumn,
-  DatatableData,
-  DatatableSetting,
-  DropdownAlign,
-  DropdownItemValue,
-  DropdownItem,
-} from "./components/type";
-
-export const Vue3Tailwind = install;
 
 function install(app: App) {
-  const components = {
-    TwFile,
-    TwInput,
-    TwMultiSelect,
-    TwSelect,
-    TwTextarea,
-    TwToggle,
-    TwButton,
-    TwTab,
-    TwOffcanvas,
-    TwModal,
-    TwDatatableClient,
-    TwDatatableServer,
-    TwFeather,
-    TwToast,
-    TwDropdownMenu,
-    TwAccordion,
-    TwForm,
-    TwErrorMessage,
-    TwDialog,
-    TwRadio,
-  };
-
   Object.values(components).forEach((component) => {
     app.component(component.name, component);
   });
@@ -75,32 +39,4 @@ function install(app: App) {
   app.directive("ripple", Ripple as Directive<any, any>);
 }
 
-export {
-  // Components
-  TwFile,
-  TwInput,
-  TwMultiSelect,
-  TwSelect,
-  TwTextarea,
-  TwToggle,
-  TwButton,
-  TwTab,
-  TwOffcanvas,
-  TwModal,
-  TwDatatableClient,
-  TwDatatableServer,
-  TwFeather,
-  TwToast,
-  TwDropdownMenu,
-  TwAccordion,
-  TwForm,
-  TwErrorMessage,
-  TwDialog,
-  TwRadio,
-
-  // Composable
-  useToast,
-  useForm,
-  useDialog,
-  useBreakpoints,
-};
+export const Vue3Tailwind = install;

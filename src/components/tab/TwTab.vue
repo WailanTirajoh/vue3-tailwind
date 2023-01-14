@@ -96,26 +96,31 @@ defineExpose({ changeTab });
 <template>
   <div v-if="type === 'horizontal'">
     <nav class="relative flex" :class="[navClass]">
-      <button
-        class="py-1"
-        :class="[tabClass, {
-        [tabActiveClass as string]: currentTab === tab.ref
-      }]"
-        :ref="el => { tabRefs[tab.ref] = el as HTMLElement }"
-        v-for="tab in tabs"
-        :key="tab.name"
-        @click="changeTab(tab.ref)"
-      >
-        {{ tab.name }}
-      </button>
-      <div
-        class="absolute left-0 h-1 bg-gray-900 duration-300 ease"
-        :class="[positionLineClass, lineClass]"
-        :style="{
-          width: `${hlineWidth}px`,
-          transform: `translateX(${hlineOffset}px)`,
-        }"
-      />
+      <ul>
+        <li>
+          <a
+            href="#"
+            class="py-1 inline-block"
+            :class="[tabClass, {
+            [tabActiveClass as string]: currentTab === tab.ref
+          }]"
+            :ref="el => { tabRefs[tab.ref] = el as HTMLElement }"
+            v-for="tab in tabs"
+            :key="tab.name"
+            @click.prevent="changeTab(tab.ref)"
+          >
+            {{ tab.name }}
+          </a>
+          <div
+            class="absolute left-0 h-1 bg-gray-900 duration-300 ease"
+            :class="[positionLineClass, lineClass]"
+            :style="{
+              width: `${hlineWidth}px`,
+              transform: `translateX(${hlineOffset}px)`,
+            }"
+          />
+        </li>
+      </ul>
     </nav>
     <div class="bg-white rounded-b p-2" :class="[bodyClass]">
       <div v-for="tab in tabs" :key="tab.ref">
@@ -127,33 +132,40 @@ defineExpose({ changeTab });
   </div>
   <div class="flex" v-else-if="type === 'vertical'">
     <nav class="relative flex flex-col w-44" :class="[navClass]">
-      <button
-        class="py-1"
-        :class="[tabClass, {
-        [tabActiveClass as string]: currentTab === tab.ref
-      }]"
-        :ref="el => { tabRefs[tab.ref] = el as HTMLElement }"
-        v-for="tab in tabs"
-        :key="tab.name"
-        @click="changeTab(tab.ref)"
-      >
-        {{ tab.name }}
-      </button>
-      <div
-        class="absolute w-1 top-0 bg-gray-900 duration-300 ease"
-        :class="[positionLineClass, lineClass]"
-        :style="{
-          height: `${vlineHeight}px`,
-          transform: `translateY(${vlineOffset}px)`,
-        }"
-      />
+      <ul>
+        <li>
+          <a
+            v-for="tab in tabs"
+            href="#"
+            class="py-1 block"
+            :class="[tabClass, {
+              [tabActiveClass as string]: currentTab === tab.ref
+            }]"
+            :ref="el => { tabRefs[tab.ref] = el as HTMLElement }"
+            :key="tab.name"
+            @click.prevent="changeTab(tab.ref)"
+          >
+            <slot :name="`nav_${tab.ref}`" :is-active="currentTab === tab.ref">
+              {{ tab.name }}
+            </slot>
+          </a>
+        </li>
+        <div
+          class="absolute w-1 top-0 bg-gray-900 duration-300 ease"
+          :class="[positionLineClass, lineClass]"
+          :style="{
+            height: `${vlineHeight}px`,
+            transform: `translateY(${vlineOffset}px)`,
+          }"
+        />
+      </ul>
     </nav>
-    <div class="bg-white rounded-b p-2 w-full" :class="[bodyClass]">
-      <div v-for="tab in tabs" :key="tab.ref">
-        <div v-if="currentTab === tab.ref">
-          <slot :name="tab.ref" />
-        </div>
-      </div>
-    </div>
+    <template v-for="tab in tabs" :key="tab.ref">
+      <slot
+        v-if="currentTab === tab.ref"
+        :name="tab.ref"
+        :is-active="currentTab === tab.ref"
+      />
+    </template>
   </div>
 </template>

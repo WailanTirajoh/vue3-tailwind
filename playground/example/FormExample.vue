@@ -8,8 +8,8 @@ import {
   TwSelect,
   TwToggle,
   TwTextarea,
-} from "@/build";
-import { useToast, useDialog, TwErrorMessage, TwForm } from "@/build";
+} from "../../src/build";
+import { useToast, useDialog, TwErrorMessage, TwForm } from "../../src/build";
 
 const formA = ref();
 const toast = useToast();

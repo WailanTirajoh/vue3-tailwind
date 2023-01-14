@@ -8,7 +8,7 @@ export default defineComponent({
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
 import { computed, defineComponent, inject, onMounted, watch } from "vue";
-import type { RadioOption } from "../type";
+import type { RadioOption } from "../../type";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {

@@ -15,7 +15,11 @@ export default defineComponent({
  * - filter on each column
  */
 import { computed, defineComponent, onMounted, ref, watch } from "vue";
-import type { DatatableData, DatatableColumn, DatatableSetting } from "../type";
+import type {
+  DatatableData,
+  DatatableColumn,
+  DatatableSetting,
+} from "../../type";
 import TwDatatablePagination from "./TwDatatablePagination.vue";
 import TwDatatableLoading from "./TwDatatableLoading.vue";
 import TwDatatableTd from "./TwDatatableTd.vue";

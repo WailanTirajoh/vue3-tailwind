@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import type { DropdownAlign } from "../type";
+import type { DropdownAlign } from "../../type";
 import { computed, ref, onMounted, onUnmounted, defineComponent } from "vue";
 
 export interface Props {

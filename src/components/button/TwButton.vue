@@ -10,7 +10,7 @@ import type {
   ButtonIconPosition,
   ButtonTextPosition,
   ButtonVariant,
-} from "../type";
+} from "../../type";
 
 import { computed, defineComponent } from "vue";
 import TwFeather from "../icon/TwFeather.vue";
