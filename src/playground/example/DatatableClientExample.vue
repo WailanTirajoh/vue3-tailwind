@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { TwDatatableServer, TwButton } from "@/components";
-import type { DatatableColumn, DatatableData } from "@/components/type";
-import { ref } from "vue";
+import { TwDatatableClient, TwButton } from "@/build";
+import type { DatatableColumn, DatatableData } from "@/build";
+import { onMounted, ref } from "vue";
 const data = ref({
   column: [
     {
@@ -31,7 +31,6 @@ const data = ref({
   ] as Array<DatatableColumn>,
   data: [] as Array<DatatableData>,
   limit: 5,
-  offset: 0,
   search: "",
   selected: [],
   sortBy: "status",
@@ -63,41 +62,33 @@ const data = ref({
   },
 });
 
-const fetchData = async () => {
-  const baseUrl = "https://dummyjson.com/products";
-  const response = await fetch(
-    baseUrl +
-      "?" +
-      new URLSearchParams({
-        limit: data.value.limit.toString(),
-        skip: data.value.offset.toString(),
-        q: data.value.search.toString(),
-        sortType: data.value.sortType,
-        sortBy: data.value.sortBy,
-      })
-  );
-  const responseJson = await response.json();
-  return {
-    data: responseJson["products"],
-    totalData: responseJson["total"],
-  };
+const datatableHook = (arg: any) => {
+  arg();
 };
+
+onMounted(() => {
+  fetch("https://dummyjson.com/products")
+    .then((res) => res.json())
+    .then((json) => {
+      data.value.data = json.products;
+    });
+});
 </script>
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Datatable Serverside</h2>
+    <h2 class="text-2xl font-bold">Datatable Clientside</h2>
     <hr class="my-2 border dark:border-gray-700" />
-    <tw-datatable-server
-      :fetch-data="fetchData"
+    <tw-datatable-client
       v-model:search="data.search"
       v-model:limit="data.limit"
-      v-model:offset="data.offset"
       v-model:selected="data.selected"
       v-model:sort-by="data.sortBy"
       v-model:sort-type="data.sortType"
       :column="data.column"
+      :data="data.data"
       :setting="data.setting"
+      @datatable:column-hook="datatableHook"
     >
       <template #row="{ column, data }">
         <template v-if="column.field === 'brand'">
@@ -121,7 +112,7 @@ const fetchData = async () => {
       <template #empty>
         <div class="bg-white">No Data</div>
       </template>
-    </tw-datatable-server>
+    </tw-datatable-client>
     <hr class="my-2 dark:border-gray-700" />
     <div>
       <div class="flex gap-2">

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { TwButton } from "@/components";
-import TwDropdownMenu from "@/components/dropdown/TwDropdownMenu.vue";
+import { TwButton, TwDropdownMenu } from "@/build";
 </script>
 
 <template>

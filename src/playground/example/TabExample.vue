@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { TwTab } from "@/components";
-import { useBreakpoints } from "@/composables/breakpoints";
+import { TwTab, useBreakpoints } from "@/build";
 
 const breakPoints = useBreakpoints();
 const horizontalTabBottom = ref();

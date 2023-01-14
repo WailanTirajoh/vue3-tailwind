@@ -19,11 +19,13 @@ import {
   TwForm,
   TwErrorMessage,
   TwDialog,
+  TwRadio,
 } from "./components";
 import Ripple from "./directives/ripple";
 import { useToast } from "./composables/toast";
 import { useForm } from "./composables/form";
 import { useDialog } from "./composables/dialog";
+import { useBreakpoints } from "./composables/breakpoints";
 import "./assets/build/build.css";
 
 export type {
@@ -61,6 +63,7 @@ function install(app: App) {
     TwForm,
     TwErrorMessage,
     TwDialog,
+    TwRadio,
   };
 
   Object.values(components).forEach((component) => {
@@ -93,9 +96,11 @@ export {
   TwForm,
   TwErrorMessage,
   TwDialog,
+  TwRadio,
 
   // Composable
   useToast,
   useForm,
   useDialog,
+  useBreakpoints,
 };

@@ -2,15 +2,26 @@
 export default defineComponent({
   name: "TwDialog",
   inheritAttrs: false,
-  components: { TwFeather },
 });
 </script>
 
 <script setup lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, nextTick, onMounted, ref, watch } from "vue";
 import { TwButton, TwFeather } from "..";
 import { useDialog } from "../../composables/dialog";
+
 const dialog = useDialog();
+
+const confirmButton = ref();
+const rejectButton = ref();
+
+onMounted(() => {
+  watch(dialog.isShown, (value) => {
+    nextTick(() => {
+      if (value) rejectButton.value.$el.focus();
+    });
+  });
+});
 </script>
 
 <template>
@@ -69,6 +80,7 @@ const dialog = useDialog();
             </div>
             <div class="footer flex justify-center gap-2 p-2">
               <TwButton
+                ref="rejectButton"
                 ripple
                 class="w-12"
                 button-text-position="center"
@@ -78,6 +90,7 @@ const dialog = useDialog();
                 {{ dialog.dialog.rejectText }}
               </TwButton>
               <TwButton
+                ref="confirmButton"
                 ripple
                 class="w-12"
                 button-text-position="center"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { TwButton, TwFeather } from "@/components";
-import TwAccordion from "@/components/accordion/TwAccordion.vue";
+import { TwButton, TwFeather, TwAccordion } from "@/build";
 
 const accordion = [
   {

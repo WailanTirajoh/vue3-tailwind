@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TwButton, TwOffcanvas } from "@/components";
+import { TwButton, TwOffcanvas } from "@/build";
 import { ref } from "vue";
 
 const example = ref(`

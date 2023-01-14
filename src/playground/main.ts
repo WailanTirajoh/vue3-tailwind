@@ -1,9 +1,9 @@
 import { createApp, type Directive } from "vue";
 import App from "./App.vue";
 
-import "./assets/dev/main.css";
-import { useForm } from "./composables/form";
-import Ripple from "./directives/ripple";
+import "../assets/dev/main.css";
+import { useForm } from "../composables/form";
+import Ripple from "../directives/ripple";
 
 const app = createApp(App);
 
@@ -12,7 +12,6 @@ Ripple.zIndex = "55";
 app.directive("ripple", Ripple as Directive<any, any>);
 
 const form = useForm();
-
 form.setCustomRules({
   test(value: any) {
     if (value === "test") return "test";

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TwButton, TwModal } from "@/components";
+import { TwButton, TwModal } from "@/build";
 </script>
 <template>
   <h2 class="text-2xl font-bold">Modal</h2>

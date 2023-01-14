@@ -9,6 +9,7 @@ export default defineComponent({
 import type { DropdownItem } from "../type";
 import { computed, defineComponent, ref } from "vue";
 import TwSelect from "./TwSelect.vue";
+import { TwInput } from "..";
 
 export interface Props {
   placeholder?: string;
@@ -35,6 +36,7 @@ const filterredItems = computed(() => {
     return item.label.toLowerCase().includes(search.value.toLowerCase());
   });
 });
+
 const valueText = computed(() => {
   const index = props.items.findIndex(
     (item) => item.value === props.modelValue
@@ -89,9 +91,8 @@ function updateValue(value: any) {
               class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
             >
               <div class="w-full p-2">
-                <input
+                <TwInput
                   v-model="search"
-                  class="block w-full rounded text-gray-600 dark:text-gray-300 text-xs p-3 bg-gray-100 dark:bg-gray-700"
                   type="text"
                   placeholder="Type something"
                 />
@@ -110,7 +111,7 @@ function updateValue(value: any) {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      class="p-3 cursor-pointer w-full text-sm text-left block"
+                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700"
                       :class="{
                         'bg-gray-800 dark:bg-gray-700 text-white':
                           modelValue === item.value,

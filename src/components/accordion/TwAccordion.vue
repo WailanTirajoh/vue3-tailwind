@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { useAnimationOpenClose } from "@/composables/animation";
+import { useAnimationOpenClose } from "../../composables/animation";
 import { defineComponent, ref } from "vue";
 
 export interface Props {

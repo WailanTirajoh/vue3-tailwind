@@ -39,6 +39,7 @@ watch(rules, (value) => {
 // Provide form name to be injected by form child components
 provide("formName", formName.value);
 
+// Expose validator whenever needed by enduser to use
 function validator() {
   if (form.value) {
     return form.value.validator;

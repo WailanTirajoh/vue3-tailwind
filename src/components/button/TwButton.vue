@@ -108,7 +108,7 @@ const btnColor = computed(() => {
       <div
         class="absolute w-full h-full cursor-not-allowed bg-white -mt-2 -ml-2 rounded !bg-opacity-20"
         v-if="props.disabled || loading"
-      ></div>
+      />
     </transition>
     <slot name="icon">
       <tw-feather

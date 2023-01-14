@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import FormExample from "@/example/FormExample.vue";
-import ButtonExample from "@/example/ButtonExample.vue";
-import TabExample from "@/example/TabExample.vue";
+import FormExample from "./example/FormExample.vue";
+import ButtonExample from "./example/ButtonExample.vue";
+import TabExample from "./example/TabExample.vue";
 import ModalExample from "./example/ModalExample.vue";
 import OffcanvasExample from "./example/OffcanvasExample.vue";
 import DatatableClientExample from "./example/DatatableClientExample.vue";
@@ -9,10 +9,9 @@ import DatatableServerExample from "./example/DatatableServerExample.vue";
 import ToastExample from "./example/ToastExample.vue";
 import DropdownExample from "./example/DropdownExample.vue";
 import AccordionExample from "./example/AccordionExample.vue";
-import { TwToggle } from "./components";
+
+import { TwToggle, TwDialog } from "../components";
 import { onMounted, ref, watch } from "vue";
-import TwDialog from "./components/dialog/TwDialog.vue";
-import { useDialog } from "./composables/dialog";
 
 const dark = ref(false);
 watch(dark, (value) => {

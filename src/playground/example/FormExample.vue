@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive, ref } from "vue";
 import {
   TwButton,
   TwFile,
@@ -8,11 +9,7 @@ import {
   TwToggle,
   TwTextarea,
 } from "@/build";
-import { reactive, ref } from "vue";
-import TwForm from "@/components/form/TwForm.vue";
-import TwErrorMessage from "@/components/form/TwErrorMessage.vue";
-import { useToast } from "@/composables/toast";
-import { useDialog } from "@/composables/dialog";
+import { useToast, useDialog, TwErrorMessage, TwForm } from "@/build";
 
 const formA = ref();
 const toast = useToast();

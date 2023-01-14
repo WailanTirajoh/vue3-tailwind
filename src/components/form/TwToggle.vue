@@ -113,6 +113,8 @@ async function validateField() {
         />
         <div
           class="block w-10 h-6 rounded-full border dark:border-gray-700 shadow-inner"
+          :aria-label="`${id}-checkbox`"
+          tabindex="-1"
           :class="[
             {
               'bg-gray-100 dark:bg-gray-600': computedValue,
@@ -126,6 +128,8 @@ async function validateField() {
           :class="{
             'translate-x-full bg-gray-600 dark:bg-green-600': computedValue,
           }"
+          :aria-label="`${id}-checkbox`"
+          tabindex="-1"
         >
           <TwFeather
             v-if="!noIcon"

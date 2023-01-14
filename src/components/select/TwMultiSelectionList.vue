@@ -9,7 +9,7 @@ export default defineComponent({
 import type { DropdownItem, DropdownItemValue } from "../type";
 import { computed, defineComponent, ref } from "vue";
 import TwSelect from "./TwSelect.vue";
-import { TwButton } from "..";
+import { TwButton, TwInput } from "..";
 
 export interface Props {
   placeholder?: string;
@@ -133,9 +133,8 @@ function closeDropdown() {
               class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
             >
               <div class="w-full p-2">
-                <input
+                <TwInput
                   v-model="search"
-                  class="block w-full rounded text-gray-600 text-xs focus:border-transparent p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
                   type="text"
                   placeholder="Type something"
                 />
@@ -147,7 +146,7 @@ function closeDropdown() {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left"
+                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700"
                       :class="{
                         'bg-gray-800 text-white': computedModelValue.includes(
                           item.value
