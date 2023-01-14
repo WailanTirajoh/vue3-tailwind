@@ -118,3 +118,5 @@ export const Vue3Tailwind = function install(app: App) {
   Ripple.zIndex = "55";
   app.directive("ripple", Ripple as Directive<any, any>);
 };
+
+export { Ripple as TwRipple };
