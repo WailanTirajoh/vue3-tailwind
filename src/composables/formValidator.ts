@@ -61,7 +61,7 @@ export const useFormValidator = ({
     if (fieldValidator && formName && fieldName) {
       composableForm.updateFormData(formName, fieldName, fieldValue.value);
       if (fieldRules && fieldRules.value) {
-        validateField();
+        // validateField();
       }
     }
   });
