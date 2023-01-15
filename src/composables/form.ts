@@ -32,6 +32,12 @@ export const useForm = () => {
       validator.mergeCustomRules(customValidatorRules.value);
     }
 
+    if (globalCustomValidatorErrorMessage.value) {
+      validator.setCustomValidatorErrorMessage(
+        globalCustomValidatorErrorMessage.value
+      );
+    }
+
     forms.value[formId] = {
       validator: validator,
     };
