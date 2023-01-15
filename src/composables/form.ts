@@ -13,6 +13,7 @@ const forms = ref<{
 }>({});
 
 const customValidatorRules = ref<CustomRules>({});
+const globalCustomValidatorErrorMessage = ref<CustomValidatorErrorMessage>({});
 
 export const useForm = () => {
   function setCustomRules(customRules: CustomRules) {
@@ -86,13 +87,22 @@ export const useForm = () => {
     return forms.value[formId].validator.getCustomFieldName()[fieldName];
   }
 
+  // Form level custom validator error message
   function setCustomValidatorErrorMessage(
     formId: string,
     customValidatorErrorMessage: CustomValidatorErrorMessage
   ) {
-    forms.value[formId].validator.setCustomValidatorErrorMessage(
-      customValidatorErrorMessage
-    );
+    forms.value[formId].validator.setCustomValidatorErrorMessage({
+      ...globalCustomValidatorErrorMessage.value,
+      ...customValidatorErrorMessage,
+    });
+  }
+
+  // Global level custom validator error message
+  function setGlobalCustomValidatorErrorMessage(
+    customValidatorErrorMessage: CustomValidatorErrorMessage
+  ) {
+    globalCustomValidatorErrorMessage.value = customValidatorErrorMessage;
   }
 
   function getError(formId: string, field: string) {
@@ -122,6 +132,7 @@ export const useForm = () => {
     setCustomFieldNames,
     getFieldName,
     setCustomValidatorErrorMessage,
+    setGlobalCustomValidatorErrorMessage,
     getError,
     getErrors,
     hasError,
