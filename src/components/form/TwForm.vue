@@ -37,6 +37,12 @@ const form = computed(() => {
 const customRules = computed(() => {
   return composableForm.getCustomRules();
 });
+const formValidatorErrorMessage = computed(() => {
+  if (form.value && form.value.validator) {
+    return form.value.validator.getCustomValidatorErrorMessage();
+  }
+  return {};
+});
 
 // Add form & set initial form rules
 onBeforeMount(() => {
@@ -66,10 +72,10 @@ watch(customValidatorErrorMessage, (value) => {
 
 // Provide form name to be injected by form child components
 provide("formName", formName.value);
-provide("rules", rules.value);
-provide("customFieldName", customFieldName.value);
-provide("customValidatorErrorMessage", customValidatorErrorMessage.value);
-provide("customRules", customRules.value);
+provide("rules", rules);
+provide("customFieldName", customFieldName);
+provide("customValidatorErrorMessage", formValidatorErrorMessage);
+provide("customRules", customRules);
 
 // Expose validator whenever needed by enduser to use
 function validator() {
@@ -82,6 +88,7 @@ defineExpose({ validator });
 </script>
 
 <template>
+  {{ formValidatorErrorMessage }}
   <form v-bind="$attrs" @submit.prevent="emit('submit')">
     <slot></slot>
   </form>

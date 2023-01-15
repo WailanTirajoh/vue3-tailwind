@@ -18,4 +18,8 @@ form.setCustomRules({
   },
 });
 
+// form.setGlobalCustomValidatorErrorMessage({
+//   ["required"]: "{field} test",
+// });
+
 app.mount("#app");
