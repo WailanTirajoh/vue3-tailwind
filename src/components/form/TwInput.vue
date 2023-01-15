@@ -10,10 +10,8 @@ import { useForm } from "../../composables/form";
 import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 import type {
-  CustomFieldName,
   CustomRules,
   CustomValidatorErrorMessage,
-  ValidationRules,
 } from "js-formdata-validator/dist/type";
 
 export interface Props {
@@ -48,11 +46,6 @@ const composableForm = useForm();
 
 const formName = inject("formName", null) as string | null;
 const customRules = inject("customRules", null) as CustomRules | null;
-const rulesInject = inject("rules", null) as ValidationRules | null;
-const customFieldNameInject = inject(
-  "customFieldName",
-  null
-) as CustomFieldName | null;
 const customValidatorErrorMessageInject = inject(
   "customValidatorErrorMessage",
   null
@@ -71,9 +64,8 @@ onMounted(() => {
   fieldValidator = new FieldValidator();
   if (fieldValidator && formName && props.name) {
     composableForm.updateFormData(formName, props.name, computedValue.value);
-    fieldValidator.setFieldName(props.name);
-    fieldValidator.setFieldRules(fieldRules.value);
     fieldValidator.setFieldName(customFieldName.value);
+    fieldValidator.setFieldRules(fieldRules.value);
 
     if (customValidatorErrorMessageInject) {
       fieldValidator.setCustomValidatorErrorMessage(
@@ -88,16 +80,16 @@ onMounted(() => {
 });
 
 const fieldRules = computed(() => {
-  if (formName && props.name && rulesInject) {
-    return rulesInject[props.name];
+  if (formName && props.name) {
+    return composableForm.getFieldRules(formName, props.name);
   }
   return [];
 });
 
 const customFieldName = computed(() => {
   const FALLBACK = "Field";
-  if (formName && props.name && customFieldNameInject) {
-    return customFieldNameInject[props.name] ?? FALLBACK;
+  if (formName && props.name) {
+    return composableForm.getFieldName(formName, props.name);
   }
   return FALLBACK;
 });
