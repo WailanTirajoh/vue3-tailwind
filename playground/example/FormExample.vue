@@ -130,6 +130,13 @@ const clear = () => {
         ref="formA"
         @submit="submit"
         :rules="formData.rules"
+        :custom-field-name="{
+          inputExample: 'Input',
+          selectExample: 'Select',
+        }"
+        :custom-validator-error-message="{
+          ['required']: 'The {field} must be filled!',
+        }"
       >
         <div class="col-span-12">
           <TwFile v-model="formData.fileModel" multiple />

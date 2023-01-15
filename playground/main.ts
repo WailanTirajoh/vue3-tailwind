@@ -13,7 +13,7 @@ app.directive("ripple", Ripple as Directive<any, any>);
 
 const form = useForm();
 form.setCustomRules({
-  test(value: any) {
+  test({ value }) {
     if (value === "test") return "test";
   },
 });

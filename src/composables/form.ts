@@ -1,6 +1,8 @@
 import { Validator } from "js-formdata-validator";
 import type {
+  CustomFieldName,
   CustomRules,
+  CustomValidatorErrorMessage,
   ValidationRules,
 } from "js-formdata-validator/dist/type";
 import { ref } from "vue";
@@ -73,6 +75,26 @@ export const useForm = () => {
     forms.value[formId].validator.setFieldErrors(fieldName, fieldErrors);
   }
 
+  function setCustomFieldNames(
+    formId: string,
+    customFieldNames: CustomFieldName
+  ) {
+    forms.value[formId].validator.setCustomFieldName(customFieldNames);
+  }
+
+  function getFieldName(formId: string, fieldName: string) {
+    return forms.value[formId].validator.getCustomFieldName()[fieldName];
+  }
+
+  function setCustomValidatorErrorMessage(
+    formId: string,
+    customValidatorErrorMessage: CustomValidatorErrorMessage
+  ) {
+    forms.value[formId].validator.setCustomValidatorErrorMessage(
+      customValidatorErrorMessage
+    );
+  }
+
   function getError(formId: string, field: string) {
     return forms.value[formId].validator.getError(field);
   }
@@ -97,6 +119,9 @@ export const useForm = () => {
     setFieldErrors,
     setCustomRules,
     getCustomRules,
+    setCustomFieldNames,
+    getFieldName,
+    setCustomValidatorErrorMessage,
     getError,
     getErrors,
     hasError,

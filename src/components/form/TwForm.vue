@@ -9,26 +9,44 @@ export default defineComponent({
 import { computed, defineComponent, onBeforeMount, provide, watch } from "vue";
 import { useForm } from "../../composables/form";
 import { generateId } from "../../utils/generateId";
-import type { ValidationRules } from "js-formdata-validator/dist/type";
+import type {
+  CustomFieldName,
+  CustomValidatorErrorMessage,
+  ValidationRules,
+} from "js-formdata-validator/dist/type";
 
 const props = defineProps<{
   name?: string;
   rules: ValidationRules;
+  customFieldName?: CustomFieldName;
+  customValidatorErrorMessage?: CustomValidatorErrorMessage;
 }>();
 
 const emit = defineEmits(["submit"]);
 
 const formName = computed(() => props.name ?? generateId());
 const rules = computed(() => props.rules);
+const customFieldName = computed(() => props.customFieldName ?? {});
+const customValidatorErrorMessage = computed(
+  () => props.customValidatorErrorMessage ?? {}
+);
 const composableForm = useForm();
 const form = computed(() => {
   return composableForm.getForm(formName.value);
+});
+const customRules = computed(() => {
+  return composableForm.getCustomRules();
 });
 
 // Add form & set initial form rules
 onBeforeMount(() => {
   composableForm.addForm(formName.value);
   composableForm.setFormRules(formName.value, rules.value);
+  composableForm.setCustomFieldNames(formName.value, customFieldName.value);
+  composableForm.setCustomValidatorErrorMessage(
+    formName.value,
+    customValidatorErrorMessage.value
+  );
 });
 
 // Update validator rules whenever rules change
@@ -36,8 +54,22 @@ watch(rules, (value) => {
   composableForm.setFormRules(formName.value, value);
 });
 
+// Update customFieldNames whenever it changes
+watch(customFieldName, (value) => {
+  composableForm.setCustomFieldNames(formName.value, value);
+});
+
+// Update customValidatorErrorMessage whenever it changes
+watch(customValidatorErrorMessage, (value) => {
+  composableForm.setCustomValidatorErrorMessage(formName.value, value);
+});
+
 // Provide form name to be injected by form child components
 provide("formName", formName.value);
+provide("rules", rules.value);
+provide("customFieldName", customFieldName.value);
+provide("customValidatorErrorMessage", customValidatorErrorMessage.value);
+provide("customRules", customRules.value);
 
 // Expose validator whenever needed by enduser to use
 function validator() {
