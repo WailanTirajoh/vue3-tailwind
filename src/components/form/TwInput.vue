@@ -10,8 +10,10 @@ import { useForm } from "../../composables/form";
 import { computed, defineComponent, inject, onMounted, watch } from "vue";
 import { FieldValidator } from "js-formdata-validator";
 import type {
+  CustomFieldName,
   CustomRules,
   CustomValidatorErrorMessage,
+  ValidationRules,
 } from "js-formdata-validator/dist/type";
 
 export interface Props {
@@ -50,6 +52,11 @@ const customValidatorErrorMessageInject = inject(
   "customValidatorErrorMessage",
   null
 ) as CustomValidatorErrorMessage | null;
+const rulesInject = inject("rules", null) as ValidationRules | null;
+const customFieldNameInject = inject(
+  "customFieldName",
+  null
+) as CustomFieldName | null;
 
 watch(computedValue, async () => {
   if (fieldValidator && formName && props.name) {
@@ -80,16 +87,16 @@ onMounted(() => {
 });
 
 const fieldRules = computed(() => {
-  if (fieldValidator && formName && props.name) {
-    return composableForm.getFieldRules(formName, props.name);
+  if (fieldValidator && formName && props.name && rulesInject) {
+    return rulesInject[props.name];
   }
   return [];
 });
 
 const customFieldName = computed(() => {
   const FALLBACK = "Field";
-  if (fieldValidator && formName && props.name) {
-    return composableForm.getFieldName(formName, props.name);
+  if (fieldValidator && formName && props.name && customFieldNameInject) {
+    return customFieldNameInject[props.name] ?? FALLBACK;
   }
   return FALLBACK;
 });
