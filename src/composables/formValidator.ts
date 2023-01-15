@@ -61,7 +61,7 @@ export const useFormValidator = ({
     if (fieldValidator && formName && fieldName) {
       composableForm.updateFormData(formName, fieldName, fieldValue.value);
       if (fieldRules && fieldRules.value) {
-        // validateField();
+        validateField();
       }
     }
   });
@@ -110,23 +110,23 @@ export const useFormValidator = ({
   //   }
   // }
 
-  // // Validate field whenever it has form wrapper, field name, and field rules
-  // async function validateField() {
-  //   if (
-  //     fieldValidator &&
-  //     formName &&
-  //     fieldName &&
-  //     fieldRules &&
-  //     fieldRules.value
-  //   ) {
-  //     fieldValidator.setFieldValue(fieldValue.value);
-  //     fieldValidator.setFormData(composableForm.getFormData(formName));
-  //     await fieldValidator.validate();
+  // Validate field whenever it has form wrapper, field name, and field rules
+  async function validateField() {
+    if (
+      fieldValidator &&
+      formName &&
+      fieldName &&
+      fieldRules &&
+      fieldRules.value
+    ) {
+      fieldValidator.setFieldValue(fieldValue.value);
+      fieldValidator.setFormData(composableForm.getFormData(formName));
+      await fieldValidator.validate();
 
-  //     const error = fieldValidator.getErrorBag();
-  //     composableForm.setFieldErrors(formName, fieldName, error);
-  //   }
-  // }
+      const error = fieldValidator.getErrorBag();
+      composableForm.setFieldErrors(formName, fieldName, error);
+    }
+  }
 
   return {
     isError: isError,
