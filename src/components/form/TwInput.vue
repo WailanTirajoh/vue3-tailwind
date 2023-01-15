@@ -43,7 +43,7 @@ const composableForm = useForm();
 const formName = inject("formName", null) as string | null;
 
 watch(computedValue, async () => {
-  if (fieldValidator && formName && props.name) {
+  if (formName && props.name) {
     composableForm.updateFormData(formName, props.name, computedValue.value);
     if (fieldRules.value) {
       validateField();
@@ -53,7 +53,7 @@ watch(computedValue, async () => {
 
 onMounted(() => {
   fieldValidator = new FieldValidator();
-  if (formName && props.name) {
+  if (fieldValidator && formName && props.name) {
     composableForm.updateFormData(formName, props.name, computedValue.value);
     fieldValidator.setFieldName(props.name);
     fieldValidator.setFieldRules(fieldRules.value);
@@ -66,14 +66,14 @@ onMounted(() => {
 });
 
 const fieldRules = computed(() => {
-  if (fieldValidator && formName && props.name) {
+  if (formName && props.name) {
     return composableForm.getFieldRules(formName, props.name);
   }
   return [];
 });
 
 const isError = computed(() => {
-  if (fieldValidator && formName && props.name) {
+  if (formName && props.name) {
     return composableForm.hasError(formName, props.name);
   }
   return false;
@@ -101,13 +101,8 @@ async function validateField() {
         v-bind="$attrs"
         v-model="computedValue"
         :type="type"
-        class="transition ease-in-out border p-2 relative text-sm w-full rounded bg-white h-10 placeholder:italic block text-gray-600 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:ring-0 focus:outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
-        :class="[
-          isError ? errorClass : '',
-          {
-            '!bg-gray-100 dark:!bg-gray-900 cursor-not-allowed': disabled,
-          },
-        ]"
+        :data-error="isError"
+        class="transition ease-in-out border p-2 relative text-sm w-full rounded bg-white h-10 placeholder:italic block text-gray-600 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:ring-0 focus:outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)] disabled:!bg-gray-100 dark:disabled:!bg-gray-900 disabled:cursor-not-allowed error:border-red-400 error:border error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:border-red-400 dark:error:border dark:error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
         :placeholder="placeholder"
         :disabled="disabled"
       />

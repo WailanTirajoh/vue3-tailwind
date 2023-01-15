@@ -1,13 +1,15 @@
 /* eslint-env node */
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,vue}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,vue}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant("error", ["&[data-error=true]", "[data-error=true] &"]);
+    }),
+  ],
 };

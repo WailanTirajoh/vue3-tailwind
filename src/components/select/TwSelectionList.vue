@@ -111,7 +111,7 @@ function updateValue(value: any) {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700"
+                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700 ring-0 outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
                       :class="{
                         'bg-gray-800 dark:bg-gray-700 text-white':
                           modelValue === item.value,

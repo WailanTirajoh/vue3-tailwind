@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { useForm } from "../../composables/form";
-import { computed, defineComponent, inject, onMounted, watch } from "vue";
+import { computed, defineComponent, inject, onMounted, ref, watch } from "vue";
 import { TwFeather } from "..";
 import { FieldValidator } from "js-formdata-validator";
 
@@ -47,6 +47,8 @@ const computedValue = computed({
   },
 });
 
+const isFocused = ref(false);
+
 // Form
 const composableForm = useForm();
 let fieldValidator: FieldValidator;
@@ -83,6 +85,13 @@ const fieldRules = computed(() => {
   return [];
 });
 
+const isError = computed(() => {
+  if (formName && props.name) {
+    return composableForm.hasError(formName, props.name);
+  }
+  return false;
+});
+
 async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
@@ -108,17 +117,24 @@ async function validateField() {
           v-model="computedValue"
           type="checkbox"
           class="sr-only"
+          @focusin="isFocused = true"
+          @focusout="isFocused = false"
           :disabled="disabled"
           :aria-label="`${id}-checkbox`"
         />
         <div
-          class="block w-10 h-6 rounded-full border dark:border-gray-700 shadow-inner"
+          :data-error="isError"
+          :data-focus="isFocused"
+          class="block w-10 h-6 rounded-full border dark:border-gray-700 shadow-inner error:border-red-400 error:border error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:border-red-400 dark:error:border dark:error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
           :aria-label="`${id}-checkbox`"
           tabindex="-1"
           :class="[
             {
               'bg-gray-100 dark:bg-gray-600': computedValue,
               'bg-gray-600 dark:bg-gray-600': !computedValue,
+              'ring-0 outline-none border-transparent shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)] error:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]':
+                isFocused,
+              '': !isFocused,
             },
             $attrs.class,
           ]"

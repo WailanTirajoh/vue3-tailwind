@@ -8,7 +8,14 @@ export default defineComponent({
 <script setup lang="ts">
 import type { DropdownItem, DropdownItemValue } from "../../type";
 import MultiSelectionList from "../select/TwMultiSelectionList.vue";
-import { computed, defineComponent, inject, onMounted, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  onMounted,
+  provide,
+  watch,
+} from "vue";
 import { useForm } from "@/composables/form";
 import { FieldValidator } from "js-formdata-validator";
 
@@ -72,6 +79,15 @@ const fieldRules = computed(() => {
   }
   return [];
 });
+
+const isError = computed(() => {
+  if (formName && props.name) {
+    return composableForm.hasError(formName, props.name);
+  }
+  return false;
+});
+
+provide("select-error", isError);
 
 async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {

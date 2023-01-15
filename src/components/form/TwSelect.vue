@@ -7,9 +7,16 @@ export default defineComponent({
 
 <script setup lang="ts">
 import type { DropdownItem } from "../../type";
-import SelectionList from "../select/TwSelectionList.vue";
+import TwSelectionList from "../select/TwSelectionList.vue";
 import { useForm } from "../../composables/form";
-import { computed, defineComponent, inject, onMounted, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  inject,
+  onMounted,
+  provide,
+  watch,
+} from "vue";
 import { FieldValidator } from "js-formdata-validator";
 
 export interface Props {
@@ -74,6 +81,15 @@ const fieldRules = computed(() => {
   return [];
 });
 
+const isError = computed(() => {
+  if (formName && props.name) {
+    return composableForm.hasError(formName, props.name);
+  }
+  return false;
+});
+
+provide("select-error", isError);
+
 async function validateField() {
   if (fieldValidator && formName && props.name && fieldRules.value) {
     fieldValidator.setFieldValue(computedValue.value);
@@ -91,7 +107,7 @@ async function validateField() {
     {{ label }}
   </label>
   <div class="relative">
-    <SelectionList
+    <TwSelectionList
       v-bind="$attrs"
       v-model="computedValue"
       :items="items"

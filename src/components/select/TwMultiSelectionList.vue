@@ -78,13 +78,7 @@ function closeDropdown() {
             v-if="computedModelValue.length > 0"
             class="p-2 text-left flex gap-1"
           >
-            <TransitionGroup
-              as="ul"
-              name="list"
-              class="w-80 fixed inset-x-0 z-50 grid gap-2 break-words pt-3 px-4"
-              style="overflow-wrap: anywhere"
-              appear
-            >
+            <TransitionGroup name="list" appear>
               <li
                 v-for="v in computedModelValue"
                 :key="v"
@@ -146,7 +140,7 @@ function closeDropdown() {
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700"
+                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700 ring-0 outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
                       :class="{
                         'bg-gray-800 text-white': computedModelValue.includes(
                           item.value

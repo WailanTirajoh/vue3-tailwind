@@ -48,6 +48,11 @@ const formData = reactive({
         }
       },
     ],
+    multiSelectExample: [
+      (value: string) => {
+        if (value.length === 0) return "This field is required!";
+      },
+    ],
     toggleExample: [
       "required",
       (value: string) => {

@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, inject, ref } from "vue";
 import { TwButton } from "..";
 export interface Props {
   rounded?: boolean;
@@ -40,6 +40,8 @@ function openDropdown() {
   isOpen.value = false;
 }
 
+const selectError = inject("select-error", false);
+
 defineExpose({ toggleDropdown, closeDropdown, openDropdown });
 </script>
 
@@ -47,7 +49,8 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
   <div class="relative">
     <slot :is-open="isOpen">
       <div
-        class="flex rounded-t dark:text-gray-300"
+        class="flex rounded-t dark:text-gray-300 error:border error:border-red-400 rounded"
+        :data-error="selectError"
         :class="{
           'bg-white shadow-lg dark:bg-gray-900 border border-b-0 border-gray-100 dark:border-gray-700':
             isOpen,
@@ -68,8 +71,9 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
             :show-clear-data="showClearData"
             :disabled="disabled"
           >
-            <button
+            <TwButton
               type="button"
+              variant="none"
               v-show="showClearData"
               class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all ease-in-out p-2"
               :disabled="disabled"
@@ -82,7 +86,7 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
                   fill="#BDBDBD"
                 />
               </svg>
-            </button>
+            </TwButton>
           </slot>
         </div>
         <slot
