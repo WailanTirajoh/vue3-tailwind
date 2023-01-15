@@ -18,8 +18,8 @@ form.setCustomRules({
   },
 });
 
-// form.setGlobalCustomValidatorErrorMessage({
-//   ["required"]: "{field} test",
-// });
+form.setGlobalCustomValidatorErrorMessage({
+  ["required"]: "Field {field} wajib diisi!",
+});
 
 app.mount("#app");

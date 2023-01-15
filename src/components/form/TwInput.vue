@@ -85,18 +85,18 @@ onMounted(() => {
         customValidatorErrorMessageInject.value
       );
     }
-  }
-  if (customRules) {
-    fieldValidator.setCustomRules(customRules.value);
-    watch(
-      customRules,
-      (value) => {
-        fieldValidator.setCustomRules(value);
-      },
-      {
-        deep: true,
-      }
-    );
+    if (customRules) {
+      fieldValidator.setCustomRules(customRules.value);
+      watch(
+        customRules,
+        (value) => {
+          fieldValidator.setCustomRules(value);
+        },
+        {
+          deep: true,
+        }
+      );
+    }
   }
 });
 

@@ -88,7 +88,6 @@ defineExpose({ validator });
 </script>
 
 <template>
-  {{ formValidatorErrorMessage }}
   <form v-bind="$attrs" @submit.prevent="emit('submit')">
     <slot></slot>
   </form>
