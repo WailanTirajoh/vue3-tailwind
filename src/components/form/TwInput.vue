@@ -52,7 +52,7 @@ const customValidatorErrorMessageInject = inject(
 ) as CustomValidatorErrorMessage | null;
 
 watch(computedValue, async () => {
-  if (formName && props.name) {
+  if (fieldValidator && formName && props.name) {
     composableForm.updateFormData(formName, props.name, computedValue.value);
     if (fieldRules.value) {
       validateField();
@@ -80,7 +80,7 @@ onMounted(() => {
 });
 
 const fieldRules = computed(() => {
-  if (formName && props.name) {
+  if (fieldValidator && formName && props.name) {
     return composableForm.getFieldRules(formName, props.name);
   }
   return [];
@@ -88,14 +88,14 @@ const fieldRules = computed(() => {
 
 const customFieldName = computed(() => {
   const FALLBACK = "Field";
-  if (formName && props.name) {
+  if (fieldValidator && formName && props.name) {
     return composableForm.getFieldName(formName, props.name);
   }
   return FALLBACK;
 });
 
 const isError = computed(() => {
-  if (formName && props.name) {
+  if (fieldValidator && formName && props.name) {
     return composableForm.hasError(formName, props.name);
   }
   return false;
