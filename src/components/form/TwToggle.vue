@@ -6,24 +6,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { useForm } from "../../composables/form";
-import {
-  computed,
-  defineComponent,
-  inject,
-  onMounted,
-  ref,
-  watch,
-  type Ref,
-} from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { TwFeather } from "..";
-import { FieldValidator } from "js-formdata-validator";
-import type {
-  CustomFieldName,
-  CustomRules,
-  CustomValidatorErrorMessage,
-  ValidationRules,
-} from "js-formdata-validator/dist/type";
+import { useFormValidator } from "@/composables/formValidator";
 
 export interface Props {
   id: string;
@@ -63,101 +48,10 @@ const computedValue = computed({
 
 const isFocused = ref(false);
 
-let fieldValidator: FieldValidator;
-const composableForm = useForm();
-
-const formName = inject("formName", null) as string | null;
-const customRules = inject("customRules", null) as Ref<CustomRules> | null;
-const customValidatorErrorMessageInject = inject(
-  "customValidatorErrorMessage",
-  null
-) as Ref<CustomValidatorErrorMessage> | null;
-const rulesInject = inject("rules", null) as Ref<ValidationRules> | null;
-const customFieldNameInject = inject(
-  "customFieldName",
-  null
-) as Ref<CustomFieldName> | null;
-
-watch(computedValue, async () => {
-  if (fieldValidator && formName && props.name) {
-    composableForm.updateFormData(formName, props.name, computedValue.value);
-    if (fieldRules.value) {
-      validateField();
-    }
-  }
+const { isError } = useFormValidator({
+  fieldName: props.name,
+  fieldValue: computedValue,
 });
-
-onMounted(() => {
-  fieldValidator = new FieldValidator();
-  if (fieldValidator && formName && props.name) {
-    composableForm.updateFormData(formName, props.name, computedValue.value);
-    fieldValidator.setFieldName(customFieldName.value);
-    fieldValidator.setFieldRules(fieldRules.value);
-
-    if (customValidatorErrorMessageInject) {
-      fieldValidator.setCustomValidatorErrorMessage(
-        customValidatorErrorMessageInject.value
-      );
-    }
-    if (customRules) {
-      fieldValidator.setCustomRules(customRules.value);
-      watch(
-        customRules,
-        (value) => {
-          fieldValidator.setCustomRules(value);
-        },
-        {
-          deep: true,
-        }
-      );
-    }
-  }
-});
-
-const fieldRules = computed(() => {
-  if (
-    fieldValidator &&
-    formName &&
-    props.name &&
-    rulesInject &&
-    rulesInject.value
-  ) {
-    return rulesInject.value[props.name];
-  }
-  return [];
-});
-
-const customFieldName = computed(() => {
-  const FALLBACK = "Field";
-  if (
-    fieldValidator &&
-    formName &&
-    props.name &&
-    customFieldNameInject &&
-    customFieldNameInject.value
-  ) {
-    return customFieldNameInject.value[props.name] ?? FALLBACK;
-  }
-  return FALLBACK;
-});
-
-const isError = computed(() => {
-  if (fieldValidator && formName && props.name) {
-    return composableForm.hasError(formName, props.name);
-  }
-  return false;
-});
-
-async function validateField() {
-  if (fieldValidator && formName && props.name && fieldRules.value) {
-    fieldValidator.setFieldValue(computedValue.value);
-    fieldValidator.setFormData(composableForm.getFormData(formName));
-    await fieldValidator.validate();
-
-    const error = fieldValidator.getErrorBag();
-    composableForm.setFieldErrors(formName, props.name, error);
-  }
-}
 </script>
 
 <template>
