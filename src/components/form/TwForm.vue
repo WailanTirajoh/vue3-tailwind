@@ -45,15 +45,15 @@ const formValidatorErrorMessage = computed(() => {
 });
 
 // Add form & set initial form rules
-onBeforeMount(() => {
-  composableForm.addForm(formName.value);
-  composableForm.setFormRules(formName.value, rules.value);
-  composableForm.setCustomFieldNames(formName.value, customFieldName.value);
-  composableForm.setCustomValidatorErrorMessage(
-    formName.value,
-    customValidatorErrorMessage.value
-  );
-});
+// onBeforeMount(() => {
+composableForm.addForm(formName.value);
+composableForm.setFormRules(formName.value, rules.value);
+composableForm.setCustomFieldNames(formName.value, customFieldName.value);
+composableForm.setCustomValidatorErrorMessage(
+  formName.value,
+  customValidatorErrorMessage.value
+);
+// });
 
 // Update validator rules whenever rules change
 watch(rules, (value) => {

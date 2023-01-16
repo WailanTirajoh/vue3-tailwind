@@ -7,7 +7,7 @@ export default defineComponent({
 
 <script setup lang="ts">
 import { useFormValidator } from "../../composables/formValidator";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 
 export interface Props {
   name?: string;
@@ -52,7 +52,7 @@ const { isError } = useFormValidator({
         v-model="computedValue"
         :type="type"
         :data-error="isError"
-        class="transition ease-in-out border p-2 relative text-sm w-full rounded bg-white h-10 placeholder:italic block text-gray-600 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:ring-0 focus:outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)] disabled:!bg-gray-100 dark:disabled:!bg-gray-900 disabled:cursor-not-allowed error:border-red-400 error:border error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:border-red-400 dark:error:border dark:error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
+        class="transition ease-in-out border p-2 relative text-sm w-full rounded bg-white h-10 placeholder:italic block text-gray-600 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800 outline-primary disabled:!bg-gray-100 dark:disabled:!bg-gray-900 disabled:cursor-not-allowed error:border-red-400 error:border error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:border-red-400 dark:error:border dark:error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
         :placeholder="placeholder"
         :disabled="disabled"
       />

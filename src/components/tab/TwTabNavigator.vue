@@ -14,9 +14,11 @@ const vlineOffset = ref(0);
 const props = withDefaults(
   defineProps<{
     type?: "vertical" | "horizontal";
+    lineClass?: Array<string> | string;
   }>(),
   {
     type: "horizontal",
+    lineClass: "",
   }
 );
 
@@ -90,10 +92,13 @@ const lineStyle = computed(() => {
       </li>
       <div
         class="absolute w-1 h-1 bottom-0 bg-gray-900 duration-300 ease"
-        :class="{
-          'bottom-0': props.type === 'horizontal',
-          'top-0': props.type === 'vertical',
-        }"
+        :class="[
+          {
+            'bottom-0': props.type === 'horizontal',
+            'top-0': props.type === 'vertical',
+          },
+          lineClass,
+        ]"
         :style="lineStyle"
       />
     </ul>

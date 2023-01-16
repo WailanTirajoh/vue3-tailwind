@@ -69,53 +69,47 @@ export const useFormValidator = ({
 
   // Initialize field validator, set custom validator error message if any,
   // set custom rules if any and watch changes on custom rules
-  onMounted(() => {
-    if (formName && fieldName) {
-      fieldValidator = new FieldValidator();
+  if (formName && fieldName) {
+    fieldValidator = new FieldValidator();
 
-      if (fieldValidator) {
-        composableForm.updateFormData(formName, fieldName, fieldValue.value);
-        isError = computed(() => {
-          if (formName && fieldName && fieldValidator) {
-            return composableForm.hasError(formName, fieldName);
-          }
-          return false;
-        });
-
-        fieldRules = computed(() => {
-          if (formName && fieldName && rulesInject && rulesInject.value) {
-            return rulesInject.value[fieldName];
-          }
-          return [];
-        });
-
-        customFieldName = computed(() => {
-          const FALLBACK = "Field";
-          if (
-            fieldName &&
-            customFieldNameInject &&
-            customFieldNameInject.value
-          ) {
-            return customFieldNameInject.value[fieldName] ?? FALLBACK;
-          }
-          return FALLBACK;
-        });
-
-        fieldValidator.setFieldName(customFieldName.value);
-        fieldValidator.setFieldRules(fieldRules.value);
-
-        if (customValidatorErrorMessageInject) {
-          fieldValidator.setCustomValidatorErrorMessage(
-            customValidatorErrorMessageInject.value
-          );
+    if (fieldValidator) {
+      composableForm.updateFormData(formName, fieldName, fieldValue.value);
+      isError = computed(() => {
+        if (formName && fieldName && fieldValidator) {
+          return composableForm.hasError(formName, fieldName);
         }
+        return false;
+      });
 
-        if (customRules) {
-          fieldValidator.setCustomRules(customRules.value);
+      fieldRules = computed(() => {
+        if (formName && fieldName && rulesInject && rulesInject.value) {
+          return rulesInject.value[fieldName];
         }
+        return [];
+      });
+
+      customFieldName = computed(() => {
+        const FALLBACK = "Field";
+        if (fieldName && customFieldNameInject && customFieldNameInject.value) {
+          return customFieldNameInject.value[fieldName] ?? FALLBACK;
+        }
+        return FALLBACK;
+      });
+
+      fieldValidator.setFieldName(customFieldName.value);
+      fieldValidator.setFieldRules(fieldRules.value);
+
+      if (customValidatorErrorMessageInject) {
+        fieldValidator.setCustomValidatorErrorMessage(
+          customValidatorErrorMessageInject.value
+        );
+      }
+
+      if (customRules) {
+        fieldValidator.setCustomRules(customRules.value);
       }
     }
-  });
+  }
 
   // Validate field whenever it has form wrapper, field name, and field rules
   async function validateField() {

@@ -13,7 +13,7 @@ import { TwTabWrapper, TwTabNavigator, TwTabBody } from "../../src/build";
             <div class="bg-gray-50 border-r">
               <div class="text-lg p-2 bg-gray-200">Title</div>
               <hr class="border-gray-300" />
-              <TwTabNavigator type="vertical">
+              <TwTabNavigator type="vertical" line-class="!rounded-r">
                 <template #tab1>
                   <div class="p-2 w-full">Test</div>
                 </template>

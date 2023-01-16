@@ -57,6 +57,7 @@ const { isError } = useFormValidator({
       v-bind="$attrs"
       v-model="computedValue"
       type="radio"
+      class="outline-primary rounded-full"
       :name="id"
       :id="`${option.label}-${id}`"
       :disabled="disabled"

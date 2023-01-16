@@ -99,7 +99,7 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
             type="button"
             variant="none"
             aria-label="dropdown-select-button"
-            class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r !rounded-l-none"
+            class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r !rounded-l-none w-8"
             :class="[
               !isOpen ? dropdownBg : '',
               dropdownBorder,

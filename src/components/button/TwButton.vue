@@ -94,7 +94,7 @@ const btnColor = computed(() => {
     v-bind="$attrs"
     v-ripple="props.ripple"
     :disabled="props.disabled"
-    class="p-2 relative duration-200 rounded-md ring-0 outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
+    class="outline-primary p-2 relative duration-200 rounded-md ring-0 active:scale-90"
     :class="[btnColor, btnButtonTextPosition]"
   >
     <transition
