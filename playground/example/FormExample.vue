@@ -133,6 +133,7 @@ const clear = () => {
         :custom-field-name="{
           inputExample: 'Input',
           selectExample: 'Select',
+          textAreaExample: 'Text Area',
         }"
       >
         <div class="col-span-12">

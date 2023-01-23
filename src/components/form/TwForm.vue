@@ -6,7 +6,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { computed, defineComponent, onBeforeMount, provide, watch } from "vue";
+import { computed, defineComponent, provide, watch } from "vue";
 import { useForm } from "../../composables/form";
 import { generateId } from "../../utils/generateId";
 import type {
@@ -84,11 +84,15 @@ function validator() {
   }
   return form.value;
 }
-defineExpose({ validator });
+
+function submit() {
+  emit("submit");
+}
+defineExpose({ validator, submit });
 </script>
 
 <template>
-  <form v-bind="$attrs" @submit.prevent="emit('submit')">
+  <form v-bind="$attrs" @submit.prevent="submit">
     <slot></slot>
   </form>
 </template>

@@ -17,7 +17,7 @@ specifiers:
   eslint-plugin-cypress: ^2.12.1
   eslint-plugin-vue: ^9.3.0
   feather-icons: ^4.29.0
-  js-formdata-validator: ^0.2.0
+  js-formdata-validator: ^0.2.1
   jsdom: ^20.0.3
   npm-run-all: ^4.1.5
   postcss: ^8.4.19
@@ -32,7 +32,7 @@ specifiers:
 
 dependencies:
   feather-icons: 4.29.0
-  js-formdata-validator: 0.2.0
+  js-formdata-validator: 0.2.1
   vue: 3.2.45
 
 devDependencies:
@@ -2366,8 +2366,8 @@ packages:
     resolution: {integrity: sha512-Yljz7ffyPbrLpLngrMtZ7NduUgVvi6wG9RJ9IUcyCd59YQ911PBJphODUcbOVbqYfxe1wuYf/LJ8PauMRwsM/g==}
     dev: true
 
-  /js-formdata-validator/0.2.0:
-    resolution: {integrity: sha512-nA7bui3zAK5vd8zjhkujsUIea/ZL4J8UEhWkChLl/Jl9YvryZeUcORPK+0NxJLOnU+2Sr3SrcB22aqh1MXNDQw==}
+  /js-formdata-validator/0.2.1:
+    resolution: {integrity: sha512-Xv+teBmSYiEvOEyF/OF0wmU3j5ndS21PbREFkq6Mtx9WkIPy8UA6uRE1nKcfRluuKvd/j3Mn7nJ3oLmLr+WZUA==}
     dev: false
 
   /js-sdsl/4.2.0:
