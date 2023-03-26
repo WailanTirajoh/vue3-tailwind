@@ -22,9 +22,6 @@ const calendar = ref<Calendar>();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 const tempYear = ref(new Date().getFullYear());
-const thisYear = ref(new Date().getFullYear());
-
-const yearCounter = ref(10);
 const minYear = ref(new Date().getFullYear() - 10);
 const maxYear = ref(new Date().getFullYear() + 10);
 
