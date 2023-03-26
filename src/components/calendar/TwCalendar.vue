@@ -22,6 +22,11 @@ const calendar = ref<Calendar>();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 const tempYear = ref(new Date().getFullYear());
+const thisYear = ref(new Date().getFullYear());
+
+const yearCounter = ref(10);
+const minYear = ref(new Date().getFullYear() - 10);
+const maxYear = ref(new Date().getFullYear() + 10);
 
 // create an array to store the names of the months
 const monthNames = [
@@ -179,6 +184,21 @@ function monthChoose(monthIndex: number) {
   view.value = "date-view";
 }
 
+function yearChoose(year: number) {
+  tempYear.value = year;
+  view.value = "month-view";
+}
+
+function yearPrev() {
+  minYear.value = minYear.value - 20;
+  maxYear.value = maxYear.value - 20;
+}
+
+function yearNext() {
+  minYear.value = minYear.value + 20;
+  maxYear.value = maxYear.value + 20;
+}
+
 onMounted(() => {
   generateCalendarRef();
 });
@@ -280,6 +300,7 @@ onMounted(() => {
       <div class="flex justify-between gap-4">
         <button
           class="text-2xl font-bold hover:bg-gray-100 w-full text-left p-2 flex items-center rounded"
+          @click="view = 'year-view'"
         >
           {{ tempYear }}
         </button>
@@ -326,7 +347,7 @@ onMounted(() => {
       </div>
       <div class="grid grid-cols-4">
         <button
-          class="h-36 hover:bg-gray-200 flex justify-center items-center text-lg duration-300 ease-in-out"
+          class="h-36 hover:bg-gray-200 flex justify-center items-center text-lg duration-300 ease-in-out border"
           v-for="(month, index) in monthNames"
           :key="`month-${index}`"
           @click="monthChoose(index)"
@@ -335,6 +356,65 @@ onMounted(() => {
           }"
         >
           {{ month }}
+        </button>
+      </div>
+    </template>
+    <template v-else-if="view === 'year-view'"
+      ><div class="flex justify-between gap-4">
+        <button
+          class="text-2xl font-bold w-full text-left p-2 flex items-center rounded text-gray-600 cursor-not-allowed"
+        >
+          {{ minYear + 1 }} - {{ maxYear }}
+        </button>
+        <div class="flex gap-2 justify-end items-center">
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="yearPrev"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          </button>
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="yearNext"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-4">
+        <button
+          class="h-16 text-lg text-center hover:bg-gray-200 border flex items-center justify-center duration-300 ease-in-out"
+          v-for="i in 20"
+          :key="`year-${i}`"
+          @click="yearChoose(minYear + i)"
+        >
+          {{ minYear + i }}
         </button>
       </div>
     </template>
