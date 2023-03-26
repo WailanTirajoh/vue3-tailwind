@@ -11,6 +11,7 @@ import TwDatatableServer from "./datatable/TwDatatableServer.vue";
 import TwToast from "./toast/TwToast.vue";
 import TwDropdownMenu from "./dropdown/TwDropdownMenu.vue";
 import TwAccordion from "./accordion/TwAccordion.vue";
+import TwCalendar from "./calendar/TwCalendar.vue";
 
 import TwForm from "./form/TwForm.vue";
 import TwErrorMessage from "./form/TwErrorMessage.vue";
@@ -48,4 +49,5 @@ export {
   TwTabWrapper,
   TwTabNavigator,
   TwTabBody,
+  TwCalendar,
 };

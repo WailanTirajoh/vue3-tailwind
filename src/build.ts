@@ -23,6 +23,7 @@ import {
   TwTabWrapper,
   TwTabNavigator,
   TwTabBody,
+  TwCalendar,
 } from "./components";
 
 import Ripple from "./directives/ripple";
@@ -78,6 +79,7 @@ export {
   TwTabWrapper,
   TwTabNavigator,
   TwTabBody,
+  TwCalendar,
 };
 
 // Export composables
@@ -108,6 +110,7 @@ export const Vue3Tailwind = function install(app: App) {
     TwTabWrapper,
     TwTabNavigator,
     TwTabBody,
+    TwCalendar,
   };
 
   Object.values(components).forEach((component) => {
