@@ -18,12 +18,10 @@ interface Calendar {
   year: number;
 }
 
+// Date View
 const calendar = ref<Calendar>();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
-const tempYear = ref(new Date().getFullYear());
-const minYear = ref(new Date().getFullYear() - 10);
-const maxYear = ref(new Date().getFullYear() + 10);
 
 // create an array to store the names of the months
 const monthNames = [
@@ -44,12 +42,15 @@ const monthNames = [
 // create an array to store the day names
 const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+// computed helper to find date based on week & date name
 const findDate = computed(() => (week: Week, dateName: string) => {
   return week.days.filter((d) => d.name === dateName)[0];
 });
 
+// available views
 const view = ref<"date-view" | "month-view" | "year-view">("date-view");
 
+// Generate calendar based on year & month
 function generateCalendarRef() {
   // create a new date object for the first day of the current month
   const firstDay = new Date(currentYear.value, currentMonth.value, 1);
@@ -165,6 +166,10 @@ function dateNext() {
   }
   generateCalendarRef();
 }
+// End Date View
+
+// Month View
+const tempYear = ref(new Date().getFullYear());
 
 function monthPrev() {
   tempYear.value--;
@@ -180,11 +185,11 @@ function monthChoose(monthIndex: number) {
   generateCalendarRef();
   view.value = "date-view";
 }
+// End Month view
 
-function yearChoose(year: number) {
-  tempYear.value = year;
-  view.value = "month-view";
-}
+// Year View
+const minYear = ref(new Date().getFullYear() - 10);
+const maxYear = ref(new Date().getFullYear() + 10);
 
 function yearPrev() {
   minYear.value = minYear.value - 20;
@@ -195,6 +200,12 @@ function yearNext() {
   minYear.value = minYear.value + 20;
   maxYear.value = maxYear.value + 20;
 }
+
+function yearChoose(year: number) {
+  tempYear.value = year;
+  view.value = "month-view";
+}
+// End Year View
 
 onMounted(() => {
   generateCalendarRef();
