@@ -21,29 +21,32 @@ interface Calendar {
 const calendar = ref<Calendar>();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
+const tempYear = ref(new Date().getFullYear());
 
 // create an array to store the names of the months
 const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
   "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];
 
 // create an array to store the day names
-const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 const findDate = computed(() => (week: Week, dateName: string) => {
   return week.days.filter((d) => d.name === dateName)[0];
 });
+
+const view = ref<"date-view" | "month-view" | "year-view">("date-view");
 
 function generateCalendarRef() {
   // create a new date object for the first day of the current month
@@ -141,7 +144,7 @@ function generateCalendarRef() {
   calendar.value = generateCalendar;
 }
 
-function fprevMont() {
+function datePrev() {
   if (currentMonth.value - 1 === 0) {
     currentYear.value = currentYear.value - 1;
     currentMonth.value = 11;
@@ -151,7 +154,7 @@ function fprevMont() {
   generateCalendarRef();
 }
 
-function fnextMonth() {
+function dateNext() {
   if (currentMonth.value + 1 > 11) {
     currentYear.value = currentYear.value + 1;
     currentMonth.value = 0;
@@ -161,83 +164,179 @@ function fnextMonth() {
   generateCalendarRef();
 }
 
+function monthPrev() {
+  tempYear.value--;
+}
+
+function monthNext() {
+  tempYear.value++;
+}
+
+function monthChoose(monthIndex: number) {
+  currentMonth.value = monthIndex;
+  currentYear.value = tempYear.value;
+  generateCalendarRef();
+  view.value = "date-view";
+}
+
 onMounted(() => {
   generateCalendarRef();
 });
 </script>
 
 <template>
-  <div class="w-full bg-white p-4 rounded shadow grid gap-4" v-if="calendar">
-    <div class="flex justify-between">
-      <div class="text-2xl font-bold">
-        {{ calendar.month }}
-        {{ calendar.year }}
-      </div>
-      <div class="flex gap-2 justify-end items-center">
+  <div class="bg-white p-4 rounded shadow grid gap-4" v-if="calendar">
+    <template v-if="view === 'date-view'">
+      <div class="flex justify-between gap-4">
         <button
-          class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
-          @click="fprevMont"
+          class="text-2xl font-bold hover:bg-gray-100 w-full text-left p-2 flex items-center rounded"
+          @click="view = 'month-view'"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M4.5 15.75l7.5-7.5 7.5 7.5"
-            />
-          </svg>
+          {{ calendar.month }}
+          {{ calendar.year }}
         </button>
-        <button
-          class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
-          @click="fnextMonth"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
+        <div class="flex gap-2 justify-end items-center">
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="datePrev"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-            />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          </button>
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="dateNext"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th class="p-4 border" v-for="day in dayNames" :key="day">
+              {{ day }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(week, index) in calendar.weeks" :key="`week-${index}`">
+            <td
+              class="hover:bg-gray-50 border relative"
+              :class="{
+                'text-gray-400 hover:bg-white':
+                  (index === 0 && findDate(week, day).date > 15) ||
+                  (index > 3 && findDate(week, day).date < 15),
+              }"
+              v-for="day in dayNames"
+              :key="findDate(week, day).jsDate.toDateString()"
+            >
+              <div class="p-4">
+                <slot name="date" :date="findDate(week, day)">
+                  <div
+                    class="absolute top-2 right-2"
+                    :class="{
+                      'bg-gray-600 text-white rounded w-6 h-6 flex items-center justify-center':
+                        findDate(week, day).jsDate.toDateString() ===
+                        new Date().toDateString(),
+                    }"
+                  >
+                    {{ findDate(week, day).date }}
+                  </div>
+                  &nbsp;
+                </slot>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+    <template v-else-if="view === 'month-view'">
+      <div class="flex justify-between gap-4">
+        <button
+          class="text-2xl font-bold hover:bg-gray-100 w-full text-left p-2 flex items-center rounded"
+        >
+          {{ tempYear }}
+        </button>
+        <div class="flex gap-2 justify-end items-center">
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="monthPrev"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 15.75l7.5-7.5 7.5 7.5"
+              />
+            </svg>
+          </button>
+          <button
+            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            @click="monthNext"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-4">
+        <button
+          class="h-36 hover:bg-gray-200 flex justify-center items-center text-lg duration-300 ease-in-out"
+          v-for="(month, index) in monthNames"
+          :key="`month-${index}`"
+          @click="monthChoose(index)"
+          :class="{
+            'font-bold': month === calendar.month && tempYear === calendar.year,
+          }"
+        >
+          {{ month }}
         </button>
       </div>
-    </div>
-    <table class="w-full">
-      <thead>
-        <tr>
-          <th class="p-4 border" v-for="day in dayNames" :key="day">
-            {{ day }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(week, index) in calendar.weeks" :key="`week-${index}`">
-          <td
-            class="p-4 hover:bg-gray-50 border"
-            :class="{
-              'text-gray-400 hover:bg-white':
-                (index === 0 && findDate(week, day).date > 15) ||
-                (index > 3 && findDate(week, day).date < 15),
-            }"
-            v-for="day in dayNames"
-            :key="day"
-          >
-            {{ findDate(week, day).date }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    </template>
   </div>
 </template>
