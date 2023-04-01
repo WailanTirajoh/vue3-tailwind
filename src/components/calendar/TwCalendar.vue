@@ -18,29 +18,33 @@ interface Calendar {
   year: number;
 }
 
+interface Props {
+  monthNames?: Array<string>;
+  dayNames?: Array<string>;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  monthNames: () => [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  dayNames: () => ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+});
+
 // Date View
 const calendar = ref<Calendar>();
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
-
-// create an array to store the names of the months
-const monthNames = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-// create an array to store the day names
-const dayNames = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
 // computed helper to find date based on week & date name
 const findDate = computed(() => (week: Week, dateName: string) => {
@@ -57,7 +61,7 @@ function generateCalendarRef() {
 
   // create an object to store the calendar data
   const generateCalendar: Calendar = {
-    month: monthNames[currentMonth.value],
+    month: props.monthNames[currentMonth.value],
     year: currentYear.value,
     weeks: [],
   };
@@ -86,9 +90,9 @@ function generateCalendarRef() {
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < day) {
         week.days.push({
-          name: dayNames[j],
+          name: props.dayNames[j],
           date: daysInPrevMonth - (day - j - 1),
-          month: monthNames[prevMonth],
+          month: props.monthNames[prevMonth],
           year: prevYear,
           fulldate: `${prevYear}-${(prevMonth + 1)
             .toString()
@@ -106,9 +110,9 @@ function generateCalendarRef() {
       } else {
         if (date <= daysInMonth) {
           week.days.push({
-            name: dayNames[j],
+            name: props.dayNames[j],
             date: date,
-            month: monthNames[currentMonth.value],
+            month: props.monthNames[currentMonth.value],
             year: currentYear.value,
             fulldate: `${currentYear.value}-${(currentMonth.value + 1)
               .toString()
@@ -126,9 +130,9 @@ function generateCalendarRef() {
             nextYear++;
           }
           week.days.push({
-            name: dayNames[j],
+            name: props.dayNames[j],
             date: date - daysInMonth,
-            month: monthNames[nextMonth],
+            month: props.monthNames[nextMonth],
             year: nextYear,
             fulldate: `${nextYear}-${(nextMonth + 1)
               .toString()
@@ -214,9 +218,10 @@ onMounted(() => {
 
 <template>
   <div
-    class="bg-white dark:bg-gray-700 p-4 rounded shadow grid gap-4"
+    class="bg-white dark:bg-gray-700 p-4 rounded shadow grid gap-4 w-full"
     v-if="calendar"
   >
+    <!-- Date View -->
     <template v-if="view === 'date-view'">
       <div class="flex justify-between gap-4">
         <button
@@ -272,7 +277,7 @@ onMounted(() => {
           <tr>
             <th
               class="p-4 border dark:border-gray-400"
-              v-for="day in dayNames"
+              v-for="day in props.dayNames"
               :key="day"
             >
               {{ day }}
@@ -288,7 +293,7 @@ onMounted(() => {
                   (index === 0 && findDate(week, day).date > 15) ||
                   (index > 3 && findDate(week, day).date < 15),
               }"
-              v-for="day in dayNames"
+              v-for="day in props.dayNames"
               :key="findDate(week, day).jsDate.toDateString()"
             >
               <div class="p-4">
@@ -311,6 +316,9 @@ onMounted(() => {
         </tbody>
       </table>
     </template>
+    <!-- End Date View -->
+
+    <!-- Month View -->
     <template v-else-if="view === 'month-view'">
       <div class="flex justify-between gap-4">
         <button
@@ -363,7 +371,7 @@ onMounted(() => {
       <div class="grid grid-cols-4">
         <button
           class="h-36 hover:bg-gray-200 dark:hover:bg-gray-600 flex justify-center items-center text-lg duration-300 ease-in-out border dark:border-gray-400"
-          v-for="(month, index) in monthNames"
+          v-for="(month, index) in props.monthNames"
           :key="`month-${index}`"
           @click="monthChoose(index)"
           :class="{
@@ -374,6 +382,9 @@ onMounted(() => {
         </button>
       </div>
     </template>
+    <!-- End Month View -->
+
+    <!-- Year View -->
     <template v-else-if="view === 'year-view'">
       <div class="flex justify-between gap-4">
         <button
@@ -433,5 +444,6 @@ onMounted(() => {
         </button>
       </div>
     </template>
+    <!-- End Year View -->
   </div>
 </template>
