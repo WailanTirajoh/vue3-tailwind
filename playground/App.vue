@@ -12,6 +12,7 @@ import AccordionExample from "./example/AccordionExample.vue";
 
 import { TwToggle, TwDialog } from "../src/build";
 import { onMounted, ref, watch } from "vue";
+import CalendarExample from "./example/CalendarExample.vue";
 
 const dark = ref(false);
 watch(dark, (value) => {
@@ -54,6 +55,11 @@ onMounted(async () => {
       class="flex justify-center py-4 bg-gray-300 min-h-screen dark:bg-gray-800"
     >
       <div class="grid gap-2">
+        <div
+          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+        >
+          <CalendarExample />
+        </div>
         <div
           class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
         >
