@@ -213,11 +213,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-white p-4 rounded shadow grid gap-4" v-if="calendar">
+  <div
+    class="bg-white dark:bg-gray-700 p-4 rounded shadow grid gap-4"
+    v-if="calendar"
+  >
     <template v-if="view === 'date-view'">
       <div class="flex justify-between gap-4">
         <button
-          class="text-2xl font-bold hover:bg-gray-100 w-full text-left p-2 flex items-center rounded"
+          class="text-2xl font-bold hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-left p-2 flex items-center rounded"
           @click="view = 'month-view'"
         >
           {{ calendar.month }}
@@ -225,7 +228,7 @@ onMounted(() => {
         </button>
         <div class="flex gap-2 justify-end items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="datePrev"
           >
             <svg
@@ -244,7 +247,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="dateNext"
           >
             <svg
@@ -267,7 +270,11 @@ onMounted(() => {
       <table>
         <thead>
           <tr>
-            <th class="p-4 border" v-for="day in dayNames" :key="day">
+            <th
+              class="p-4 border dark:border-gray-400"
+              v-for="day in dayNames"
+              :key="day"
+            >
               {{ day }}
             </th>
           </tr>
@@ -275,7 +282,7 @@ onMounted(() => {
         <tbody>
           <tr v-for="(week, index) in calendar.weeks" :key="`week-${index}`">
             <td
-              class="hover:bg-gray-50 border relative"
+              class="hover:bg-gray-50 dark:hover:bg-gray-600 border dark:border-gray-400 relative"
               :class="{
                 'text-gray-400 hover:bg-white':
                   (index === 0 && findDate(week, day).date > 15) ||
@@ -307,14 +314,14 @@ onMounted(() => {
     <template v-else-if="view === 'month-view'">
       <div class="flex justify-between gap-4">
         <button
-          class="text-2xl font-bold hover:bg-gray-100 w-full text-left p-2 flex items-center rounded"
+          class="text-2xl font-bold hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-left p-2 flex items-center rounded"
           @click="view = 'year-view'"
         >
           {{ tempYear }}
         </button>
         <div class="flex gap-2 justify-end items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="monthPrev"
           >
             <svg
@@ -333,7 +340,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="monthNext"
           >
             <svg
@@ -355,7 +362,7 @@ onMounted(() => {
       </div>
       <div class="grid grid-cols-4">
         <button
-          class="h-36 hover:bg-gray-200 flex justify-center items-center text-lg duration-300 ease-in-out border"
+          class="h-36 hover:bg-gray-200 dark:hover:bg-gray-600 flex justify-center items-center text-lg duration-300 ease-in-out border dark:border-gray-400"
           v-for="(month, index) in monthNames"
           :key="`month-${index}`"
           @click="monthChoose(index)"
@@ -367,16 +374,16 @@ onMounted(() => {
         </button>
       </div>
     </template>
-    <template v-else-if="view === 'year-view'"
-      ><div class="flex justify-between gap-4">
+    <template v-else-if="view === 'year-view'">
+      <div class="flex justify-between gap-4">
         <button
-          class="text-2xl font-bold w-full text-left p-2 flex items-center rounded text-gray-600 cursor-not-allowed"
+          class="text-2xl font-bold w-full text-left p-2 flex items-center rounded text-gray-600 dark:text-gray-400 cursor-not-allowed"
         >
           {{ minYear + 1 }} - {{ maxYear }}
         </button>
         <div class="flex gap-2 justify-end items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="yearPrev"
           >
             <svg
@@ -395,7 +402,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
             @click="yearNext"
           >
             <svg
@@ -417,7 +424,7 @@ onMounted(() => {
       </div>
       <div class="grid grid-cols-4">
         <button
-          class="h-16 text-lg text-center hover:bg-gray-200 border flex items-center justify-center duration-300 ease-in-out"
+          class="h-16 text-lg text-center hover:bg-gray-200 dark:hover:bg-gray-600 border dark:border-gray-400 flex items-center justify-center duration-300 ease-in-out"
           v-for="i in 20"
           :key="`year-${i}`"
           @click="yearChoose(minYear + i)"
