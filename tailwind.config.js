@@ -2,6 +2,7 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
 module.exports = {
+  prefix: "vt-",
   content: ["./index.html", "./src/**/*.{js,ts,vue}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {

@@ -2,7 +2,7 @@
 @tailwind utilities;
 
 @layer components {
-  .outline-primary {
-    @apply outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)];
+  .vt-outline-primary {
+    @apply vt-outline-none focus:vt-border-transparent focus:vt-shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)];
   }
 }
