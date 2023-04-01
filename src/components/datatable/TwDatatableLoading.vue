@@ -19,25 +19,25 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <transition
-    enter-active-class="transition ease-out duration-200"
-    enter-class="transform opacity-0 scale-95"
-    enter-to-class="transform opacity-100 scale-100"
-    leave-active-class="transition ease-in duration-75"
-    leave-class="transform opacity-100 scale-100"
-    leave-to-class="transform opacity-0 scale-95"
+    enter-active-class="vt-transition vt-ease-out vt-duration-200"
+    enter-class="vt-transform vt-opacity-0 vt-scale-95"
+    enter-to-class="vt-transform vt-opacity-100 vt-scale-100"
+    leave-active-class="vt-transition vt-ease-in vt-duration-75"
+    leave-class="vt-transform vt-opacity-100 vt-scale-100"
+    leave-to-class="vt-transform vt-opacity-0 vt-scale-95"
   >
     <div
       v-if="show"
-      class="text-xs absolute top-1/3 left-1/2 grid gap-3 z-10 p-4"
+      class="vt-text-xs vt-absolute vt-top-1/3 vt-left-1/2 vt-grid vt-gap-3 vt-z-10 vt-p-4"
     >
-      <div class="flex justify-center">
+      <div class="vt-flex vt-justify-center">
         <div
-          class="rounded-full glassmorphism w-14 h-14 flex items-center justify-center"
+          class="vt-rounded-full vt-glassmorphism vt-w-14 vt-h-14 vt-flex vt-items-center vt-justify-center"
         >
           <TwDatatableCircleSpinner />
         </div>
       </div>
-      <div class="text-center text-gray-900">Please Wait</div>
+      <div class="vt-text-center vt-text-gray-900">Please Wait</div>
     </div>
   </transition>
 </template>
