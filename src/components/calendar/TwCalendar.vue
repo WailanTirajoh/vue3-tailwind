@@ -218,22 +218,22 @@ onMounted(() => {
 
 <template>
   <div
-    class="bg-white dark:bg-gray-700 p-4 rounded shadow grid gap-4 w-full"
+    class="vt-bg-white dark:vt-bg-gray-700 vt-p-4 vt-rounded vt-shadow vt-grid vt-gap-4 vt-w-full"
     v-if="calendar"
   >
     <!-- Date View -->
     <template v-if="view === 'date-view'">
-      <div class="flex justify-between gap-4">
+      <div class="vt-flex vt-justify-between vt-gap-4">
         <button
-          class="text-2xl font-bold hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-left p-2 flex items-center rounded"
+          class="vt-text-2xl vt-font-bold hover:vt-bg-gray-100 dark:hover:vt-bg-gray-600 vt-w-full vt-text-left vt-p-2 vt-flex vt-items-center vt-rounded"
           @click="view = 'month-view'"
         >
           {{ calendar.month }}
           {{ calendar.year }}
         </button>
-        <div class="flex gap-2 justify-end items-center">
+        <div class="vt-flex vt-gap-2 vt-justify-end vt-items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="datePrev"
           >
             <svg
@@ -242,7 +242,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -252,7 +252,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="dateNext"
           >
             <svg
@@ -261,7 +261,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -276,7 +276,7 @@ onMounted(() => {
         <thead>
           <tr>
             <th
-              class="p-4 border dark:border-gray-400"
+              class="vt-p-4 vt-border dark:vt-border-gray-400"
               v-for="day in props.dayNames"
               :key="day"
             >
@@ -287,21 +287,21 @@ onMounted(() => {
         <tbody>
           <tr v-for="(week, index) in calendar.weeks" :key="`week-${index}`">
             <td
-              class="hover:bg-gray-50 dark:hover:bg-gray-600 border dark:border-gray-400 relative"
+              class="hover:vt-bg-gray-50 dark:hover:vt-bg-gray-600 vt-border dark:vt-border-gray-400 vt-relative"
               :class="{
-                'text-gray-400 hover:bg-white':
+                'vt-text-gray-400 hover:vt-bg-white':
                   (index === 0 && findDate(week, day).date > 15) ||
                   (index > 3 && findDate(week, day).date < 15),
               }"
               v-for="day in props.dayNames"
               :key="findDate(week, day).jsDate.toDateString()"
             >
-              <div class="p-4">
+              <div class="vt-p-4">
                 <slot name="date" :date="findDate(week, day)">
                   <div
-                    class="absolute top-2 right-2"
+                    class="vt-absolute vt-top-2 vt-right-2"
                     :class="{
-                      'bg-gray-600 text-white rounded w-6 h-6 flex items-center justify-center':
+                      'vt-bg-gray-600 vt-text-white vt-rounded vt-w-6 vt-h-6 vt-flex vt-items-center vt-justify-center':
                         findDate(week, day).jsDate.toDateString() ===
                         new Date().toDateString(),
                     }"
@@ -320,16 +320,16 @@ onMounted(() => {
 
     <!-- Month View -->
     <template v-else-if="view === 'month-view'">
-      <div class="flex justify-between gap-4">
+      <div class="vt-flex vt-justify-between vt-gap-4">
         <button
-          class="text-2xl font-bold hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-left p-2 flex items-center rounded"
+          class="vt-text-2xl vt-font-bold hover:vt-bg-gray-100 dark:hover:vt-bg-gray-600 vt-w-full vt-text-left vt-p-2 vt-flex vt-items-center vt-rounded"
           @click="view = 'year-view'"
         >
           {{ tempYear }}
         </button>
-        <div class="flex gap-2 justify-end items-center">
+        <div class="vt-flex vt-gap-2 vt-justify-end vt-items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="monthPrev"
           >
             <svg
@@ -338,7 +338,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -348,7 +348,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="monthNext"
           >
             <svg
@@ -357,7 +357,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -368,14 +368,15 @@ onMounted(() => {
           </button>
         </div>
       </div>
-      <div class="grid grid-cols-4">
+      <div class="vt-grid vt-grid-cols-4">
         <button
-          class="h-36 hover:bg-gray-200 dark:hover:bg-gray-600 flex justify-center items-center text-lg duration-300 ease-in-out border dark:border-gray-400"
+          class="vt-h-36 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-justify-center vt-items-center vt-text-lg vt-duration-300 vt-ease-in-out vt-border dark:vt-border-gray-400"
           v-for="(month, index) in props.monthNames"
           :key="`month-${index}`"
           @click="monthChoose(index)"
           :class="{
-            'font-bold': month === calendar.month && tempYear === calendar.year,
+            'vt-font-bold':
+              month === calendar.month && tempYear === calendar.year,
           }"
         >
           {{ month }}
@@ -386,15 +387,15 @@ onMounted(() => {
 
     <!-- Year View -->
     <template v-else-if="view === 'year-view'">
-      <div class="flex justify-between gap-4">
+      <div class="vt-flex vt-justify-between vt-gap-4">
         <button
-          class="text-2xl font-bold w-full text-left p-2 flex items-center rounded text-gray-600 dark:text-gray-400 cursor-not-allowed"
+          class="vt-text-2xl vt-font-bold vt-w-full vt-text-left vt-p-2 vt-flex vt-items-center vt-rounded vt-text-gray-600 dark:vt-text-gray-400 vt-cursor-not-allowed"
         >
           {{ minYear + 1 }} - {{ maxYear }}
         </button>
-        <div class="flex gap-2 justify-end items-center">
+        <div class="vt-flex vt-gap-2 vt-justify-end vt-items-center">
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="yearPrev"
           >
             <svg
@@ -403,7 +404,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -413,7 +414,7 @@ onMounted(() => {
             </svg>
           </button>
           <button
-            class="w-10 h-10 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center rounded duration-300 ease-in-out"
+            class="vt-w-10 vt-h-10 hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-flex vt-items-center vt-justify-center vt-rounded vt-duration-300 vt-ease-in-out"
             @click="yearNext"
           >
             <svg
@@ -422,7 +423,7 @@ onMounted(() => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="vt-w-6 vt-h-6"
             >
               <path
                 stroke-linecap="round"
@@ -433,9 +434,9 @@ onMounted(() => {
           </button>
         </div>
       </div>
-      <div class="grid grid-cols-4">
+      <div class="vt-grid vt-grid-cols-4">
         <button
-          class="h-16 text-lg text-center hover:bg-gray-200 dark:hover:bg-gray-600 border dark:border-gray-400 flex items-center justify-center duration-300 ease-in-out"
+          class="vt-h-16 vt-text-lg vt-text-center hover:vt-bg-gray-200 dark:hover:vt-bg-gray-600 vt-border dark:vt-border-gray-400 vt-flex vt-items-center vt-justify-center vt-duration-300 vt-ease-in-out"
           v-for="i in 20"
           :key="`year-${i}`"
           @click="yearChoose(minYear + i)"

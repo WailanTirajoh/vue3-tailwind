@@ -59,7 +59,7 @@ function copyTextToClipboard(text: string | number | boolean | undefined) {
     <slot />
     <div
       v-show="contextMenu.isShown"
-      class="fixed inset-0 z-40"
+      class="vt-fixed vt-inset-0 vt-z-40"
       @click="theadContextCloseHandler()"
       @contextmenu.prevent="theadContextCloseHandler()"
       @scroll="theadContextCloseHandler()"
@@ -67,14 +67,14 @@ function copyTextToClipboard(text: string | number | boolean | undefined) {
     <div
       v-if="copyText"
       v-show="contextMenu.isShown"
-      class="fixed z-50 w-52 bg-white dark:bg-gray-800 rounded-lg cst-shadow border dark:border-gray-700 text-gray-600 dark:text-gray-200 flex flex-col gap-3"
+      class="vt-fixed vt-z-50 vt-w-52 vt-bg-white dark:vt-bg-gray-800 vt-rounded-lg vt-cst-shadow vt-border dark:vt-border-gray-700 vt-text-gray-600 dark:vt-text-gray-200 vt-flex vt-flex-col vt-gap-3"
       :style="{
         left: contextMenu.clientX + 'px',
         top: contextMenu.clientY + 'px',
       }"
     >
       <div
-        class="bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 cursor-pointer p-2 rounded"
+        class="vt-bg-white hover:vt-bg-gray-50 dark:vt-bg-gray-800 dark:hover:vt-bg-gray-900 vt-cursor-pointer vt-p-2 vt-rounded"
         @click="copyTextToClipboard(copyText)"
       >
         Copy to clipboard

@@ -30,16 +30,16 @@ const position = ref(props.position);
 
 const classPosition = computed(() => {
   if (props.position === "bottom-left") {
-    return "mr-auto bottom-4 ml-4";
+    return "vt-mr-auto vt-bottom-4 vt-ml-4";
   }
   if (props.position === "bottom-right") {
-    return "ml-auto bottom-4 mr-4";
+    return "vt-ml-auto vt-bottom-4 vt-mr-4";
   }
   if (props.position === "top-right") {
-    return "ml-auto top-4 mr-4";
+    return "vt-ml-auto vt-top-4 vt-mr-4";
   }
   if (props.position === "top-left") {
-    return "ml-auto top-4 ml-4";
+    return "vt-ml-auto vt-top-4 vt-ml-4";
   }
   return "";
 });
@@ -50,7 +50,7 @@ const classPosition = computed(() => {
     <transition-group
       tag="ul"
       name="list"
-      class="w-80 fixed inset-x-0 z-50 grid gap-2 break-words pt-3 px-4"
+      class="vt-w-80 vt-fixed vt-inset-x-0 vt-z-50 vt-grid vt-gap-2 vt-break-words vt-pt-3 vt-px-4"
       :class="[classPosition, position, wrapperClass]"
       style="overflow-wrap: anywhere"
       appear
@@ -64,7 +64,7 @@ const classPosition = computed(() => {
           v-for="toast in props.toasts"
           :id="toast?.id"
           :key="`toast-${toast.id}`"
-          class="w-full"
+          class="vt-w-full"
           :message="toast.message"
           :type="toast.type"
           :lifetime="toast.lifetime"

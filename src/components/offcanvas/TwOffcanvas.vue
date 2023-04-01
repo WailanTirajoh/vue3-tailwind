@@ -39,10 +39,10 @@ const width = computed(() => {
 });
 
 const classMap: Record<OffcanvasPosition, string> = {
-  ["right"]: "top-0 right-0",
-  ["top"]: "left-0 top-0",
-  ["bottom"]: "left-0 bottom-0",
-  ["left"]: "top-0 left-0",
+  ["right"]: "vt-top-0 vt-right-0",
+  ["top"]: "vt-left-0 vt-top-0",
+  ["bottom"]: "vt-left-0 vt-bottom-0",
+  ["left"]: "vt-top-0 vt-left-0",
 };
 
 const classPosition = computed(() => classMap[props.position]);
@@ -63,10 +63,10 @@ defineExpose({ openOffCanvas, closeOffCanvas, toggleOffCanvas });
 onMounted(() => {
   watch(isOpen, (newValue) => {
     if (newValue) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("vt-overflow-hidden");
       emit("on-open");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("vt-overflow-hidden");
       emit("on-close");
     }
   });
@@ -81,7 +81,7 @@ onMounted(() => {
     <transition name="slide-fade">
       <div
         v-if="isOpen"
-        class="fixed z-50 flex flex-col max-w-full bg-white dark:bg-gray-800 dark:text-gray-300 bg-clip-padding transition-all duration-300 ease-in-out h-full shadow-2xl"
+        class="vt-fixed vt-z-50 vt-flex vt-flex-col vt-max-w-full vt-bg-white dark:vt-bg-gray-800 dark:vt-text-gray-300 vt-bg-clip-padding vt-transition-all vt-duration-300 vt-ease-in-out vt-h-full vt-shadow-2xl"
         :class="[classPosition, position]"
         :style="{
           width: width,
@@ -92,12 +92,12 @@ onMounted(() => {
       >
         <slot name="header">
           <div
-            class="flex justify-between p-4 border-b-2 dark:border-gray-700 border-b-gray-200 items-center"
+            class="vt-flex vt-justify-between vt-p-4 vt-border-b-2 dark:vt-border-gray-700 vt-border-b-gray-200 vt-items-center"
           >
             <slot name="headerTitle"></slot>
             <slot name="headerButton">
               <button
-                class="duration-200 p-1 ml-auto bg-transparent border-0 text-black dark:text-gray-50 opacity-30 hover:opacity-80 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                class="vt-duration-200 vt-p-1 vt-ml-auto vt-bg-transparent vt-border-0 vt-text-black dark:vt-text-gray-50 vt-opacity-30 hover:vt-opacity-80 vt-float-right vt-text-3xl vt-leading-none vt-font-semibold vt-outline-none focus:vt-outline-none"
                 @click="closeOffCanvas()"
               >
                 <TwFeather type="x" />
@@ -109,17 +109,20 @@ onMounted(() => {
       </div>
     </transition>
     <transition
-      enter-active-class="ease-out duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="ease-in duration-200"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+      enter-active-class="vt-ease-out vt-duration-300"
+      enter-from-class="vt-opacity-0"
+      enter-to-class="vt-opacity-100"
+      leave-active-class="vt-ease-in vt-duration-200"
+      leave-from-class="vt-opacity-100"
+      leave-to-class="vt-opacity-0"
     >
       <slot name="backdrop">
-        <div v-if="isOpen" class="fixed inset-0 transform transition-all z-10">
+        <div
+          v-if="isOpen"
+          class="vt-fixed vt-inset-0 vt-transform vt-transition-all vt-z-10"
+        >
           <div
-            class="absolute inset-0 bg-gray-900 opacity-50"
+            class="vt-absolute vt-inset-0 vt-bg-gray-900 vt-opacity-50"
             @click="
               closeOffCanvas();
               emit('backdrop-click');

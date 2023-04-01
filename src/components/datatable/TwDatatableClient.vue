@@ -208,14 +208,16 @@ function checkAllClick() {
 </script>
 
 <template>
-  <div class="grid grid-cols-12 gap-4">
-    <div class="col-span-12 flex justify-between items-center gap-8 text-xs">
-      <div class="flex gap-2 items-center">
+  <div class="vt-grid vt-grid-cols-12 vt-gap-4">
+    <div
+      class="vt-col-span-12 vt-flex vt-justify-between vt-items-center vt-gap-8 vt-text-xs"
+    >
+      <div class="vt-flex vt-gap-2 vt-items-center">
         <div>Show</div>
         <div>
           <select
             v-model="limit"
-            class="p-2 rounded border dark:bg-gray-900 appearance-none focus:border dark:border-gray-700 focus:ring-0 focus:outline-none custor-pointer"
+            class="vt-p-2 vt-rounded vt-border dark:vt-bg-gray-900 vt-appearance-none focus:vt-border dark:vt-border-gray-700 focus:vt-ring-0 focus:vt-outline-none vt-custor-pointer"
           >
             <option
               :value="v.value"
@@ -232,17 +234,17 @@ function checkAllClick() {
         <input
           v-model="search"
           type="text"
-          class="block w-full rounded text-gray-600 border dark:border-gray-700 focus:ring-0 focus:outline-none p-2 dark:bg-gray-900 font-normal"
+          class="vt-block vt-w-full vt-rounded vt-text-gray-600 vt-border dark:vt-border-gray-700 focus:vt-ring-0 focus:vt-outline-none vt-p-2 dark:vt-bg-gray-900 vt-font-normal"
           placeholder="Type something and press enter . . ."
           @keyup.enter="enterSearch()"
         />
       </div>
     </div>
-    <div class="col-span-12">
-      <div class="relative">
-        <div class="overflow-auto table-fix-head">
+    <div class="vt-col-span-12">
+      <div class="vt-relative">
+        <div class="vt-overflow-auto vt-table-fix-head">
           <table
-            class="tw-datatable resizable w-full rounded-lg border-separate border-spacing-y-4"
+            class="vt-tw-datatable vt-resizable vt-w-full vt-rounded-lg vt-border-separate vt-border-spacing-y-4"
             :summary="summary"
           >
             <slot name="thead" :data="data" :column="props.column">
@@ -254,7 +256,9 @@ function checkAllClick() {
                       width: '20px',
                     }"
                   >
-                    <div class="flex justify-center items-center px-2">
+                    <div
+                      class="vt-flex vt-justify-center vt-items-center vt-px-2"
+                    >
                       <input
                         type="checkbox"
                         v-model="checkAll"
@@ -269,7 +273,7 @@ function checkAllClick() {
                     :sort-by="sortBy"
                   >
                     <th
-                      class="select-none"
+                      class="vt-select-none"
                       :class="{
                         asc: sortBy == h.field && sortType == 'asc',
                         desc: sortBy == h.field && sortType == 'desc',
@@ -287,21 +291,23 @@ function checkAllClick() {
               </thead>
             </slot>
             <slot name="tbody" :data="data" :column="props.column">
-              <tbody class="text-sm" v-if="data.length > 0">
+              <tbody class="vt-text-sm" v-if="data.length > 0">
                 <tr
-                  class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700"
+                  class="vt-duration-300 hover:vt-bg-gray-50 dark:vt-bg-gray-800 dark:hover:vt-bg-gray-700 dark:vt-border-gray-700"
                   v-for="(d, i) in data"
                   :key="`body-${i}`"
                 >
                   <td
-                    class="duration-300 p-1 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                    class="vt-duration-300 vt-p-1 vt-bg-white dark:vt-bg-gray-800 dark:hover:vt-bg-gray-700 vt-relative dark:vt-border-gray-600 first:vt-rounded-l-lg last:vt-rounded-r-lg vt-py-4"
                     style="box-shadow: 20px 3px 20px #0000000b"
                     v-if="setting.checkbox"
                     :style="{
                       width: '20px',
                     }"
                   >
-                    <div class="flex justify-center items-center px-2">
+                    <div
+                      class="vt-flex vt-justify-center vt-items-center vt-px-2"
+                    >
                       <input
                         type="checkbox"
                         :value="d['id']"
@@ -310,7 +316,7 @@ function checkAllClick() {
                     </div>
                   </td>
                   <TwDatatableTd
-                    class="duration-300 p-1 bg-white dark:bg-gray-800 dark:hover:bg-gray-700 relative dark:border-gray-600 first:rounded-l-lg last:rounded-r-lg py-4"
+                    class="vt-duration-300 vt-p-1 vt-bg-white dark:vt-bg-gray-800 dark:hover:vt-bg-gray-700 vt-relative dark:vt-border-gray-600 first:vt-rounded-l-lg last:vt-rounded-r-lg vt-py-4"
                     style="box-shadow: 20px 3px 20px #0000000b"
                     :copyText="d[h.field] ?? ''"
                     v-for="h in props.column"
@@ -335,12 +341,12 @@ function checkAllClick() {
                   </TwDatatableTd>
                 </tr>
               </tbody>
-              <tbody class="text-sm" v-else>
+              <tbody class="vt-text-sm" v-else>
                 <tr
-                  class="duration-300 hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700"
+                  class="vt-duration-300 hover:vt-bg-gray-50 dark:vt-bg-gray-800 dark:hover:vt-bg-gray-900 dark:vt-border-gray-700"
                 >
                   <td
-                    class="duration-300 p-1 hover:bg-gray-100 border dark:hover:bg-gray-900 relative dark:border-gray-600"
+                    class="vt-duration-300 vt-p-1 hover:vt-bg-gray-100 vt-border dark:hover:vt-bg-gray-900 vt-relative dark:vt-border-gray-600"
                     :colspan="props.column.length + (setting.checkbox ? 1 : 0)"
                   >
                     <slot name="empty"></slot>
@@ -353,9 +359,12 @@ function checkAllClick() {
         <TwDatatableLoading :show="isLoading" />
       </div>
     </div>
-    <div class="col-span-12">
-      <div v-if="totalData > 0" class="flex items-center justify-between">
-        <div class="text-xs">
+    <div class="vt-col-span-12">
+      <div
+        v-if="totalData > 0"
+        class="vt-flex vt-items-center vt-justify-between"
+      >
+        <div class="vt-text-xs">
           Showing from {{ showFrom }} to {{ showTo }} of total
           {{ totalData }} data
         </div>
@@ -367,7 +376,7 @@ function checkAllClick() {
             :is-loading="isLoading"
             :per-page="limit"
             @change-current-page="updateCurrentPage"
-            class="text-xs"
+            class="vt-text-xs"
           />
         </div>
       </div>

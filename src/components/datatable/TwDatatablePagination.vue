@@ -39,13 +39,13 @@ function changeCurrentPage(page: number) {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="vt-flex">
     <button
       aria-label="pagination-prev-button"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
+      class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out"
       :class="{
-        'cursor-not-allowed': currentPage - 1 < 1,
-        'cursor-wait': isLoading,
+        'vt-cursor-not-allowed': currentPage - 1 < 1,
+        'vt-cursor-wait': isLoading,
       }"
       :disabled="currentPage - 1 < 1 || isLoading"
       @click="changeCurrentPage(currentPage - 1)"
@@ -58,11 +58,11 @@ function changeCurrentPage(page: number) {
       </svg>
     </button>
     <button
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
+      class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out vt-overflow-hidden"
       :class="{
         '': currentPage != 1,
-        'bg-white dark:bg-gray-700 rounded-lg': currentPage == 1,
-        'cursor-wait': isLoading,
+        'vt-bg-white dark:vt-bg-gray-700 vt-rounded-lg': currentPage == 1,
+        'vt-cursor-wait': isLoading,
       }"
       :disabled="isLoading"
       @click="changeCurrentPage(1)"
@@ -74,12 +74,12 @@ function changeCurrentPage(page: number) {
         <div v-for="index in arrEachSide" :key="index">
           <button
             v-if="totalPage - index > 1"
-            class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
+            class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out vt-overflow-hidden"
             :class="{
               '': currentPage != totalPage - index,
-              'bg-white dark:bg-gray-700 rounded-lg':
+              'vt-bg-white dark:vt-bg-gray-700 vt-rounded-lg':
                 currentPage == totalPage - index,
-              'cursor-wait': isLoading,
+              'vt-cursor-wait': isLoading,
             }"
             :disabled="isLoading"
             @click="changeCurrentPage(totalPage - index)"
@@ -92,12 +92,12 @@ function changeCurrentPage(page: number) {
         <div v-for="index in eachSide" :key="index">
           <button
             v-if="index - 2 + currentPage > 1"
-            class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
+            class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out vt-overflow-hidden"
             :class="{
               '': currentPage != index - 2 + currentPage,
-              'bg-white dark:bg-gray-700 rounded-lg':
+              'vt-bg-white dark:vt-bg-gray-700 vt-rounded-lg':
                 currentPage == index - 2 + currentPage,
-              'cursor-wait': isLoading,
+              'vt-cursor-wait': isLoading,
             }"
             :disabled="isLoading"
             @click="changeCurrentPage(index - 2 + currentPage)"
@@ -107,9 +107,9 @@ function changeCurrentPage(page: number) {
         </div>
         <button
           v-if="currentPage === 1"
-          class="p-2 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
+          class="vt-p-2 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out"
           :class="{
-            'cursor-wait': isLoading,
+            'vt-cursor-wait': isLoading,
           }"
           :disabled="isLoading"
           @click="changeCurrentPage(3)"
@@ -118,9 +118,9 @@ function changeCurrentPage(page: number) {
         </button>
         <button
           v-if="currentPage === 2 || currentPage === 1"
-          class="p-2 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
+          class="vt-p-2 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out"
           :class="{
-            'cursor-wait': isLoading,
+            'vt-cursor-wait': isLoading,
           }"
           :disabled="isLoading"
           @click="changeCurrentPage(4)"
@@ -131,11 +131,12 @@ function changeCurrentPage(page: number) {
     </template>
     <button
       v-if="totalPage - 1 > 0"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out overflow-hidden"
+      class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out vt-overflow-hidden"
       :class="{
         '': currentPage != totalPage,
-        'bg-white dark:bg-gray-700 rounded-lg': currentPage == totalPage,
-        'cursor-wait': isLoading,
+        'vt-bg-white dark:vt-bg-gray-700 vt-rounded-lg':
+          currentPage == totalPage,
+        'vt-cursor-wait': isLoading,
       }"
       :disabled="isLoading"
       @click="changeCurrentPage(totalPage)"
@@ -144,10 +145,10 @@ function changeCurrentPage(page: number) {
     </button>
     <button
       aria-label="pagination-next-button"
-      class="p-1 flex justify-center items-center w-8 h-8 transition-all ease-in-out"
+      class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out"
       :class="{
-        'cursor-not-allowed': currentPage + 1 > totalPage,
-        'cursor-wait': isLoading,
+        'vt-cursor-not-allowed': currentPage + 1 > totalPage,
+        'vt-cursor-wait': isLoading,
       }"
       :disabled="currentPage + 1 > totalPage || isLoading"
       @click="changeCurrentPage(currentPage + 1)"
@@ -163,11 +164,11 @@ function changeCurrentPage(page: number) {
 </template>
 
 <style scoped>
-.text-red-cst {
+.vt-text-red-cst {
   color: #339eff;
 }
 
-.dark .text-red-cst {
+.dark .vt-text-red-cst {
   color: #ebebeb;
 }
 </style>

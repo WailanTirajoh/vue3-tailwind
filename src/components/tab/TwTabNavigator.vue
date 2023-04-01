@@ -72,16 +72,16 @@ const lineStyle = computed(() => {
 </script>
 
 <template>
-  <nav class="relative flex flex-col w-44">
+  <nav class="vt-relative vt-flex vt-flex-col vt-w-44">
     <ul
       :class="{
-        flex: props.type === 'horizontal',
+        'vt-flex': props.type === 'horizontal',
       }"
     >
       <li v-for="tab in tabWrapper.childrens" :key="tab">
         <a
           href="#"
-          class="block"
+          class="vt-block"
           :ref="el => { tabRefs[tab] = el as HTMLElement }"
           @click.prevent="changeTab(tab)"
         >
@@ -91,11 +91,11 @@ const lineStyle = computed(() => {
         </a>
       </li>
       <div
-        class="absolute w-1 h-1 bottom-0 bg-gray-900 duration-300 ease"
+        class="vt-absolute vt-w-1 vt-h-1 vt-bottom-0 vt-bg-gray-900 vt-duration-300 vt-ease"
         :class="[
           {
-            'bottom-0': props.type === 'horizontal',
-            'top-0': props.type === 'vertical',
+            'vt-bottom-0': props.type === 'horizontal',
+            'vt-top-0': props.type === 'vertical',
           },
           lineClass,
         ]"

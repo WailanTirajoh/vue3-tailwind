@@ -47,17 +47,17 @@ officiis debitis fuga repellendus? Quam!
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Offcanvas</h2>
-    <hr class="my-2 border dark:border-gray-700" />
-    <div class="grid grid-cols-12 gap-2">
-      <div class="col-span-12">
-        <div class="grid md:flex gap-2">
+    <h2 class="vt-text-2xl vt-font-bold">Offcanvas</h2>
+    <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
+    <div class="vt-grid vt-grid-cols-12 vt-gap-2">
+      <div class="vt-col-span-12">
+        <div class="vt-grid md:vt-flex vt-gap-2">
           <TwOffcanvas position="left">
             <template #trigger>
               <TwButton> Left Offcanvas </TwButton>
             </template>
             <template #headerTitle> Left Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>
@@ -66,7 +66,7 @@ officiis debitis fuga repellendus? Quam!
               <TwButton> Right Offcanvas </TwButton>
             </template>
             <template #headerTitle> Right Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>
@@ -75,7 +75,7 @@ officiis debitis fuga repellendus? Quam!
               <TwButton> Right Offcanvas with width 800px </TwButton>
             </template>
             <template #headerTitle> Right Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>
@@ -84,7 +84,7 @@ officiis debitis fuga repellendus? Quam!
               <TwButton> Left Offcanvas with width 600px </TwButton>
             </template>
             <template #headerTitle> Right Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>
@@ -93,7 +93,7 @@ officiis debitis fuga repellendus? Quam!
               <TwButton> Top Offcanvas </TwButton>
             </template>
             <template #headerTitle> Top Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>
@@ -102,7 +102,7 @@ officiis debitis fuga repellendus? Quam!
               <TwButton> Bottom Offcanvas </TwButton>
             </template>
             <template #headerTitle> Bottom Offcanvas </template>
-            <div class="p-4 overflow-auto">
+            <div class="vt-p-4 vt-overflow-auto">
               {{ example }}
             </div>
           </TwOffcanvas>

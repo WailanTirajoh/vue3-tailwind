@@ -44,10 +44,13 @@ provide("select-error", isError);
 </script>
 
 <template>
-  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+  <label
+    v-if="label"
+    class="vt-font-bold vt-text-gray-700 dark:vt-text-gray-400"
+  >
     {{ label }}
   </label>
-  <div class="relative">
+  <div class="vt-relative">
     <MultiSelectionList
       v-bind="$attrs"
       v-model="computedValue"
@@ -57,7 +60,7 @@ provide("select-error", isError);
     />
     <div
       v-if="disabled"
-      class="w-full h-full absolute top-0 left-0 rounded bg-gray-100 bg-opacity-5 cursor-not-allowed"
+      class="vt-w-full vt-h-full vt-absolute vt-top-0 vt-left-0 vt-rounded vt-bg-gray-100 vt-bg-opacity-5 vt-cursor-not-allowed"
     ></div>
   </div>
 </template>

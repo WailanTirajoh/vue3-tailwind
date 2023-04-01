@@ -82,18 +82,18 @@ function closeDropdown() {
               <li
                 v-for="v in computedModelValue"
                 :key="v"
-                class="inline-block border dark:border-gray-700 dark:bg-gray-800 rounded overflow-hidden dark:text-gray-200"
+                class="vt-inline-block vt-border dark:vt-border-gray-700 dark:vt-bg-gray-800 vt-rounded vt-overflow-hidden dark:vt-text-gray-200"
               >
-                <div class="flex items-center gap-2">
+                <div class="vt-flex vt-items-center vt-gap-2">
                   <div
-                    class="text-xs rounded text-gray-800 dark:text-gray-200 p-1 bg-white dark:bg-gray-800 h-full w-full"
+                    class="vt-text-xs vt-rounded vt-text-gray-800 dark:vt-text-gray-200 vt-p-1 vt-bg-white dark:vt-bg-gray-800 vt-h-full vt-w-full"
                   >
                     {{ v }}
                   </div>
                   <TwButton
                     type="button"
                     variant="none"
-                    class="cursor-pointer bg-gray-200 dark:bg-gray-900 !p-1 w-5 h-full rounded-none flex items-center justify-center"
+                    class="vt-cursor-pointer vt-bg-gray-200 dark:vt-bg-gray-900 !vt-p-1 vt-w-5 vt-h-full vt-rounded-none vt-flex vt-items-center vt-justify-center"
                     @click.stop="removeSelectedValue(v)"
                   >
                     &#10005;
@@ -102,7 +102,7 @@ function closeDropdown() {
               </li>
             </TransitionGroup>
           </div>
-          <div v-else class="p-2 text-gray-400 italic text-left">
+          <div v-else class="vt-p-2 vt-text-gray-400 vt-italic vt-text-left">
             {{ placeholder }}
           </div>
         </slot>
@@ -115,37 +115,36 @@ function closeDropdown() {
           :model-value="computedModelValue"
         >
           <transition
-            enter-from-class="transform opacity-0 scale-95"
-            enter-active-class="transition ease-out duration-200"
-            enter-to-class="transform opacity-100 scale-100"
-            leave-from-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-to-class="transform opacity-0 scale-95"
+            enter-from-class="vt-transform vt-opacity-0 vt-scale-95"
+            enter-active-class="vt-transition vt-ease-out vt-duration-200"
+            enter-to-class="vt-transform vt-opacity-100 vt-scale-100"
+            leave-from-class="vt-transform vt-opacity-100 vt-scale-100"
+            leave-active-class="vt-transition vt-ease-in vt-duration-75"
+            leave-to-class="vt-transform vt-opacity-0 vt-scale-95"
           >
             <div
               v-if="isOpen"
-              class="absolute bg-white dark:bg-gray-900 w-full z-10 shadow-lg rounded-b overflow-hidden border border-t-0 border-gray-100 dark:border-gray-700"
+              class="vt-absolute vt-bg-white dark:vt-bg-gray-900 vt-w-full vt-z-10 vt-shadow-lg vt-rounded-b vt-overflow-hidden vt-border vt-border-t-0 vt-border-gray-100 dark:vt-border-gray-700"
             >
-              <div class="w-full p-2">
+              <div class="vt-w-full vt-p-2">
                 <TwInput
                   v-model="search"
                   type="text"
                   placeholder="Type something"
                 />
               </div>
-              <ul class="max-h-52 overflow-y-auto">
+              <ul class="vt-max-h-52 vt-overflow-y-auto">
                 <template v-if="filterredItems.length > 0">
                   <li
                     v-for="item in filterredItems"
                     :key="'dropdown-' + item.value"
                   >
                     <a
-                      class="block p-3 cursor-pointer w-full text-sm select-none transition-all duration-300 ease-in-out text-left focus:bg-gray-600 focus:text-gray-100 focus:outline-gray-700 ring-0 outline-none focus:border-transparent focus:shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
+                      class="vt-block vt-p-3 vt-cursor-pointer vt-w-full vt-text-sm vt-select-none vt-transition-all vt-duration-300 vt-ease-in-out vt-text-left focus:vt-bg-gray-600 focus:vt-text-gray-100 focus:vt-outline-gray-700 vt-ring-0 vt-outline-none focus:vt-border-transparent focus:vt-shadow-[0_0_0_0.2rem_rgb(0_123_255_/_25%)]"
                       :class="{
-                        'bg-gray-800 text-white': computedModelValue.includes(
-                          item.value
-                        ),
-                        'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300':
+                        'vt-bg-gray-800 vt-text-white':
+                          computedModelValue.includes(item.value),
+                        'hover:vt-bg-gray-100 dark:hover:vt-bg-gray-800 vt-text-gray-700 dark:vt-text-gray-300':
                           !computedModelValue.includes(item.value),
                       }"
                       href="#"
@@ -157,7 +156,7 @@ function closeDropdown() {
                 </template>
                 <template v-else>
                   <li
-                    class="p-3 w-full text-sm text-center overflow-hidden break-words"
+                    class="vt-p-3 vt-w-full vt-text-sm vt-text-center vt-overflow-hidden vt-break-words"
                   >
                     No matching data for key "{{ search }}"
                   </li>

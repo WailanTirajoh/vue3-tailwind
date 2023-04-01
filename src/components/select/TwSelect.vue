@@ -49,19 +49,20 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
   <div class="relative">
     <slot :is-open="isOpen">
       <div
-        class="flex rounded-t dark:text-gray-300 error:border error:border-red-400 rounded"
+        class="vt-flex vt-rounded-t dark:vt-text-gray-300 error:vt-border error:vt-border-red-400 vt-rounded"
         :data-error="selectError"
         :class="{
-          'bg-white shadow-lg dark:bg-gray-900 border border-b-0 border-gray-100 dark:border-gray-700':
+          'vt-bg-white vt-shadow-lg dark:vt-bg-gray-900 vt-border vt-border-b-0 vt-border-gray-100 dark:vt-border-gray-700':
             isOpen,
         }"
       >
         <div
-          class="flex items-center justify-between text-gray-700 w-full text-sm border-r-0 rounded-l h-10 cursor-pointer"
+          class="vt-flex vt-items-center vt-justify-between vt-text-gray-700 vt-w-full vt-text-sm vt-border-r-0 vt-rounded-l vt-h-10 vt-cursor-pointer"
           :class="{
-            'bg-white border dark:bg-gray-800 dark:border-gray-700': !isOpen,
-            'rounded-l-md': !rounded,
-            'bg-gray-100': disabled,
+            'vt-bg-white vt-border dark:vt-bg-gray-800 dark:vt-border-gray-700':
+              !isOpen,
+            'vt-rounded-l-md': !rounded,
+            'vt-bg-gray-100': disabled,
           }"
           @click="toggleDropdown"
         >
@@ -75,7 +76,7 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
               type="button"
               variant="none"
               v-show="showClearData"
-              class="flex items-center hover:bg-gray-200 dark:hover:bg-gray-900 rounded-full justify-center transition-all ease-in-out p-2"
+              class="vt-flex vt-items-center hover:vt-bg-gray-200 dark:hover:vt-bg-gray-900 vt-rounded-full vt-justify-center vt-transition-all vt-ease-in-out vt-p-2"
               :disabled="disabled"
               @click.stop="$emit('clear-data')"
               aria-label="clear-data"
@@ -99,23 +100,23 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
             type="button"
             variant="none"
             aria-label="dropdown-select-button"
-            class="p-1 px-3 flex items-center justify-center cursor-pointer transition-colors !rounded-r !rounded-l-none w-8"
+            class="vt-p-1 vt-px-3 vt-flex vt-items-center vt-justify-center vt-cursor-pointer vt-transition-colors !vt-rounded-r !vt-rounded-l-none vt-w-8"
             :class="[
               !isOpen ? dropdownBg : '',
               dropdownBorder,
               {
-                'border hover:bg-gray-200 shadow-none bg-white dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900':
+                'vt-border hover:vt-bg-gray-200 vt-shadow-none vt-bg-white dark:vt-bg-gray-800 dark:vt-border-gray-700 dark:hover:vt-bg-gray-900':
                   !isOpen,
-                'rounded-r-md': !rounded,
+                'vt-rounded-r-md': !rounded,
               },
             ]"
             :disabled="disabled"
             @click="toggleDropdown"
           >
             <div
-              class="transition-all"
+              class="vt-transition-all"
               :class="{
-                'rotate-180': isOpen,
+                'vt-rotate-180': isOpen,
               }"
             >
               <svg
@@ -135,7 +136,7 @@ defineExpose({ toggleDropdown, closeDropdown, openDropdown });
         </slot>
       </div>
     </slot>
-    <div class="relative">
+    <div class="vt-relative">
       <slot name="list" :is-open="isOpen" />
     </div>
   </div>

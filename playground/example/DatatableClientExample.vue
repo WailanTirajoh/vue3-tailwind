@@ -77,8 +77,8 @@ onMounted(() => {
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Datatable Clientside</h2>
-    <hr class="my-2 border dark:border-gray-700" />
+    <h2 class="vt-text-2xl vt-font-bold">Datatable Clientside</h2>
+    <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
     <tw-datatable-client
       v-model:search="data.search"
       v-model:limit="data.limit"
@@ -101,8 +101,8 @@ onMounted(() => {
           {{ data.description }}
         </template>
         <template v-if="column.field === 'action'">
-          <div class="flex gap-2 justify-center">
-            <tw-button variant="primary" class="border border-gray-900">
+          <div class="vt-flex vt-gap-2 vt-justify-center">
+            <tw-button variant="primary" class="vt-border vt-border-gray-900">
               Edit
             </tw-button>
             <tw-button variant="danger"> Delete </tw-button>
@@ -110,25 +110,25 @@ onMounted(() => {
         </template>
       </template>
       <template #empty>
-        <div class="bg-white">No Data</div>
+        <div class="vt-bg-white">No Data</div>
       </template>
     </tw-datatable-client>
-    <hr class="my-2 dark:border-gray-700" />
+    <hr class="vt-my-2 dark:vt-border-gray-700" />
     <div>
-      <div class="flex gap-2">
-        <div class="w-32">Selected Data</div>
+      <div class="vt-flex vt-gap-2">
+        <div class="vt-w-32">Selected Data</div>
         <div>: {{ data.selected }}</div>
       </div>
-      <div class="flex gap-2">
-        <div class="w-32">Order By</div>
+      <div class="vt-flex vt-gap-2">
+        <div class="vt-w-32">Order By</div>
         <div>: {{ data.sortBy }}</div>
       </div>
-      <div class="flex gap-2">
-        <div class="w-32">Order Type</div>
+      <div class="vt-flex vt-gap-2">
+        <div class="vt-w-32">Order Type</div>
         <div>: {{ data.sortType }}</div>
       </div>
-      <div class="flex gap-2">
-        <div class="w-32">Search</div>
+      <div class="vt-flex vt-gap-2">
+        <div class="vt-w-32">Search</div>
         <div>: {{ data.search }}</div>
       </div>
     </div>
