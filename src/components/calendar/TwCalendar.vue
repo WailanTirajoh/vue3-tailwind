@@ -1,24 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
+import type { Calendar, Week, Days } from "../../type";
 
-type Days = {
-  date: number;
-  name: string;
-  month: string;
-  year: number;
-  fulldate: string;
-  jsDate: Date;
-};
-type Week = {
-  days: Array<Days>;
-};
-interface Calendar {
-  month: string;
-  weeks: Array<Week>;
-  year: number;
-}
-
-interface Props {
+export interface Props {
   monthNames?: Array<string>;
   dayNames?: Array<string>;
 }

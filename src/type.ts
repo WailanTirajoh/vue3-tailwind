@@ -109,3 +109,24 @@ export interface Dialog {
   acceptText?: string;
   icon?: string;
 }
+
+// Calendar
+
+export type Days = {
+  date: number;
+  name: string;
+  month: string;
+  year: number;
+  fulldate: string;
+  jsDate: Date;
+};
+
+export type Week = {
+  days: Array<Days>;
+};
+
+export interface Calendar {
+  month: string;
+  weeks: Array<Week>;
+  year: number;
+}
