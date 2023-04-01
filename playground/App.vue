@@ -39,7 +39,7 @@ onMounted(async () => {
 <template>
   <div>
     <div
-      class="bg-white border-b p-4 sticky top-0 z-10 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300"
+      class="vt-bg-white vt-border-b vt-p-4 vt-sticky vt-top-0 vt-z-10 dark:vt-bg-gray-900 dark:vt-border-gray-700 dark:vt-text-gray-300"
     >
       <TwToggle
         id="toggle-dark"
@@ -52,61 +52,61 @@ onMounted(async () => {
       />
     </div>
     <div
-      class="flex justify-center py-4 bg-gray-300 min-h-screen dark:bg-gray-800"
+      class="vt-flex vt-justify-center vt-py-4 vt-bg-gray-300 vt-min-h-screen dark:vt-bg-gray-800"
     >
-      <div class="grid gap-2">
+      <div class="vt-grid vt-gap-2">
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <CalendarExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <AccordionExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <FormExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <ButtonExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <TabExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <ModalExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <OffcanvasExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <DropdownExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <ToastExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <DatatableServerExample />
         </div>
         <div
-          class="col-span-12 p-4 rounded-lg shadow-xl bg-gray-100 dark:bg-gray-900 dark:text-gray-300"
+          class="vt-col-span-12 vt-p-4 vt-rounded-lg vt-shadow-xl vt-bg-gray-100 dark:vt-bg-gray-900 dark:vt-text-gray-300"
         >
           <DatatableClientExample />
         </div>

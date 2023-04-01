@@ -55,7 +55,7 @@ const accordion = [
         </div>
       </template>
       <template #example2>
-        <div class="p-4">Example 2</div>
+        <div class="vt-p-4">Example 2</div>
       </template>
     </TwAccordion>
   </div>

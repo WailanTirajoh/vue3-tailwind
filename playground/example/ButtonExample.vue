@@ -65,10 +65,10 @@ const options = ref<Options>({
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Button</h2>
-    <hr class="my-2 border dark:border-gray-700" />
-    <div class="grid grid-cols-12">
-      <div class="col-span-12">
+    <h2 class="vt-text-2xl vt-font-bold">Button</h2>
+    <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
+    <div class="vt-grid vt-grid-cols-12">
+      <div class="vt-col-span-12">
         <tw-button
           :variant="options.variant"
           :icon="options.icon"
@@ -81,13 +81,13 @@ const options = ref<Options>({
           {{ options.text }}
         </tw-button>
       </div>
-      <div class="col-span-12">
-        <hr class="my-2 dark:border-gray-700" />
-        <h3 class="text-xl font-semibold">Props</h3>
+      <div class="vt-col-span-12">
+        <hr class="vt-my-2 dark:vt-border-gray-700" />
+        <h3 class="vt-text-xl vt-font-semibold">Props</h3>
         <div
-          class="grid grid-cols-12 gap-x-4 border-2 p-2 rounded-lg shadow-inner bg-gray-200 dark:bg-gray-800 dark:border-gray-700"
+          class="vt-grid vt-grid-cols-12 vt-gap-x-4 vt-border-2 vt-p-2 vt-rounded-lg vt-shadow-inner vt-bg-gray-200 dark:vt-bg-gray-800 dark:vt-border-gray-700"
         >
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-toggle
               id="toggle-button-loading"
               v-model="options.loading"
@@ -104,7 +104,7 @@ const options = ref<Options>({
               label="Disabled"
             ></tw-toggle>
           </div>
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-radio
               label="Variant"
               id="radio-button-variant"
@@ -112,7 +112,7 @@ const options = ref<Options>({
               :options="buttonVariants"
             ></tw-radio>
           </div>
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-radio
               label="Text Position"
               id="radio-button-textPosition"
@@ -120,7 +120,7 @@ const options = ref<Options>({
               :options="buttonTextPositions"
             ></tw-radio>
           </div>
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-radio
               label="Icon Position"
               id="radio-button-iconPosition"
@@ -128,7 +128,7 @@ const options = ref<Options>({
               :options="buttonIconPositions"
             ></tw-radio>
           </div>
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-input
               label="Text"
               type="text"
@@ -136,7 +136,7 @@ const options = ref<Options>({
               v-model="options.text"
             ></tw-input>
           </div>
-          <div class="col-span-12 md:col-span-6 lg:col-span-3">
+          <div class="vt-col-span-12 md:vt-col-span-6 lg:vt-col-span-3">
             <tw-input
               label="Icon"
               type="text"

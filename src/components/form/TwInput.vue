@@ -42,7 +42,10 @@ const { isError } = useFormValidator({
 </script>
 
 <template>
-  <label v-if="label" class="font-bold text-gray-700 dark:text-gray-400">
+  <label
+    v-if="label"
+    class="vt-font-bold vt-text-gray-700 dark:vt-text-gray-400"
+  >
     {{ label }}
   </label>
   <div>
@@ -52,7 +55,7 @@ const { isError } = useFormValidator({
         v-model="computedValue"
         :type="type"
         :data-error="isError"
-        class="transition ease-in-out border p-2 relative text-sm w-full rounded bg-white h-10 placeholder:italic block text-gray-600 dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800 outline-primary disabled:!bg-gray-100 dark:disabled:!bg-gray-900 disabled:cursor-not-allowed error:border-red-400 error:border error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:border-red-400 dark:error:border dark:error:focus:shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
+        class="vt-transition vt-ease-in-out vt-border vt-p-2 vt-relative vt-text-sm vt-w-full vt-rounded vt-bg-white vt-h-10 placeholder:vt-italic vt-block vt-text-gray-600 dark:vt-text-gray-200 dark:vt-border-gray-700 dark:vt-bg-gray-800 vt-outline-primary disabled:!vt-bg-gray-100 dark:disabled:!vt-bg-gray-900 disabled:vt-cursor-not-allowed error:vt-border-red-400 error:vt-border error:focus:vt-shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);] dark:error:vt-border-red-400 dark:error:vt-border dark:error:focus:vt-shadow-[0_0_0_0.2rem_rgb(255_0_0_/_25%);]"
         :placeholder="placeholder"
         :disabled="disabled"
       />

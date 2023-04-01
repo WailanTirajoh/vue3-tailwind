@@ -30,7 +30,11 @@ const errors = computed(() => {
 
 <template>
   <slot :errors="errors">
-    <div v-bind="$attrs" class="text-red-400 text-sm italic" v-if="errors">
+    <div
+      v-bind="$attrs"
+      class="vt-text-red-400 vt-text-sm vt-italic"
+      v-if="errors"
+    >
       {{ errors.join(", ") }}
     </div>
   </slot>

@@ -2,8 +2,8 @@
 import { TwButton, TwModal } from "../../src/build";
 </script>
 <template>
-  <h2 class="text-2xl font-bold">Modal</h2>
-  <hr class="my-2 border dark:border-gray-700" />
+  <h2 class="vt-text-2xl vt-font-bold">Modal</h2>
+  <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
   <TwModal backdrop="static" :full-height="false">
     <template #trigger>
       <TwButton> Modal </TwButton>

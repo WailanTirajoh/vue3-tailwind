@@ -84,47 +84,47 @@ onMounted(() => {
     </span>
     <teleport to="body">
       <transition
-        enter-active-class="ease-out duration-300"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="ease-in duration-200"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
+        enter-active-class="vt-ease-out vt-duration-300"
+        enter-from-class="vt-opacity-0"
+        enter-to-class="vt-opacity-100"
+        leave-active-class="vt-ease-in vt-duration-200"
+        leave-from-class="vt-opacity-100"
+        leave-to-class="vt-opacity-0"
       >
         <div
           v-show="isOpen"
           @click.self="backdropClick"
-          class="fixed inset-0 transform transition-all z-50 bg-gray-900 !bg-opacity-50 pt-12"
+          class="vt-fixed vt-inset-0 vt-transform vt-transition-all vt-z-50 vt-bg-gray-900 !vt-bg-opacity-50 vt-pt-12"
           :class="[props.backdropClass]"
         >
           <transition
-            enter-active-class="ease-out duration-300"
-            enter-from-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enter-to-class="opacity-100 translate-y-0 sm:scale-100"
-            leave-active-class="ease-in duration-200"
-            leave-from-class="opacity-100 translate-y-0 sm:scale-100"
-            leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-active-class="vt-ease-out vt-duration-300"
+            enter-from-class="vt-opacity-0 vt-translate-y-4 sm:vt-translate-y-0 sm:vt-scale-95"
+            enter-to-class="vt-opacity-100 vt-translate-y-0 sm:vt-scale-100"
+            leave-active-class="vt-ease-in vt-duration-200"
+            leave-from-class="vt-opacity-100 vt-translate-y-0 sm:vt-scale-100"
+            leave-to-class="vt-opacity-0 vt-translate-y-4 sm:vt-translate-y-0 sm:vt-scale-95"
           >
             <div
               v-if="isOpen"
               ref="modalContainer"
-              class="overflow-x-hidden overflow-y-auto z-40 outline-none focus:outline-none justify-center flex px-2 duration-50 transition-all"
+              class="vt-overflow-x-hidden vt-overflow-y-auto vt-z-40 vt-outline-none focus:vt-outline-none vt-justify-center vt-flex vt-px-2 vt-duration-50 vt-transition-all"
               @click.self="backdropClick"
             >
               <div
-                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-800 dark:text-gray-300 outline-none focus:outline-none max-h-[80vh]"
+                class="vt-border-0 vt-rounded-lg vt-shadow-lg vt-relative vt-flex vt-flex-col vt-w-full vt-bg-white dark:vt-bg-gray-800 dark:vt-text-gray-300 vt-outline-none focus:vt-outline-none vt-max-h-[80vh]"
                 :class="[props.modalWrapperClass]"
                 :style="{ width: props.width }"
               >
                 <div
-                  class="flex items-center justify-between p-5 border-b border-solid border-slate-200 dark:border-gray-700 rounded-t px-6"
+                  class="vt-flex vt-items-center vt-justify-between vt-p-5 vt-border-b vt-border-solid vt-border-slate-200 dark:vt-border-gray-700 vt-rounded-t vt-px-6"
                   :class="[props.modalHeaderClass]"
                 >
                   <slot name="header"></slot>
                   <slot name="headerCloseButton">
                     <button
                       v-if="props.showCloseIcon"
-                      class="duration-200 p-1 ml-auto transition-opacity bg-transparent border-0 text-black opacity-30 hover:opacity-60 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                      class="vt-duration-200 vt-p-1 vt-ml-auto vt-transition-opacity vt-bg-transparent vt-border-0 vt-text-black vt-opacity-30 hover:vt-opacity-60 vt-float-right vt-text-3xl vt-leading-none vt-font-semibold vt-outline-none focus:vt-outline-none"
                       @click="toggleModal()"
                     >
                       <tw-feather type="x" />
@@ -132,14 +132,14 @@ onMounted(() => {
                   </slot>
                 </div>
                 <div
-                  class="relative p-6 flex-auto overflow-y-auto"
+                  class="vt-relative vt-p-6 vt-flex-auto vt-overflow-y-auto"
                   :class="[props.modalBodyClass]"
                   :style="{ height: bodyHeight }"
                 >
                   <slot name="body"></slot>
                 </div>
                 <div
-                  class="flex items-center p-6 border-t dark:border-gray-700 border-solid border-slate-200 rounded-b"
+                  class="vt-flex vt-items-center vt-p-6 vt-border-t dark:vt-border-gray-700 vt-border-solid vt-border-slate-200 vt-rounded-b"
                   :class="[props.modalFooterClass]"
                 >
                   <slot name="footer"></slot>

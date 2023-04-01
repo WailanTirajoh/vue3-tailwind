@@ -39,7 +39,7 @@ function changeCurrentPage(page: number) {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="vt-flex">
     <button
       aria-label="pagination-prev-button"
       class="vt-p-1 vt-flex vt-justify-center vt-items-center vt-w-8 vt-h-8 vt-transition-all vt-ease-in-out"

@@ -6,9 +6,9 @@ const { toasts, success, error, warning, info } = useToast();
 
 <template>
   <tw-toast position="bottom-right" :toasts="toasts" />
-  <div class="grid gap-2">
-    <h2 class="text-2xl font-bold">Toasts</h2>
-    <hr class="my-2 border dark:border-gray-700" />
+  <div class="vt-grid vt-gap-2">
+    <h2 class="vt-text-2xl vt-font-bold">Toasts</h2>
+    <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
     <tw-button
       variant="success"
       @click="

@@ -43,9 +43,9 @@ const emit = defineEmits(["after-move"]);
 const positionLineClass = computed(() => {
   let position = "";
   if (type.value === "horizontal") {
-    position = props.position === "top" ? "top-0" : "bottom-0";
+    position = props.position === "top" ? "vt-top-0" : "vt-bottom-0";
   } else {
-    position = props.position === "right" ? "right-0" : "left-0";
+    position = props.position === "right" ? "vt-right-0" : "vt-left-0";
   }
   return position;
 });
@@ -95,12 +95,12 @@ defineExpose({ changeTab });
 
 <template>
   <div v-if="type === 'horizontal'">
-    <nav class="relative flex" :class="[navClass]">
+    <nav class="vt-relative vt-flex" :class="[navClass]">
       <ul>
         <li>
           <a
             href="#"
-            class="py-1 inline-block"
+            class="vt-py-1 vt-inline-block"
             :class="[tabClass, {
             [tabActiveClass as string]: currentTab === tab.ref
           }]"
@@ -112,7 +112,7 @@ defineExpose({ changeTab });
             {{ tab.name }}
           </a>
           <div
-            class="absolute left-0 h-1 bg-gray-900 duration-300 ease"
+            class="vt-absolute vt-left-0 vt-h-1 vt-bg-gray-900 vt-duration-300 vt-ease"
             :class="[positionLineClass, lineClass]"
             :style="{
               width: `${hlineWidth}px`,
@@ -122,7 +122,7 @@ defineExpose({ changeTab });
         </li>
       </ul>
     </nav>
-    <div class="bg-white rounded-b p-2" :class="[bodyClass]">
+    <div class="vt-bg-white vt-rounded-b vt-p-2" :class="[bodyClass]">
       <div v-for="tab in tabs" :key="tab.ref">
         <div v-if="currentTab === tab.ref">
           <slot :name="tab.ref" />
@@ -130,14 +130,14 @@ defineExpose({ changeTab });
       </div>
     </div>
   </div>
-  <div class="flex" v-else-if="type === 'vertical'">
-    <nav class="relative flex flex-col w-44" :class="[navClass]">
+  <div class="vt-flex" v-else-if="type === 'vertical'">
+    <nav class="vt-relative vt-flex vt-flex-col vt-w-44" :class="[navClass]">
       <ul>
         <li>
           <a
             v-for="tab in tabs"
             href="#"
-            class="py-1 block"
+            class="vt-py-1 vt-block"
             :class="[tabClass, {
               [tabActiveClass as string]: currentTab === tab.ref
             }]"
@@ -151,7 +151,7 @@ defineExpose({ changeTab });
           </a>
         </li>
         <div
-          class="absolute w-1 top-0 bg-gray-900 duration-300 ease"
+          class="vt-absolute vt-w-1 vt-top-0 vt-bg-gray-900 vt-duration-300 vt-ease"
           :class="[positionLineClass, lineClass]"
           :style="{
             height: `${vlineHeight}px`,

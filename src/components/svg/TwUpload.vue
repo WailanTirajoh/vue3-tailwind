@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="w-8 h-8"
+    class="vt-w-8 vt-h-8"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 20 20"

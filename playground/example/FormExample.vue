@@ -118,11 +118,11 @@ const clear = () => {
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold">Form</h2>
-    <hr class="my-2 border dark:border-gray-700" />
+    <h2 class="vt-text-2xl vt-font-bold">Form</h2>
+    <hr class="vt-my-2 vt-border dark:vt-border-gray-700" />
     <div>
       <TwForm
-        class="grid grid-cols-12 gap-2 bg-white dark:bg-gray-900 dark:border-gray-700 dark:border rounded-lg p-2 shadow"
+        class="vt-grid vt-grid-cols-12 vt-gap-2 vt-bg-white dark:vt-bg-gray-900 dark:vt-border-gray-700 dark:vt-border vt-rounded-lg vt-p-2 vt-shadow"
         :class="{
           'tw-shake': formError,
         }"
@@ -136,10 +136,10 @@ const clear = () => {
           textAreaExample: 'Text Area',
         }"
       >
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwFile v-model="formData.fileModel" multiple />
         </div>
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwInput
             name="inputExample"
             v-model="formData.inputExample"
@@ -149,7 +149,7 @@ const clear = () => {
           />
           <TwErrorMessage name="inputExample"></TwErrorMessage>
         </div>
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwTextarea
             name="textAreaExample"
             v-model="formData.textAreaExample"
@@ -159,7 +159,7 @@ const clear = () => {
           />
           <TwErrorMessage name="textAreaExample"></TwErrorMessage>
         </div>
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwSelect
             name="selectExample"
             v-model="formData.selectExample"
@@ -169,7 +169,7 @@ const clear = () => {
           />
           <TwErrorMessage name="selectExample"></TwErrorMessage>
         </div>
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwMultiSelect
             name="multiSelectExample"
             v-model="formData.multiSelectExample"
@@ -179,7 +179,7 @@ const clear = () => {
           />
           <TwErrorMessage name="multiSelectExample"></TwErrorMessage>
         </div>
-        <div class="col-span-12">
+        <div class="vt-col-span-12">
           <TwToggle
             id="toggle"
             name="toggleExample"
@@ -188,7 +188,7 @@ const clear = () => {
           />
           <TwErrorMessage name="toggleExample"></TwErrorMessage>
         </div>
-        <div class="col-span-12 flex justify-end gap-1">
+        <div class="vt-col-span-12 vt-flex vt-justify-end vt-gap-1">
           <TwButton
             ripple
             variant="secondary"

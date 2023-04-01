@@ -117,10 +117,10 @@ const btnColor = computed(() => {
         :class="[
           btnIconPosition,
           props.iconPosition === 'left'
-            ? 'mr-2'
+            ? 'vt-mr-2'
             : props.iconPosition === 'center'
-            ? 'mx-2'
-            : 'ml-2',
+            ? 'vt-mx-2'
+            : 'vt-ml-2',
         ]"
         :type="btnIcon"
         :animation="props.loading ? 'spin' : ''"
