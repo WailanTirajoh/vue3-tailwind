@@ -17,9 +17,9 @@ import CalendarExample from "./example/CalendarExample.vue";
 const dark = ref(false);
 watch(dark, (value) => {
   if (value) {
-    document.body.classList.add("dark");
+    document.body.setAttribute("data-theme", "dark");
   } else {
-    document.body.classList.remove("dark");
+    document.body.setAttribute("data-theme", "light");
   }
 });
 
@@ -29,9 +29,9 @@ onMounted(async () => {
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   if (windowPreferenceDark) {
-    document.body.classList.add("dark");
+    document.body.setAttribute("data-theme", "dark");
   } else {
-    document.body.classList.remove("dark");
+    document.body.setAttribute("data-theme", "light");
   }
 });
 </script>
