@@ -27,6 +27,8 @@ import {
 } from "./components";
 
 import Ripple from "./directives/ripple";
+import ClickOutside from "./directives/clickOutside";
+
 import { useToast } from "./composables/toast";
 import { useForm } from "./composables/form";
 import { useDialog } from "./composables/dialog";
@@ -120,6 +122,8 @@ export const Vue3Tailwind = function install(app: App) {
   Ripple.color = "rgba(255, 255, 255, 0.35)";
   Ripple.zIndex = "55";
   app.directive("ripple", Ripple as Directive<any, any>);
+  app.directive("click-outside", ClickOutside as Directive<any, any>);
 };
 
 export { Ripple as TwRipple };
+export { ClickOutside as TwClickOutside };

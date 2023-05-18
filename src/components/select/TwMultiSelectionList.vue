@@ -58,10 +58,14 @@ function clearData() {
 function closeDropdown() {
   if (props.closeOnSelect) dropdownSelect.value.closeDropdown();
 }
+
+function forceCloseDropdown() {
+  dropdownSelect.value.closeDropdown();
+}
 </script>
 
 <template>
-  <div>
+  <div v-click-outside="forceCloseDropdown">
     <TwSelect
       ref="dropdownSelect"
       :rounded="true"

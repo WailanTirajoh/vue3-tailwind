@@ -4,11 +4,13 @@ import App from "./App.vue";
 import "../src/assets/dev/main.css";
 import { useForm } from "../src/composables/form";
 import Ripple from "../src/directives/ripple";
+import ClickOutside from "../src/directives/clickOutside";
 
 const app = createApp(App);
 
 Ripple.color = "rgba(255, 255, 255, 0.35)";
 Ripple.zIndex = "55";
+app.directive("click-outside", ClickOutside as Directive<any, any>);
 app.directive("ripple", Ripple as Directive<any, any>);
 
 const form = useForm();
